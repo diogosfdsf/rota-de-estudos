@@ -1,0 +1,528 @@
+<title>Rota de Estudos do Zion</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Lexend:wght@300;400;600&display=swap">
+<style>
+  :root{
+    --bg:#E7EEEF; --surface:#F9FCFC; --surface2:#EFF5F5;
+    --ink:#0F323C; --muted:#4E6B73; --line:#C7D8DA;
+    --accent:#1C6E8C; --gold:#B5751A; --ok:#1B7A5A; --err:#AE3444; --on-accent:#FFFFFF;
+    --shadow:0 2px 0 rgba(15,50,60,.10), 0 10px 24px -14px rgba(15,50,60,.5);
+    --r:16px;
+    --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+    --body:"Lexend","Segoe UI",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0B1E25; --surface:#143039; --surface2:#1A3B46;
+      --ink:#E3EEEC; --muted:#93AFB5; --line:#27505B;
+      --accent:#54B8CE; --gold:#EBAB3E; --ok:#54C296; --err:#E87684; --on-accent:#06202A;
+      --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0B1E25; --surface:#143039; --surface2:#1A3B46;
+    --ink:#E3EEEC; --muted:#93AFB5; --line:#27505B;
+    --accent:#54B8CE; --gold:#EBAB3E; --ok:#54C296; --err:#E87684; --on-accent:#06202A;
+    --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
+  }
+
+  body{background:var(--bg); color:var(--ink); font-family:var(--body); font-weight:300;
+       line-height:1.6; -webkit-text-size-adjust:100%;}
+  .wrap{max-width:660px; margin:0 auto; padding:18px 16px 56px; display:flex; flex-direction:column; gap:18px;}
+
+  /* ---- topo: rota do Log Pose ---- */
+  header{display:flex; flex-direction:column; gap:10px;}
+  .brand{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
+  .brand b{font-family:var(--display); font-weight:800; font-size:1.05rem; letter-spacing:.2px;}
+  .brand span{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);}
+  .rota{display:flex; align-items:center; gap:0; list-style:none; padding:0; margin:0;}
+  .rota li{flex:1; display:flex; align-items:center; gap:0;}
+  .rota i{display:block; width:13px; height:13px; border-radius:50%; border:2px solid var(--line);
+          background:var(--surface); flex:none;}
+  .rota li[data-on] i{border-color:var(--accent); background:var(--accent);}
+  .rota li[data-now] i{border-color:var(--gold); background:var(--gold); box-shadow:0 0 0 4px color-mix(in srgb, var(--gold) 25%, transparent);}
+  .rota li::after{content:""; height:2px; background:var(--line); flex:1; margin:0 2px;}
+  .rota li:last-child::after{display:none;}
+  .rota li[data-on]::after{background:var(--accent);}
+
+  /* ---- cartão ---- */
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+        box-shadow:var(--shadow); padding:22px 20px; display:flex; flex-direction:column; gap:16px;}
+  .eyebrow{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:600;}
+  h1{font-family:var(--display); font-weight:800; font-size:1.75rem; line-height:1.15; margin:0; text-wrap:balance;}
+  h2{font-family:var(--display); font-weight:800; font-size:1.3rem; line-height:1.2; margin:0; text-wrap:balance;}
+  p{margin:0; max-width:60ch;}
+  .lead{font-size:1.05rem;}
+  .muted{color:var(--muted); font-size:.92rem;}
+
+  /* ---- botões ---- */
+  button{font-family:inherit; font-size:1rem; cursor:pointer; border-radius:12px; border:1px solid var(--line);
+         background:var(--surface2); color:var(--ink); padding:14px 18px; min-height:52px; transition:transform .12s, background .12s, border-color .12s;}
+  button:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  button:hover:not(:disabled){border-color:var(--accent);}
+  button:active:not(:disabled){transform:translateY(1px);}
+  button:disabled{cursor:default; opacity:1;}
+  .go{background:var(--accent); border-color:var(--accent); color:var(--on-accent); font-family:var(--display);
+      font-weight:600; font-size:1.1rem; align-self:flex-start; padding:14px 26px;}
+  .go:hover{filter:brightness(1.08);}
+  .ghost{background:transparent; border-style:dashed; font-size:.9rem; min-height:44px; padding:10px 16px;}
+
+  /* ---- sílabas ---- */
+  .silabas{display:flex; flex-wrap:wrap; gap:8px;}
+  .sil{font-family:var(--display); font-weight:600; font-size:1.35rem; padding:12px 18px; min-height:58px;}
+  .sil[data-state="ok"]{background:color-mix(in srgb, var(--ok) 18%, var(--surface)); border-color:var(--ok); color:var(--ok);
+       font-size:1.6rem; animation:pulo .45s ease;}
+  .sil[data-state="no"]{background:color-mix(in srgb, var(--err) 14%, var(--surface)); border-color:var(--err); color:var(--err);}
+  @keyframes pulo{0%{transform:translateY(0)}40%{transform:translateY(-10px) rotate(-3deg)}100%{transform:translateY(0)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important;}}
+
+  .palavra{font-family:var(--display); font-weight:800; font-size:2rem; letter-spacing:.5px; line-height:1.1;}
+  .palavra em{font-style:normal; color:var(--gold); font-size:1.25em;}
+
+  .opcoes{display:grid; gap:10px;}
+  @media (min-width:520px){ .opcoes.tres{grid-template-columns:repeat(3,1fr);} .opcoes.duas{grid-template-columns:repeat(2,1fr);} }
+  .opcoes button{font-family:var(--display); font-weight:600;}
+  .opcoes button[data-state="ok"]{background:color-mix(in srgb, var(--ok) 18%, var(--surface)); border-color:var(--ok); color:var(--ok);}
+  .opcoes button[data-state="no"]{background:color-mix(in srgb, var(--err) 14%, var(--surface)); border-color:var(--err); color:var(--err);}
+
+  /* ---- feedback ---- */
+  .fb{border-left:4px solid var(--line); padding:10px 14px; border-radius:0 10px 10px 0; background:var(--surface2); font-size:.95rem;}
+  .fb[data-k="ok"]{border-color:var(--ok);}
+  .fb[data-k="no"]{border-color:var(--err);}
+  .fb[data-k="dica"]{border-color:var(--gold);}
+  .fb b{font-family:var(--display);}
+
+  /* ---- regras ---- */
+  .regra{display:flex; flex-direction:column; gap:6px; padding:14px; border:1px solid var(--line);
+         border-radius:12px; background:var(--surface2);}
+  .regra .nome{font-family:var(--display); font-weight:800; font-size:1.1rem; color:var(--accent);}
+  .regra .demo{font-family:var(--display); font-weight:600; font-size:1.4rem; letter-spacing:1px;}
+  .regra .demo em{font-style:normal; color:var(--gold); font-size:1.3em; display:inline-block;}
+  .grupo{display:flex; flex-direction:column; gap:12px;}
+
+  .contador{font-size:.85rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:-4px;}
+  .nav .ghost{min-height:42px; padding:8px 16px; color:var(--muted);}
+  .nav .ghost:hover{color:var(--accent);}
+  .nav .contador{text-align:right;}
+  .revisao{font-size:.8rem; color:var(--muted); font-style:italic;}
+  textarea{width:100%; box-sizing:border-box; font-family:var(--body); font-size:1.05rem; line-height:1.6;
+           padding:14px; border-radius:12px; border:1px solid var(--line); background:var(--surface2); color:var(--ink);
+           min-height:150px; resize:vertical;}
+  textarea:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{font-size:.85rem; padding:6px 12px; border-radius:999px; border:1px dashed var(--gold); color:var(--gold);}
+  .placar{display:flex; align-items:baseline; gap:10px; font-family:var(--display); font-weight:800; font-size:2.4rem; color:var(--accent);}
+  .placar small{font-family:var(--body); font-weight:400; font-size:1rem; color:var(--muted);}
+  .resumo{width:100%; box-sizing:border-box; font-family:ui-monospace,"Consolas",monospace; font-size:.8rem; min-height:200px;}
+  .linha{height:1px; background:var(--line); border:0; margin:0;}
+  footer{text-align:center; font-size:.8rem; color:var(--muted);}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand"><b>Droidec</b><span>01/09 · Alabasta · Sílaba Tônica</span></div>
+    <ul class="rota" id="rota"></ul>
+  </header>
+  <main id="tela"></main>
+  <footer>Feito pro Zion 🏴‍☠️</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var GUIADO = [
+    {w:"tapete",  sil:["ta","pe","te"],     t:1, dica:"Fala bem devagar: ta-PE-te. Onde a tua voz sobe?"},
+    {w:"jasmim",  sil:["jas","mim"],        t:1, dica:"É uma flor do deserto. Chama ela de longe: jas-MIM!"},
+    {w:"lâmpada", sil:["lâm","pa","da"],    t:0, dica:"O chapeuzinho (^) é um dedo apontando: ele mora na sílaba forte."},
+    {w:"areia",   sil:["a","rei","a"],      t:1, dica:"Tem um REI escondido no meio da palavra. E rei fala alto."},
+    {w:"âncora",  sil:["ân","co","ra"],     t:0, dica:"Olha o acento de novo. Ele nunca mente."}
+  ];
+
+  var DESAFIO = [
+    {w:"princesa",  sil:["prin","ce","sa"],       t:1, c:"paroxitona",    nota:"Vivi é a prin-CE-sa. Força na penúltima, sem acento nenhum escrito."},
+    {w:"sultão",    sil:["sul","tão"],            t:1, c:"oxitona",       nota:"sul-TÃO: a última é a mais forte."},
+    {w:"pirâmide",  sil:["pi","râ","mi","de"],    t:1, c:"proparoxitona", nota:"pi-RÂ-mi-de: contando de trás pra frente — de(1), mi(2), RÂ(3). Antepenúltima!"},
+    {w:"javali",    sil:["ja","va","li"],         t:2, c:"oxitona",       nota:"Pegadinha: não tem acento escrito, mas a força está no LI. ja-va-LI."},
+    {w:"bússola",   sil:["bús","so","la"],        t:0, c:"proparoxitona", nota:"BÚS-so-la: o acento marca a antepenúltima. Toda proparoxítona leva acento."},
+    {w:"caravana",  sil:["ca","ra","va","na"],    t:2, c:"paroxitona",    nota:"ca-ra-VA-na: penúltima. É o grupo mais comum do português."},
+    {w:"tambor",    sil:["tam","bor"],            t:1, c:"oxitona",       nota:"tam-BOR: bate mais forte no fim, igual o instrumento."},
+    {w:"relâmpago", sil:["re","lâm","pa","go"],   t:1, c:"proparoxitona", nota:"re-LÂM-pa-go: go(1), pa(2), LÂM(3). Antepenúltima de novo."}
+  ];
+
+  var DUPLAS = [
+    {frase:"Nami visitou a ___ de bússolas do reino.",
+     ops:["fábrica","fabrica"], ok:0,
+     nota:"FÁ-bri-ca (proparoxítona) é o lugar. fa-BRI-ca (paroxítona) é o verbo: “ele fabrica bússolas”."},
+    {frase:"Chopper ficou com uma ___ enorme sobre o mapa.",
+     ops:["dúvida","duvida"], ok:0,
+     nota:"DÚ-vi-da é a pergunta na cabeça. du-VI-da é o verbo: “ele duvida do mapa”."},
+    {frase:"A ___ do palácio anotou o recado da princesa.",
+     ops:["secretária","secretaria"], ok:0,
+     nota:"se-cre-TÁ-ria é a pessoa. se-cre-ta-RI-a é o lugar, a sala. Mesmas letras, sílaba forte diferente, sentido diferente."}
+  ];
+
+  var CLASSES = [
+    {id:"oxitona",       rot:"Oxítona"},
+    {id:"paroxitona",    rot:"Paroxítona"},
+    {id:"proparoxitona", rot:"Proparoxítona"}
+  ];
+
+  var KEY = "zion-silaba-tonica-2026-09-01";
+  var VAZIO = {tela:0, iG:0, iD:0, iP:0, guiado:{}, desafio:{}, duplas:{}, texto:""};
+  var S = JSON.parse(JSON.stringify(VAZIO));
+  function cursor(m,n){ var i=0; while(i<n && m[i]) i++; return i; }
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){
+      var o = JSON.parse(raw);
+      S = Object.assign(S, o);
+      if(o.iG == null){ /* progresso salvo antes dos botões de voltar */
+        S.iG = cursor(S.guiado, GUIADO.length);
+        S.iD = cursor(S.desafio, DESAFIO.length);
+        S.iP = cursor(S.duplas, DUPLAS.length);
+      }
+    }
+  }catch(e){}
+  function salva(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+  var el = function(t,c,x){ var n=document.createElement(t); if(c) n.className=c; if(x!=null) n.textContent=x; return n; };
+  var tela = document.getElementById("tela");
+  var TELAS = [gancho, regra, treino, desafio, duplas, fim];
+
+  function rota(){
+    var ul = document.getElementById("rota"); ul.innerHTML="";
+    for(var i=0;i<TELAS.length;i++){
+      var li = el("li"); li.appendChild(el("i"));
+      if(i < S.tela) li.setAttribute("data-on","");
+      if(i === S.tela) li.setAttribute("data-now","");
+      ul.appendChild(li);
+    }
+  }
+  function vai(n){ S.tela = n; salva(); render(); window.scrollTo(0,0); }
+  function render(){ rota(); tela.innerHTML=""; tela.appendChild(TELAS[S.tela]()); }
+
+  function card(){ var c = el("div","card"); for(var i=0;i<arguments.length;i++) c.appendChild(arguments[i]); return c; }
+  function eyebrow(t){ return el("div","eyebrow",t); }
+  function botao(t,fn){ var b = el("button","go",t); b.addEventListener("click",fn); return b; }
+
+  /* barra de navegação: voltar à esquerda, posição à direita */
+  function navbar(rotulo, voltar){
+    var n = el("div","nav");
+    if(voltar){
+      var b = el("button","ghost","← Voltar");
+      b.addEventListener("click", function(){ voltar(); window.scrollTo(0,0); });
+      n.appendChild(b);
+    } else n.appendChild(el("span"));
+    n.appendChild(el("span","contador", rotulo));
+    return n;
+  }
+  function pula(campo, valor, telaN){ S[campo] = valor; if(telaN!=null) S.tela = telaN; salva(); render(); }
+
+  function silabado(sil,t){
+    var p = el("div","palavra"), i;
+    for(i=0;i<sil.length;i++){
+      if(i) p.appendChild(document.createTextNode("-"));
+      if(i===t){ var e = el("em",null,sil[i].toUpperCase()); p.appendChild(e); }
+      else p.appendChild(document.createTextNode(sil[i]));
+    }
+    return p;
+  }
+
+  /* ---------- 1. gancho ---------- */
+  function gancho(){
+    var p1 = el("p","lead","O Log Pose parou de girar: a rota agora aponta pra Alabasta, o reino do deserto.");
+    var p2 = el("p","lead","O portão do palácio não abre com chave. Abre com um grito — e só funciona se a tripulação gritar a sílaba certa de cada palavra.");
+    var p3 = el("p","lead","Toda palavra tem uma sílaba que a gente fala mais forte que as outras. Achar ela é o teu trabalho de hoje.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O portão que só abre com um grito"), p1, p2, p3, botao("Bora! →", function(){ vai(1); }));
+  }
+
+  /* ---------- 2. a regra ---------- */
+  function regra(){
+    var g = el("div","grupo");
+    var dados = [
+      {n:"Oxítona", d:["sul","tão"], t:1, x:"A força cai na ÚLTIMA sílaba."},
+      {n:"Paroxítona", d:["pal","mei","ra"], t:1, x:"A força cai na PENÚLTIMA — a segunda de trás pra frente."},
+      {n:"Proparoxítona", d:["bús","so","la"], t:0, x:"A força cai na ANTEPENÚLTIMA — a terceira de trás pra frente."}
+    ];
+    dados.forEach(function(d){
+      var box = el("div","regra");
+      box.appendChild(el("div","nome",d.n));
+      var demo = el("div","demo"), i;
+      for(i=0;i<d.d.length;i++){
+        if(i) demo.appendChild(document.createTextNode("-"));
+        if(i===d.t) demo.appendChild(el("em",null,d.d[i].toUpperCase()));
+        else demo.appendChild(document.createTextNode(d.d[i]));
+      }
+      box.appendChild(demo);
+      box.appendChild(el("p","muted",d.x));
+      g.appendChild(box);
+    });
+    var truque = el("div","fb"); truque.setAttribute("data-k","dica");
+    truque.appendChild(el("b",null,"O truque do Log Pose: "));
+    truque.appendChild(document.createTextNode("conta as sílabas de trás pra frente. Parou na 1ª? Oxítona. Na 2ª? Paroxítona. Na 3ª? Proparoxítona."));
+
+    return card(
+      navbar("A regra", function(){ vai(0); }),
+      eyebrow("A regra"),
+      el("h2",null,"Onde a voz grita mais forte"),
+      el("p",null,"A sílaba tônica é aquela que você fala mais alto sem perceber. Experimenta falar as três palavras abaixo em voz alta — dá pra ouvir o grito."),
+      g, truque,
+      botao("Entendi, quero treinar →", function(){ vai(2); })
+    );
+  }
+
+  /* ---------- 3. treino guiado ---------- */
+  function treino(){
+    var idx = S.iG;
+    if(idx >= GUIADO.length){
+      return card(
+        navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
+        eyebrow("Treino guiado"), el("h2",null,"Treino completo! ⚓"),
+        el("p",null,"Você já pega a sílaba forte quando ela vem separadinha. Agora vem a parte que a escola cobra."),
+        botao("Ir pro desafio →", function(){ vai(3); }));
+    }
+    var q = GUIADO[idx], feito = S.guiado[idx];
+    var c = el("div","card");
+    c.appendChild(navbar("Treino · " + (idx+1) + " de " + GUIADO.length, function(){
+      if(idx > 0) pula("iG", idx-1); else vai(1);
+    }));
+    c.appendChild(el("h2",null,"Clica na sílaba mais forte"));
+    c.appendChild(el("p","muted", feito ? "Você já respondeu esta — dá uma olhada e segue." : "Fala a palavra em voz alta antes de escolher. Sério, funciona."));
+
+    var forte = q.sil.join("-").replace(q.sil[q.t], q.sil[q.t].toUpperCase());
+    var linha = el("div","silabas");
+    var fb = el("div","fb"); fb.style.display="none";
+    var tentativa = 0;
+
+    function trava(){ Array.prototype.forEach.call(linha.children,function(x){ x.disabled=true; }); }
+    function proxima(){ c.appendChild(botao("Próxima →", function(){ pula("iG", idx+1); window.scrollTo(0,0); })); }
+    function diz(k, negrito, resto){
+      fb.style.display=""; fb.setAttribute("data-k",k); fb.innerHTML="";
+      fb.appendChild(el("b",null,negrito)); fb.appendChild(document.createTextNode(resto));
+    }
+
+    q.sil.forEach(function(s,i){
+      var b = el("button","sil",s);
+      b.addEventListener("click", function(){
+        if(b.disabled) return;
+        if(i === q.t){
+          b.setAttribute("data-state","ok"); trava();
+          diz("ok","Isso! ", forte + " — a força fica em “" + q.sil[q.t] + "”.");
+          S.guiado[idx] = {feito:true, acertou: tentativa===0}; salva();
+          proxima();
+        } else {
+          tentativa++;
+          b.setAttribute("data-state","no");
+          if(tentativa === 1){
+            diz("dica","Quase. ", q.dica + " Tenta de novo.");
+          } else {
+            linha.children[q.t].setAttribute("data-state","ok"); trava();
+            diz("no","A certa é “" + q.sil[q.t] + "”. ", "Fala assim: " + forte + ".");
+            S.guiado[idx] = {feito:true, acertou:false}; salva();
+            proxima();
+          }
+        }
+      });
+      linha.appendChild(b);
+    });
+    c.appendChild(linha); c.appendChild(fb);
+
+    if(feito){
+      linha.children[q.t].setAttribute("data-state","ok"); trava();
+      diz(feito.acertou ? "ok" : "no",
+          feito.acertou ? "Você acertou de primeira. " : "Aqui você precisou de dica. ",
+          forte + " — a força fica em “" + q.sil[q.t] + "”.");
+      proxima();
+    }
+    return c;
+  }
+
+  /* ---------- 4. desafio ---------- */
+  function desafio(){
+    var idx = S.iD;
+    if(idx >= DESAFIO.length){
+      var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
+      return card(
+        navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
+        eyebrow("Desafio"), el("h2",null,"Desafio vencido! 🏜️"),
+        el("p",null,"Você classificou " + acertos + " de " + DESAFIO.length + " certas de primeira."),
+        botao("Última parada →", function(){ vai(4); }));
+    }
+    var q = DESAFIO[idx], feito = S.desafio[idx];
+    var rotCerta = CLASSES.filter(function(x){ return x.id===q.c; })[0].rot;
+    var c = el("div","card");
+    c.appendChild(navbar("Desafio · " + (idx+1) + " de " + DESAFIO.length, function(){
+      if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
+    }));
+    c.appendChild(el("h2",null,"Essa palavra é de qual grupo?"));
+    c.appendChild(silabado(q.sil, q.t));
+    c.appendChild(el("p","muted","A sílaba forte já está marcada em dourado. Agora conta de trás pra frente."));
+
+    var ops = el("div","opcoes tres");
+    var fb = el("div","fb"); fb.style.display="none";
+    function resolve(certo, negrito){
+      Array.prototype.forEach.call(ops.children,function(x,i){
+        x.disabled = true;
+        if(CLASSES[i].id === q.c) x.setAttribute("data-state","ok");
+      });
+      fb.style.display=""; fb.setAttribute("data-k", certo?"ok":"no"); fb.innerHTML="";
+      fb.appendChild(el("b",null,negrito));
+      fb.appendChild(document.createTextNode(q.nota));
+      c.appendChild(botao("Próxima →", function(){ pula("iD", idx+1); window.scrollTo(0,0); }));
+    }
+    CLASSES.forEach(function(cl){
+      var b = el("button",null,cl.rot);
+      b.addEventListener("click", function(){
+        if(b.disabled) return;
+        var certo = cl.id === q.c;
+        if(!certo) b.setAttribute("data-state","no");
+        S.desafio[idx] = {acertou:certo, marcou:cl.rot}; salva();
+        resolve(certo, certo ? "Certo! " : "É " + rotCerta + ". ");
+      });
+      ops.appendChild(b);
+    });
+    c.appendChild(ops); c.appendChild(fb);
+
+    if(feito){
+      if(!feito.acertou){
+        Array.prototype.forEach.call(ops.children,function(x,i){ if(CLASSES[i].rot === feito.marcou) x.setAttribute("data-state","no"); });
+      }
+      resolve(feito.acertou, feito.acertou ? "Você acertou: " + rotCerta + ". " : "Você marcou " + feito.marcou + ", mas é " + rotCerta + ". ");
+    }
+    return c;
+  }
+
+  /* ---------- 5. duplas + explicação ---------- */
+  function duplas(){
+    var idx = S.iP;
+    if(idx < DUPLAS.length){
+      var q = DUPLAS[idx], feito = S.duplas[idx];
+      var c = el("div","card");
+      c.appendChild(navbar("Duplas mágicas · " + (idx+1) + " de " + DUPLAS.length, function(){
+        if(idx > 0) pula("iP", idx-1); else pula("iD", DESAFIO.length, 3);
+      }));
+      c.appendChild(el("h2",null,"Mesmas letras, sentidos diferentes"));
+      c.appendChild(el("p","lead", q.frase));
+      var ops = el("div","opcoes duas");
+      var fb = el("div","fb"); fb.style.display="none";
+      var resolve = function(certo, negrito){
+        Array.prototype.forEach.call(ops.children,function(x){ x.disabled=true; });
+        ops.children[q.ok].setAttribute("data-state","ok");
+        fb.style.display=""; fb.setAttribute("data-k",certo?"ok":"no"); fb.innerHTML="";
+        fb.appendChild(el("b",null,negrito));
+        fb.appendChild(document.createTextNode(q.nota));
+        c.appendChild(botao("Continuar →", function(){ pula("iP", idx+1); window.scrollTo(0,0); }));
+      };
+      q.ops.forEach(function(op,i){
+        var b = el("button",null,op);
+        b.addEventListener("click", function(){
+          if(b.disabled) return;
+          var certo = i === q.ok;
+          if(!certo) b.setAttribute("data-state","no");
+          S.duplas[idx] = {acertou:certo, marcou:op}; salva();
+          resolve(certo, certo ? "Isso mesmo. " : "A certa é “"+q.ops[q.ok]+"”. ");
+        });
+        ops.appendChild(b);
+      });
+      c.appendChild(ops); c.appendChild(fb);
+
+      if(feito){
+        if(!feito.acertou){
+          Array.prototype.forEach.call(ops.children,function(x){ if(x.textContent === feito.marcou) x.setAttribute("data-state","no"); });
+        }
+        resolve(feito.acertou, feito.acertou ? "Você acertou: “"+q.ops[q.ok]+"”. " : "Você marcou “"+feito.marcou+"”, mas é “"+q.ops[q.ok]+"”. ");
+      }
+      return c;
+    }
+
+    /* explique como Droidec */
+    var c2 = el("div","card");
+    c2.appendChild(navbar("Explicação", function(){ pula("iP", DUPLAS.length-1); }));
+    c2.appendChild(eyebrow("Explique como Droidec"));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Chopper?"));
+    c2.appendChild(el("p","lead","Chopper não sabe nada de sílaba tônica. Escreve com as TUAS palavras como ele faz pra descobrir se uma palavra é oxítona, paroxítona ou proparoxítona."));
+    var chips = el("div","chips");
+    ["sílaba forte","contar de trás pra frente","última / penúltima / antepenúltima"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
+    c2.appendChild(chips);
+    var ta = el("textarea"); ta.value = S.texto || "";
+    ta.setAttribute("placeholder","Chopper, presta atenção: primeiro você...");
+    var cont = el("div","contador","0 letras");
+    var b = botao("Terminei →", function(){ vai(5); });
+    b.disabled = true; b.style.opacity = ".45";
+    function check(){
+      S.texto = ta.value; salva();
+      var n = ta.value.trim().length;
+      cont.textContent = n + " letras" + (n<40 ? " — escreve mais um pouquinho" : " — pode seguir!");
+      b.disabled = n < 40; b.style.opacity = n < 40 ? ".45" : "1";
+    }
+    ta.addEventListener("input", check);
+    c2.appendChild(ta); c2.appendChild(cont); c2.appendChild(b);
+    check();
+    return c2;
+  }
+
+  /* ---------- 6. fim ---------- */
+  function fim(){
+    var tg=0, ag=0, td=0, ad=0, tp=0, ap=0, i;
+    for(i=0;i<GUIADO.length;i++){ if(S.guiado[i]){ tg++; if(S.guiado[i].acertou) ag++; } }
+    for(i=0;i<DESAFIO.length;i++){ if(S.desafio[i]){ td++; if(S.desafio[i].acertou) ad++; } }
+    for(i=0;i<DUPLAS.length;i++){ if(S.duplas[i]){ tp++; if(S.duplas[i].acertou) ap++; } }
+    var total = tg+td+tp, acertos = ag+ad+ap;
+
+    var c = el("div","card");
+    c.appendChild(navbar("Fim da rota", function(){ pula("iP", DUPLAS.length, 4); }));
+    c.appendChild(eyebrow("Fim da rota"));
+    c.appendChild(el("h2",null,"O portão de Alabasta abriu ⚓"));
+    var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
+    pl.appendChild(el("small",null,"acertos de primeira"));
+    c.appendChild(pl);
+
+    var msg = "Você pegou as proparoxítonas, que são as que mais confundem.";
+    if(ad <= 4) msg = "As proparoxítonas ainda estão escorregando — vale contar de trás pra frente com o dedo.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas sem acento escrito.";
+    c.appendChild(el("p",null, msg + " Agora a tarefa da escola vai ser moleza."));
+
+    c.appendChild(el("hr","linha"));
+    c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
+
+    var txt = ["AULA DE HOJE — Sílaba tônica (Alabasta)",
+               "Data: " + new Date().toLocaleDateString("pt-BR"),
+               "",
+               "Treino guiado: " + ag + "/" + tg + " de primeira",
+               "Desafio (classificar): " + ad + "/" + td + " de primeira",
+               "Duplas mágicas: " + ap + "/" + tp,
+               "TOTAL: " + acertos + "/" + total,
+               ""];
+    var errou = [];
+    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push(DESAFIO[i].w + " (marcou " + S.desafio[i].marcou + ", era " + CLASSES.filter(function(x){return x.id===DESAFIO[i].c;})[0].rot + ")");
+    for(i=0;i<DUPLAS.length;i++) if(S.duplas[i] && !S.duplas[i].acertou) errou.push("dupla: marcou " + S.duplas[i].marcou + ", era " + DUPLAS[i].ops[DUPLAS[i].ok]);
+    for(i=0;i<GUIADO.length;i++) if(S.guiado[i] && !S.guiado[i].acertou) errou.push(GUIADO[i].w + " (precisou de dica)");
+    txt.push("Errou / tropeçou:");
+    txt.push(errou.length ? "- " + errou.join("\n- ") : "- nada");
+    txt.push("", "EXPLICAÇÃO DO ZION (na íntegra):", (S.texto||"").trim() || "(não escreveu)");
+    var resumo = txt.join("\n");
+
+    var ta = el("textarea","resumo"); ta.value = resumo; ta.setAttribute("readonly","");
+    var b = botao("📋 Copiar resumo pro papai", function(){
+      ta.select();
+      var ok = false;
+      try{ ok = document.execCommand("copy"); }catch(e){}
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(resumo).then(function(){}, function(){}); ok = true; }
+      b.textContent = ok ? "✅ Copiado! Manda pro papai" : "Seleciona o texto abaixo e copia";
+    });
+    c.appendChild(b);
+    c.appendChild(ta);
+
+    var reset = el("button","ghost","Começar tudo de novo");
+    reset.addEventListener("click", function(){
+      S = JSON.parse(JSON.stringify(VAZIO)); salva(); render(); window.scrollTo(0,0);
+    });
+    c.appendChild(reset);
+    return c;
+  }
+
+  render();
+})();
+</script>

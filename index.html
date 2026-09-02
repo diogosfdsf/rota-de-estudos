@@ -2,26 +2,26 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Lexend:wght@300;400;600&display=swap">
 <style>
   :root{
-    --bg:#E7EEEF; --surface:#F9FCFC; --surface2:#EFF5F5;
-    --ink:#0F323C; --muted:#4E6B73; --line:#C7D8DA;
-    --accent:#1C6E8C; --gold:#B5751A; --ok:#1B7A5A; --err:#AE3444; --on-accent:#FFFFFF;
-    --shadow:0 2px 0 rgba(15,50,60,.10), 0 10px 24px -14px rgba(15,50,60,.5);
+    --bg:#EDEEE0; --surface:#FBFAF3; --surface2:#F1F0E2;
+    --ink:#1B2A20; --muted:#5C6B5C; --line:#D6D6BC;
+    --accent:#2E6F52; --gold:#A8752A; --ok:#2E7D4F; --err:#A83B3B; --on-accent:#FFFFFF;
+    --shadow:0 2px 0 rgba(27,42,32,.10), 0 10px 24px -14px rgba(27,42,32,.5);
     --r:16px;
     --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
     --body:"Lexend","Segoe UI",system-ui,sans-serif;
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#0B1E25; --surface:#143039; --surface2:#1A3B46;
-      --ink:#E3EEEC; --muted:#93AFB5; --line:#27505B;
-      --accent:#54B8CE; --gold:#EBAB3E; --ok:#54C296; --err:#E87684; --on-accent:#06202A;
+      --bg:#0E1712; --surface:#16211A; --surface2:#1C2A21;
+      --ink:#E6EDE2; --muted:#93A695; --line:#2C3E30;
+      --accent:#59C08B; --gold:#E3B65C; --ok:#57C98A; --err:#E27272; --on-accent:#08150F;
       --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0B1E25; --surface:#143039; --surface2:#1A3B46;
-    --ink:#E3EEEC; --muted:#93AFB5; --line:#27505B;
-    --accent:#54B8CE; --gold:#EBAB3E; --ok:#54C296; --err:#E87684; --on-accent:#06202A;
+    --bg:#0E1712; --surface:#16211A; --surface2:#1C2A21;
+    --ink:#E6EDE2; --muted:#93A695; --line:#2C3E30;
+    --accent:#59C08B; --gold:#E3B65C; --ok:#57C98A; --err:#E27272; --on-accent:#08150F;
     --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
   }
 
@@ -29,7 +29,6 @@
        line-height:1.6; -webkit-text-size-adjust:100%;}
   .wrap{max-width:660px; margin:0 auto; padding:18px 16px 56px; display:flex; flex-direction:column; gap:18px;}
 
-  /* ---- topo: rota do Log Pose ---- */
   header{display:flex; flex-direction:column; gap:10px;}
   .brand{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
   .brand b{font-family:var(--display); font-weight:800; font-size:1.05rem; letter-spacing:.2px;}
@@ -44,7 +43,6 @@
   .rota li:last-child::after{display:none;}
   .rota li[data-on]::after{background:var(--accent);}
 
-  /* ---- cartão ---- */
   .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
         box-shadow:var(--shadow); padding:22px 20px; display:flex; flex-direction:column; gap:16px;}
   .eyebrow{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:600;}
@@ -54,7 +52,6 @@
   .lead{font-size:1.05rem;}
   .muted{color:var(--muted); font-size:.92rem;}
 
-  /* ---- botões ---- */
   button{font-family:inherit; font-size:1rem; cursor:pointer; border-radius:12px; border:1px solid var(--line);
          background:var(--surface2); color:var(--ink); padding:14px 18px; min-height:52px; transition:transform .12s, background .12s, border-color .12s;}
   button:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
@@ -66,45 +63,36 @@
   .go:hover{filter:brightness(1.08);}
   .ghost{background:transparent; border-style:dashed; font-size:.9rem; min-height:44px; padding:10px 16px;}
 
-  /* ---- sílabas ---- */
-  .silabas{display:flex; flex-wrap:wrap; gap:8px;}
-  .sil{font-family:var(--display); font-weight:600; font-size:1.35rem; padding:12px 18px; min-height:58px;}
-  .sil[data-state="ok"]{background:color-mix(in srgb, var(--ok) 18%, var(--surface)); border-color:var(--ok); color:var(--ok);
-       font-size:1.6rem; animation:pulo .45s ease;}
-  .sil[data-state="no"]{background:color-mix(in srgb, var(--err) 14%, var(--surface)); border-color:var(--err); color:var(--err);}
-  @keyframes pulo{0%{transform:translateY(0)}40%{transform:translateY(-10px) rotate(-3deg)}100%{transform:translateY(0)}}
   @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important;}}
-
-  .palavra{font-family:var(--display); font-weight:800; font-size:2rem; letter-spacing:.5px; line-height:1.1;}
-  .palavra em{font-style:normal; color:var(--gold); font-size:1.25em;}
 
   .opcoes{display:grid; gap:10px;}
   @media (min-width:520px){ .opcoes.tres{grid-template-columns:repeat(3,1fr);} .opcoes.duas{grid-template-columns:repeat(2,1fr);} }
-  .opcoes button{font-family:var(--display); font-weight:600;}
+  .opcoes button{font-weight:500; text-align:left; line-height:1.35;}
   .opcoes button[data-state="ok"]{background:color-mix(in srgb, var(--ok) 18%, var(--surface)); border-color:var(--ok); color:var(--ok);}
   .opcoes button[data-state="no"]{background:color-mix(in srgb, var(--err) 14%, var(--surface)); border-color:var(--err); color:var(--err);}
 
-  /* ---- feedback ---- */
   .fb{border-left:4px solid var(--line); padding:10px 14px; border-radius:0 10px 10px 0; background:var(--surface2); font-size:.95rem;}
   .fb[data-k="ok"]{border-color:var(--ok);}
   .fb[data-k="no"]{border-color:var(--err);}
   .fb[data-k="dica"]{border-color:var(--gold);}
+  .fb[data-k="modelo"]{border-color:var(--accent);}
   .fb b{font-family:var(--display);}
 
-  /* ---- regras ---- */
   .regra{display:flex; flex-direction:column; gap:6px; padding:14px; border:1px solid var(--line);
          border-radius:12px; background:var(--surface2);}
-  .regra .nome{font-family:var(--display); font-weight:800; font-size:1.1rem; color:var(--accent);}
-  .regra .demo{font-family:var(--display); font-weight:600; font-size:1.4rem; letter-spacing:1px;}
-  .regra .demo em{font-style:normal; color:var(--gold); font-size:1.3em; display:inline-block;}
+  .regra .nome{font-family:var(--display); font-weight:800; font-size:1.05rem; color:var(--accent);}
   .grupo{display:flex; flex-direction:column; gap:12px;}
+
+  .citacao{font-style:italic; padding:10px 14px; border-left:3px solid var(--line); color:var(--muted); font-size:1rem;}
+
+  .contexto{background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:.95rem;}
 
   .contador{font-size:.85rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
   .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:-4px;}
   .nav .ghost{min-height:42px; padding:8px 16px; color:var(--muted);}
   .nav .ghost:hover{color:var(--accent);}
   .nav .contador{text-align:right;}
-  .revisao{font-size:.8rem; color:var(--muted); font-style:italic;}
+
   textarea{width:100%; box-sizing:border-box; font-family:var(--body); font-size:1.05rem; line-height:1.6;
            padding:14px; border-radius:12px; border:1px solid var(--line); background:var(--surface2); color:var(--ink);
            min-height:150px; resize:vertical;}
@@ -120,7 +108,7 @@
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>01/09 · Alabasta · Sílaba Tônica</span></div>
+    <div class="brand"><b>Droidec</b><span>02/09 · Arquipélago das Ruínas · História</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -132,63 +120,77 @@
   "use strict";
 
   var GUIADO = [
-    {w:"tapete",  sil:["ta","pe","te"],     t:1, dica:"Fala bem devagar: ta-PE-te. Onde a tua voz sobe?"},
-    {w:"jasmim",  sil:["jas","mim"],        t:1, dica:"É uma flor do deserto. Chama ela de longe: jas-MIM!"},
-    {w:"lâmpada", sil:["lâm","pa","da"],    t:0, dica:"O chapeuzinho (^) é um dedo apontando: ele mora na sílaba forte."},
-    {w:"areia",   sil:["a","rei","a"],      t:1, dica:"Tem um REI escondido no meio da palavra. E rei fala alto."},
-    {w:"âncora",  sil:["ân","co","ra"],     t:0, dica:"Olha o acento de novo. Ele nunca mente."}
+    {contexto:"Nas Ruínas do Vale Perdido, Robin encontrou uma capela de pedra bem ao lado de casas onde vivia o povo Kalu.",
+     pergunta:"Quem, além do povo Kalu, ajudou a construir essas ruínas?",
+     opcoes:["Só os Kalu, sozinhos","Monges Viajantes, que vieram ensinar sua religião","Piratas à procura de tesouro"],
+     certa:1, dica:"Por que teria uma capela — um lugar de reza — bem ao lado das casas dos Kalu?",
+     porque:"Uma capela ao lado das casas é a pista: alguém de fora, com outra religião, veio morar junto."},
+    {contexto:"Enquanto viviam perto dos Monges Viajantes, o povo Kalu aprendia a nova religião, plantava a terra e ajudava a construir a vila.",
+     pergunta:"O que o povo Kalu fazia nessas vilas?",
+     opcoes:["Ficava escondido, sem nenhum contato","Aprendia, trabalhava e construía junto com os Monges","Ia embora assim que os Monges chegavam"],
+     certa:1, dica:"Olha de novo o que o texto diz que eles faziam: aprender, plantar, construir — junto.",
+     porque:"Era uma vida em conjunto: os Kalu não ficaram isolados nem foram embora — trabalharam lado a lado com os Monges."},
+    {contexto:null,
+     pergunta:"Qual era o principal objetivo dos Monges Viajantes ao fundar essas vilas?",
+     opcoes:["Ensinar sua religião ao povo Kalu","Vender espadas para o povo Kalu","Aprender a língua Kalu só por curiosidade"],
+     certa:0, dica:"Pensa no nome deles: “Monges”. O que um monge normalmente quer ensinar?",
+     porque:"É a própria função de um monge viajante: levar sua fé para outros lugares."},
+    {contexto:null,
+     pergunta:"Por que essas ruínas viraram um patrimônio importante, estudado até hoje?",
+     opcoes:["Porque mostram como dois povos diferentes viveram juntos, há muito tempo","Porque são feitas de ouro puro","Porque ninguém mais lembra delas"],
+     certa:0, dica:"Pensa no que a Robin, como arqueóloga, mais valoriza: ouro ou histórias?",
+     porque:"O valor não está no material — está na história de dois povos diferentes dividindo o mesmo lugar."},
+    {contexto:"A Robin achou uma placa de pedra dizendo só: “Aqui, um grande herói trouxe a civilização.”",
+     pergunta:"O que a Robin deveria fazer antes de acreditar 100% nessa placa?",
+     opcoes:["Aceitar, porque está escrito em pedra","Procurar outros registros, pra ver se contam a mesma coisa","Ignorar, porque placa de pedra sempre mente"],
+     certa:1, dica:"Lembra o que a gente aprendeu: uma fonte só mostra UM lado. O que a Robin faz quando só tem um lado?",
+     porque:"Nem sempre é mentira — mas também nunca é a história toda. Por isso ela sempre busca uma segunda pista."}
   ];
 
   var DESAFIO = [
-    {w:"princesa",  sil:["prin","ce","sa"],       t:1, c:"paroxitona",    nota:"Vivi é a prin-CE-sa. Força na penúltima, sem acento nenhum escrito."},
-    {w:"sultão",    sil:["sul","tão"],            t:1, c:"oxitona",       nota:"sul-TÃO: a última é a mais forte."},
-    {w:"pirâmide",  sil:["pi","râ","mi","de"],    t:1, c:"proparoxitona", nota:"pi-RÂ-mi-de: contando de trás pra frente — de(1), mi(2), RÂ(3). Antepenúltima!"},
-    {w:"javali",    sil:["ja","va","li"],         t:2, c:"oxitona",       nota:"Pegadinha: não tem acento escrito, mas a força está no LI. ja-va-LI."},
-    {w:"bússola",   sil:["bús","so","la"],        t:0, c:"proparoxitona", nota:"BÚS-so-la: o acento marca a antepenúltima. Toda proparoxítona leva acento."},
-    {w:"caravana",  sil:["ca","ra","va","na"],    t:2, c:"paroxitona",    nota:"ca-ra-VA-na: penúltima. É o grupo mais comum do português."},
-    {w:"tambor",    sil:["tam","bor"],            t:1, c:"oxitona",       nota:"tam-BOR: bate mais forte no fim, igual o instrumento."},
-    {w:"relâmpago", sil:["re","lâm","pa","go"],   t:1, c:"proparoxitona", nota:"re-LÂM-pa-go: go(1), pa(2), LÂM(3). Antepenúltima de novo."}
+    {contexto:"Um grupo de exploradores chamado Caçadores de Ilhas invadia as terras do povo Kalu para capturar pessoas e levá-las a trabalhar à força em terras distantes.",
+     pergunta:"Por que o povo Kalu resistia aos Caçadores de Ilhas?",
+     opcoes:["Para proteger sua casa, sua família e sua liberdade","Porque odiava qualquer pessoa que viesse de fora","Porque queria ficar com as armas dos Caçadores"],
+     certa:0, nota:"Resistir não era sobre ódio — era proteger o que era mais importante: o lar, a família e a liberdade de viver do seu jeito."},
+    {contexto:"Anos depois, uma cidade construiu uma estátua de um dos Caçadores de Ilhas, com a frase: “Aqui está o grande herói que abriu caminho para o progresso.”",
+     pergunta:"Essa estátua conta toda a história sobre esse Caçador?",
+     opcoes:["Sim, estátuas sempre contam tudo","Não — ela mostra só o lado de quem quis ser lembrado como herói","Não importa, estátua é só decoração"],
+     certa:1, nota:"Pegadinha clássica: quem manda construir uma estátua escolhe o que vai ser lembrado. Isso não é mentira, mas também não é a história toda."},
+    {contexto:"Há muito tempo, nas casas do povo Kalu e também nas casas dos Monges e Caçadores, não existia um quarto especial para as crianças, nem regras de cuidado só para elas. Elas ajudavam bem cedo nos trabalhos dos adultos.",
+     pergunta:"O que isso mostra sobre a infância de muito tempo atrás?",
+     opcoes:["Era exatamente igual à infância de hoje","Era diferente — as crianças eram tratadas mais como “adultos pequenos”","As crianças não existiam antigamente"],
+     certa:1, nota:"A ideia de infância como um tempo só de brincar, estudar e ser cuidado é bem mais recente do que parece."},
+    {contexto:"Alguns do povo Kalu foram viver nas vilas dos Monges. Lá aprendiam a nova religião — mas também ficavam mais protegidos de serem capturados pelos Caçadores de Ilhas.",
+     pergunta:"A vida nas vilas dos Monges era só uma coisa boa, ou só uma coisa ruim, para o povo Kalu?",
+     opcoes:["Só coisa boa — eles escolheram tudo livremente, sem perder nada","Só coisa ruim — não existia proteção nenhuma ali","As duas coisas ao mesmo tempo: tinham mais proteção, mas também deixavam de lado parte dos seus costumes"],
+     certa:2, nota:"A história raramente é só boa ou só ruim. As vilas protegiam de um perigo, mas também mudavam o jeito de viver do povo Kalu."},
+    {contexto:"Uma pintora famosa retratou um Caçador de Ilhas como um homem cansado e maltrapilho — bem diferente da estátua brilhante da praça.",
+     pergunta:"Por que pode ser útil olhar as duas imagens — a estátua E a pintura — antes de decidir o que pensar sobre esse Caçador?",
+     opcoes:["Porque cada imagem mostra um pedaço diferente da verdade","Porque uma das duas com certeza é mentira","Porque imagem antiga não serve pra nada"],
+     certa:0, nota:"Duas fontes diferentes, dois pedaços da verdade. Juntando os pedaços, a imagem fica mais completa."},
+    {contexto:null,
+     pergunta:"Além de lutar, de que outra forma um povo pode resistir para não perder sua cultura?",
+     opcoes:["Parando de contar suas próprias histórias","Continuando a falar sua língua, contar suas histórias e manter vivas suas tradições","Copiando tudo do jeito dos Caçadores de Ilhas"],
+     certa:1, nota:"Resistir também é lembrar. Um povo que mantém viva sua língua e suas histórias está resistindo, mesmo sem lutar."},
+    {contexto:null,
+     pergunta:"Hoje em dia, será que todas as crianças do mundo têm escola, brinquedos e tempo pra brincar do mesmo jeito?",
+     opcoes:["Sim, hoje em dia é tudo igual para todo mundo","Não — ainda hoje existem muitas diferenças, dependendo de onde e como cada criança vive","Isso não tem nada a ver com o assunto"],
+     certa:1, nota:"Pegadinha: é fácil achar que “hoje em dia” já resolveu tudo. Mas as diferenças na infância continuam existindo, só que de outros jeitos."},
+    {contexto:"A Robin percebeu que as ruínas, as imagens dos Caçadores e os registros sobre as crianças tinham algo em comum.",
+     pergunta:"O que esses três achados ensinam sobre estudar história?",
+     opcoes:["Que só existe uma versão certa da história, sempre","Que é preciso juntar várias pistas e pontos de vista diferentes para entender o passado","Que história antiga não serve pra nada hoje"],
+     certa:1, nota:"Isso é ser um bom arqueólogo, tipo a Robin: nunca se contentar com uma pista só."}
   ];
 
-  var DUPLAS = [
-    {frase:"Nami visitou a ___ de bússolas do reino.",
-     ops:["fábrica","fabrica"], ok:0,
-     nota:"FÁ-bri-ca (proparoxítona) é o lugar. fa-BRI-ca (paroxítona) é o verbo: “ele fabrica bússolas”."},
-    {frase:"Chopper ficou com uma ___ enorme sobre o mapa.",
-     ops:["dúvida","duvida"], ok:0,
-     nota:"DÚ-vi-da é a pergunta na cabeça. du-VI-da é o verbo: “ele duvida do mapa”."},
-    {frase:"A ___ do palácio anotou o recado da princesa.",
-     ops:["secretária","secretaria"], ok:0,
-     nota:"se-cre-TÁ-ria é a pessoa. se-cre-ta-RI-a é o lugar, a sala. Mesmas letras, sílaba forte diferente, sentido diferente."}
-  ];
-
-  var CLASSES = [
-    {id:"oxitona",       rot:"Oxítona"},
-    {id:"paroxitona",    rot:"Paroxítona"},
-    {id:"proparoxitona", rot:"Proparoxítona"}
-  ];
-
-  var KEY = "zion-silaba-tonica-2026-09-01";
-  var VAZIO = {tela:0, iG:0, iD:0, iP:0, guiado:{}, desafio:{}, duplas:{}, texto:""};
+  var KEY = "zion-historia-missoes-2026-09-02";
+  var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
-  function cursor(m,n){ var i=0; while(i<n && m[i]) i++; return i; }
-  try{
-    var raw = localStorage.getItem(KEY);
-    if(raw){
-      var o = JSON.parse(raw);
-      S = Object.assign(S, o);
-      if(o.iG == null){ /* progresso salvo antes dos botões de voltar */
-        S.iG = cursor(S.guiado, GUIADO.length);
-        S.iD = cursor(S.desafio, DESAFIO.length);
-        S.iP = cursor(S.duplas, DUPLAS.length);
-      }
-    }
-  }catch(e){}
+  try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
   function salva(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
   var el = function(t,c,x){ var n=document.createElement(t); if(c) n.className=c; if(x!=null) n.textContent=x; return n; };
   var tela = document.getElementById("tela");
-  var TELAS = [gancho, regra, treino, desafio, duplas, fim];
+  var TELAS = [gancho, regra, treino, desafio, explicacao, fim];
 
   function rota(){
     var ul = document.getElementById("rota"); ul.innerHTML="";
@@ -206,7 +208,6 @@
   function eyebrow(t){ return el("div","eyebrow",t); }
   function botao(t,fn){ var b = el("button","go",t); b.addEventListener("click",fn); return b; }
 
-  /* barra de navegação: voltar à esquerda, posição à direita */
   function navbar(rotulo, voltar){
     var n = el("div","nav");
     if(voltar){
@@ -219,57 +220,60 @@
   }
   function pula(campo, valor, telaN){ S[campo] = valor; if(telaN!=null) S.tela = telaN; salva(); render(); }
 
-  function silabado(sil,t){
-    var p = el("div","palavra"), i;
-    for(i=0;i<sil.length;i++){
-      if(i) p.appendChild(document.createTextNode("-"));
-      if(i===t){ var e = el("em",null,sil[i].toUpperCase()); p.appendChild(e); }
-      else p.appendChild(document.createTextNode(sil[i]));
-    }
-    return p;
-  }
+  function opcoesClasse(n){ return n<=2 ? "opcoes duas" : "opcoes tres"; }
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","O Log Pose parou de girar: a rota agora aponta pra Alabasta, o reino do deserto.");
-    var p2 = el("p","lead","O portão do palácio não abre com chave. Abre com um grito — e só funciona se a tripulação gritar a sílaba certa de cada palavra.");
-    var p3 = el("p","lead","Toda palavra tem uma sílaba que a gente fala mais forte que as outras. Achar ela é o teu trabalho de hoje.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"O portão que só abre com um grito"), p1, p2, p3, botao("Bora! →", function(){ vai(1); }));
+    var p1 = el("p","lead","A Robin achou um arquipélago escondido: cinco ilhas de pedra, cobertas de trepadeiras, com ruínas que ninguém sabe explicar direito.");
+    var p2 = el("p","lead","Ela pediu ajuda — porque toda ruína conta uma história, mas nem sempre conta a história INTEIRA.");
+    var p3 = el("p","lead","Hoje você é assistente arqueológico dela. Sua missão: juntar as pistas certas antes de tirar qualquer conclusão.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"As Cinco Ruínas Perdidas"), p1, p2, p3, botao("Vamos explorar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
   function regra(){
     var g = el("div","grupo");
-    var dados = [
-      {n:"Oxítona", d:["sul","tão"], t:1, x:"A força cai na ÚLTIMA sílaba."},
-      {n:"Paroxítona", d:["pal","mei","ra"], t:1, x:"A força cai na PENÚLTIMA — a segunda de trás pra frente."},
-      {n:"Proparoxítona", d:["bús","so","la"], t:0, x:"A força cai na ANTEPENÚLTIMA — a terceira de trás pra frente."}
+    var perguntas = [
+      {n:"1. Quem fez isso?", x:"Quem escreveu, construiu ou mandou fazer esse registro?"},
+      {n:"2. Pra quem foi feito?", x:"Quem escreveu queria impressionar, ensinar ou convencer alguém de alguma coisa?"},
+      {n:"3. O que não está sendo dito?", x:"O que ficou de fora — que também seria importante saber?"}
     ];
-    dados.forEach(function(d){
+    perguntas.forEach(function(p){
       var box = el("div","regra");
-      box.appendChild(el("div","nome",d.n));
-      var demo = el("div","demo"), i;
-      for(i=0;i<d.d.length;i++){
-        if(i) demo.appendChild(document.createTextNode("-"));
-        if(i===d.t) demo.appendChild(el("em",null,d.d[i].toUpperCase()));
-        else demo.appendChild(document.createTextNode(d.d[i]));
-      }
-      box.appendChild(demo);
-      box.appendChild(el("p","muted",d.x));
+      box.appendChild(el("div","nome",p.n));
+      box.appendChild(el("p","muted",p.x));
       g.appendChild(box);
     });
-    var truque = el("div","fb"); truque.setAttribute("data-k","dica");
-    truque.appendChild(el("b",null,"O truque do Log Pose: "));
-    truque.appendChild(document.createTextNode("conta as sílabas de trás pra frente. Parou na 1ª? Oxítona. Na 2ª? Paroxítona. Na 3ª? Proparoxítona."));
+
+    var citacao = el("div","citacao","“Aqui, o grande Capitão Doran trouxe ordem a essas terras selvagens.” — placa de pedra, Ilha 3");
+
+    var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
+    modelo.appendChild(el("b",null,"🧭 Robin pensa alto: "));
+    modelo.appendChild(document.createTextNode(
+      "primeiro, reparo que foi o próprio Capitão Doran quem mandou fazer essa placa — ninguém escreve mal de si mesmo. " +
+      "Depois, reparo na palavra “selvagens” — isso não é um fato, é uma opinião de quem escreveu. " +
+      "Então eu concluo: essa placa mostra como o Capitão QUERIA ser lembrado, não necessariamente o que aconteceu de verdade. " +
+      "Preciso achar outra pista pra completar a história."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Onde a voz grita mais forte"),
-      el("p",null,"A sílaba tônica é aquela que você fala mais alto sem perceber. Experimenta falar as três palavras abaixo em voz alta — dá pra ouvir o grito."),
-      g, truque,
+      el("h2",null,"Como a Robin lê uma pista antiga"),
+      el("p",null,"Toda vez que encontra um registro antigo — uma placa, uma pintura, uma estátua — a Robin faz sempre as MESMAS três perguntas, antes de acreditar em qualquer coisa."),
+      g,
+      el("p","muted","Vamos treinar juntos com uma pista de verdade:"),
+      citacao, modelo,
+      el("p","muted","Guarda essas três perguntas — você vai precisar delas em todos os próximos desafios."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
+  }
+
+  function montaOpcoes(q, ops, onEscolher, jaFeito){
+    q.opcoes.forEach(function(txt,i){
+      var b = el("button",null,txt);
+      b.addEventListener("click", function(){ if(!b.disabled) onEscolher(i,b); });
+      ops.appendChild(b);
+    });
   }
 
   /* ---------- 3. treino guiado ---------- */
@@ -278,8 +282,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Treino completo! ⚓"),
-        el("p",null,"Você já pega a sílaba forte quando ela vem separadinha. Agora vem a parte que a escola cobra."),
+        eyebrow("Treino guiado"), el("h2",null,"Primeira leva de pistas, decifrada! 🗺️"),
+        el("p",null,"Você já sabe fazer as três perguntas da Robin. Agora vem a parte que a escola cobra de verdade."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -287,52 +291,46 @@
     c.appendChild(navbar("Treino · " + (idx+1) + " de " + GUIADO.length, function(){
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
-    c.appendChild(el("h2",null,"Clica na sílaba mais forte"));
-    c.appendChild(el("p","muted", feito ? "Você já respondeu esta — dá uma olhada e segue." : "Fala a palavra em voz alta antes de escolher. Sério, funciona."));
+    if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    c.appendChild(el("h2",null,q.pergunta));
 
-    var forte = q.sil.join("-").replace(q.sil[q.t], q.sil[q.t].toUpperCase());
-    var linha = el("div","silabas");
+    var ops = el("div", opcoesClasse(q.opcoes.length));
     var fb = el("div","fb"); fb.style.display="none";
     var tentativa = 0;
 
-    function trava(){ Array.prototype.forEach.call(linha.children,function(x){ x.disabled=true; }); }
+    function trava(){ Array.prototype.forEach.call(ops.children,function(x){ x.disabled=true; }); }
     function proxima(){ c.appendChild(botao("Próxima →", function(){ pula("iG", idx+1); window.scrollTo(0,0); })); }
     function diz(k, negrito, resto){
       fb.style.display=""; fb.setAttribute("data-k",k); fb.innerHTML="";
       fb.appendChild(el("b",null,negrito)); fb.appendChild(document.createTextNode(resto));
     }
 
-    q.sil.forEach(function(s,i){
-      var b = el("button","sil",s);
-      b.addEventListener("click", function(){
-        if(b.disabled) return;
-        if(i === q.t){
-          b.setAttribute("data-state","ok"); trava();
-          diz("ok","Isso! ", forte + " — a força fica em “" + q.sil[q.t] + "”.");
-          S.guiado[idx] = {feito:true, acertou: tentativa===0}; salva();
-          proxima();
+    montaOpcoes(q, ops, function(i,b){
+      if(i === q.certa){
+        b.setAttribute("data-state","ok"); trava();
+        diz("ok","Isso mesmo! ", q.porque);
+        S.guiado[idx] = {feito:true, acertou: tentativa===0}; salva();
+        proxima();
+      } else {
+        tentativa++;
+        b.setAttribute("data-state","no");
+        if(tentativa === 1){
+          diz("dica","Quase. ", q.dica + " Tenta de novo.");
         } else {
-          tentativa++;
-          b.setAttribute("data-state","no");
-          if(tentativa === 1){
-            diz("dica","Quase. ", q.dica + " Tenta de novo.");
-          } else {
-            linha.children[q.t].setAttribute("data-state","ok"); trava();
-            diz("no","A certa é “" + q.sil[q.t] + "”. ", "Fala assim: " + forte + ".");
-            S.guiado[idx] = {feito:true, acertou:false}; salva();
-            proxima();
-          }
+          ops.children[q.certa].setAttribute("data-state","ok"); trava();
+          diz("no","A certa era: “" + q.opcoes[q.certa] + "”. ", q.porque);
+          S.guiado[idx] = {feito:true, acertou:false}; salva();
+          proxima();
         }
-      });
-      linha.appendChild(b);
+      }
     });
-    c.appendChild(linha); c.appendChild(fb);
+    c.appendChild(ops); c.appendChild(fb);
 
     if(feito){
-      linha.children[q.t].setAttribute("data-state","ok"); trava();
+      ops.children[q.certa].setAttribute("data-state","ok"); trava();
       diz(feito.acertou ? "ok" : "no",
           feito.acertou ? "Você acertou de primeira. " : "Aqui você precisou de dica. ",
-          forte + " — a força fica em “" + q.sil[q.t] + "”.");
+          q.porque);
       proxima();
     }
     return c;
@@ -345,109 +343,60 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Desafio vencido! 🏜️"),
-        el("p",null,"Você classificou " + acertos + " de " + DESAFIO.length + " certas de primeira."),
+        eyebrow("Desafio"), el("h2",null,"As cinco ruínas, decifradas! 🏺"),
+        el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
     var q = DESAFIO[idx], feito = S.desafio[idx];
-    var rotCerta = CLASSES.filter(function(x){ return x.id===q.c; })[0].rot;
     var c = el("div","card");
     c.appendChild(navbar("Desafio · " + (idx+1) + " de " + DESAFIO.length, function(){
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
-    c.appendChild(el("h2",null,"Essa palavra é de qual grupo?"));
-    c.appendChild(silabado(q.sil, q.t));
-    c.appendChild(el("p","muted","A sílaba forte já está marcada em dourado. Agora conta de trás pra frente."));
+    if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    c.appendChild(el("h2",null,q.pergunta));
 
-    var ops = el("div","opcoes tres");
+    var ops = el("div", opcoesClasse(q.opcoes.length));
     var fb = el("div","fb"); fb.style.display="none";
     function resolve(certo, negrito){
       Array.prototype.forEach.call(ops.children,function(x,i){
         x.disabled = true;
-        if(CLASSES[i].id === q.c) x.setAttribute("data-state","ok");
+        if(i === q.certa) x.setAttribute("data-state","ok");
       });
       fb.style.display=""; fb.setAttribute("data-k", certo?"ok":"no"); fb.innerHTML="";
       fb.appendChild(el("b",null,negrito));
       fb.appendChild(document.createTextNode(q.nota));
       c.appendChild(botao("Próxima →", function(){ pula("iD", idx+1); window.scrollTo(0,0); }));
     }
-    CLASSES.forEach(function(cl){
-      var b = el("button",null,cl.rot);
-      b.addEventListener("click", function(){
-        if(b.disabled) return;
-        var certo = cl.id === q.c;
-        if(!certo) b.setAttribute("data-state","no");
-        S.desafio[idx] = {acertou:certo, marcou:cl.rot}; salva();
-        resolve(certo, certo ? "Certo! " : "É " + rotCerta + ". ");
-      });
-      ops.appendChild(b);
+    montaOpcoes(q, ops, function(i,b){
+      var certo = i === q.certa;
+      if(!certo) b.setAttribute("data-state","no");
+      S.desafio[idx] = {acertou:certo, marcou:q.opcoes[i]}; salva();
+      resolve(certo, certo ? "Certo! " : "Essa não é a melhor resposta. ");
     });
     c.appendChild(ops); c.appendChild(fb);
 
     if(feito){
       if(!feito.acertou){
-        Array.prototype.forEach.call(ops.children,function(x,i){ if(CLASSES[i].rot === feito.marcou) x.setAttribute("data-state","no"); });
+        Array.prototype.forEach.call(ops.children,function(x){ if(x.textContent === feito.marcou) x.setAttribute("data-state","no"); });
       }
-      resolve(feito.acertou, feito.acertou ? "Você acertou: " + rotCerta + ". " : "Você marcou " + feito.marcou + ", mas é " + rotCerta + ". ");
+      resolve(feito.acertou, feito.acertou ? "Você acertou: “" + q.opcoes[q.certa] + "”. " : "Você marcou “" + feito.marcou + "”, mas a melhor resposta era “" + q.opcoes[q.certa] + "”. ");
     }
     return c;
   }
 
-  /* ---------- 5. duplas + explicação ---------- */
-  function duplas(){
-    var idx = S.iP;
-    if(idx < DUPLAS.length){
-      var q = DUPLAS[idx], feito = S.duplas[idx];
-      var c = el("div","card");
-      c.appendChild(navbar("Duplas mágicas · " + (idx+1) + " de " + DUPLAS.length, function(){
-        if(idx > 0) pula("iP", idx-1); else pula("iD", DESAFIO.length, 3);
-      }));
-      c.appendChild(el("h2",null,"Mesmas letras, sentidos diferentes"));
-      c.appendChild(el("p","lead", q.frase));
-      var ops = el("div","opcoes duas");
-      var fb = el("div","fb"); fb.style.display="none";
-      var resolve = function(certo, negrito){
-        Array.prototype.forEach.call(ops.children,function(x){ x.disabled=true; });
-        ops.children[q.ok].setAttribute("data-state","ok");
-        fb.style.display=""; fb.setAttribute("data-k",certo?"ok":"no"); fb.innerHTML="";
-        fb.appendChild(el("b",null,negrito));
-        fb.appendChild(document.createTextNode(q.nota));
-        c.appendChild(botao("Continuar →", function(){ pula("iP", idx+1); window.scrollTo(0,0); }));
-      };
-      q.ops.forEach(function(op,i){
-        var b = el("button",null,op);
-        b.addEventListener("click", function(){
-          if(b.disabled) return;
-          var certo = i === q.ok;
-          if(!certo) b.setAttribute("data-state","no");
-          S.duplas[idx] = {acertou:certo, marcou:op}; salva();
-          resolve(certo, certo ? "Isso mesmo. " : "A certa é “"+q.ops[q.ok]+"”. ");
-        });
-        ops.appendChild(b);
-      });
-      c.appendChild(ops); c.appendChild(fb);
-
-      if(feito){
-        if(!feito.acertou){
-          Array.prototype.forEach.call(ops.children,function(x){ if(x.textContent === feito.marcou) x.setAttribute("data-state","no"); });
-        }
-        resolve(feito.acertou, feito.acertou ? "Você acertou: “"+q.ops[q.ok]+"”. " : "Você marcou “"+feito.marcou+"”, mas é “"+q.ops[q.ok]+"”. ");
-      }
-      return c;
-    }
-
-    /* explique como Droidec */
+  /* ---------- 5. explique como Droidec ---------- */
+  function explicacao(){
     var c2 = el("div","card");
-    c2.appendChild(navbar("Explicação", function(){ pula("iP", DUPLAS.length-1); }));
+    c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Chopper?"));
-    c2.appendChild(el("p","lead","Chopper não sabe nada de sílaba tônica. Escreve com as TUAS palavras como ele faz pra descobrir se uma palavra é oxítona, paroxítona ou proparoxítona."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pra Nami?"));
+    c2.appendChild(el("p","lead","Um amigo seu disse que os Caçadores de Ilhas foram “heróis que abriram caminho pro progresso”. Escreve, com as TUAS palavras, como você explicaria pra esse amigo o que ele está esquecendo de pensar antes de decidir isso."));
     var chips = el("div","chips");
-    ["sílaba forte","contar de trás pra frente","última / penúltima / antepenúltima"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["os dois lados","quem foi prejudicado","a história toda"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Chopper, presta atenção: primeiro você...");
+    ta.setAttribute("placeholder","Amigo, antes de chamar alguém de herói...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -465,40 +414,37 @@
 
   /* ---------- 6. fim ---------- */
   function fim(){
-    var tg=0, ag=0, td=0, ad=0, tp=0, ap=0, i;
+    var tg=0, ag=0, td=0, ad=0, i;
     for(i=0;i<GUIADO.length;i++){ if(S.guiado[i]){ tg++; if(S.guiado[i].acertou) ag++; } }
     for(i=0;i<DESAFIO.length;i++){ if(S.desafio[i]){ td++; if(S.desafio[i].acertou) ad++; } }
-    for(i=0;i<DUPLAS.length;i++){ if(S.duplas[i]){ tp++; if(S.duplas[i].acertou) ap++; } }
-    var total = tg+td+tp, acertos = ag+ad+ap;
+    var total = tg+td, acertos = ag+ad;
 
     var c = el("div","card");
-    c.appendChild(navbar("Fim da rota", function(){ pula("iP", DUPLAS.length, 4); }));
+    c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"O portão de Alabasta abriu ⚓"));
+    c.appendChild(el("h2",null,"As Cinco Ruínas, decifradas ⚓"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você pegou as proparoxítonas, que são as que mais confundem.";
-    if(ad <= 4) msg = "As proparoxítonas ainda estão escorregando — vale contar de trás pra frente com o dedo.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas sem acento escrito.";
-    c.appendChild(el("p",null, msg + " Agora a tarefa da escola vai ser moleza."));
+    var msg = "Você já pensa como uma arqueóloga de verdade: sempre buscando o outro lado da história.";
+    if(ad <= 4) msg = "As pegadinhas de “quem conta a história” ainda enganam um pouco — vale reler as três perguntas da Robin antes da próxima.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas mais difíceis sobre heróis e estátuas.";
+    c.appendChild(el("p",null, msg + " Agora a tarefa da escola vai ficar bem mais fácil de pensar."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Sílaba tônica (Alabasta)",
+    var txt = ["AULA DE HOJE — História (Arquipélago das Ruínas)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",
-               "Desafio (classificar): " + ad + "/" + td + " de primeira",
-               "Duplas mágicas: " + ap + "/" + tp,
+               "Desafio: " + ad + "/" + td + " de primeira",
                "TOTAL: " + acertos + "/" + total,
                ""];
     var errou = [];
-    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push(DESAFIO[i].w + " (marcou " + S.desafio[i].marcou + ", era " + CLASSES.filter(function(x){return x.id===DESAFIO[i].c;})[0].rot + ")");
-    for(i=0;i<DUPLAS.length;i++) if(S.duplas[i] && !S.duplas[i].acertou) errou.push("dupla: marcou " + S.duplas[i].marcou + ", era " + DUPLAS[i].ops[DUPLAS[i].ok]);
-    for(i=0;i<GUIADO.length;i++) if(S.guiado[i] && !S.guiado[i].acertou) errou.push(GUIADO[i].w + " (precisou de dica)");
+    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push("Desafio " + (i+1) + ": marcou “" + S.desafio[i].marcou + "”, era “" + DESAFIO[i].opcoes[DESAFIO[i].certa] + "”");
+    for(i=0;i<GUIADO.length;i++) if(S.guiado[i] && !S.guiado[i].acertou) errou.push("Treino " + (i+1) + " (precisou de dica)");
     txt.push("Errou / tropeçou:");
     txt.push(errou.length ? "- " + errou.join("\n- ") : "- nada");
     txt.push("", "EXPLICAÇÃO DO ZION (na íntegra):", (S.texto||"").trim() || "(não escreveu)");

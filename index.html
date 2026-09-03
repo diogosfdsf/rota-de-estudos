@@ -2,26 +2,26 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Lexend:wght@300;400;600&display=swap">
 <style>
   :root{
-    --bg:#EDEEE0; --surface:#FBFAF3; --surface2:#F1F0E2;
-    --ink:#1B2A20; --muted:#5C6B5C; --line:#D6D6BC;
-    --accent:#2E6F52; --gold:#A8752A; --ok:#2E7D4F; --err:#A83B3B; --on-accent:#FFFFFF;
-    --shadow:0 2px 0 rgba(27,42,32,.10), 0 10px 24px -14px rgba(27,42,32,.5);
+    --bg:#EAF1F3; --surface:#FFFFFF; --surface2:#EEF4F6;
+    --ink:#16303A; --muted:#57717A; --line:#CBD9DD;
+    --accent:#1C7293; --gold:#D97B29; --ok:#2E7D4F; --err:#B23B3B; --on-accent:#FFFFFF;
+    --shadow:0 2px 0 rgba(22,48,58,.10), 0 10px 24px -14px rgba(22,48,58,.5);
     --r:16px;
     --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
     --body:"Lexend","Segoe UI",system-ui,sans-serif;
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#0E1712; --surface:#16211A; --surface2:#1C2A21;
-      --ink:#E6EDE2; --muted:#93A695; --line:#2C3E30;
-      --accent:#59C08B; --gold:#E3B65C; --ok:#57C98A; --err:#E27272; --on-accent:#08150F;
+      --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
+      --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
+      --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
       --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0E1712; --surface:#16211A; --surface2:#1C2A21;
-    --ink:#E6EDE2; --muted:#93A695; --line:#2C3E30;
-    --accent:#59C08B; --gold:#E3B65C; --ok:#57C98A; --err:#E27272; --on-accent:#08150F;
+    --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
+    --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
+    --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
     --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
   }
 
@@ -108,7 +108,7 @@
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>02/09 · Arquipélago das Ruínas · História</span></div>
+    <div class="brand"><b>Droidec</b><span>02/09 · Estaleiro do Franky · Geografia — Indústria</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -120,69 +120,69 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"Nas Ruínas do Vale Perdido, Robin encontrou uma capela de pedra bem ao lado de casas onde vivia o povo Kalu.",
-     pergunta:"Quem, além do povo Kalu, ajudou a construir essas ruínas?",
-     opcoes:["Só os Kalu, sozinhos","Monges Viajantes, que vieram ensinar sua religião","Piratas à procura de tesouro"],
-     certa:1, dica:"Por que teria uma capela — um lugar de reza — bem ao lado das casas dos Kalu?",
-     porque:"Uma capela ao lado das casas é a pista: alguém de fora, com outra religião, veio morar junto."},
-    {contexto:"Enquanto viviam perto dos Monges Viajantes, o povo Kalu aprendia a nova religião, plantava a terra e ajudava a construir a vila.",
-     pergunta:"O que o povo Kalu fazia nessas vilas?",
-     opcoes:["Ficava escondido, sem nenhum contato","Aprendia, trabalhava e construía junto com os Monges","Ia embora assim que os Monges chegavam"],
-     certa:1, dica:"Olha de novo o que o texto diz que eles faziam: aprender, plantar, construir — junto.",
-     porque:"Era uma vida em conjunto: os Kalu não ficaram isolados nem foram embora — trabalharam lado a lado com os Monges."},
+    {contexto:"Franky quer fabricar 200 coletes salva-vidas pra doar pra uma ilha vizinha. Ele separa a equipe: cada pessoa faz só uma etapa, e repete essa etapa em todos os coletes.",
+     pergunta:"Esse jeito de organizar o trabalho tem nome. Qual?",
+     opcoes:["Trabalho artesanal","Linha de produção","Trabalho escondido"],
+     certa:1, dica:"Pensa: cada pessoa repete SEMPRE a mesma etapa, em sequência. Isso lembra uma linha, uma fileira de passos.",
+     porque:"Linha de produção é exatamente isso: o trabalho dividido em etapas, cada uma feita por uma pessoa (ou máquina) diferente, em sequência."},
+    {contexto:"Zoro faz um colete inteiro sozinho, cortando e costurando à mão, do início ao fim.",
+     pergunta:"O jeito do Zoro de trabalhar é indústria?",
+     opcoes:["Sim, porque ele também está fazendo um colete","Não — é trabalho artesanal: uma pessoa só, sem máquina, sem produção em grande quantidade","Sim, porque ele é forte e rápido"],
+     certa:1, dica:"Uma característica central da indústria é produzir MUITOS produtos, em pouco tempo, com máquinas. O Zoro tem isso?",
+     porque:"Trabalho artesanal e trabalho industrial não são a mesma coisa — a diferença está na quantidade, na máquina e na linha de produção."},
     {contexto:null,
-     pergunta:"Qual era o principal objetivo dos Monges Viajantes ao fundar essas vilas?",
-     opcoes:["Ensinar sua religião ao povo Kalu","Vender espadas para o povo Kalu","Aprender a língua Kalu só por curiosidade"],
-     certa:0, dica:"Pensa no nome deles: “Monges”. O que um monge normalmente quer ensinar?",
-     porque:"É a própria função de um monge viajante: levar sua fé para outros lugares."},
+     pergunta:"Além de gente trabalhando, o que MAIS uma fábrica precisa pra funcionar?",
+     opcoes:["Só uma boa ideia, nada mais","Matéria-prima, eletricidade e meios de transporte, além da mão de obra","Só uma bandeira bonita"],
+     certa:1, dica:"Pensa em tudo que entra numa fábrica pra ela funcionar: pessoas, mas também materiais, energia... o que mais?",
+     porque:"Uma fábrica depende de vários elementos ao mesmo tempo: gente pra trabalhar, matéria-prima pra transformar, eletricidade pras máquinas rodarem e transporte pra levar tudo de um lado pro outro."},
+    {contexto:"O algodão que vira tecido dos coletes vem da lavoura — plantado, colhido, e levado até a fábrica de Franky.",
+     pergunta:"Nesse exemplo, o algodão é o quê?",
+     opcoes:["A matéria-prima","O produto final","O meio de transporte"],
+     certa:0, dica:"Matéria-prima é o material que ENTRA na fábrica pra virar outra coisa. O que entra aqui, ainda cru, sem virar colete?",
+     porque:"Matéria-prima é o material bruto, antes de ser transformado. O colete pronto é o produto final."},
     {contexto:null,
-     pergunta:"Por que essas ruínas viraram um patrimônio importante, estudado até hoje?",
-     opcoes:["Porque mostram como dois povos diferentes viveram juntos, há muito tempo","Porque são feitas de ouro puro","Porque ninguém mais lembra delas"],
-     certa:0, dica:"Pensa no que a Robin, como arqueóloga, mais valoriza: ouro ou histórias?",
-     porque:"O valor não está no material — está na história de dois povos diferentes dividindo o mesmo lugar."},
-    {contexto:"A Robin achou uma placa de pedra dizendo só: “Aqui, um grande herói trouxe a civilização.”",
-     pergunta:"O que a Robin deveria fazer antes de acreditar 100% nessa placa?",
-     opcoes:["Aceitar, porque está escrito em pedra","Procurar outros registros, pra ver se contam a mesma coisa","Ignorar, porque placa de pedra sempre mente"],
-     certa:1, dica:"Lembra o que a gente aprendeu: uma fonte só mostra UM lado. O que a Robin faz quando só tem um lado?",
-     porque:"Nem sempre é mentira — mas também nunca é a história toda. Por isso ela sempre busca uma segunda pista."}
+     pergunta:"Uma fábrica que transforma leite em queijo é chamada de quê, além de indústria alimentícia?",
+     opcoes:["Agroindústria, porque transforma matéria-prima vinda da produção agropecuária","Artesanato, porque é feito à mão","Comércio, porque vende direto pro cliente"],
+     certa:0, dica:"Pensa de onde vem o leite: da pecuária. Quando a fábrica transforma matéria-prima da agropecuária, tem um nome especial.",
+     porque:"Agroindústrias são fábricas que transformam matérias-primas vindas da agricultura, pecuária ou extrativismo em outros produtos — como leite virando queijo."}
   ];
 
   var DESAFIO = [
-    {contexto:"Um grupo de exploradores chamado Caçadores de Ilhas invadia as terras do povo Kalu para capturar pessoas e levá-las a trabalhar à força em terras distantes.",
-     pergunta:"Por que o povo Kalu resistia aos Caçadores de Ilhas?",
-     opcoes:["Para proteger sua casa, sua família e sua liberdade","Porque odiava qualquer pessoa que viesse de fora","Porque queria ficar com as armas dos Caçadores"],
-     certa:0, nota:"Resistir não era sobre ódio — era proteger o que era mais importante: o lar, a família e a liberdade de viver do seu jeito."},
-    {contexto:"Anos depois, uma cidade construiu uma estátua de um dos Caçadores de Ilhas, com a frase: “Aqui está o grande herói que abriu caminho para o progresso.”",
-     pergunta:"Essa estátua conta toda a história sobre esse Caçador?",
-     opcoes:["Sim, estátuas sempre contam tudo","Não — ela mostra só o lado de quem quis ser lembrado como herói","Não importa, estátua é só decoração"],
-     certa:1, nota:"Pegadinha clássica: quem manda construir uma estátua escolhe o que vai ser lembrado. Isso não é mentira, mas também não é a história toda."},
-    {contexto:"Há muito tempo, nas casas do povo Kalu e também nas casas dos Monges e Caçadores, não existia um quarto especial para as crianças, nem regras de cuidado só para elas. Elas ajudavam bem cedo nos trabalhos dos adultos.",
-     pergunta:"O que isso mostra sobre a infância de muito tempo atrás?",
-     opcoes:["Era exatamente igual à infância de hoje","Era diferente — as crianças eram tratadas mais como “adultos pequenos”","As crianças não existiam antigamente"],
-     certa:1, nota:"A ideia de infância como um tempo só de brincar, estudar e ser cuidado é bem mais recente do que parece."},
-    {contexto:"Alguns do povo Kalu foram viver nas vilas dos Monges. Lá aprendiam a nova religião — mas também ficavam mais protegidos de serem capturados pelos Caçadores de Ilhas.",
-     pergunta:"A vida nas vilas dos Monges era só uma coisa boa, ou só uma coisa ruim, para o povo Kalu?",
-     opcoes:["Só coisa boa — eles escolheram tudo livremente, sem perder nada","Só coisa ruim — não existia proteção nenhuma ali","As duas coisas ao mesmo tempo: tinham mais proteção, mas também deixavam de lado parte dos seus costumes"],
-     certa:2, nota:"A história raramente é só boa ou só ruim. As vilas protegiam de um perigo, mas também mudavam o jeito de viver do povo Kalu."},
-    {contexto:"Uma pintora famosa retratou um Caçador de Ilhas como um homem cansado e maltrapilho — bem diferente da estátua brilhante da praça.",
-     pergunta:"Por que pode ser útil olhar as duas imagens — a estátua E a pintura — antes de decidir o que pensar sobre esse Caçador?",
-     opcoes:["Porque cada imagem mostra um pedaço diferente da verdade","Porque uma das duas com certeza é mentira","Porque imagem antiga não serve pra nada"],
-     certa:0, nota:"Duas fontes diferentes, dois pedaços da verdade. Juntando os pedaços, a imagem fica mais completa."},
-    {contexto:null,
-     pergunta:"Além de lutar, de que outra forma um povo pode resistir para não perder sua cultura?",
-     opcoes:["Parando de contar suas próprias histórias","Continuando a falar sua língua, contar suas histórias e manter vivas suas tradições","Copiando tudo do jeito dos Caçadores de Ilhas"],
-     certa:1, nota:"Resistir também é lembrar. Um povo que mantém viva sua língua e suas histórias está resistindo, mesmo sem lutar."},
-    {contexto:null,
-     pergunta:"Hoje em dia, será que todas as crianças do mundo têm escola, brinquedos e tempo pra brincar do mesmo jeito?",
-     opcoes:["Sim, hoje em dia é tudo igual para todo mundo","Não — ainda hoje existem muitas diferenças, dependendo de onde e como cada criança vive","Isso não tem nada a ver com o assunto"],
-     certa:1, nota:"Pegadinha: é fácil achar que “hoje em dia” já resolveu tudo. Mas as diferenças na infância continuam existindo, só que de outros jeitos."},
-    {contexto:"A Robin percebeu que as ruínas, as imagens dos Caçadores e os registros sobre as crianças tinham algo em comum.",
-     pergunta:"O que esses três achados ensinam sobre estudar história?",
-     opcoes:["Que só existe uma versão certa da história, sempre","Que é preciso juntar várias pistas e pontos de vista diferentes para entender o passado","Que história antiga não serve pra nada hoje"],
-     certa:1, nota:"Isso é ser um bom arqueólogo, tipo a Robin: nunca se contentar com uma pista só."}
+    {contexto:"Na fábrica de Franky, uma pessoa planta e colhe o algodão, ainda na fazenda.",
+     pergunta:"Qual profissional faz essa etapa?",
+     opcoes:["Agricultor","Costureiro","Vendedor"],
+     certa:0, nota:"É a primeira etapa da cadeia: cultivar a matéria-prima antes mesmo dela chegar na fábrica."},
+    {contexto:"Depois de colhido, o algodão precisa ser levado da fazenda até a fábrica de Franky, em outra ilha.",
+     pergunta:"Qual profissional faz essa etapa?",
+     opcoes:["Motorista / transportador","Projetista","Embalador"],
+     certa:0, nota:"Sem meios de transporte, a matéria-prima nunca chegaria na fábrica."},
+    {contexto:"Na fábrica, uma máquina transforma o algodão em fios, e depois os fios em tecido.",
+     pergunta:"Qual profissional cuida dessa etapa?",
+     opcoes:["Operador de máquinas têxteis","Vaqueiro","Vendedor"],
+     certa:0, nota:"É o coração da linha de produção: a máquina que transforma matéria-prima em material pronto pra virar produto."},
+    {contexto:"Alguém desenha, antes de tudo, como vai ser o formato e o tamanho do colete salva-vidas.",
+     pergunta:"Essa etapa acontece antes ou depois da costura?",
+     opcoes:["Antes — é o projeto, o desenho, que guia todas as etapas seguintes","Depois — só se desenha depois de já ter costurado tudo","Não faz parte da produção, é só um detalhe"],
+     certa:0, nota:"Pegadinha: parece que só o produto final importa, mas o projeto vem primeiro — ele guia tudo o que vem depois."},
+    {contexto:"Depois de cortado e montado, alguém costura as peças do colete até ele ficar pronto.",
+     pergunta:"Qual profissional faz essa etapa?",
+     opcoes:["Costureiro(a)","Motorista","Agricultor"],
+     certa:0, nota:"Sem essa etapa, as peças cortadas nunca virariam um colete de verdade."},
+    {contexto:"No fim, os coletes prontos são contados, colocados em caixas e preparados pra sair da fábrica.",
+     pergunta:"Qual profissional faz essa etapa?",
+     opcoes:["Embalador","Projetista","Agricultor"],
+     certa:0, nota:"Embalar é a última etapa dentro da fábrica, antes do produto sair pra ser vendido."},
+    {contexto:"Uma fábrica corta e costura camisetas em grande quantidade, usando máquinas de costura industriais.",
+     pergunta:"Que tipo de indústria é essa?",
+     opcoes:["Indústria têxtil","Indústria automobilística","Agroindústria"],
+     certa:0, nota:"Têxtil é a indústria de tecidos e roupas — camisetas entram exatamente aí."},
+    {contexto:"Uma fábrica pega laranjas colhidas no campo e transforma em suco engarrafado, pronto pra vender.",
+     pergunta:"Essa fábrica é indústria, ou só faz parte da agricultura, já que usa laranja?",
+     opcoes:["É indústria (uma agroindústria) — porque transforma a matéria-prima agrícola em outro produto, com máquinas e em grande quantidade","Não é indústria, é só agricultura, porque usa laranja","É indústria só se usar máquinas de metal, nunca de suco"],
+     certa:0, nota:"Pegadinha comum: usar matéria-prima agrícola não faz da fábrica “agricultura”. O que define indústria é a transformação em grande escala com máquinas — a laranja virando suco é exatamente isso: uma agroindústria."}
   ];
 
-  var KEY = "zion-historia-missoes-2026-09-02";
+  var KEY = "zion-geografia-industria-2026-09-02";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -224,51 +224,52 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","A Robin achou um arquipélago escondido: cinco ilhas de pedra, cobertas de trepadeiras, com ruínas que ninguém sabe explicar direito.");
-    var p2 = el("p","lead","Ela pediu ajuda — porque toda ruína conta uma história, mas nem sempre conta a história INTEIRA.");
-    var p3 = el("p","lead","Hoje você é assistente arqueológico dela. Sua missão: juntar as pistas certas antes de tirar qualquer conclusão.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"As Cinco Ruínas Perdidas"), p1, p2, p3, botao("Vamos explorar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","Franky recebeu um pedido: 200 coletes salva-vidas pra uma ilha que está com a frota despreparada pro Grand Line.");
+    var p2 = el("p","lead","Só que ele não vai fazer um colete por vez. Ele quer montar uma FÁBRICA de verdade, com etapas, máquinas e uma equipe inteira trabalhando junto.");
+    var p3 = el("p","lead","Hoje você vira aprendiz de engenheiro do Franky. Sua missão: entender como uma indústria funciona de verdade — SUPER!");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"A Fábrica do Franky"), p1, p2, p3, botao("Bora montar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
   function regra(){
     var g = el("div","grupo");
-    var perguntas = [
-      {n:"1. Quem fez isso?", x:"Quem escreveu, construiu ou mandou fazer esse registro?"},
-      {n:"2. Pra quem foi feito?", x:"Quem escreveu queria impressionar, ensinar ou convencer alguém de alguma coisa?"},
-      {n:"3. O que não está sendo dito?", x:"O que ficou de fora — que também seria importante saber?"}
+    var itens = [
+      {n:"Mão de obra", x:"As pessoas que trabalham em cada etapa da produção."},
+      {n:"Matéria-prima", x:"O material bruto que entra na fábrica pra ser transformado."},
+      {n:"Eletricidade", x:"A energia que faz as máquinas funcionarem."},
+      {n:"Meios de transporte", x:"O jeito de levar a matéria-prima até a fábrica, e o produto pronto até quem vai comprar."}
     ];
-    perguntas.forEach(function(p){
+    itens.forEach(function(it){
       var box = el("div","regra");
-      box.appendChild(el("div","nome",p.n));
-      box.appendChild(el("p","muted",p.x));
+      box.appendChild(el("div","nome",it.n));
+      box.appendChild(el("p","muted",it.x));
       g.appendChild(box);
     });
 
-    var citacao = el("div","citacao","“Aqui, o grande Capitão Doran trouxe ordem a essas terras selvagens.” — placa de pedra, Ilha 3");
+    var citacao = el("div","citacao","Franky, olhando os desenhos: “Um artesão faz UM colete por vez, com as próprias mãos. Isso é lindo, mas é lento.”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"🧭 Robin pensa alto: "));
+    modelo.appendChild(el("b",null,"🔧 Franky pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro, reparo que foi o próprio Capitão Doran quem mandou fazer essa placa — ninguém escreve mal de si mesmo. " +
-      "Depois, reparo na palavra “selvagens” — isso não é um fato, é uma opinião de quem escreveu. " +
-      "Então eu concluo: essa placa mostra como o Capitão QUERIA ser lembrado, não necessariamente o que aconteceu de verdade. " +
-      "Preciso achar outra pista pra completar a história."));
+      "primeiro, eu reparo que fazer um produto por vez, à mão, é trabalho artesanal — bonito, mas não é indústria. " +
+      "Depois, penso: se eu quero 200 coletes rápido, preciso de máquinas E de gente trabalhando em EQUIPE, cada um numa etapa. " +
+      "Então eu concluo: isso só vira indústria se tiver produção em grande quantidade, com máquinas, organizada em linha de produção. " +
+      "Só uma dessas coisas sozinha não basta."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Como a Robin lê uma pista antiga"),
-      el("p",null,"Toda vez que encontra um registro antigo — uma placa, uma pintura, uma estátua — a Robin faz sempre as MESMAS três perguntas, antes de acreditar em qualquer coisa."),
+      el("h2",null,"O que faz uma fábrica ser uma fábrica"),
+      el("p",null,"A atividade industrial produz mercadorias em grande quantidade, usando máquinas — muitas vezes organizada em linha de produção, onde cada trabalhador cuida de uma etapa. Mas isso não acontece sozinho: uma fábrica sempre depende de quatro coisas."),
       g,
-      el("p","muted","Vamos treinar juntos com uma pista de verdade:"),
+      el("p","muted","Vamos ver o Franky pensando nisso, na prática:"),
       citacao, modelo,
-      el("p","muted","Guarda essas três perguntas — você vai precisar delas em todos os próximos desafios."),
+      el("p","muted","Guarda essas quatro peças — você vai precisar delas nos próximos desafios."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
 
-  function montaOpcoes(q, ops, onEscolher, jaFeito){
+  function montaOpcoes(q, ops, onEscolher){
     q.opcoes.forEach(function(txt,i){
       var b = el("button",null,txt);
       b.addEventListener("click", function(){ if(!b.disabled) onEscolher(i,b); });
@@ -282,8 +283,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Primeira leva de pistas, decifrada! 🗺️"),
-        el("p",null,"Você já sabe fazer as três perguntas da Robin. Agora vem a parte que a escola cobra de verdade."),
+        eyebrow("Treino guiado"), el("h2",null,"Peças no lugar! ⚙️"),
+        el("p",null,"Você já entende o que faz uma fábrica funcionar. Agora vem a parte que a escola cobra de verdade."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -343,7 +344,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"As cinco ruínas, decifradas! 🏺"),
+        eyebrow("Desafio"), el("h2",null,"Fábrica montada! 🏭"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -389,14 +390,14 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pra Nami?"));
-    c2.appendChild(el("p","lead","Um amigo seu disse que os Caçadores de Ilhas foram “heróis que abriram caminho pro progresso”. Escreve, com as TUAS palavras, como você explicaria pra esse amigo o que ele está esquecendo de pensar antes de decidir isso."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Chopper?"));
+    c2.appendChild(el("p","lead","O Chopper não entende por que Franky não faz os 200 coletes sozinho, um por um. Escreve, com as TUAS palavras, por que uma FÁBRICA com linha de produção consegue fazer isso muito mais rápido do que uma pessoa sozinha fazendo tudo à mão."));
     var chips = el("div","chips");
-    ["os dois lados","quem foi prejudicado","a história toda"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["linha de produção","cada um faz uma etapa","máquinas"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Amigo, antes de chamar alguém de herói...");
+    ta.setAttribute("placeholder","Chopper, presta atenção: uma fábrica...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -422,20 +423,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"As Cinco Ruínas, decifradas ⚓"));
+    c.appendChild(el("h2",null,"Fábrica do Franky, SUPER completa ⚙️"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já pensa como uma arqueóloga de verdade: sempre buscando o outro lado da história.";
-    if(ad <= 4) msg = "As pegadinhas de “quem conta a história” ainda enganam um pouco — vale reler as três perguntas da Robin antes da próxima.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas mais difíceis sobre heróis e estátuas.";
-    c.appendChild(el("p",null, msg + " Agora a tarefa da escola vai ficar bem mais fácil de pensar."));
+    var msg = "Você já sabe reconhecer indústria de longe — mesmo quando a matéria-prima vem do campo.";
+    if(ad <= 4) msg = "As pegadinhas de tipo de indústria e etapas da produção ainda enganam um pouco — vale reler as quatro peças da fábrica antes da próxima.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de agroindústria e etapas da linha de produção.";
+    c.appendChild(el("p",null, msg + " Agora a tarefa da escola vai ficar bem mais fácil."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — História (Arquipélago das Ruínas)",
+    var txt = ["AULA DE HOJE — Geografia: A Indústria (Estaleiro do Franky)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

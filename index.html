@@ -108,7 +108,7 @@
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>02/09 · Estaleiro do Franky · Geografia — Indústria</span></div>
+    <div class="brand"><b>Droidec</b><span>10/09 · Ilha dos Gorilas · Pesquisa — Information Report</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -120,69 +120,69 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"Franky quer fabricar 200 coletes salva-vidas pra doar pra uma ilha vizinha. Ele separa a equipe: cada pessoa faz só uma etapa, e repete essa etapa em todos os coletes.",
-     pergunta:"Esse jeito de organizar o trabalho tem nome. Qual?",
-     opcoes:["Trabalho artesanal","Linha de produção","Trabalho escondido"],
-     certa:1, dica:"Pensa: cada pessoa repete SEMPRE a mesma etapa, em sequência. Isso lembra uma linha, uma fileira de passos.",
-     porque:"Linha de produção é exatamente isso: o trabalho dividido em etapas, cada uma feita por uma pessoa (ou máquina) diferente, em sequência."},
-    {contexto:"Zoro faz um colete inteiro sozinho, cortando e costurando à mão, do início ao fim.",
-     pergunta:"O jeito do Zoro de trabalhar é indústria?",
-     opcoes:["Sim, porque ele também está fazendo um colete","Não — é trabalho artesanal: uma pessoa só, sem máquina, sem produção em grande quantidade","Sim, porque ele é forte e rápido"],
-     certa:1, dica:"Uma característica central da indústria é produzir MUITOS produtos, em pouco tempo, com máquinas. O Zoro tem isso?",
-     porque:"Trabalho artesanal e trabalho industrial não são a mesma coisa — a diferença está na quantidade, na máquina e na linha de produção."},
-    {contexto:null,
-     pergunta:"Além de gente trabalhando, o que MAIS uma fábrica precisa pra funcionar?",
-     opcoes:["Só uma boa ideia, nada mais","Matéria-prima, eletricidade e meios de transporte, além da mão de obra","Só uma bandeira bonita"],
-     certa:1, dica:"Pensa em tudo que entra numa fábrica pra ela funcionar: pessoas, mas também materiais, energia... o que mais?",
-     porque:"Uma fábrica depende de vários elementos ao mesmo tempo: gente pra trabalhar, matéria-prima pra transformar, eletricidade pras máquinas rodarem e transporte pra levar tudo de um lado pro outro."},
-    {contexto:"O algodão que vira tecido dos coletes vem da lavoura — plantado, colhido, e levado até a fábrica de Franky.",
-     pergunta:"Nesse exemplo, o algodão é o quê?",
-     opcoes:["A matéria-prima","O produto final","O meio de transporte"],
-     certa:0, dica:"Matéria-prima é o material que ENTRA na fábrica pra virar outra coisa. O que entra aqui, ainda cru, sem virar colete?",
-     porque:"Matéria-prima é o material bruto, antes de ser transformado. O colete pronto é o produto final."},
-    {contexto:null,
-     pergunta:"Uma fábrica que transforma leite em queijo é chamada de quê, além de indústria alimentícia?",
-     opcoes:["Agroindústria, porque transforma matéria-prima vinda da produção agropecuária","Artesanato, porque é feito à mão","Comércio, porque vende direto pro cliente"],
-     certa:0, dica:"Pensa de onde vem o leite: da pecuária. Quando a fábrica transforma matéria-prima da agropecuária, tem um nome especial.",
-     porque:"Agroindústrias são fábricas que transformam matérias-primas vindas da agricultura, pecuária ou extrativismo em outros produtos — como leite virando queijo."}
+    {contexto:"No caderno do Chopper: “O gorila come folhas, brotos de bambu, caules e frutas.”",
+     pergunta:"Em qual gaveta do relatório essa informação entra?",
+     opcoes:["Habitat","Diet","Appearance"],
+     certa:1, dica:"Pergunta do jeito do Chopper: essa frase fala de ONDE ele vive, de COMO ele é, ou do que ele COME?",
+     porque:"Tudo que fala de comida vai em Diet. “Folhas, brotos e frutas” é comida, então é Diet."},
+    {contexto:"No caderno: “O gorila é um mamífero primata, do grupo dos grandes macacos (apes), como o chimpanzé.”",
+     pergunta:"Qual gaveta?",
+     opcoes:["Classification","Diet","Interesting facts"],
+     certa:0, dica:"Essa frase responde “o que ele É”, o grupo de animais a que ele pertence.",
+     porque:"Classification é a gaveta do “o que ele é”: mamífero, primata, ape. É sempre a primeira coisa do relatório."},
+    {contexto:"No caderno: “Vive nas florestas da África Central — Congo, Ruanda, Uganda.”",
+     pergunta:"Qual gaveta?",
+     opcoes:["Behaviour","Habitat","Classification"],
+     certa:1, dica:"Nomes de florestas e de países respondem a uma pergunta só: ONDE?",
+     porque:"Habitat é o lugar onde o animal vive. Floresta da África Central = habitat do gorila."},
+    {contexto:"No caderno: “O macho adulto pesa até uns 180 kg e tem pelos prateados nas costas — por isso se chama silverback.”",
+     pergunta:"Qual gaveta?",
+     opcoes:["Appearance","Behaviour","Diet"],
+     certa:0, dica:"Peso, cor do pelo e tamanho: isso é o que você VE olhando o animal.",
+     porque:"Appearance é como o animal é por fora: tamanho, peso, cor, pelo. Silverback é uma descrição de aparência."},
+    {contexto:"No caderno: “Vivem em grupos de família liderados por um silverback e constroem um ninho novo de folhas toda noite.”",
+     pergunta:"Qual gaveta?",
+     opcoes:["Appearance","Habitat","Behaviour"],
+     certa:2, dica:"Cuidado com a pegadinha: aparece a palavra “silverback”, mas a frase fala do que eles FAZEM.",
+     porque:"Behaviour é o que o animal faz: viver em grupo, escolher um líder, construir ninho. Silverback aqui é só o nome de quem lidera."}
   ];
 
   var DESAFIO = [
-    {contexto:"Na fábrica de Franky, uma pessoa planta e colhe o algodão, ainda na fazenda.",
-     pergunta:"Qual profissional faz essa etapa?",
-     opcoes:["Agricultor","Costureiro","Vendedor"],
-     certa:0, nota:"É a primeira etapa da cadeia: cultivar a matéria-prima antes mesmo dela chegar na fábrica."},
-    {contexto:"Depois de colhido, o algodão precisa ser levado da fazenda até a fábrica de Franky, em outra ilha.",
-     pergunta:"Qual profissional faz essa etapa?",
-     opcoes:["Motorista / transportador","Projetista","Embalador"],
-     certa:0, nota:"Sem meios de transporte, a matéria-prima nunca chegaria na fábrica."},
-    {contexto:"Na fábrica, uma máquina transforma o algodão em fios, e depois os fios em tecido.",
-     pergunta:"Qual profissional cuida dessa etapa?",
-     opcoes:["Operador de máquinas têxteis","Vaqueiro","Vendedor"],
-     certa:0, nota:"É o coração da linha de produção: a máquina que transforma matéria-prima em material pronto pra virar produto."},
-    {contexto:"Alguém desenha, antes de tudo, como vai ser o formato e o tamanho do colete salva-vidas.",
-     pergunta:"Essa etapa acontece antes ou depois da costura?",
-     opcoes:["Antes — é o projeto, o desenho, que guia todas as etapas seguintes","Depois — só se desenha depois de já ter costurado tudo","Não faz parte da produção, é só um detalhe"],
-     certa:0, nota:"Pegadinha: parece que só o produto final importa, mas o projeto vem primeiro — ele guia tudo o que vem depois."},
-    {contexto:"Depois de cortado e montado, alguém costura as peças do colete até ele ficar pronto.",
-     pergunta:"Qual profissional faz essa etapa?",
-     opcoes:["Costureiro(a)","Motorista","Agricultor"],
-     certa:0, nota:"Sem essa etapa, as peças cortadas nunca virariam um colete de verdade."},
-    {contexto:"No fim, os coletes prontos são contados, colocados em caixas e preparados pra sair da fábrica.",
-     pergunta:"Qual profissional faz essa etapa?",
-     opcoes:["Embalador","Projetista","Agricultor"],
-     certa:0, nota:"Embalar é a última etapa dentro da fábrica, antes do produto sair pra ser vendido."},
-    {contexto:"Uma fábrica corta e costura camisetas em grande quantidade, usando máquinas de costura industriais.",
-     pergunta:"Que tipo de indústria é essa?",
-     opcoes:["Indústria têxtil","Indústria automobilística","Agroindústria"],
-     certa:0, nota:"Têxtil é a indústria de tecidos e roupas — camisetas entram exatamente aí."},
-    {contexto:"Uma fábrica pega laranjas colhidas no campo e transforma em suco engarrafado, pronto pra vender.",
-     pergunta:"Essa fábrica é indústria, ou só faz parte da agricultura, já que usa laranja?",
-     opcoes:["É indústria (uma agroindústria) — porque transforma a matéria-prima agrícola em outro produto, com máquinas e em grande quantidade","Não é indústria, é só agricultura, porque usa laranja","É indústria só se usar máquinas de metal, nunca de suco"],
-     certa:0, nota:"Pegadinha comum: usar matéria-prima agrícola não faz da fábrica “agricultura”. O que define indústria é a transformação em grande escala com máquinas — a laranja virando suco é exatamente isso: uma agroindústria."}
+    {contexto:null,
+     pergunta:"O gorila é o maior primata do mundo. Quanto pesa um macho adulto?",
+     opcoes:["Cerca de 180 kg","Cerca de 20 kg","Mais de 1 tonelada"],
+     certa:0, nota:"Um silverback chega perto de 180 kg — mais ou menos o peso de duas pessoas adultas juntas."},
+    {contexto:"O gorila é enorme, tem braços fortíssimos e assusta à distância.",
+     pergunta:"Então ele caça outros animais pra comer?",
+     opcoes:["Sim, ele caça antas e macacos menores","Não — ele é herbívoro: come quase só plantas, e às vezes formigas e cupins","Sim, ele come peixe no rio"],
+     certa:1, nota:"Pegadinha clássica: força não tem nada a ver com dieta. O maior primata do planeta se sustenta comendo folha."},
+    {contexto:"De longe, o Chopper vê um gorila bater no próprio peito com as mãos abertas, fazendo pum-pum-pum.",
+     pergunta:"O que ele está fazendo?",
+     opcoes:["Mostrando tamanho e força pra EVITAR uma briga — é um aviso","Começando um ataque contra quem estiver na frente","Chamando comida"],
+     certa:0, nota:"Pegadinha número 2: bater no peito é conversa, não ataque. É o jeito de dizer “eu sou grande, melhor cada um pro seu lado” — e normalmente ninguém briga."},
+    {contexto:"Em inglês existem duas palavras diferentes: monkey e ape.",
+     pergunta:"O gorila é monkey ou ape?",
+     opcoes:["Ape — apes não têm rabo; monkeys têm","Monkey — todo macaco é monkey","Nenhum dos dois, gorila não é macaco"],
+     certa:0, nota:"Gorila, chimpanzé, orangotango e o ser humano são apes (grandes macacos). O detalhe mais fácil de lembrar: ape não tem rabo."},
+    {contexto:null,
+     pergunta:"Como o gorila anda pelo chão?",
+     opcoes:["Apoiando os nós dos dedos das mãos (knuckle-walking)","Sempre em pé, só nas duas pernas","Pulando de árvore em árvore o dia inteiro"],
+     certa:0, nota:"Ele anda com as quatro apoiadas, mas apoia os nós dos dedos, não a palma. Dá pra ficar em pé, mas é só por pouco tempo."},
+    {contexto:null,
+     pergunta:"Quanto de planta um gorila adulto come por dia?",
+     opcoes:["Uns 18 a 30 quilos","Uns 2 quilos","Meio quilo"],
+     certa:0, nota:"Como folha alimenta pouco, ele passa quase o dia todo comendo. É esse o motivo do tamanho da barriga dele."},
+    {contexto:null,
+     pergunta:"Onde os gorilas dormem?",
+     opcoes:["Num ninho de folhas e galhos, novo a cada noite","Sempre na mesma caverna","Pendurados de cabeça pra baixo"],
+     certa:0, nota:"Cada gorila monta o próprio ninho ao anoitecer e abandona no dia seguinte. Os filhotes pequenos dormem junto com a mãe."},
+    {contexto:"Os gorilas estão em perigo de extinção, principalmente porque a floresta onde vivem vai diminuindo.",
+     pergunta:"O que fez o número de gorilas-das-montanhas voltar a CRESCER nos últimos anos?",
+     opcoes:["Áreas protegidas e guardas-florestais cuidando deles","Levar todos pro zoológico","Nada, não dá mais pra fazer nada"],
+     certa:0, nota:"Boa notícia pro fim do relatório: quando a floresta é protegida, a população se recupera. O gorila-das-montanhas já passou de mil indivíduos."}
   ];
 
-  var KEY = "zion-geografia-industria-2026-09-02";
+  var KEY = "zion-gorilas-2026-09-10";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -224,20 +224,22 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","Franky recebeu um pedido: 200 coletes salva-vidas pra uma ilha que está com a frota despreparada pro Grand Line.");
-    var p2 = el("p","lead","Só que ele não vai fazer um colete por vez. Ele quer montar uma FÁBRICA de verdade, com etapas, máquinas e uma equipe inteira trabalhando junto.");
-    var p3 = el("p","lead","Hoje você vira aprendiz de engenheiro do Franky. Sua missão: entender como uma indústria funciona de verdade — SUPER!");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"A Fábrica do Franky"), p1, p2, p3, botao("Bora montar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","O Sunny encosta numa ilha coberta de floresta. Lá do meio da mata vem um som grave, ritmado: pum-pum-pum. Chopper congela e sussurra: “Isso é um gorila.”");
+    var p2 = el("p","lead","Chopper quer estudar o animal e escrever um INFORMATION RESEARCH REPORT — um relatório de pesquisa. Só que ele anotou tudo bagunçado no caderno e não sabe onde cada informação entra.");
+    var p3 = el("p","lead","Hoje você é o pesquisador da tripulação. Missão: aprender os fatos sobre o gorila E aprender a pôr cada fato na parte certa do relatório.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O Relatório do Chopper"), p1, p2, p3, botao("Bora pesquisar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
   function regra(){
     var g = el("div","grupo");
     var itens = [
-      {n:"Mão de obra", x:"As pessoas que trabalham em cada etapa da produção."},
-      {n:"Matéria-prima", x:"O material bruto que entra na fábrica pra ser transformado."},
-      {n:"Eletricidade", x:"A energia que faz as máquinas funcionarem."},
-      {n:"Meios de transporte", x:"O jeito de levar a matéria-prima até a fábrica, e o produto pronto até quem vai comprar."}
+      {n:"Classification", x:"O que o animal É. Gorila = mamífero, primata, um grande macaco (ape) — parente do chimpanzé e do orangotango."},
+      {n:"Appearance", x:"Como ele é por fora: tamanho, cor, corpo. É o maior primata do mundo; o macho adulto tem pelos prateados nas costas e por isso se chama silverback."},
+      {n:"Habitat", x:"Onde ele vive. Florestas da África Central — Congo, Ruanda, Uganda, Camarões."},
+      {n:"Diet", x:"O que ele come. Folhas, brotos de bambu, caules e frutas — e de vez em quando formigas e cupins."},
+      {n:"Behaviour", x:"Como ele vive e age. Vive em grupo de família liderado por um silverback e constrói um ninho novo de folhas toda noite pra dormir."},
+      {n:"Interesting facts", x:"As curiosidades que ninguém espera. Ex.: quase não precisa beber água, porque tira a água das plantas que come."}
     ];
     itens.forEach(function(it){
       var box = el("div","regra");
@@ -246,25 +248,25 @@
       g.appendChild(box);
     });
 
-    var citacao = el("div","citacao","Franky, olhando os desenhos: “Um artesão faz UM colete por vez, com as próprias mãos. Isso é lindo, mas é lento.”");
+    var citacao = el("div","citacao","No caderno do Chopper está escrito, solto: “ele come uns 20 quilos de folhas por dia”.");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"🔧 Franky pensa alto: "));
+    modelo.appendChild(el("b",null,"Chopper pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro, eu reparo que fazer um produto por vez, à mão, é trabalho artesanal — bonito, mas não é indústria. " +
-      "Depois, penso: se eu quero 200 coletes rápido, preciso de máquinas E de gente trabalhando em EQUIPE, cada um numa etapa. " +
-      "Então eu concluo: isso só vira indústria se tiver produção em grande quantidade, com máquinas, organizada em linha de produção. " +
-      "Só uma dessas coisas sozinha não basta."));
+      "primeiro eu leio a anotação inteira e pergunto: essa frase fala do QUE ele é, de COMO ele é, de ONDE ele vive, do que ele COME ou do que ele FAZ? " +
+      "Aqui aparece “come” e aparece “folhas”, que é comida. Então não é habitat nem aparência. " +
+      "Logo eu concluo: essa informação vai na gaveta Diet. E aí eu escrevo com as MINHAS palavras: “Gorillas are herbivores. They eat leaves, stems and fruit.” " +
+      "Copiar igualzinho da fonte não vale — o relatório tem que sair do que EU entendi."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"O que faz uma fábrica ser uma fábrica"),
-      el("p",null,"A atividade industrial produz mercadorias em grande quantidade, usando máquinas — muitas vezes organizada em linha de produção, onde cada trabalhador cuida de uma etapa. Mas isso não acontece sozinho: uma fábrica sempre depende de quatro coisas."),
+      el("h2",null,"As 6 gavetas de um information report"),
+      el("p",null,"Um relatório de pesquisa não é um texto solto: ele tem gavetas. Cada fato que você descobre vai numa gaveta. Sabendo as gavetas, a pesquisa se organiza sozinha."),
       g,
-      el("p","muted","Vamos ver o Franky pensando nisso, na prática:"),
+      el("p","muted","Vamos ver o Chopper escolhendo uma gaveta, na prática:"),
       citacao, modelo,
-      el("p","muted","Guarda essas quatro peças — você vai precisar delas nos próximos desafios."),
+      el("p","muted","Guarda essas seis gavetas — o treino agora é exatamente escolher a certa."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -283,8 +285,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Peças no lugar! ⚙️"),
-        el("p",null,"Você já entende o que faz uma fábrica funcionar. Agora vem a parte que a escola cobra de verdade."),
+        eyebrow("Treino guiado"), el("h2",null,"Caderno organizado!"),
+        el("p",null,"Você já sabe em que gaveta cada informação entra. Agora vem a parte dos fatos — o que a pesquisa precisa saber sobre o gorila."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -344,7 +346,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Fábrica montada! 🏭"),
+        eyebrow("Desafio"), el("h2",null,"Pesquisa completa! 🦍"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -390,14 +392,14 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Chopper?"));
-    c2.appendChild(el("p","lead","O Chopper não entende por que Franky não faz os 200 coletes sozinho, um por um. Escreve, com as TUAS palavras, por que uma FÁBRICA com linha de produção consegue fazer isso muito mais rápido do que uma pessoa sozinha fazendo tudo à mão."));
+    c2.appendChild(el("h2",null,"Escreve a abertura do relatório"));
+    c2.appendChild(el("p","lead","O Chopper vai apresentar o gorila pra tripulação inteira, e ninguém ali sabe o que é um gorila. Escreve, com as TUAS palavras, um parágrafo que responda três coisas: o que o gorila É, ONDE ele vive e o que ele COME."));
     var chips = el("div","chips");
-    ["linha de produção","cada um faz uma etapa","máquinas"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["mamífero primata","floresta da África","herbívoro"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Chopper, presta atenção: uma fábrica...");
+    ta.setAttribute("placeholder","Pessoal, o gorila é...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -423,20 +425,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Fábrica do Franky, SUPER completa ⚙️"));
+    c.appendChild(el("h2",null,"Relatório do Chopper, pronto 🦍"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já sabe reconhecer indústria de longe — mesmo quando a matéria-prima vem do campo.";
-    if(ad <= 4) msg = "As pegadinhas de tipo de indústria e etapas da produção ainda enganam um pouco — vale reler as quatro peças da fábrica antes da próxima.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de agroindústria e etapas da linha de produção.";
-    c.appendChild(el("p",null, msg + " Agora a tarefa da escola vai ficar bem mais fácil."));
+    var msg = "Você já separa fato por fato nas gavetas certas do relatório — é isso que a professora quer ver na folha.";
+    if(ad <= 4) msg = "As pegadinhas do gorila (herbívoro e bater no peito) ainda enganam — vale reler as seis gavetas antes de preencher a folha.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as duas pegadinhas: gorila é herbívoro, e bater no peito é aviso, não ataque.";
+    c.appendChild(el("p",null, msg + " Agora é só preencher a folha da escola com as tuas palavras."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Geografia: A Indústria (Estaleiro do Franky)",
+    var txt = ["AULA DE HOJE — Pesquisa: O Gorila / Information Report (Ilha dos Gorilas)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

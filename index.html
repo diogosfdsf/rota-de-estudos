@@ -104,11 +104,17 @@
   .resumo{width:100%; box-sizing:border-box; font-family:ui-monospace,"Consolas",monospace; font-size:.8rem; min-height:200px;}
   .linha{height:1px; background:var(--line); border:0; margin:0;}
   footer{text-align:center; font-size:.8rem; color:var(--muted);}
+
+  .grupos{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:4px 0;}
+  .grupo-caixa{display:flex; flex-wrap:wrap; gap:4px; max-width:132px; justify-content:center;
+               padding:10px 12px; border:2px dashed var(--accent); border-radius:14px;
+               background:var(--surface2); font-size:1.55rem; line-height:1.1;}
+  .conta{font-family:var(--display); font-weight:800; font-size:1.35rem; color:var(--accent); letter-spacing:.02em;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>10/09 · Ilha dos Gorilas · Pesquisa — Information Report</span></div>
+    <div class="brand"><b>Droidec</b><span>11/09 · Cozinha do Sanji · Multiplicação — Aula 1: Grupos iguais</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -119,70 +125,72 @@
 (function(){
   "use strict";
 
+  var ONI = "\u{1F359}", PEIXE = "\u{1F41F}", CARNE = "\u{1F356}", TANG = "\u{1F34A}", LIVRO = "\u{1F4DA}";
+
   var GUIADO = [
-    {contexto:"No caderno do Chopper: “O gorila come folhas, brotos de bambu, caules e frutas.”",
-     pergunta:"Em qual gaveta do relatório essa informação entra?",
-     opcoes:["Habitat","Diet","Appearance"],
-     certa:1, dica:"Pergunta do jeito do Chopper: essa frase fala de ONDE ele vive, de COMO ele é, ou do que ele COME?",
-     porque:"Tudo que fala de comida vai em Diet. “Folhas, brotos e frutas” é comida, então é Diet."},
-    {contexto:"No caderno: “O gorila é um mamífero primata, do grupo dos grandes macacos (apes), como o chimpanzé.”",
-     pergunta:"Qual gaveta?",
-     opcoes:["Classification","Diet","Interesting facts"],
-     certa:0, dica:"Essa frase responde “o que ele É”, o grupo de animais a que ele pertence.",
-     porque:"Classification é a gaveta do “o que ele é”: mamífero, primata, ape. É sempre a primeira coisa do relatório."},
-    {contexto:"No caderno: “Vive nas florestas da África Central — Congo, Ruanda, Uganda.”",
-     pergunta:"Qual gaveta?",
-     opcoes:["Behaviour","Habitat","Classification"],
-     certa:1, dica:"Nomes de florestas e de países respondem a uma pergunta só: ONDE?",
-     porque:"Habitat é o lugar onde o animal vive. Floresta da África Central = habitat do gorila."},
-    {contexto:"No caderno: “O macho adulto pesa até uns 180 kg e tem pelos prateados nas costas — por isso se chama silverback.”",
-     pergunta:"Qual gaveta?",
-     opcoes:["Appearance","Behaviour","Diet"],
-     certa:0, dica:"Peso, cor do pelo e tamanho: isso é o que você VE olhando o animal.",
-     porque:"Appearance é como o animal é por fora: tamanho, peso, cor, pelo. Silverback é uma descrição de aparência."},
-    {contexto:"No caderno: “Vivem em grupos de família liderados por um silverback e constroem um ninho novo de folhas toda noite.”",
-     pergunta:"Qual gaveta?",
-     opcoes:["Appearance","Habitat","Behaviour"],
-     certa:2, dica:"Cuidado com a pegadinha: aparece a palavra “silverback”, mas a frase fala do que eles FAZEM.",
-     porque:"Behaviour é o que o animal faz: viver em grupo, escolher um líder, construir ninho. Silverback aqui é só o nome de quem lidera."}
+    {contexto:"Sanji arrumou os onigiris em pratos.", grupos:[2,2,2], icone:ONI,
+     pergunta:"Quantos grupos tem, e quantos onigiris em cada grupo?",
+     opcoes:["3 grupos com 2 em cada","2 grupos com 3 em cada","6 grupos com 1 em cada"],
+     certa:0, dica:"Conta primeiro as caixinhas tracejadas. Depois olha dentro de UMA caixinha só.",
+     porque:"São 3 pratos (grupos) e cada prato tem 2 onigiris. Primeiro os grupos, depois quanto tem dentro."},
+    {contexto:"Agora são peixes, separados em baldes.", grupos:[5,5,5], icone:PEIXE,
+     pergunta:"Qual soma mostra esse desenho?",
+     opcoes:["5 + 5 + 5","3 + 5","5 + 3 + 5 + 3"],
+     certa:0, dica:"Cada caixinha vira uma parcela da soma. Quantas caixinhas? Quanto tem em cada?",
+     porque:"Três baldes de 5 viram três parcelas iguais: 5 + 5 + 5 = 15."},
+    {contexto:"Pedaços de carne pro Luffy, em duas travessas.", grupos:[4,4], icone:CARNE,
+     pergunta:"Qual multiplicação mostra esse desenho?",
+     opcoes:["2 × 4","2 + 4","4 × 4"],
+     certa:0, dica:"Na multiplicação, o primeiro número é QUANTOS GRUPOS e o segundo é QUANTOS EM CADA.",
+     porque:"2 grupos de 4: 2 × 4 = 4 + 4 = 8."},
+    {contexto:"Sanji escreveu na lousa da cozinha: 3 + 3 + 3 + 3", grupos:null,
+     pergunta:"Como fica essa soma em multiplicação?",
+     opcoes:["4 × 3","3 × 3","3 + 4"],
+     certa:0, dica:"Conta quantas vezes o 3 aparece na soma. Esse é o número de grupos.",
+     porque:"O 3 aparece 4 vezes: são 4 grupos de 3. Então 3 + 3 + 3 + 3 = 4 × 3 = 12."},
+    {contexto:"Quatro pratos de onigiri na mesa.", grupos:[3,3,3,3], icone:ONI,
+     pergunta:"Quantos onigiris ao todo? Conta de 3 em 3.",
+     opcoes:["12","7","10"],
+     certa:0, dica:"Não conta de um em um. Pula de prato em prato: 3, 6, ...",
+     porque:"3, 6, 9, 12 — quatro pulos de 3 dão 12. É exatamente 4 × 3 = 12."}
   ];
 
   var DESAFIO = [
-    {contexto:null,
-     pergunta:"O gorila é o maior primata do mundo. Quanto pesa um macho adulto?",
-     opcoes:["Cerca de 180 kg","Cerca de 20 kg","Mais de 1 tonelada"],
-     certa:0, nota:"Um silverback chega perto de 180 kg — mais ou menos o peso de duas pessoas adultas juntas."},
-    {contexto:"O gorila é enorme, tem braços fortíssimos e assusta à distância.",
-     pergunta:"Então ele caça outros animais pra comer?",
-     opcoes:["Sim, ele caça antas e macacos menores","Não — ele é herbívoro: come quase só plantas, e às vezes formigas e cupins","Sim, ele come peixe no rio"],
-     certa:1, nota:"Pegadinha clássica: força não tem nada a ver com dieta. O maior primata do planeta se sustenta comendo folha."},
-    {contexto:"De longe, o Chopper vê um gorila bater no próprio peito com as mãos abertas, fazendo pum-pum-pum.",
-     pergunta:"O que ele está fazendo?",
-     opcoes:["Mostrando tamanho e força pra EVITAR uma briga — é um aviso","Começando um ataque contra quem estiver na frente","Chamando comida"],
-     certa:0, nota:"Pegadinha número 2: bater no peito é conversa, não ataque. É o jeito de dizer “eu sou grande, melhor cada um pro seu lado” — e normalmente ninguém briga."},
-    {contexto:"Em inglês existem duas palavras diferentes: monkey e ape.",
-     pergunta:"O gorila é monkey ou ape?",
-     opcoes:["Ape — apes não têm rabo; monkeys têm","Monkey — todo macaco é monkey","Nenhum dos dois, gorila não é macaco"],
-     certa:0, nota:"Gorila, chimpanzé, orangotango e o ser humano são apes (grandes macacos). O detalhe mais fácil de lembrar: ape não tem rabo."},
-    {contexto:null,
-     pergunta:"Como o gorila anda pelo chão?",
-     opcoes:["Apoiando os nós dos dedos das mãos (knuckle-walking)","Sempre em pé, só nas duas pernas","Pulando de árvore em árvore o dia inteiro"],
-     certa:0, nota:"Ele anda com as quatro apoiadas, mas apoia os nós dos dedos, não a palma. Dá pra ficar em pé, mas é só por pouco tempo."},
-    {contexto:null,
-     pergunta:"Quanto de planta um gorila adulto come por dia?",
-     opcoes:["Uns 18 a 30 quilos","Uns 2 quilos","Meio quilo"],
-     certa:0, nota:"Como folha alimenta pouco, ele passa quase o dia todo comendo. É esse o motivo do tamanho da barriga dele."},
-    {contexto:null,
-     pergunta:"Onde os gorilas dormem?",
-     opcoes:["Num ninho de folhas e galhos, novo a cada noite","Sempre na mesma caverna","Pendurados de cabeça pra baixo"],
-     certa:0, nota:"Cada gorila monta o próprio ninho ao anoitecer e abandona no dia seguinte. Os filhotes pequenos dormem junto com a mãe."},
-    {contexto:"Os gorilas estão em perigo de extinção, principalmente porque a floresta onde vivem vai diminuindo.",
-     pergunta:"O que fez o número de gorilas-das-montanhas voltar a CRESCER nos últimos anos?",
-     opcoes:["Áreas protegidas e guardas-florestais cuidando deles","Levar todos pro zoológico","Nada, não dá mais pra fazer nada"],
-     certa:0, nota:"Boa notícia pro fim do relatório: quando a floresta é protegida, a população se recupera. O gorila-das-montanhas já passou de mil indivíduos."}
+    {contexto:"Nami colheu tangerinas e separou em cestas.", grupos:[5,5,5,5], icone:TANG,
+     pergunta:"Qual multiplicação mostra as cestas, e quanto dá?",
+     opcoes:["4 × 5 = 20","5 × 5 = 25","4 + 5 = 9"],
+     certa:0, nota:"4 cestas com 5 em cada: 5, 10, 15, 20. Então 4 × 5 = 20."},
+    {contexto:"Luffy arrumou os onigiris do jeito dele.", grupos:[2,4,3], icone:ONI,
+     pergunta:"Dá pra escrever esse desenho como uma multiplicação?",
+     opcoes:["Não — os grupos não são iguais, então é soma: 2 + 4 + 3","Sim: 3 × 3","Sim: 3 × 4"],
+     certa:0, nota:"Pegadinha: multiplicação só funciona com grupos IGUAIS. Se cada grupo tem uma quantidade diferente, a conta é soma — e dá 9."},
+    {contexto:"Usopp jura que 4 × 2 e 4 + 2 dão a mesma coisa.", grupos:null,
+     pergunta:"Ele tem razão?",
+     opcoes:["Não — 4 + 2 junta o 4 e o 2 (dá 6); 4 × 2 são 4 grupos de 2 (dá 8)","Sim, os dois dão 6","Sim, os dois dão 8"],
+     certa:0, nota:"Pegadinha: o + junta dois números uma vez só. O × repete um grupo várias vezes. Sinal diferente, conta diferente."},
+    {contexto:"O Sunny tem 3 botes salva-vidas. Cabem 6 piratas em cada bote.", grupos:null,
+     pergunta:"Qual conta descobre quantos piratas cabem nos botes?",
+     opcoes:["3 × 6","3 + 6","6 − 3"],
+     certa:0, nota:"3 grupos (botes) de 6 (piratas): 3 × 6 = 6 + 6 + 6 = 18."},
+    {contexto:"Franky escreveu no casco: 6 × 2", grupos:null,
+     pergunta:"Qual soma é igual a 6 × 2?",
+     opcoes:["2 + 2 + 2 + 2 + 2 + 2","6 + 2","6 + 6 + 6 + 6 + 6 + 6"],
+     certa:0, nota:"6 × 2 são 6 grupos de 2: o 2 aparece seis vezes, e dá 12."},
+    {contexto:"Chopper guardou bandagens em 7 caixas, com 10 bandagens em cada.", grupos:null,
+     pergunta:"Quantas bandagens ao todo?",
+     opcoes:["70","17","710"],
+     certa:0, nota:"7 grupos de 10: 10, 20, 30, 40, 50, 60, 70. Contar de 10 em 10 é o pulo mais fácil que existe."},
+    {contexto:"Robin empilhou os livros da biblioteca do navio.", grupos:[5,5,5,5,5,5], icone:LIVRO,
+     pergunta:"Qual é o jeito MAIS RÁPIDO de achar o total?",
+     opcoes:["Contar de 5 em 5: 5, 10, 15, 20, 25, 30","Contar um por um até o fim","Somar 6 + 5"],
+     certa:0, nota:"Contar de um em um funciona, mas demora e é fácil se perder. Pular de 5 em 5 usa os grupos: seis pulos, 30 livros."},
+    {contexto:"Sanji pediu pra você montar 2 × 5 na mesa.", grupos:null,
+     pergunta:"Qual arrumação combina com 2 × 5?",
+     opcoes:["2 pratos com 5 onigiris em cada","1 prato com 2 onigiris e outro com 5","7 onigiris soltos na mesa"],
+     certa:0, nota:"2 × 5 = 2 grupos iguais de 5, e dá 10. Um prato com 2 e outro com 5 é 2 + 5 — grupos diferentes, conta diferente."}
   ];
 
-  var KEY = "zion-gorilas-2026-09-10";
+  var KEY = "zion-multiplicacao-aula1-2026-09-11";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -224,51 +232,59 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","O Sunny encosta numa ilha coberta de floresta. Lá do meio da mata vem um som grave, ritmado: pum-pum-pum. Chopper congela e sussurra: “Isso é um gorila.”");
-    var p2 = el("p","lead","Chopper quer estudar o animal e escrever um INFORMATION RESEARCH REPORT — um relatório de pesquisa. Só que ele anotou tudo bagunçado no caderno e não sabe onde cada informação entra.");
-    var p3 = el("p","lead","Hoje você é o pesquisador da tripulação. Missão: aprender os fatos sobre o gorila E aprender a pôr cada fato na parte certa do relatório.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"O Relatório do Chopper"), p1, p2, p3, botao("Bora pesquisar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","Luffy invade a cozinha do Sunny gritando: “SANJI, QUANTA COMIDA TEM?!”");
+    var p2 = el("p","lead","Sanji não conta um onigiri de cada vez. Ele arruma tudo em pratos com a MESMA quantidade — e descobre o total num piscar de olhos.");
+    var p3 = el("p","lead","Hoje você é o ajudante de cozinha do Sanji. Missão: aprender o segredo dele, que tem nome: MULTIPLICAÇÃO.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O Segredo do Sanji"), p1, p2, p3, botao("Bora cozinhar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
   function regra(){
     var g = el("div","grupo");
-    var itens = [
-      {n:"Classification", x:"O que o animal É. Gorila = mamífero, primata, um grande macaco (ape) — parente do chimpanzé e do orangotango."},
-      {n:"Appearance", x:"Como ele é por fora: tamanho, cor, corpo. É o maior primata do mundo; o macho adulto tem pelos prateados nas costas e por isso se chama silverback."},
-      {n:"Habitat", x:"Onde ele vive. Florestas da África Central — Congo, Ruanda, Uganda, Camarões."},
-      {n:"Diet", x:"O que ele come. Folhas, brotos de bambu, caules e frutas — e de vez em quando formigas e cupins."},
-      {n:"Behaviour", x:"Como ele vive e age. Vive em grupo de família liderado por um silverback e constrói um ninho novo de folhas toda noite pra dormir."},
-      {n:"Interesting facts", x:"As curiosidades que ninguém espera. Ex.: quase não precisa beber água, porque tira a água das plantas que come."}
+    var passos = [
+      {n:"1. Olha os grupos", x:"4 pratos, e cada prato tem 3 onigiris. Todos os pratos têm a MESMA quantidade."},
+      {n:"2. Vira soma", x:"Cada prato é uma parcela: 3 + 3 + 3 + 3."},
+      {n:"3. Vira multiplicação", x:"4 × 3 = 12. Lê-se “quatro vezes três”: 4 grupos de 3. Em inglês: 4 groups of 3."}
     ];
-    itens.forEach(function(it){
+    passos.forEach(function(it){
       var box = el("div","regra");
       box.appendChild(el("div","nome",it.n));
       box.appendChild(el("p","muted",it.x));
       g.appendChild(box);
     });
 
-    var citacao = el("div","citacao","No caderno do Chopper está escrito, solto: “ele come uns 20 quilos de folhas por dia”.");
+    var concreto = el("div","contexto","Tem feijão, tampinha ou Lego por perto? Monta 4 montinhos de 3 na mesa antes de seguir. Mexer com a mão ajuda a cabeça.");
+    var citacao = el("div","citacao","Luffy, babando: “Sanji, conta rápido, quantos tem?”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"Chopper pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F373} Sanji pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu leio a anotação inteira e pergunto: essa frase fala do QUE ele é, de COMO ele é, de ONDE ele vive, do que ele COME ou do que ele FAZ? " +
-      "Aqui aparece “come” e aparece “folhas”, que é comida. Então não é habitat nem aparência. " +
-      "Logo eu concluo: essa informação vai na gaveta Diet. E aí eu escrevo com as MINHAS palavras: “Gorillas are herbivores. They eat leaves, stems and fruit.” " +
-      "Copiar igualzinho da fonte não vale — o relatório tem que sair do que EU entendi."));
+      "primeiro eu confiro se os grupos são IGUAIS — se um prato tivesse 2 e outro 4, não dava pra multiplicar. Aqui todos têm 3, então pode. " +
+      "Depois eu conto os pratos: 4. Esse é o primeiro número. Olho dentro de UM prato só: 3. Esse é o segundo número. Escrevo 4 × 3. " +
+      "E, em vez de contar os onigiris um por um, eu pulo de prato em prato: 3, 6, 9, 12. Então 4 × 3 = 12."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"As 6 gavetas de um information report"),
-      el("p",null,"Um relatório de pesquisa não é um texto solto: ele tem gavetas. Cada fato que você descobre vai numa gaveta. Sabendo as gavetas, a pesquisa se organiza sozinha."),
+      el("h2",null,"Multiplicar é contar grupos iguais"),
+      desenhaGrupos({grupos:[3,3,3,3], icone:"\u{1F359}"}),
       g,
-      el("p","muted","Vamos ver o Chopper escolhendo uma gaveta, na prática:"),
+      concreto,
+      el("p","muted","Agora vê o Sanji pensando, passo a passo:"),
       citacao, modelo,
-      el("p","muted","Guarda essas seis gavetas — o treino agora é exatamente escolher a certa."),
+      el("p","muted","Guarda as duas perguntas mágicas: QUANTOS GRUPOS? QUANTOS EM CADA?"),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
+  }
+
+  function desenhaGrupos(q){
+    var w = el("div","grupos");
+    q.grupos.forEach(function(n){
+      var g = el("div","grupo-caixa");
+      for(var i=0;i<n;i++) g.appendChild(el("span",null,q.icone || "\u25CF"));
+      w.appendChild(g);
+    });
+    return w;
   }
 
   function montaOpcoes(q, ops, onEscolher){
@@ -285,8 +301,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Caderno organizado!"),
-        el("p",null,"Você já sabe em que gaveta cada informação entra. Agora vem a parte dos fatos — o que a pesquisa precisa saber sobre o gorila."),
+        eyebrow("Treino guiado"), el("h2",null,"Grupos no lugar!"),
+        el("p",null,"Você já sabe ver os grupos, contar o que tem em cada um e escrever a conta. Agora é sem dica — e com pegadinha."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -295,6 +311,7 @@
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.grupos) c.appendChild(desenhaGrupos(q));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -346,7 +363,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Pesquisa completa! 🦍"),
+        eyebrow("Desafio"), el("h2",null,"Cozinha arrumada! \u{1F359}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -356,6 +373,7 @@
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.grupos) c.appendChild(desenhaGrupos(q));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -392,14 +410,14 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Escreve a abertura do relatório"));
-    c2.appendChild(el("p","lead","O Chopper vai apresentar o gorila pra tripulação inteira, e ninguém ali sabe o que é um gorila. Escreve, com as TUAS palavras, um parágrafo que responda três coisas: o que o gorila É, ONDE ele vive e o que ele COME."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
+    c2.appendChild(el("p","lead","O Luffy acha que multiplicar é frescura: ele prefere contar onigiri de um em um. Escreve, com as TUAS palavras, o que quer dizer 4 × 3 e por que dá pra achar o total sem contar um por um."));
     var chips = el("div","chips");
-    ["mamífero primata","floresta da África","herbívoro"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["grupos iguais","quantos em cada","pular de 3 em 3"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Pessoal, o gorila é...");
+    ta.setAttribute("placeholder","Luffy, presta atenção: 4 × 3 quer dizer...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -425,20 +443,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Relatório do Chopper, pronto 🦍"));
+    c.appendChild(el("h2",null,"Aula 1 da multiplicação, completa \u{1F359}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já separa fato por fato nas gavetas certas do relatório — é isso que a professora quer ver na folha.";
-    if(ad <= 4) msg = "As pegadinhas do gorila (herbívoro e bater no peito) ainda enganam — vale reler as seis gavetas antes de preencher a folha.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as duas pegadinhas: gorila é herbívoro, e bater no peito é aviso, não ataque.";
-    c.appendChild(el("p",null, msg + " Agora é só preencher a folha da escola com as tuas palavras."));
+    var msg = "Você já separa grupo igual de grupo desigual — é a base de toda a tabuada que vem pela frente.";
+    if(ad <= 4) msg = "As pegadinhas de grupo desigual e de + com × ainda enganam — vale rever as duas perguntas mágicas antes da próxima aula.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas: grupo desigual não multiplica, e 4 + 2 não é 4 × 2.";
+    c.appendChild(el("p",null, msg + " Na próxima aula a gente arruma esses grupos em fileiras e descobre um truque que corta a tabuada pela metade."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Pesquisa: O Gorila / Information Report (Ilha dos Gorilas)",
+    var txt = ["AULA DE HOJE — Matemática: Multiplicação, Aula 1 — Grupos iguais (Cozinha do Sanji)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

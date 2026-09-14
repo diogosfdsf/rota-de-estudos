@@ -110,11 +110,15 @@
                padding:10px 12px; border:2px dashed var(--accent); border-radius:14px;
                background:var(--surface2); font-size:1.55rem; line-height:1.1;}
   .conta{font-family:var(--display); font-weight:800; font-size:1.35rem; color:var(--accent); letter-spacing:.02em;}
+
+  .passos{margin:0; padding-left:1.4em; display:flex; flex-direction:column; gap:4px;}
+  .passos li{padding-left:2px;}
+  .ruim{color:var(--err); text-decoration:line-through; text-decoration-thickness:1px;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>11/09 · Cozinha do Sanji · Multiplicação — Aula 1: Grupos iguais</span></div>
+    <div class="brand"><b>Droidec</b><span>14/09 · Restaurante Baratie · Português — Texto instrucional (receita)</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -125,72 +129,70 @@
 (function(){
   "use strict";
 
-  var ONI = "\u{1F359}", PEIXE = "\u{1F41F}", CARNE = "\u{1F356}", TANG = "\u{1F34A}", LIVRO = "\u{1F4DA}";
-
   var GUIADO = [
-    {contexto:"Sanji arrumou os onigiris em pratos.", grupos:[2,2,2], icone:ONI,
-     pergunta:"Quantos grupos tem, e quantos onigiris em cada grupo?",
-     opcoes:["3 grupos com 2 em cada","2 grupos com 3 em cada","6 grupos com 1 em cada"],
-     certa:0, dica:"Conta primeiro as caixinhas tracejadas. Depois olha dentro de UMA caixinha só.",
-     porque:"São 3 pratos (grupos) e cada prato tem 2 onigiris. Primeiro os grupos, depois quanto tem dentro."},
-    {contexto:"Agora são peixes, separados em baldes.", grupos:[5,5,5], icone:PEIXE,
-     pergunta:"Qual soma mostra esse desenho?",
-     opcoes:["5 + 5 + 5","3 + 5","5 + 3 + 5 + 3"],
-     certa:0, dica:"Cada caixinha vira uma parcela da soma. Quantas caixinhas? Quanto tem em cada?",
-     porque:"Três baldes de 5 viram três parcelas iguais: 5 + 5 + 5 = 15."},
-    {contexto:"Pedaços de carne pro Luffy, em duas travessas.", grupos:[4,4], icone:CARNE,
-     pergunta:"Qual multiplicação mostra esse desenho?",
-     opcoes:["2 × 4","2 + 4","4 × 4"],
-     certa:0, dica:"Na multiplicação, o primeiro número é QUANTOS GRUPOS e o segundo é QUANTOS EM CADA.",
-     porque:"2 grupos de 4: 2 × 4 = 4 + 4 = 8."},
-    {contexto:"Sanji escreveu na lousa da cozinha: 3 + 3 + 3 + 3", grupos:null,
-     pergunta:"Como fica essa soma em multiplicação?",
-     opcoes:["4 × 3","3 × 3","3 + 4"],
-     certa:0, dica:"Conta quantas vezes o 3 aparece na soma. Esse é o número de grupos.",
-     porque:"O 3 aparece 4 vezes: são 4 grupos de 3. Então 3 + 3 + 3 + 3 = 4 × 3 = 12."},
-    {contexto:"Quatro pratos de onigiri na mesa.", grupos:[3,3,3,3], icone:ONI,
-     pergunta:"Quantos onigiris ao todo? Conta de 3 em 3.",
-     opcoes:["12","7","10"],
-     certa:0, dica:"Não conta de um em um. Pula de prato em prato: 3, 6, ...",
-     porque:"3, 6, 9, 12 — quatro pulos de 3 dão 12. É exatamente 4 × 3 = 12."}
+    {contexto:"Na página do Zeff aparece a palavra: frigideira.",
+     pergunta:"Frigideira é ingrediente ou utensílio?",
+     opcoes:["Utensílio","Ingrediente"],
+     certa:0, dica:"Pergunta do Sanji: isso vai DENTRO da comida, ou é o que eu uso e depois lavo?",
+     porque:"Ninguém come a frigideira: ela é usada pra cozinhar e depois vai pra pia. Então é utensílio."},
+    {contexto:null,
+     pergunta:"Qual item da lista de ingredientes está bem escrito?",
+     opcoes:["2 ovos","ovos","alguns ovos"],
+     certa:0, dica:"Finge que você é o Luffy: com “alguns ovos”, você sabe quantos pegar?",
+     porque:"Só “2 ovos” diz a quantidade exata. Quem nunca fez a receita não adivinha quanto é “alguns”."},
+    {contexto:null,
+     pergunta:"Qual destas frases é um passo de modo de preparo?",
+     opcoes:["Amasse as bananas com um garfo.","As bananas amassadas.","Banana e garfo."],
+     certa:0, dica:"Um passo começa com um verbo que MANDA fazer alguma coisa. Qual frase manda fazer?",
+     porque:"“Amasse” é um verbo de ação: diz exatamente o que a mão tem que fazer. As outras só dão nome às coisas."},
+    {contexto:"Três passos da panqueca estão soltos na mesa.",
+     pergunta:"Qual deles é o PRIMEIRO?",
+     opcoes:["Descasque as bananas.","Despeje a massa na frigideira.","Sirva com mel."],
+     certa:0, dica:"Imagina a cozinha de verdade: dá pra despejar a massa antes de ter massa?",
+     porque:"Antes de tudo a banana precisa estar sem casca. Receita segue a ordem em que as coisas acontecem de verdade."},
+    {contexto:"Complete o passo:  ______ os ovos na tigela.",
+     pergunta:"Qual verbo de ação encaixa?",
+     opcoes:["Quebre","Asse","Corte"],
+     certa:0, dica:"O que a gente faz com um ovo pra ele ir parar dentro da tigela?",
+     porque:"“Quebre os ovos na tigela” — o verbo mostra exatamente a ação. Assar e cortar não fazem sentido com ovo cru."}
   ];
 
   var DESAFIO = [
-    {contexto:"Nami colheu tangerinas e separou em cestas.", grupos:[5,5,5,5], icone:TANG,
-     pergunta:"Qual multiplicação mostra as cestas, e quanto dá?",
-     opcoes:["4 × 5 = 20","5 × 5 = 25","4 + 5 = 9"],
-     certa:0, nota:"4 cestas com 5 em cada: 5, 10, 15, 20. Então 4 × 5 = 20."},
-    {contexto:"Luffy arrumou os onigiris do jeito dele.", grupos:[2,4,3], icone:ONI,
-     pergunta:"Dá pra escrever esse desenho como uma multiplicação?",
-     opcoes:["Não — os grupos não são iguais, então é soma: 2 + 4 + 3","Sim: 3 × 3","Sim: 3 × 4"],
-     certa:0, nota:"Pegadinha: multiplicação só funciona com grupos IGUAIS. Se cada grupo tem uma quantidade diferente, a conta é soma — e dá 9."},
-    {contexto:"Usopp jura que 4 × 2 e 4 + 2 dão a mesma coisa.", grupos:null,
-     pergunta:"Ele tem razão?",
-     opcoes:["Não — 4 + 2 junta o 4 e o 2 (dá 6); 4 × 2 são 4 grupos de 2 (dá 8)","Sim, os dois dão 6","Sim, os dois dão 8"],
-     certa:0, nota:"Pegadinha: o + junta dois números uma vez só. O × repete um grupo várias vezes. Sinal diferente, conta diferente."},
-    {contexto:"O Sunny tem 3 botes salva-vidas. Cabem 6 piratas em cada bote.", grupos:null,
-     pergunta:"Qual conta descobre quantos piratas cabem nos botes?",
-     opcoes:["3 × 6","3 + 6","6 − 3"],
-     certa:0, nota:"3 grupos (botes) de 6 (piratas): 3 × 6 = 6 + 6 + 6 = 18."},
-    {contexto:"Franky escreveu no casco: 6 × 2", grupos:null,
-     pergunta:"Qual soma é igual a 6 × 2?",
-     opcoes:["2 + 2 + 2 + 2 + 2 + 2","6 + 2","6 + 6 + 6 + 6 + 6 + 6"],
-     certa:0, nota:"6 × 2 são 6 grupos de 2: o 2 aparece seis vezes, e dá 12."},
-    {contexto:"Chopper guardou bandagens em 7 caixas, com 10 bandagens em cada.", grupos:null,
-     pergunta:"Quantas bandagens ao todo?",
-     opcoes:["70","17","710"],
-     certa:0, nota:"7 grupos de 10: 10, 20, 30, 40, 50, 60, 70. Contar de 10 em 10 é o pulo mais fácil que existe."},
-    {contexto:"Robin empilhou os livros da biblioteca do navio.", grupos:[5,5,5,5,5,5], icone:LIVRO,
-     pergunta:"Qual é o jeito MAIS RÁPIDO de achar o total?",
-     opcoes:["Contar de 5 em 5: 5, 10, 15, 20, 25, 30","Contar um por um até o fim","Somar 6 + 5"],
-     certa:0, nota:"Contar de um em um funciona, mas demora e é fácil se perder. Pular de 5 em 5 usa os grupos: seis pulos, 30 livros."},
-    {contexto:"Sanji pediu pra você montar 2 × 5 na mesa.", grupos:null,
-     pergunta:"Qual arrumação combina com 2 × 5?",
-     opcoes:["2 pratos com 5 onigiris em cada","1 prato com 2 onigiris e outro com 5","7 onigiris soltos na mesa"],
-     certa:0, nota:"2 × 5 = 2 grupos iguais de 5, e dá 10. Um prato com 2 e outro com 5 é 2 + 5 — grupos diferentes, conta diferente."}
+    {contexto:"Três cozinheiros escreveram a lista de ingredientes da panqueca.",
+     pergunta:"Qual lista alguém que NUNCA fez consegue seguir?",
+     opcoes:["2 bananas maduras, 2 ovos, 4 colheres (sopa) de aveia","banana, ovo, aveia","tudo que precisa pra panqueca"],
+     certa:0, nota:"Só a primeira diz O QUE e QUANTO. As outras obrigam a pessoa a adivinhar."},
+    {contexto:"Luffy fez a lista de utensílios: tigela, garfo, mel, frigideira.",
+     pergunta:"Qual item está na lista errada?",
+     opcoes:["Mel","Garfo","Tigela"],
+     certa:0, nota:"Pegadinha: mel vai dentro da comida, então é ingrediente. Garfo e tigela você usa e lava."},
+    {contexto:"Na receita do Luffy está escrito: “Cozinha até ficar bom.”",
+     pergunta:"Qual é o melhor jeito de reescrever esse passo?",
+     opcoes:["Deixe cada lado na frigideira por uns 2 minutos, até dourar.","Cozinha bastante.","Faz direito."],
+     certa:0, nota:"“Bom” é diferente pra cada um. Tempo e sinal que dá pra ver (dourar) deixam o passo claro."},
+    {contexto:null,
+     pergunta:"Qual sequência de passos está na ordem certa?",
+     opcoes:["1. Amasse as bananas  2. Junte os ovos e a aveia  3. Mexa bem","1. Mexa bem  2. Amasse as bananas  3. Junte os ovos e a aveia","1. Junte os ovos e a aveia  2. Mexa bem  3. Descasque as bananas"],
+     certa:0, nota:"Não dá pra mexer uma massa que ainda não existe, nem descascar a banana depois de misturar. A ordem segue a cozinha de verdade."},
+    {contexto:null,
+     pergunta:"Em qual passo a receita deve avisar “peça ajuda a um adulto”?",
+     opcoes:["Aqueça a frigideira no fogão.","Descasque as bananas.","Separe uma tigela."],
+     certa:0, nota:"Fogão, forno e faca pedem um adulto junto. Uma boa receita avisa isso no passo certo."},
+    {contexto:"Um passo tem que ter uma ação só.",
+     pergunta:"Qual passo precisa ser dividido em vários?",
+     opcoes:["Descasque as bananas, amasse, quebre os ovos, mexa e leve ao fogo.","Amasse as bananas com o garfo.","Sirva com mel."],
+     certa:0, nota:"Pegadinha: esse passo tem cinco verbos. Quem está lendo se perde no meio. Cada verbo vira um passo numerado."},
+    {contexto:"Complete o passo:  ______ um pouco da massa na frigideira com uma concha.",
+     pergunta:"Qual verbo de ação encaixa?",
+     opcoes:["Despeje","Descasque","Corte"],
+     certa:0, nota:"Massa mole a gente despeja. Escolher o verbo certo faz a pessoa imaginar a ação na hora."},
+    {contexto:"Na folha tem a pergunta: “Por que escolhi essa receita?”",
+     pergunta:"Qual resposta conta de verdade por que a receita é especial?",
+     opcoes:["Porque minha avó fazia essa panqueca aos domingos e a casa ficava com cheiro de banana.","Porque sim.","Panqueca tem banana."],
+     certa:0, nota:"Essa parte não é instrução: é pra contar uma lembrança ou um sentimento. Detalhe (quem, quando, o cheiro) faz o leitor sentir junto."}
   ];
 
-  var KEY = "zion-multiplicacao-aula1-2026-09-11";
+  var KEY = "zion-receita-2026-09-14";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -232,59 +234,55 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","Luffy invade a cozinha do Sunny gritando: “SANJI, QUANTA COMIDA TEM?!”");
-    var p2 = el("p","lead","Sanji não conta um onigiri de cada vez. Ele arruma tudo em pratos com a MESMA quantidade — e descobre o total num piscar de olhos.");
-    var p3 = el("p","lead","Hoje você é o ajudante de cozinha do Sanji. Missão: aprender o segredo dele, que tem nome: MULTIPLICAÇÃO.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"O Segredo do Sanji"), p1, p2, p3, botao("Bora cozinhar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","No Baratie, o restaurante flutuante onde o Sanji aprendeu a cozinhar, o livro de receitas do chef Zeff caiu no mar. Sobrou uma página meio apagada.");
+    var p2 = el("p","lead","Luffy leu “faz a massa e cozinha” e tentou fazer panqueca sozinho. Resultado: fumaça pra todo lado e nenhuma panqueca.");
+    var p3 = el("p","lead","A receita não estava errada — estava MAL ESCRITA. Hoje você reescreve o livro do Zeff de um jeito que até o Luffy consiga seguir.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O Livro de Receitas do Baratie"), p1, p2, p3, botao("Bora pra cozinha! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
   function regra(){
     var g = el("div","grupo");
-    var passos = [
-      {n:"1. Olha os grupos", x:"4 pratos, e cada prato tem 3 onigiris. Todos os pratos têm a MESMA quantidade."},
-      {n:"2. Vira soma", x:"Cada prato é uma parcela: 3 + 3 + 3 + 3."},
-      {n:"3. Vira multiplicação", x:"4 × 3 = 12. Lê-se “quatro vezes três”: 4 grupos de 3. Em inglês: 4 groups of 3."}
+    var regras = [
+      {n:"1. Ingrediente ≠ utensílio", x:"Ingrediente vai DENTRO da comida (banana, ovo, aveia). Utensílio é o que você USA e depois lava (tigela, garfo, frigideira)."},
+      {n:"2. Ingrediente sempre com quantidade", x:"“2 ovos”, “4 colheres de sopa de aveia”. Nunca só “ovos” ou “um pouco de aveia”."},
+      {n:"3. Um passo = uma ação, com verbo de ação, na ordem", x:"Cada passo começa com um verbo que manda fazer: Descasque, Amasse, Mexa, Despeje. Numere na ordem em que acontece."}
     ];
-    passos.forEach(function(it){
+    regras.forEach(function(it){
       var box = el("div","regra");
       box.appendChild(el("div","nome",it.n));
       box.appendChild(el("p","muted",it.x));
       g.appendChild(box);
     });
 
-    var concreto = el("div","contexto","Tem feijão, tampinha ou Lego por perto? Monta 4 montinhos de 3 na mesa antes de seguir. Mexer com a mão ajuda a cabeça.");
-    var citacao = el("div","citacao","Luffy, babando: “Sanji, conta rápido, quantos tem?”");
+    var ruim = el("div","contexto");
+    ruim.appendChild(el("b",null,"Página do Zeff: "));
+    ruim.appendChild(el("span","ruim","Mistura tudo e faz a panqueca."));
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
     modelo.appendChild(el("b",null,"\u{1F373} Sanji pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu confiro se os grupos são IGUAIS — se um prato tivesse 2 e outro 4, não dava pra multiplicar. Aqui todos têm 3, então pode. " +
-      "Depois eu conto os pratos: 4. Esse é o primeiro número. Olho dentro de UM prato só: 3. Esse é o segundo número. Escrevo 4 × 3. " +
-      "E, em vez de contar os onigiris um por um, eu pulo de prato em prato: 3, 6, 9, 12. Então 4 × 3 = 12."));
+      "primeiro eu me finjo de Luffy, alguém que NUNCA fez essa receita, e leio a frase. “Tudo” o quê? Ele não sabe. Então eu troco “tudo” pelos ingredientes. " +
+      "Depois eu penso: qual é a PRIMEIRA coisa que a mão faz? Tirar a casca da banana. Isso vira o passo 1, com o verbo na frente: “Descasque”. " +
+      "Aí eu vejo que “mistura e faz” são duas ações, então viram dois passos. No fim eu leio de novo, fingindo ser o Luffy: dá pra fazer sem me perguntar nada? Se dá, está pronto."));
+
+    var bom = el("ol","passos");
+    ["Descasque as 2 bananas.","Amasse as bananas com um garfo, dentro da tigela.","Junte os 2 ovos e as 4 colheres de aveia.","Mexa até ficar uma massa só.","Com um adulto, despeje um pouco da massa na frigideira quente e deixe dourar dos dois lados."]
+      .forEach(function(t){ bom.appendChild(el("li",null,t)); });
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Multiplicar é contar grupos iguais"),
-      desenhaGrupos({grupos:[3,3,3,3], icone:"\u{1F359}"}),
+      el("h2",null,"O que faz uma receita dar certo"),
+      el("p",null,"Receita é um texto instrucional: ele ENSINA alguém a fazer algo. Só funciona se a pessoa conseguir fazer sozinha, sem te perguntar nada."),
       g,
-      concreto,
-      el("p","muted","Agora vê o Sanji pensando, passo a passo:"),
-      citacao, modelo,
-      el("p","muted","Guarda as duas perguntas mágicas: QUANTOS GRUPOS? QUANTOS EM CADA?"),
+      el("p","muted","Olha o Sanji consertando a página estragada:"),
+      ruim, modelo,
+      el("p","muted","Depois do conserto, ficou assim:"),
+      bom,
+      el("p","muted","A pergunta que resolve tudo: QUEM NUNCA FEZ CONSEGUE SEGUIR?"),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
-  }
-
-  function desenhaGrupos(q){
-    var w = el("div","grupos");
-    q.grupos.forEach(function(n){
-      var g = el("div","grupo-caixa");
-      for(var i=0;i<n;i++) g.appendChild(el("span",null,q.icone || "\u25CF"));
-      w.appendChild(g);
-    });
-    return w;
   }
 
   function montaOpcoes(q, ops, onEscolher){
@@ -301,8 +299,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Grupos no lugar!"),
-        el("p",null,"Você já sabe ver os grupos, contar o que tem em cada um e escrever a conta. Agora é sem dica — e com pegadinha."),
+        eyebrow("Treino guiado"), el("h2",null,"Receita organizada!"),
+        el("p",null,"Você já separa ingrediente de utensílio e escreve um passo que dá pra seguir. Agora é sem dica — e com pegadinha."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -311,7 +309,6 @@
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
-    if(q.grupos) c.appendChild(desenhaGrupos(q));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -363,7 +360,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Cozinha arrumada! \u{1F359}"),
+        eyebrow("Desafio"), el("h2",null,"Livro do Zeff salvo! \u{1F4D6}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -373,7 +370,6 @@
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
-    if(q.grupos) c.appendChild(desenhaGrupos(q));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -411,13 +407,13 @@
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
     c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
-    c2.appendChild(el("p","lead","O Luffy acha que multiplicar é frescura: ele prefere contar onigiri de um em um. Escreve, com as TUAS palavras, o que quer dizer 4 × 3 e por que dá pra achar o total sem contar um por um."));
+    c2.appendChild(el("p","lead","O Luffy vai escrever a primeira receita dele pro livro do Baratie. Explica, com as TUAS palavras, o que uma receita PRECISA ter pra outra pessoa conseguir fazer sem errar."));
     var chips = el("div","chips");
-    ["grupos iguais","quantos em cada","pular de 3 em 3"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["quantidade","verbo de ação","passo a passo na ordem"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Luffy, presta atenção: 4 × 3 quer dizer...");
+    ta.setAttribute("placeholder","Luffy, pra receita dar certo...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -443,20 +439,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Aula 1 da multiplicação, completa \u{1F359}"));
+    c.appendChild(el("h2",null,"Receita do Baratie, pronta \u{1F9C1}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já separa grupo igual de grupo desigual — é a base de toda a tabuada que vem pela frente.";
-    if(ad <= 4) msg = "As pegadinhas de grupo desigual e de + com × ainda enganam — vale rever as duas perguntas mágicas antes da próxima aula.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas: grupo desigual não multiplica, e 4 + 2 não é 4 × 2.";
-    c.appendChild(el("p",null, msg + " Na próxima aula a gente arruma esses grupos em fileiras e descobre um truque que corta a tabuada pela metade."));
+    var msg = "Você já escreve pensando em quem nunca fez a receita — é exatamente o que a professora pediu.";
+    if(ad <= 4) msg = "Passo com várias ações e frase vaga ainda escapam — antes de escrever a folha, confere se cada passo tem um verbo só.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas: mel é ingrediente, e cada passo tem uma ação só.";
+    c.appendChild(el("p",null, msg + " Agora faz o bolo de morango com um adulto e escreve a TUA receita na folha."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Matemática: Multiplicação, Aula 1 — Grupos iguais (Cozinha do Sanji)",
+    var txt = ["AULA DE HOJE — Português: Texto instrucional / Receita (Restaurante Baratie)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

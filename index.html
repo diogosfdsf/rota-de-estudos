@@ -121,11 +121,19 @@
   .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1.02rem; color:var(--ink);}
   .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
   .destaque{color:var(--accent); font-weight:600;}
+
+  .silabas{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:6px 0;}
+  .sil{display:flex; flex-direction:column; align-items:center; gap:4px;}
+  .sil b{font-family:var(--display); font-weight:600; font-size:1.2rem; padding:10px 16px;
+         border-radius:10px; background:var(--surface2); border:1px solid var(--line);}
+  .sil small{font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
+  .sil[data-forte] b{background:var(--gold); border-color:var(--gold); color:var(--on-accent); font-weight:800;}
+  .sil[data-forte] small{color:var(--gold); font-weight:700;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>17/09 · Loja da Nami · Português — Tempos verbais (verbos em -er)</span></div>
+    <div class="brand"><b>Droidec</b><span>21/09 · O Tambor do Brook · Português — Sílaba tônica</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -137,69 +145,69 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"Placa HOJE, na loja da Nami.",
-     pergunta:"Hoje eu ______ (comer) carne com o Luffy.",
-     opcoes:["como","comia","comerei"],
-     certa:0, dica:"A placa diz HOJE: é presente. E a pessoa é EU. Qual terminação o eu usa no presente?",
-     porque:"Presente + eu = terminação -o: eu como. “Comia” é ontem e “comerei” é amanhã."},
-    {contexto:"Placa HOJE.",
-     pergunta:"Tu ______ (beber) água depois do treino.",
-     opcoes:["bebes","bebe","bebeis"],
-     certa:0, dica:"Lembra da pegadinha nº 1: o TU quase sempre termina com uma letra no fim. Qual?",
-     porque:"Tu bebes. A marca do tu é o -s no fim — “tu bebe” é a forma do ele/ela."},
-    {contexto:"Placa HOJE.",
-     pergunta:"Vós ______ (aprender) navegação com a Nami.",
-     opcoes:["aprendeis","aprendemos","aprende"],
-     certa:0, dica:"Pegadinha nº 2: o vós NÃO copia o nós. A terminação dele no presente é -eis.",
-     porque:"Vós aprendeis. “Aprendemos” é do nós, e o vós tem terminação própria."},
-    {contexto:"Placa ONTEM.",
-     pergunta:"Antigamente, nós ______ (correr) na praia toda manhã.",
-     opcoes:["corríamos","corremos","correremos"],
-     certa:0, dica:"É o tempo do que acontecia antes. No pretérito, todas as pessoas ganham -ia. E o nós fica -íamos.",
-     porque:"Nós corríamos. No pretérito o nós fica -íamos; “corremos” é presente e “correremos” é futuro."},
-    {contexto:"Placa AMANHÃ.",
-     pergunta:"Amanhã eu ______ (escrever) a carta pro Sabo.",
-     opcoes:["escreverei","escreverá","escrevia"],
-     certa:0, dica:"No futuro o verbo fica INTEIRO e ganha a terminação. Qual é a do eu: -ei ou -á?",
-     porque:"Eu escreverei. O -á é do ele/ela — “eu escreverá” mistura as duas pessoas."}
+    {contexto:"Bate palma junto: te / sou / ra.", silabas:["te","sou","ra"], forte:null,
+     pergunta:"Falando “Ô, tesouraaa!”, em qual sílaba a tua voz sobe?",
+     opcoes:["sou","te","ra"],
+     certa:0, dica:"Fala em voz alta, chamando alguém de longe. A sílaba que sai mais forte é a tônica.",
+     porque:"te-SOU-ra. A voz sobe no SOU: essa é a sílaba tônica."},
+    {contexto:"A batida de CADERNO cai assim:", silabas:["ca","DER","no"], forte:1, rotulos:["antepenúltima","penúltima","última"],
+     pergunta:"A batida caiu na penúltima sílaba. Como essa palavra se chama?",
+     opcoes:["Paroxítona","Oxítona","Proparoxítona"],
+     certa:0, dica:"Conta de trás pra frente: última = oxítona, penúltima = paroxítona, antepenúltima = proparoxítona.",
+     porque:"Batida na penúltima = paroxítona. A maioria das palavras do português é assim."},
+    {contexto:"Agora SÁBADO:", silabas:["SÁ","ba","do"], forte:0, rotulos:["antepenúltima","penúltima","última"],
+     pergunta:"Como se classifica?",
+     opcoes:["Proparoxítona","Paroxítona","Oxítona"],
+     certa:0, dica:"A batida caiu na terceira contando do fim pro começo. Qual é o nome dessa?",
+     porque:"SÁ-ba-do: batida na antepenúltima = proparoxítona. E repara: ela tem acento, como TODA proparoxítona."},
+    {contexto:"Cuidado com esta:", silabas:["com","pu","ta","DOR"], forte:3, rotulos:[null,null,"penúltima","última"],
+     pergunta:"Computador tem 4 sílabas. Como se classifica?",
+     opcoes:["Oxítona","Proparoxítona","Paroxítona"],
+     certa:0, dica:"Esquece o tamanho da palavra. Onde caiu a batida: com-pu-ta-DOR?",
+     porque:"A batida caiu na ÚLTIMA sílaba, então é oxítona — mesmo sendo uma palavra comprida. Tamanho não classifica nada."},
+    {contexto:"Uma regra que vale sempre.",
+     pergunta:"Toda palavra proparoxítona leva acento?",
+     opcoes:["Sim, todas — sem exceção","Não, só algumas","Só quando termina em A"],
+     certa:0, dica:"Pensa em música, médico, sábado, ônibus, relâmpago. Alguma delas está sem acento?",
+     porque:"Todas as proparoxítonas são acentuadas: música, médico, sábado, ônibus, relâmpago, plástico. Essa regra não tem exceção."}
   ];
 
   var DESAFIO = [
-    {contexto:"Placa AMANHÃ.",
-     pergunta:"Tu ______ (responder) a carta amanhã.",
-     opcoes:["responderás","responderá","responderias"],
-     certa:0, nota:"Futuro + tu = responderás. O verbo fica inteiro (responder) e ainda assim o tu leva o -s no fim."},
-    {contexto:"Placa HOJE.",
-     pergunta:"Qual está certo?",
-     opcoes:["Vós comeis no Baratie.","Vós comemos no Baratie.","Vós come no Baratie."],
-     certa:0, nota:"Pegadinha: “comemos” é do nós. O vós tem a terminação -eis, que é só dele."},
-    {contexto:"Placa AMANHÃ.",
-     pergunta:"Qual frase está escrita corretamente?",
-     opcoes:["Eu correrei na maratona de Water Seven.","Eu correrá na maratona de Water Seven.","Eu corria na maratona de Water Seven amanhã."],
-     certa:0, nota:"Pegadinha: no futuro, eu = -ei e ele/ela = -á. Trocar os dois é o erro mais comum da tabela."},
-    {contexto:"“Nós bebíamos suco de tangerina todo dia quando éramos pequenos.”",
-     pergunta:"Em que tempo está essa frase?",
-     opcoes:["Pretérito (o que acontecia antes)","Presente (o que acontece hoje)","Futuro (o que vai acontecer)"],
-     certa:0, nota:"A terminação -íamos entrega: é pretérito. Todas as pessoas do pretérito têm -ia no meio."},
-    {contexto:"“Eles aprenderão a ler mapas no ano que vem.”",
-     pergunta:"Em que tempo está essa frase?",
-     opcoes:["Futuro","Pretérito","Presente"],
-     certa:0, nota:"Verbo inteiro (aprender) + terminação -ão = futuro do eles/elas. “No ano que vem” confirma."},
-    {contexto:"Uma linha da tabela saiu errada.",
-     pergunta:"Qual delas está errada?",
-     opcoes:["Vós escrevemos","Nós escrevemos","Eles escrevem"],
-     certa:0, nota:"Pegadinha: o certo é “vós escreveis”. O vós copiar o nós é o erro que mais aparece nessas tabelas."},
-    {contexto:null,
-     pergunta:"O que o FUTURO faz de diferente dos outros dois tempos?",
-     opcoes:["Mantém o verbo inteiro e acrescenta a terminação: vender + ei","Corta o -er, igual aos outros","Troca o verbo por outro"],
-     certa:0, nota:"É a chave do futuro: correr + ei = correrei; comer + ão = comerão. No presente e no pretérito o -er cai fora."},
-    {contexto:"Terminações do PRESENTE, na ordem eu · tu · ele · nós · vós · eles.",
-     pergunta:"Qual sequência está certa?",
-     opcoes:["-o, -es, -e, -emos, -eis, -em","-o, -e, -e, -emos, -emos, -em","-ei, -ás, -á, -emos, -eis, -ão"],
-     certa:0, nota:"Essa é a família do presente. A segunda repete o nós no vós e esquece o -s do tu; a terceira é a família do futuro."}
+    {contexto:null, silabas:["mú","si","ca"], forte:null,
+     pergunta:"Classifique: MÚSICA",
+     opcoes:["Proparoxítona","Paroxítona","Oxítona"],
+     certa:0, nota:"MÚ-si-ca: batida na antepenúltima. O próprio acento já mostra onde a voz sobe."},
+    {contexto:null, silabas:["ban","dei","ra"], forte:null,
+     pergunta:"Classifique: BANDEIRA",
+     opcoes:["Paroxítona","Proparoxítona","Oxítona"],
+     certa:0, nota:"ban-DEI-ra: a batida cai na penúltima, então é paroxítona. Ter três sílabas não faz dela proparoxítona."},
+    {contexto:null, silabas:["fei","jão"], forte:null,
+     pergunta:"Classifique: FEIJÃO",
+     opcoes:["Oxítona","Paroxítona","Proparoxítona"],
+     certa:0, nota:"fei-JÃO: a voz sobe na última sílaba. Oxítona."},
+    {contexto:"Pegadinha das grandes.", silabas:["re","fri","ge","ran","te"], forte:null,
+     pergunta:"Classifique: REFRIGERANTE",
+     opcoes:["Paroxítona","Proparoxítona","Oxítona"],
+     certa:0, nota:"Cinco sílabas, e mesmo assim re-fri-ge-RAN-te tem a batida na penúltima: paroxítona. Palavra comprida engana, a batida não."},
+    {contexto:null, silabas:["ô","ni","bus"], forte:null,
+     pergunta:"Classifique: ÔNIBUS",
+     opcoes:["Proparoxítona","Paroxítona","Oxítona"],
+     certa:0, nota:"Ô-ni-bus: batida na antepenúltima. Proparoxítona, e por isso vem acentuada."},
+    {contexto:"Uma destas palavras está escrita SEM o acento que precisa.",
+     pergunta:"Qual delas?",
+     opcoes:["sabado","caderno","pastel"],
+     certa:0, nota:"“Sábado” é proparoxítona, e toda proparoxítona leva acento. Caderno e pastel não precisam."},
+    {contexto:"A palavra JACARE está sem acento.",
+     pergunta:"Ela precisa de acento?",
+     opcoes:["Sim: jacaré — é oxítona terminada em E","Não, nenhuma oxítona leva acento","Só se tivesse 4 sílabas"],
+     certa:0, nota:"Oxítona terminada em A, E ou O (e em EM) leva acento: jacaré, sofá, cipó, também. Já “pastel” e “animal” não levam."},
+    {contexto:"Três classificações de um colega.",
+     pergunta:"Qual está ERRADA?",
+     opcoes:["pastel → proparoxítona","médico → proparoxítona","gravata → paroxítona"],
+     certa:0, nota:"pas-TEL é oxítona: a batida cai na última. Proparoxítona precisa de pelo menos três sílabas E batida na antepenúltima."}
   ];
 
-  var KEY = "zion-verbos-er-2026-09-17";
+  var KEY = "zion-silaba-tonica-2026-09-21";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -241,66 +249,68 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","A Nami montou uma loja de mapas com três placas: ONTEM, HOJE e AMANHÃ. Cada placa conta o que ela fazia, faz e vai fazer.");
-    var p2 = el("p","lead","Aí uma onda bateu no balcão e embaralhou as placas. Agora está escrito “ontem eu venderei” e “amanhã eu vendia”. Ninguém entende mais nada.");
-    var p3 = el("p","lead","Hoje você arruma a loja. Missão: acertar a TERMINAÇÃO de cada verbo terminado em -er, em cada tempo e pra cada pessoa.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"A Loja de Mapas da Nami"), p1, p2, p3, botao("Bora arrumar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","O Brook descobriu uma coisa: toda palavra tem ritmo. Quando você fala, uma sílaba sempre sai mais FORTE que as outras — é a batida do tambor dentro da palavra.");
+    var p2 = el("p","lead","Ele quer transformar as palavras em música, mas só consegue se souber onde cai a batida forte de cada uma. E tem palavra que engana: é grande, mas a batida está lá no meio.");
+    var p3 = el("p","lead","Hoje você é o baterista do Brook. Missão: achar a sílaba forte de qualquer palavra — mesmo das que não têm acento nenhum. Yohohoho!");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O Tambor do Brook"), p1, p2, p3, botao("Bora tocar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
-  function tabterm(linhas){
-    var t = el("div","tabterm");
-    linhas.forEach(function(l){
-      t.appendChild(el("b",null,l[0]));
-      var s = el("span");
-      s.innerHTML = l[1];
-      t.appendChild(s);
+  function silabas(lista, forte, rotulos){
+    var w = el("div","silabas");
+    lista.forEach(function(s, i){
+      var d = el("div","sil");
+      if(i === forte) d.setAttribute("data-forte","");
+      d.appendChild(el("b",null,s));
+      if(rotulos && rotulos[i]) d.appendChild(el("small",null,rotulos[i]));
+      w.appendChild(d);
     });
-    return t;
+    return w;
   }
 
   function regra(){
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. Tira o -er e troca a terminação"));
-    r1.appendChild(el("p","muted","Todo verbo terminado em -er (comer, correr, beber, aprender) segue as mesmas três famílias:"));
-    r1.appendChild(tabterm([
-      ["PRESENTE", "eu com<em>o</em> · tu com<em>es</em> · ele com<em>e</em> · nós com<em>emos</em> · vós com<em>eis</em> · eles com<em>em</em>"],
-      ["PRETÉRITO", "eu com<em>ia</em> · tu com<em>ias</em> · ele com<em>ia</em> · nós com<em>íamos</em> · vós com<em>íeis</em> · eles com<em>iam</em>"],
-      ["FUTURO", "eu comer<em>ei</em> · tu comer<em>ás</em> · ele comer<em>á</em> · nós comer<em>emos</em> · vós comer<em>eis</em> · eles comer<em>ão</em>"]
-    ]));
-    r1.appendChild(el("p","muted","Repara no futuro: ele é o único que guarda o verbo INTEIRO (comer + ei). Nos outros dois, o -er cai fora."));
+    r1.appendChild(el("div","nome","1. Ache a batida forte"));
+    r1.appendChild(el("p","muted","Fale a palavra como se estivesse CHAMANDO alguém de longe, batendo palma em cada sílaba. A sílaba em que a sua voz sobe é a tônica. Não precisa de acento escrito pra ela existir."));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. TU sempre termina em -s"));
-    r2.appendChild(el("p","muted","tu comes, tu comias, tu comerás. Se você escreveu “tu come”, faltou o -s. Essa é a pegadinha nº 1."));
+    r2.appendChild(el("div","nome","2. Conte de trás pra frente"));
+    r2.appendChild(el("p","muted","Agora olha ONDE caiu a batida, contando do fim da palavra pro começo: última = oxítona, penúltima = paroxítona, antepenúltima = proparoxítona."));
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. VÓS nunca copia o NÓS"));
-    r3.appendChild(el("p","muted","vós comeis (não “vós comemos”), vós comíeis, vós comereis. O vós tem terminação só dele: -eis / -íeis. Pegadinha nº 2."));
+    r3.appendChild(el("div","nome","3. Tamanho não diz nada!"));
+    r3.appendChild(el("p","muted","Palavra comprida NÃO é proparoxítona por ser comprida. “Refrigerante” tem 5 sílabas e é paroxítona. O que decide é só a batida forte."));
     g.appendChild(r3);
 
-    var citacao = el("div","citacao","Nami, de caneta na mão: “Preciso escrever o que TU fazias e o que VÓS fareis. Como é mesmo?”");
+    var citacao = el("div","citacao","Brook, com a baqueta no ar: “Vamos testar com TESOURA. Ô, te-SOU-raaa!”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F5FA} Nami pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F3B5} Brook pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "vamos com o verbo CORRER. Primeiro eu vejo o tempo: é hoje, então é presente. Depois eu vejo a pessoa: é TU. " +
-      "Aí eu tiro o -er e fico com “corr”. A terminação do tu no presente é -es, e eu lembro da regra: tu SEMPRE tem -s no fim. Então: tu corres. " +
-      "Agora VÓS, no mesmo tempo: tiro o -er de novo, e a terminação do vós é -eis. Cuidado pra não copiar o nós — não é “vós corremos”, é vós correis."));
+      "primeiro eu separo batendo palma: te / sou / ra — três sílabas. Depois eu chamo a palavra de longe: “te-SOU-ra!”. A minha voz subiu no SOU, então essa é a forte. " +
+      "Agora eu conto de trás pra frente: “ra” é a última, “sou” é a penúltima. A batida caiu na penúltima, então tesoura é PAROXÍTONA. " +
+      "Repara que eu nunca olhei o tamanho da palavra nem procurei acento — eu escutei onde a voz subiu."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"As terminações dos verbos em -er"),
-      el("p",null,"Conjugar é trocar o final do verbo conforme QUEM faz (eu, tu, ele, nós, vós, eles) e QUANDO (ontem, hoje, amanhã)."),
+      el("h2",null,"Onde cai a batida da palavra"),
+      silabas(["te","SOU","ra"], 1, ["antepenúltima","penúltima","última"]),
+      el("p",null,"Toda palavra com duas sílabas ou mais tem uma sílaba mais forte: a sílaba tônica. Descobrir qual é resolve a questão inteira."),
       g,
-      el("p","muted","Vê a Nami escolhendo uma terminação, passo a passo:"),
+      el("p","muted","Vê o Brook achando a batida, passo a passo:"),
       citacao, modelo,
-      el("p","muted","Duas perguntas resolvem qualquer um: QUAL O TEMPO? QUAL A PESSOA?"),
+      el("p","muted","Mais três exemplos, pra ouvir a diferença:"),
+      silabas(["ca","FÉ"], 1, ["penúltima","última"]),
+      el("p","muted","café → batida na ÚLTIMA = oxítona"),
+      silabas(["ban","DEI","ra"], 1, ["antepenúltima","penúltima","última"]),
+      el("p","muted","bandeira → batida na PENÚLTIMA = paroxítona"),
+      silabas(["MÚ","si","ca"], 0, ["antepenúltima","penúltima","última"]),
+      el("p","muted","música → batida na ANTEPENÚLTIMA = proparoxítona (e proparoxítona SEMPRE leva acento)"),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -319,8 +329,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Placas no lugar!"),
-        el("p",null,"Você já acha a terminação certa com ajuda. Agora é sem dica — e com as duas pegadinhas."),
+        eyebrow("Treino guiado"), el("h2",null,"Ritmo pegado!"),
+        el("p",null,"Você já acha a batida forte com ajuda. Agora é sem dica — e com as pegadinhas de palavra comprida."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -329,6 +339,7 @@
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.silabas) c.appendChild(silabas(q.silabas, q.forte, q.rotulos));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -380,7 +391,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Loja arrumada! \u{1F5FA}"),
+        eyebrow("Desafio"), el("h2",null,"Música pronta! \u{1F941}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -390,6 +401,7 @@
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.silabas) c.appendChild(silabas(q.silabas, q.forte, q.rotulos));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -426,14 +438,14 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Chopper?"));
-    c2.appendChild(el("p","lead","O Chopper vive escrevendo “tu come” e “vós comemos”. Explica pra ele, com as TUAS palavras, como descobrir a terminação certa do TU e do VÓS em qualquer verbo terminado em -er."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Brook?"));
+    c2.appendChild(el("p","lead","Aparece a palavra CADERNO, que não tem acento nenhum. O Brook não faz ideia de onde bater o tambor. Explica pra ele, com as TUAS palavras, o passo a passo pra descobrir a sílaba forte e dizer se a palavra é oxítona, paroxítona ou proparoxítona."));
     var chips = el("div","chips");
-    ["tu termina em -s","vós tem terminação própria","qual o tempo?"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["falar chamando","bater palma em cada sílaba","contar de trás pra frente"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Chopper, quando for TU você...");
+    ta.setAttribute("placeholder","Brook, primeiro você...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -459,20 +471,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Mapas em ordem \u{1F5FA}"));
+    c.appendChild(el("h2",null,"Tambor do Brook, afinado \u{1F3B5}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já separa o tempo da pessoa antes de escolher a terminação — é assim que a tabela sai certa.";
-    if(ad <= 4) msg = "O TU e o VÓS ainda enganam. Antes da próxima tabela, repete em voz alta: tu termina em -s, vós termina em -eis.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as duas pegadinhas: o -s do tu e o vós que não copia o nós.";
-    c.appendChild(el("p",null, msg + " Agora pega a tua folha do verbo vender e confere linha por linha: tem -s no tu? o vós está diferente do nós?"));
+    var msg = "Você já acha a batida forte sem depender do acento escrito — era esse o pulo do gato.";
+    if(ad <= 4) msg = "As palavras compridas ainda enganam. Antes da próxima folha, fala cada palavra em voz alta chamando, e só depois classifica.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de palavra comprida que não é proparoxítona.";
+    c.appendChild(el("p",null, msg + " Agora pega a tua folha e refaz em voz alta: fala cada palavra chamando, escuta onde a voz sobe e só então classifica."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Português: Tempos verbais dos verbos em -er (Loja da Nami)",
+    var txt = ["AULA DE HOJE — Português: Sílaba tônica — oxítona, paroxítona e proparoxítona (O Tambor do Brook)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

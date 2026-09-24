@@ -139,11 +139,21 @@
            padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);
            font-family:ui-monospace,"Consolas",monospace; font-size:1rem;}
   .pessoas b{font-family:var(--display); color:var(--accent);}
+
+  .ciclo{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; padding:6px 0;}
+  .ciclo span{padding:9px 14px; border-radius:999px; background:var(--surface2); border:1px solid var(--line);
+              font-size:.95rem;}
+  .ciclo i{font-style:normal; color:var(--gold); font-weight:800;}
+  .versus{display:grid; gap:10px;}
+  @media (min-width:520px){ .versus{grid-template-columns:1fr 1fr;} }
+  .versus > div{padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
+  .versus h3{margin:0 0 6px; font-family:var(--display); font-size:1rem; color:var(--accent);}
+  .versus ul{margin:0; padding-left:1.1em; font-size:.92rem; color:var(--muted); display:flex; flex-direction:column; gap:3px;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>22/09 · O Teatro do Usopp · Português — Verbos terminados em -ar</span></div>
+    <div class="brand"><b>Droidec</b><span>24/09 · A Ilha das Montanhas · Geografia — Resíduos e cooperativas</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -155,69 +165,69 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"No palco do Usopp, placa HOJE.",
-     pergunta:"Hoje eu ______ (cantar) no teatro.",
-     opcoes:["canto","cantei","cantarei"],
-     certa:0, dica:"A placa diz HOJE: presente. A pessoa é EU. Qual terminação o eu usa no presente dos verbos em -ar?",
-     porque:"Presente + eu = -o: eu canto. “Cantei” é ontem e “cantarei” é amanhã."},
-    {contexto:"Placa HOJE.",
-     pergunta:"Tu ______ (nadar) muito bem.",
-     opcoes:["nadas","nada","nadais"],
-     certa:0, dica:"Lembra: o TU sempre tem -s no fim. “Nada” é a forma de quem?",
-     porque:"Tu nadas. Sem o -s, “tu nada” vira a forma do ele/ela."},
-    {contexto:"Placa HOJE. Essa é a linha que some com mais facilidade.",
-     pergunta:"Eles ______ (brincar) na areia.",
-     opcoes:["brincam","brinca","brincaram"],
-     certa:0, dica:"É a última linha da tabela: eles/elas, no presente. A terminação é -am.",
-     porque:"Eles brincam. “Brincaram” é pretérito e “brinca” é do ele/ela — uma pessoa só."},
-    {contexto:"Placa ONTEM.",
-     pergunta:"Ontem ele ______ (pular) da árvore.",
-     opcoes:["pulou","pularam","pula"],
-     certa:0, dica:"Ele/ela é UMA pessoa. “Pularam” está falando de quantas?",
-     porque:"Ele pulou. “Pularam” é do eles/elas — trocar essas duas é o erro mais comum da tabela."},
-    {contexto:"Placa AMANHÃ.",
-     pergunta:"Amanhã eu ______ (contar) a história toda.",
-     opcoes:["contarei","contará","contei"],
-     certa:0, dica:"No futuro o verbo fica inteiro e ganha a terminação. A do eu é -ei; a do ele é -á.",
-     porque:"Eu contarei. “Contará” é do ele/ela e “contei” é ontem."}
+    {contexto:"Na ilha, a montanha de lixo cresce todo mês.",
+     pergunta:"Quando as pessoas compram cada vez mais coisas, o que acontece com a quantidade de resíduos?",
+     opcoes:["Aumenta junto","Diminui","Fica sempre igual"],
+     certa:0, dica:"Pensa em tudo que vem junto com uma compra: caixa, sacola, plástico, embalagem. Para onde isso vai depois?",
+     porque:"Quanto mais se consome, mais embalagem e material são descartados. Consumo e resíduo crescem juntos."},
+    {contexto:"Numa fábrica, garrafas de vidro são derretidas num forno enorme e viram garrafas novas, aos milhares.",
+     pergunta:"Esse reaproveitamento é industrial ou artesanal?",
+     opcoes:["Industrial","Artesanal"],
+     certa:0, dica:"Faz as três perguntas: quem faz? quanto sai? o material virou outra coisa?",
+     porque:"Máquina, grande quantidade e o material transformado: é reaproveitamento industrial."},
+    {contexto:"Uma moradora costura embalagens de salgadinho à mão e faz bolsas, uma diferente da outra.",
+     pergunta:"E esse aqui?",
+     opcoes:["Artesanal","Industrial"],
+     certa:0, dica:"Repara que a embalagem continua embalagem: ela não foi derretida nem transformada, só ganhou outro uso.",
+     porque:"Feito à mão, poucas unidades e o material continua sendo o que era: reaproveitamento artesanal."},
+    {contexto:"O Jinbe pergunta o que aconteceria se ninguém catasse material reciclável na ilha.",
+     pergunta:"Qual seria a consequência?",
+     opcoes:["O material ia se acumulando e a fábrica teria que tirar mais matéria-prima da natureza","Nada mudaria, porque o lixo some sozinho","A ilha ficaria mais limpa"],
+     certa:0, nota:null, dica:"Pensa nos dois lados: o que acontece com o que já foi jogado fora, e de onde vem o material novo das fábricas.",
+     porque:"O catador devolve material para a indústria. Sem ele, o resíduo se acumula E a natureza é explorada ainda mais para repor a matéria-prima."},
+    {contexto:"Os catadores da ilha trabalham na informalidade.",
+     pergunta:"O que isso quer dizer?",
+     opcoes:["Trabalham por conta própria, sem registro, sem direitos garantidos e sem saber quanto vão ganhar","Trabalham numa empresa grande, com carteira assinada","Trabalham só nos fins de semana"],
+     certa:0, dica:"Informal é o contrário de formal, de registrado. O que falta pra quem trabalha assim?",
+     porque:"Na informalidade não há registro nem direitos, e a renda é incerta. Sair dela foi justamente o que a cooperativa permitiu."}
   ];
 
   var DESAFIO = [
-    {contexto:"Placa ONTEM.",
-     pergunta:"Qual frase está certa?",
-     opcoes:["Tu cantaste no teatro ontem.","Tu cantou no teatro ontem.","Tu cantaram no teatro ontem."],
-     certa:0, nota:"Pegadinha da linha trocada: “cantou” é do ele e “cantaram” é do eles. O tu no pretérito fica cantaste — e repara que tem -s, como sempre."},
-    {contexto:"Placa ONTEM.",
-     pergunta:"Ontem eles ______ (nadar) até a ilha.",
-     opcoes:["nadaram","nadou","nadarão"],
-     certa:0, nota:"Eles nadaram. “Nadou” é uma pessoa só e “nadarão” é amanhã."},
-    {contexto:"Placa HOJE.",
-     pergunta:"Vós ______ (olhar) o palco.",
-     opcoes:["olhais","olhamos","olha"],
-     certa:0, nota:"Pegadinha: “olhamos” é do nós. Nos verbos em -ar, o vós no presente termina em -ais."},
-    {contexto:"Placa AMANHÃ.",
-     pergunta:"Amanhã tu ______ (ajudar) o Usopp.",
-     opcoes:["ajudarás","ajudará","ajudaras"],
-     certa:0, nota:"Futuro + tu = ajudarás: verbo inteiro (ajudar) + ás, com o -s do tu e o acento no á."},
-    {contexto:"“Eles brincarão no parque no sábado que vem.”",
-     pergunta:"Em que tempo está a frase?",
-     opcoes:["Futuro","Pretérito","Presente"],
-     certa:0, nota:"Verbo inteiro (brincar) + ão = futuro do eles/elas. “No sábado que vem” confirma."},
-    {contexto:"Uma linha da tabela saiu errada.",
-     pergunta:"Qual delas?",
-     opcoes:["Ele pularam","Nós pulamos","Eu pulei"],
-     certa:0, nota:"O certo é “ele pulou”. A forma “pularam” pertence à linha do eles/elas — a linha escorregou."},
-    {contexto:"Terminações do PRESENTE dos verbos em -ar, na ordem eu · tu · ele · nós · vós · eles.",
-     pergunta:"Qual sequência está certa?",
-     opcoes:["-o, -as, -a, -amos, -ais, -am","-o, -es, -e, -emos, -eis, -em","-ei, -ás, -á, -emos, -eis, -ão"],
-     certa:0, nota:"Essa é a família do -ar. A segunda é dos verbos em -er (comer, vender) e a terceira é a do futuro."},
-    {contexto:"Cuidado para não misturar as conjugações.",
-     pergunta:"Vós ______ (cantar), no presente.",
-     opcoes:["cantais","canteis","cantemos"],
-     certa:0, nota:"Verbo em -ar guarda o A: vós cantais. Verbo em -er fica com o E: vós comeis. O vós nunca copia o nós."}
+    {contexto:"Na ilha, um grupo transforma pneus velhos em vasos de planta, cortando e pintando à mão.",
+     pergunta:"Que tipo de reaproveitamento é esse?",
+     opcoes:["Artesanal","Industrial","Nenhum dos dois"],
+     certa:0, nota:"À mão, poucas unidades e o pneu continua pneu, só com outro uso: artesanal."},
+    {contexto:"Pegadinha!",
+     pergunta:"Todo reaproveitamento precisa de fábrica e máquina?",
+     opcoes:["Não — existe o artesanal, feito à mão, e ele também tira material do lixo","Sim, sem fábrica não dá","Só se for plástico"],
+     certa:0, nota:"Reaproveitar não é só trabalho de indústria. Uma maquete de sucata ou um vaso de pneu também devolvem uso a um material descartado."},
+    {contexto:"Numa fábrica de bicicletas, chegaram máquinas novas.",
+     pergunta:"Isso quer dizer que o trabalho humano ficou desnecessário?",
+     opcoes:["Não — alguém opera, conserta, organiza e planeja; o tipo de trabalho muda, mas as pessoas continuam necessárias","Sim, a máquina faz tudo sozinha","Sim, fábrica moderna não tem funcionário"],
+     certa:0, nota:"Pegadinha clássica: máquina muda o TIPO de trabalho, não elimina o trabalhador."},
+    {contexto:"Uma fábrica joga resíduo no rio da ilha e solta fumaça no ar.",
+     pergunta:"Dá pra dizer que a atividade industrial não causa problema ambiental?",
+     opcoes:["Não dá — ela causa poluição e resíduos, e por isso precisa de tratamento e fiscalização","Dá, indústria não polui","Só polui se for fábrica de plástico"],
+     certa:0, nota:"Toda indústria usa recursos e gera resíduos. Reconhecer isso é o primeiro passo para exigir tratamento e cuidado."},
+    {contexto:"Uma empresa derruba árvores demais para fazer móveis.",
+     pergunta:"A responsabilidade por esse problema é só de quem derruba?",
+     opcoes:["Não — é de toda a sociedade: quem extrai, quem compra, quem descarta e o poder público que fiscaliza","Sim, só de quem derruba a árvore","De ninguém, é natural"],
+     certa:0, nota:"Quem consome também puxa a demanda, e o poder público responde pela fiscalização. A conta é dividida."},
+    {contexto:"Os catadores da ilha se uniram e formaram uma cooperativa.",
+     pergunta:"Quem manda numa cooperativa?",
+     opcoes:["Os próprios trabalhadores, que são donos das ferramentas e decidem juntos","Um patrão contratado de fora","O dono da fábrica mais próxima"],
+     certa:0, nota:"Numa cooperativa não há patrão: o grupo é dono dos equipamentos, toma as decisões, planeja e executa junto."},
+    {contexto:"Antes da cooperativa, cada catador vendia sozinho o material que juntava, pelo preço que ofereciam.",
+     pergunta:"O que muda quando eles se organizam em grupo?",
+     opcoes:["Juntos conseguem negociar melhor, dividir ferramentas e tarefas e ter mais força para pedir seus direitos","Nada muda, o trabalho é o mesmo","Passam a trabalhar mais e ganhar menos"],
+     certa:0, nota:"Essa é a força da organização coletiva: sozinho você aceita o que aparece; em grupo você negocia, divide e reivindica."},
+    {contexto:"Na história, os catadores dizem: “merecemos o nosso reconhecimento”.",
+     pergunta:"Por que eles pedem reconhecimento?",
+     opcoes:["Porque fazem um trabalho essencial: recuperam materiais, protegem o ambiente e quase ninguém percebe","Porque querem aparecer na televisão","Porque é um trabalho fácil"],
+     certa:0, nota:"Eles são a base da recuperação dos materiais. Reconhecimento aqui quer dizer ser visto como trabalhador importante — e ser tratado como tal."}
   ];
 
-  var KEY = "zion-verbos-ar-2026-09-22";
+  var KEY = "zion-residuos-cooperativa-2026-09-24";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -259,73 +269,67 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","O Usopp montou um teatro na praia e conta a mesma aventura três vezes: o que ele FEZ ontem, o que FAZ hoje e o que VAI FAZER amanhã.");
-    var p2 = el("p","lead","Só que ele se atrapalha todo: diz “tu pulou” e “ele pularam”, e a plateia não entende mais quem fez o quê.");
-    var p3 = el("p","lead","Hoje você é o diretor do teatro. Missão: acertar a terminação dos verbos terminados em -ar, sem trocar a pessoa de linha.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"O Teatro do Usopp"), p1, p2, p3, botao("Bora ensaiar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","O Sunny chega numa ilha onde o lixo virou montanha. Tem gente catando garrafa, lata e papelão no meio de tudo — sozinhos, cada um por si, ganhando quase nada.");
+    var p2 = el("p","lead","O Jinbe olha aquilo e diz: “Sem essas pessoas, esse material nunca voltaria a ser usado. Elas seguram a ilha inteira nas costas — só que ninguém enxerga isso.”");
+    var p3 = el("p","lead","Hoje você ajuda o Jinbe a organizar a ilha. Missão: entender de onde vem tanto resíduo, o que o catador faz e por que trabalhar JUNTO muda tudo.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"A Ilha das Montanhas de Lixo"), p1, p2, p3, botao("Bora organizar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
-  function tabterm(linhas){
-    var t = el("div","tabterm");
-    linhas.forEach(function(l){
-      t.appendChild(el("b",null,l[0]));
-      var s = el("span"); s.innerHTML = l[1];
-      t.appendChild(s);
-    });
-    return t;
-  }
-
   function regra(){
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. Tira o -ar e cola a terminação"));
-    r1.appendChild(el("p","muted","Verbos terminados em -ar (cantar, pular, nadar, brincar) seguem sempre estas três famílias:"));
-    r1.appendChild(tabterm([
-      ["PRESENTE", "eu cant<em>o</em> · tu cant<em>as</em> · ele cant<em>a</em> · nós cant<em>amos</em> · vós cant<em>ais</em> · eles cant<em>am</em>"],
-      ["PRETÉRITO", "eu cant<em>ei</em> · tu cant<em>aste</em> · ele cant<em>ou</em> · nós cant<em>amos</em> · vós cant<em>astes</em> · eles cant<em>aram</em>"],
-      ["FUTURO", "eu cantar<em>ei</em> · tu cantar<em>ás</em> · ele cantar<em>á</em> · nós cantar<em>emos</em> · vós cantar<em>eis</em> · eles cantar<em>ão</em>"]
-    ]));
-    r1.appendChild(el("p","muted","No futuro o verbo fica INTEIRO (cantar + ei). No presente e no pretérito, o -ar cai fora."));
+    r1.appendChild(el("div","nome","1. De onde vem tanto resíduo"));
+    var ciclo = el("div","ciclo");
+    ["mais gente comprando (consumismo)","<i>→</i>","mais coisas produzidas","<i>→</i>","mais embalagem jogada fora","<i>→</i>","montanha de resíduos"].forEach(function(t){
+      var s = el("span"); s.innerHTML = t; ciclo.appendChild(s);
+    });
+    r1.appendChild(ciclo);
+    r1.appendChild(el("p","muted","E tem o outro lado: tudo isso sai da natureza. Se a matéria-prima só é retirada e nunca volta, ela vai se esgotando."));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. Uma linha, uma pessoa — não escorrega"));
-    r2.appendChild(el("p","muted","Cada linha da tabela é uma pessoa só. Antes de escrever, aponta o dedo na linha e fala a pessoa em voz alta:"));
-    var p = el("div","pessoas");
-    [["eu","→ termina em -o, -ei"],["tu","→ SEMPRE tem -s (ou -ste)"],["ele/ela","→ -a, -ou, -á"],
-     ["nós","→ -amos, -aremos"],["vós","→ -ais, -astes, -areis"],["eles/elas","→ -am, -aram, -arão"]].forEach(function(l){
-      p.appendChild(el("b",null,l[0])); p.appendChild(el("span",null,l[1]));
-    });
-    r2.appendChild(p);
-    r2.appendChild(el("p","muted","“Tu pulou” e “ele pularam” são linhas trocadas: pulou é do ele, pularam é do eles."));
+    r2.appendChild(el("div","nome","2. O catador fecha o ciclo"));
+    r2.appendChild(el("p","muted","Ele separa o que ainda serve e devolve para as fábricas como matéria-prima. Sem isso, o material vira lixo para sempre e a indústria tem que tirar tudo de novo da natureza. Por isso os catadores dizem: “somos a base da recuperação desses materiais”."));
+    r2.appendChild(el("p","muted","Trabalhar na INFORMALIDADE é trabalhar sozinho, sem registro, sem direitos e sem garantia nenhuma de quanto vai ganhar no fim do dia."));
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. Nenhuma linha fica vazia"));
-    r3.appendChild(el("p","muted","A tabela tem 6 pessoas × 3 tempos = 18 quadradinhos. Se sobrou um vazio, a tabela não está pronta — principalmente a linha do ELES/ELAS, que é a última e some fácil."));
+    r3.appendChild(el("div","nome","3. Reaproveitar: dois caminhos"));
+    var v = el("div","versus");
+    var a = el("div");
+    a.appendChild(el("h3",null,"Industrial"));
+    var ua = el("ul");
+    ["Máquina e fábrica","Grande quantidade","Transforma o material: a lata vira lâmina, a garrafa PET vira fio e depois camiseta"].forEach(function(t){ ua.appendChild(el("li",null,t)); });
+    a.appendChild(ua);
+    var b = el("div");
+    b.appendChild(el("h3",null,"Artesanal"));
+    var ub = el("ul");
+    ["Feito à mão","Poucas unidades, uma diferente da outra","Aproveita a peça como ela é: o lacre continua lacre dentro do colar"].forEach(function(t){ ub.appendChild(el("li",null,t)); });
+    b.appendChild(ub);
+    v.appendChild(a); v.appendChild(b);
+    r3.appendChild(v);
     g.appendChild(r3);
 
-    var citacao = el("div","citacao","Usopp, ensaiando: “Ontem eu... ééé... nós... tu...?”");
+    var citacao = el("div","citacao","Uma moradora da ilha: “Eu junto lacre de lata e faço pulseira pra vender na feira. Isso é fábrica?”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F3AD} Usopp pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F30A} Jinbe pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "vamos com PULAR, na linha do TU, no pretérito. Primeiro eu olho a coluna: é pretérito, o que já aconteceu. " +
-      "Depois eu olho a linha e falo em voz alta: TU. Aí eu tiro o -ar e fico com “pul”. " +
-      "A terminação do tu no pretérito é -aste, e ela já tem o -s que o tu sempre pede: tu pulaste. " +
-      "Por último eu confiro: essa forma é mesmo do tu? “Pulou” seria do ele, “pularam” seria do eles. Então está certo."));
+      "primeiro eu pergunto: quem está fazendo, uma máquina ou uma pessoa com as mãos? Aqui é ela, à mão. " +
+      "Depois: sai muita coisa igual ou poucas, cada uma de um jeito? Poucas, uma diferente da outra. " +
+      "E por último: o material virou outra coisa, ou continua sendo lacre? Continua lacre, só mudou de lugar. " +
+      "Três respostas apontando para o mesmo lado: isso é reaproveitamento ARTESANAL. Se a lata fosse derretida numa fábrica e virasse folha de alumínio, aí sim seria industrial."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Os verbos terminados em -ar"),
-      el("p",null,"Conjugar é trocar o fim do verbo conforme QUEM faz e QUANDO acontece. O truque é fazer sempre essas duas perguntas antes de escrever."),
+      el("h2",null,"Resíduo, catador e cooperativa"),
       g,
-      el("p","muted","Vê o Usopp escolhendo uma forma, passo a passo:"),
+      el("p","muted","Vê o Jinbe decidindo um caso, passo a passo:"),
       citacao, modelo,
-      el("p","muted","As duas perguntas de sempre: QUAL O TEMPO? QUAL A PESSOA?"),
+      el("p","muted","Guarda as três perguntas: QUEM FAZ? QUANTO SAI? O MATERIAL VIROU OUTRA COISA?"),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -344,8 +348,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Ensaio no ponto!"),
-        el("p",null,"Você já acha a terminação com ajuda. Agora é sem dica — e com as pegadinhas de linha trocada."),
+        eyebrow("Treino guiado"), el("h2",null,"Ilha organizada!"),
+        el("p",null,"Você já separa o que é industrial do que é artesanal. Agora é sem dica — e com as pegadinhas."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -405,7 +409,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Peça pronta! \u{1F3AD}"),
+        eyebrow("Desafio"), el("h2",null,"Cooperativa de pé! \u{267B}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -451,14 +455,14 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Usopp?"));
-    c2.appendChild(el("p","lead","O Usopp vive escrevendo “tu pulou” e “ele pularam”, trocando as linhas da tabela. Explica pra ele, com as TUAS palavras, o que conferir ANTES de escrever cada forma pra não errar a pessoa."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
+    c2.appendChild(el("p","lead","O Luffy não entendeu: “se cada um já cata sozinho, por que se juntar numa cooperativa?”. Explica pra ele, com as TUAS palavras, o que muda quando as pessoas se organizam em grupo em vez de trabalhar cada uma por si."));
     var chips = el("div","chips");
-    ["qual o tempo","qual a pessoa","tu sempre tem -s"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["juntos","decidem sem patrão","reconhecimento"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Usopp, antes de escrever você tem que...");
+    ta.setAttribute("placeholder","Luffy, quando as pessoas se juntam...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -484,20 +488,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Teatro do Usopp, lotado \u{1F3AD}"));
+    c.appendChild(el("h2",null,"Ilha das Montanhas, salva \u{1F30A}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já confere a pessoa antes de escrever — é isso que impede a linha de escorregar na tabela.";
-    if(ad <= 4) msg = "As linhas ainda escorregam. Antes de preencher a folha, fala a pessoa em voz alta e só depois escreve a forma.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de linha trocada (tu/ele) e do vós.";
-    c.appendChild(el("p",null, msg + " Agora preenche a tabela do verbo falar: uma linha por vez, dizendo a pessoa em voz alta antes de escrever."));
+    var msg = "Você já explica o ciclo inteiro: consumo, resíduo, catador e matéria-prima de volta na fábrica.";
+    if(ad <= 4) msg = "A diferença entre industrial e artesanal ainda confunde. Antes de responder no caderno, faz as três perguntas: quem faz? quanto sai? o material virou outra coisa?";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas da máquina que “substitui” o trabalho humano e da responsabilidade ambiental.";
+    c.appendChild(el("p",null, msg + " Agora responde no caderno as três perguntas da história em quadrinhos, com frases inteiras e com as tuas palavras."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Português: Tempos verbais dos verbos em -ar (O Teatro do Usopp)",
+    var txt = ["AULA DE HOJE — Geografia: Resíduos, catadores e cooperativas (A Ilha das Montanhas)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

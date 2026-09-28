@@ -149,11 +149,17 @@
   .versus > div{padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
   .versus h3{margin:0 0 6px; font-family:var(--display); font-size:1rem; color:var(--accent);}
   .versus ul{margin:0; padding-left:1.1em; font-size:.92rem; color:var(--muted); display:flex; flex-direction:column; gap:3px;}
+
+  .frasev{font-size:1.08rem; padding:10px 14px; border-left:3px solid var(--accent);
+          background:var(--surface2); border-radius:0 10px 10px 0; line-height:1.8;}
+  .frasev em{font-style:normal; background:var(--gold); color:var(--on-accent);
+             padding:2px 7px; border-radius:6px; font-weight:700;}
+  .frasev s{color:var(--muted); text-decoration-thickness:1px;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>24/09 · A Ilha das Montanhas · Geografia — Resíduos e cooperativas</span></div>
+    <div class="brand"><b>Droidec</b><span>28/09 · Zoro Perdido no Tempo · Português — Presente, passado e futuro</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -165,69 +171,69 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"Na ilha, a montanha de lixo cresce todo mês.",
-     pergunta:"Quando as pessoas compram cada vez mais coisas, o que acontece com a quantidade de resíduos?",
-     opcoes:["Aumenta junto","Diminui","Fica sempre igual"],
-     certa:0, dica:"Pensa em tudo que vem junto com uma compra: caixa, sacola, plástico, embalagem. Para onde isso vai depois?",
-     porque:"Quanto mais se consome, mais embalagem e material são descartados. Consumo e resíduo crescem juntos."},
-    {contexto:"Numa fábrica, garrafas de vidro são derretidas num forno enorme e viram garrafas novas, aos milhares.",
-     pergunta:"Esse reaproveitamento é industrial ou artesanal?",
-     opcoes:["Industrial","Artesanal"],
-     certa:0, dica:"Faz as três perguntas: quem faz? quanto sai? o material virou outra coisa?",
-     porque:"Máquina, grande quantidade e o material transformado: é reaproveitamento industrial."},
-    {contexto:"Uma moradora costura embalagens de salgadinho à mão e faz bolsas, uma diferente da outra.",
-     pergunta:"E esse aqui?",
-     opcoes:["Artesanal","Industrial"],
-     certa:0, dica:"Repara que a embalagem continua embalagem: ela não foi derretida nem transformada, só ganhou outro uso.",
-     porque:"Feito à mão, poucas unidades e o material continua sendo o que era: reaproveitamento artesanal."},
-    {contexto:"O Jinbe pergunta o que aconteceria se ninguém catasse material reciclável na ilha.",
-     pergunta:"Qual seria a consequência?",
-     opcoes:["O material ia se acumulando e a fábrica teria que tirar mais matéria-prima da natureza","Nada mudaria, porque o lixo some sozinho","A ilha ficaria mais limpa"],
-     certa:0, nota:null, dica:"Pensa nos dois lados: o que acontece com o que já foi jogado fora, e de onde vem o material novo das fábricas.",
-     porque:"O catador devolve material para a indústria. Sem ele, o resíduo se acumula E a natureza é explorada ainda mais para repor a matéria-prima."},
-    {contexto:"Os catadores da ilha trabalham na informalidade.",
-     pergunta:"O que isso quer dizer?",
-     opcoes:["Trabalham por conta própria, sem registro, sem direitos garantidos e sem saber quanto vão ganhar","Trabalham numa empresa grande, com carteira assinada","Trabalham só nos fins de semana"],
-     certa:0, dica:"Informal é o contrário de formal, de registrado. O que falta pra quem trabalha assim?",
-     porque:"Na informalidade não há registro nem direitos, e a renda é incerta. Sair dela foi justamente o que a cooperativa permitiu."}
+    {contexto:null, frase:"Ontem o Chopper pescou um peixe enorme.",
+     pergunta:"Qual é o VERBO dessa frase?",
+     opcoes:["pescou","ontem","peixe"],
+     certa:0, dica:"Verbo é a palavra da AÇÃO. Faz o teste do “eu”: eu pesquei — dá. Eu ontem — não dá.",
+     porque:"O verbo é PESCOU, porque é o que alguém fez. “Ontem” é palavra de tempo e “peixe” é uma coisa."},
+    {contexto:"Agora a mesma frase, mas sem a palavra ontem:", frase:"O Chopper pescou um peixe enorme.",
+     pergunta:"Em que tempo ela está?",
+     opcoes:["Passado","Presente","Futuro"],
+     certa:0, dica:"Sumiu o “ontem”, mas o verbo continua lá. Olha só o fim dele: pesc-OU.",
+     porque:"Passado. A terminação -ou já entrega sozinha: a ação aconteceu e acabou. A palavra de tempo era só um empurrãozinho."},
+    {contexto:null, frase:"A Nami desenha um mapa novo.",
+     pergunta:"Em que tempo está?",
+     opcoes:["Presente","Passado","Futuro"],
+     certa:0, dica:"Termina em -ou, -eu ou -iu? Tem R antes do fim? Se a resposta for não pros dois, sobra um tempo só.",
+     porque:"Presente: desenh-A. É o que ela faz agora. Sem R e sem -ou, não é futuro nem passado."},
+    {contexto:null, frase:"O Zoro treinará amanhã bem cedo.",
+     pergunta:"Qual pista DENTRO DO VERBO mostra que é futuro?",
+     opcoes:["O R antes do fim: treina-R-á","A palavra amanhã","A palavra cedo"],
+     certa:0, dica:"A pergunta é sobre o próprio verbo, não sobre o resto da frase. O que treinará tem que faRá, viajaRemos e apresentaRão também têm?",
+     porque:"Todo verbo no futuro carrega um R antes da terminação: treinará, fará, viajaremos. Esse R é o carimbo do futuro."},
+    {contexto:"Essa frase não tem nenhuma palavra de tempo:", frase:"O Luffy comerá toda a carne da mesa.",
+     pergunta:"Em que tempo está?",
+     opcoes:["Futuro","Presente","Passado"],
+     certa:0, dica:"Procura o R: com-e-R-á.",
+     porque:"Futuro: comeRÁ. Ainda vai acontecer — e a frase provou que dá pra saber sem nenhum “amanhã” escrito."}
   ];
 
   var DESAFIO = [
-    {contexto:"Na ilha, um grupo transforma pneus velhos em vasos de planta, cortando e pintando à mão.",
-     pergunta:"Que tipo de reaproveitamento é esse?",
-     opcoes:["Artesanal","Industrial","Nenhum dos dois"],
-     certa:0, nota:"À mão, poucas unidades e o pneu continua pneu, só com outro uso: artesanal."},
-    {contexto:"Pegadinha!",
-     pergunta:"Todo reaproveitamento precisa de fábrica e máquina?",
-     opcoes:["Não — existe o artesanal, feito à mão, e ele também tira material do lixo","Sim, sem fábrica não dá","Só se for plástico"],
-     certa:0, nota:"Reaproveitar não é só trabalho de indústria. Uma maquete de sucata ou um vaso de pneu também devolvem uso a um material descartado."},
-    {contexto:"Numa fábrica de bicicletas, chegaram máquinas novas.",
-     pergunta:"Isso quer dizer que o trabalho humano ficou desnecessário?",
-     opcoes:["Não — alguém opera, conserta, organiza e planeja; o tipo de trabalho muda, mas as pessoas continuam necessárias","Sim, a máquina faz tudo sozinha","Sim, fábrica moderna não tem funcionário"],
-     certa:0, nota:"Pegadinha clássica: máquina muda o TIPO de trabalho, não elimina o trabalhador."},
-    {contexto:"Uma fábrica joga resíduo no rio da ilha e solta fumaça no ar.",
-     pergunta:"Dá pra dizer que a atividade industrial não causa problema ambiental?",
-     opcoes:["Não dá — ela causa poluição e resíduos, e por isso precisa de tratamento e fiscalização","Dá, indústria não polui","Só polui se for fábrica de plástico"],
-     certa:0, nota:"Toda indústria usa recursos e gera resíduos. Reconhecer isso é o primeiro passo para exigir tratamento e cuidado."},
-    {contexto:"Uma empresa derruba árvores demais para fazer móveis.",
-     pergunta:"A responsabilidade por esse problema é só de quem derruba?",
-     opcoes:["Não — é de toda a sociedade: quem extrai, quem compra, quem descarta e o poder público que fiscaliza","Sim, só de quem derruba a árvore","De ninguém, é natural"],
-     certa:0, nota:"Quem consome também puxa a demanda, e o poder público responde pela fiscalização. A conta é dividida."},
-    {contexto:"Os catadores da ilha se uniram e formaram uma cooperativa.",
-     pergunta:"Quem manda numa cooperativa?",
-     opcoes:["Os próprios trabalhadores, que são donos das ferramentas e decidem juntos","Um patrão contratado de fora","O dono da fábrica mais próxima"],
-     certa:0, nota:"Numa cooperativa não há patrão: o grupo é dono dos equipamentos, toma as decisões, planeja e executa junto."},
-    {contexto:"Antes da cooperativa, cada catador vendia sozinho o material que juntava, pelo preço que ofereciam.",
-     pergunta:"O que muda quando eles se organizam em grupo?",
-     opcoes:["Juntos conseguem negociar melhor, dividir ferramentas e tarefas e ter mais força para pedir seus direitos","Nada muda, o trabalho é o mesmo","Passam a trabalhar mais e ganhar menos"],
-     certa:0, nota:"Essa é a força da organização coletiva: sozinho você aceita o que aparece; em grupo você negocia, divide e reivindica."},
-    {contexto:"Na história, os catadores dizem: “merecemos o nosso reconhecimento”.",
-     pergunta:"Por que eles pedem reconhecimento?",
-     opcoes:["Porque fazem um trabalho essencial: recuperam materiais, protegem o ambiente e quase ninguém percebe","Porque querem aparecer na televisão","Porque é um trabalho fácil"],
-     certa:0, nota:"Eles são a base da recuperação dos materiais. Reconhecimento aqui quer dizer ser visto como trabalhador importante — e ser tratado como tal."}
+    {contexto:null,
+     pergunta:"Qual destas palavras é um VERBO?",
+     opcoes:["correu","ontem","manhã"],
+     certa:0, nota:"“Correu” é ação: eu corri, ele correu. “Ontem” e “manhã” marcam tempo, mas ninguém “faz” um ontem."},
+    {contexto:null, frase:"Os marujos limpam o convés do navio.",
+     pergunta:"Em que tempo está?",
+     opcoes:["Presente","Passado","Futuro"],
+     certa:0, nota:"limp-AM: sem R e sem -aram. É o que eles fazem agora. Repara que a frase não tem nenhuma palavra de tempo — e mesmo assim dá pra saber."},
+    {contexto:null, frase:"O Usopp encontrou uma caixa no porão.",
+     pergunta:"Em que tempo está?",
+     opcoes:["Passado","Presente","Futuro"],
+     certa:0, nota:"Pegadinha sem palavra de tempo: encontr-OU já é passado. Cuidado pra não achar que é presente só porque não tem “ontem” escrito."},
+    {contexto:null, frase:"Amanhã o Sanji fará um bolo de morango.",
+     pergunta:"Qual é o verbo?",
+     opcoes:["fará","amanhã","bolo"],
+     certa:0, nota:"O verbo é FARÁ, a ação. “Amanhã” é tempo e “bolo” é coisa. Na hora de retirar verbos de um texto, é esse tipo de troca que derruba."},
+    {contexto:null,
+     pergunta:"Que letra aparece em TODO verbo no futuro?",
+     opcoes:["O R: fará, viajaremos, apresentarão, visitará","O S","O M"],
+     certa:0, nota:"É o carimbo do futuro. Quando bater a dúvida, procura o R antes da terminação."},
+    {contexto:"O Brook copiou uma frase e disse que o verbo era “biblioteca”.", frase:"O Brook tocou violino na biblioteca.",
+     pergunta:"Ele está certo?",
+     opcoes:["Não — biblioteca é um lugar; o verbo é tocou","Sim, biblioteca é o verbo","Os dois são verbos"],
+     certa:0, nota:"Lugar não é verbo. O teste do “eu” resolve: eu toquei — dá; eu biblioteca — não dá."},
+    {contexto:"Transforma para o PASSADO:", frase:"A Robin lê um livro antigo.",
+     pergunta:"Como fica?",
+     opcoes:["A Robin leu um livro antigo","A Robin lerá um livro antigo","A Robin lendo um livro antigo"],
+     certa:0, nota:"lê → leu. A opção com R (lerá) é o futuro, e “lendo” não marca tempo nenhum."},
+    {contexto:null, frase:"Nós viajaremos para a próxima ilha.",
+     pergunta:"Se mudar para o passado, como fica?",
+     opcoes:["Nós viajamos para a próxima ilha","Nós viajaremos para a próxima ilha","Nós viajar para a próxima ilha"],
+     certa:0, nota:"Tira o R do futuro e a ação volta pro passado: viajaremos → viajamos."}
   ];
 
-  var KEY = "zion-residuos-cooperativa-2026-09-24";
+  var KEY = "zion-tempos-verbais-2026-09-28";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -269,67 +275,70 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","O Sunny chega numa ilha onde o lixo virou montanha. Tem gente catando garrafa, lata e papelão no meio de tudo — sozinhos, cada um por si, ganhando quase nada.");
-    var p2 = el("p","lead","O Jinbe olha aquilo e diz: “Sem essas pessoas, esse material nunca voltaria a ser usado. Elas seguram a ilha inteira nas costas — só que ninguém enxerga isso.”");
-    var p3 = el("p","lead","Hoje você ajuda o Jinbe a organizar a ilha. Missão: entender de onde vem tanto resíduo, o que o catador faz e por que trabalhar JUNTO muda tudo.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"A Ilha das Montanhas de Lixo"), p1, p2, p3, botao("Bora organizar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","O Zoro já se perdeu em todas as ilhas do Grand Line. Agora ele conseguiu uma coisa nova: se perder no TEMPO.");
+    var p2 = el("p","lead","Ele lê “Luffy comerá toda a carne” e pergunta: “isso já aconteceu? tô com fome de ontem ou de amanhã?”. A frase não tem ontem, nem hoje, nem amanhã escrito — e ele trava.");
+    var p3 = el("p","lead","Hoje você é a bússola do Zoro. Missão: descobrir o tempo de qualquer frase olhando SÓ para o verbo.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"Zoro Perdido no Tempo"), p1, p2, p3, botao("Bora achar o caminho! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
+  function frase(html){
+    var d = el("div","frasev"); d.innerHTML = html; return d;
+  }
+
+  function tabterm(linhas){
+    var t = el("div","tabterm");
+    linhas.forEach(function(l){
+      t.appendChild(el("b",null,l[0]));
+      var s = el("span"); s.innerHTML = l[1];
+      t.appendChild(s);
+    });
+    return t;
+  }
+
   function regra(){
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. De onde vem tanto resíduo"));
-    var ciclo = el("div","ciclo");
-    ["mais gente comprando (consumismo)","<i>→</i>","mais coisas produzidas","<i>→</i>","mais embalagem jogada fora","<i>→</i>","montanha de resíduos"].forEach(function(t){
-      var s = el("span"); s.innerHTML = t; ciclo.appendChild(s);
-    });
-    r1.appendChild(ciclo);
-    r1.appendChild(el("p","muted","E tem o outro lado: tudo isso sai da natureza. Se a matéria-prima só é retirada e nunca volta, ela vai se esgotando."));
+    r1.appendChild(el("div","nome","1. Verbo é a palavra da AÇÃO"));
+    r1.appendChild(el("p","muted","Verbo é o que alguém FAZ, ou o que acontece. “Ontem”, “amanhã”, “hoje” são palavras de TEMPO, não de ação. “Biblioteca”, “parque”, “livro” são coisas e lugares."));
+    r1.appendChild(frase("Ontem o Chopper <em>pescou</em> um peixe enorme."));
+    r1.appendChild(el("p","muted","Teste rápido: dá pra pôr “eu” na frente e fazer? Eu pesquei — dá. Eu ontem — não dá. Então o verbo é PESCOU."));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. O catador fecha o ciclo"));
-    r2.appendChild(el("p","muted","Ele separa o que ainda serve e devolve para as fábricas como matéria-prima. Sem isso, o material vira lixo para sempre e a indústria tem que tirar tudo de novo da natureza. Por isso os catadores dizem: “somos a base da recuperação desses materiais”."));
-    r2.appendChild(el("p","muted","Trabalhar na INFORMALIDADE é trabalhar sozinho, sem registro, sem direitos e sem garantia nenhuma de quanto vai ganhar no fim do dia."));
+    r2.appendChild(el("div","nome","2. O tempo está no FIM do verbo"));
+    r2.appendChild(el("p","muted","A palavra “ontem” só ajuda. Quem manda mesmo é a terminação do verbo:"));
+    r2.appendChild(tabterm([
+      ["PASSADO", "pesc<em>ou</em> · corr<em>eu</em> · sorr<em>iu</em> · estud<em>ei</em> · estud<em>aram</em>"],
+      ["PRESENTE", "pesc<em>a</em> · pesc<em>o</em> · pesc<em>am</em> · corr<em>e</em> · estud<em>am</em>"],
+      ["FUTURO", "pesca<em>rá</em> · pesca<em>rei</em> · pesca<em>remos</em> · corre<em>rão</em>"]
+    ]));
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. Reaproveitar: dois caminhos"));
-    var v = el("div","versus");
-    var a = el("div");
-    a.appendChild(el("h3",null,"Industrial"));
-    var ua = el("ul");
-    ["Máquina e fábrica","Grande quantidade","Transforma o material: a lata vira lâmina, a garrafa PET vira fio e depois camiseta"].forEach(function(t){ ua.appendChild(el("li",null,t)); });
-    a.appendChild(ua);
-    var b = el("div");
-    b.appendChild(el("h3",null,"Artesanal"));
-    var ub = el("ul");
-    ["Feito à mão","Poucas unidades, uma diferente da outra","Aproveita a peça como ela é: o lacre continua lacre dentro do colar"].forEach(function(t){ ub.appendChild(el("li",null,t)); });
-    b.appendChild(ub);
-    v.appendChild(a); v.appendChild(b);
-    r3.appendChild(v);
+    r3.appendChild(el("div","nome","3. O R entrega o futuro"));
+    r3.appendChild(el("p","muted","Todo verbo no futuro tem um R antes da terminação: fa<b>R</b>á, viaja<b>R</b>emos, apresenta<b>R</b>ão, visita<b>R</b>á. Achou esse R? É amanhã."));
     g.appendChild(r3);
 
-    var citacao = el("div","citacao","Uma moradora da ilha: “Eu junto lacre de lata e faço pulseira pra vender na feira. Isso é fábrica?”");
+    var citacao = el("div","citacao","Zoro, coçando a cabeça: “‘Os alunos estudam para a prova.’ Não tem ontem nem amanhã aqui. E agora?”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F30A} Jinbe pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F5E1} Zoro pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu pergunto: quem está fazendo, uma máquina ou uma pessoa com as mãos? Aqui é ela, à mão. " +
-      "Depois: sai muita coisa igual ou poucas, cada uma de um jeito? Poucas, uma diferente da outra. " +
-      "E por último: o material virou outra coisa, ou continua sendo lacre? Continua lacre, só mudou de lugar. " +
-      "Três respostas apontando para o mesmo lado: isso é reaproveitamento ARTESANAL. Se a lata fosse derretida numa fábrica e virasse folha de alumínio, aí sim seria industrial."));
+      "primeiro eu procuro a AÇÃO da frase. Alunos é gente, prova é coisa… estudam é o que eles fazem. Achei o verbo: estudam. " +
+      "Agora eu olho só para o fim dele: termina em -am. Tem R? Não tem, então não é futuro. Termina em -ou, -eu ou -aram? Também não. " +
+      "Sobra o presente: é uma coisa que eles fazem agora, todo dia. Pronto — e eu nem precisei de nenhuma palavra de tempo na frase."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Resíduo, catador e cooperativa"),
+      el("h2",null,"O verbo é a bússola do tempo"),
+      el("p",null,"Muita frase não tem “ontem”, “hoje” nem “amanhã”. E não precisa: o próprio verbo já diz quando a coisa acontece."),
       g,
-      el("p","muted","Vê o Jinbe decidindo um caso, passo a passo:"),
+      el("p","muted","Vê o Zoro se achando no tempo, passo a passo:"),
       citacao, modelo,
-      el("p","muted","Guarda as três perguntas: QUEM FAZ? QUANTO SAI? O MATERIAL VIROU OUTRA COISA?"),
+      el("p","muted","A ordem é sempre essa: ACHA O VERBO → OLHA O FIM DELE → DECIDE O TEMPO."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -348,8 +357,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Ilha organizada!"),
-        el("p",null,"Você já separa o que é industrial do que é artesanal. Agora é sem dica — e com as pegadinhas."),
+        eyebrow("Treino guiado"), el("h2",null,"Bússola calibrada!"),
+        el("p",null,"Você já acha o verbo e lê a terminação. Agora é sem dica — e com frases sem nenhuma palavra de tempo."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -358,6 +367,7 @@
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -409,7 +419,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Cooperativa de pé! \u{267B}"),
+        eyebrow("Desafio"), el("h2",null,"Rota encontrada! \u{1F9ED}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -419,6 +429,7 @@
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -455,14 +466,14 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
-    c2.appendChild(el("p","lead","O Luffy não entendeu: “se cada um já cata sozinho, por que se juntar numa cooperativa?”. Explica pra ele, com as TUAS palavras, o que muda quando as pessoas se organizam em grupo em vez de trabalhar cada uma por si."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Zoro?"));
+    c2.appendChild(el("p","lead","O Zoro só consegue achar o tempo quando a frase tem “ontem” ou “amanhã” escrito. Explica pra ele, com as TUAS palavras, como descobrir o tempo de uma frase que NÃO tem nenhuma palavra de tempo."));
     var chips = el("div","chips");
-    ["juntos","decidem sem patrão","reconhecimento"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["achar o verbo","olhar o fim do verbo","o R do futuro"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Luffy, quando as pessoas se juntam...");
+    ta.setAttribute("placeholder","Zoro, primeiro você procura...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -488,20 +499,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Ilha das Montanhas, salva \u{1F30A}"));
+    c.appendChild(el("h2",null,"Zoro de volta ao presente \u{1F9ED}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já explica o ciclo inteiro: consumo, resíduo, catador e matéria-prima de volta na fábrica.";
-    if(ad <= 4) msg = "A diferença entre industrial e artesanal ainda confunde. Antes de responder no caderno, faz as três perguntas: quem faz? quanto sai? o material virou outra coisa?";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas da máquina que “substitui” o trabalho humano e da responsabilidade ambiental.";
-    c.appendChild(el("p",null, msg + " Agora responde no caderno as três perguntas da história em quadrinhos, com frases inteiras e com as tuas palavras."));
+    var msg = "Você já descobre o tempo pelo verbo, sem depender das palavras ontem e amanhã — era esse o pulo do gato.";
+    if(ad <= 4) msg = "Achar o verbo ainda escapa às vezes. Antes de responder qualquer folha, faz o teste do “eu”: eu pesquei dá, eu ontem não dá.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as frases sem nenhuma palavra de tempo e as pegadinhas de “ontem não é verbo”.";
+    c.appendChild(el("p",null, msg + " Agora volta na tua folha e confere: em cada frase, qual é a palavra da AÇÃO e como ela termina?"));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Geografia: Resíduos, catadores e cooperativas (A Ilha das Montanhas)",
+    var txt = ["AULA DE HOJE — Português: Presente, passado e futuro (Zoro Perdido no Tempo)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

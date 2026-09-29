@@ -148,6 +148,28 @@
   .placar small { display: block; font-family: var(--corpo); font-size: 16px; color: var(--tinta-fraca); }
 
   svg.arte { width: 100%; height: auto; max-width: 340px; display: block; margin: 16px auto; }
+  /* ---------- linha do tempo ---------- */
+  .linha-tempo { display: grid; gap: 0; margin: 16px 0; }
+  .momento {
+    display: grid; grid-template-columns: 62px 1fr; gap: 14px; align-items: start;
+    padding: 12px 0 12px 0; border-left: 3px solid var(--linha); padding-left: 16px; margin-left: 8px;
+  }
+  .momento b { font-family: var(--display); font-size: 19px; color: var(--madeira); font-variant-numeric: tabular-nums; }
+  .momento span { font-size: 16px; }
+  .momento.destaque-tempo { border-left-color: var(--ouro); background: var(--carta-alt); border-radius: 0 10px 10px 0; }
+  .momento.destaque-tempo b { color: var(--ouro); }
+
+  /* ---------- quem participou ---------- */
+  table.quem td { vertical-align: top; border-bottom: 1px solid var(--linha); }
+  table.quem td:first-child { width: 38px; font-size: 22px; }
+  table.quem tr:last-child td { border-bottom: none; }
+
+  /* ---------- a cola ---------- */
+  ul.cola { margin: 0; padding-left: 20px; }
+  ul.cola li { margin-bottom: 10px; }
+  ul.cola li:last-child { margin-bottom: 0; }
+
+  .btn.perigo { border-color: var(--errado); color: var(--errado); background: transparent; font-size: 15px; padding: 10px 16px; }
 </style>
 
 <div class="topo">
@@ -175,36 +197,96 @@
     <p>Essa história aconteceu de verdade, em <strong>1789</strong>, em Minas Gerais. Bora entender?</p>
 
     <div class="acoes">
+      <button class="btn perigo" id="zerar-topo" hidden>🔄 Limpar respostas</button>
       <span class="espaco"></span>
-      <button class="btn" data-ir="t-regra">Bora! →</button>
+      <button class="btn" data-ir="t-aula1">Bora! →</button>
     </div>
   </section>
 
-  <!-- ===== BLOCO 2 — A REGRA ===== -->
-  <section class="tela" id="t-regra">
-    <p class="kicker">Eu faço · o Droidec explica</p>
-    <h1>Três coisas para entender tudo</h1>
+  <!-- ===== BLOCO 2A — O QUE ESTAVA ACONTECENDO ===== -->
+  <section class="tela" id="t-aula1">
+    <p class="kicker">Estudar · parte 1 de 3</p>
+    <h1>Por que Minas estava revoltada</h1>
 
     <div class="carta">
-      <h3>1. O que foi</h3>
-      <p>Em <strong>1789</strong>, o Brasil era colônia de Portugal. Um grupo de Minas Gerais planejou separar Minas de Portugal e criar um país novo.</p>
-      <p><strong>O plano nunca começou.</strong> Alguém contou para o governo antes. Em 1792 os participantes foram julgados e condenados.</p>
+      <h3>Primeiro: o Brasil era colônia</h3>
+      <p>Colônia quer dizer que a terra tinha dono do outro lado do mar. Quem mandava no Brasil era o <strong>rei de Portugal</strong>.</p>
+      <p>Na prática: brasileiro não podia ter fábrica, não podia vender para outro país, não podia ter universidade. Quem quisesse estudar de verdade tinha que ir para a Europa — e só os ricos conseguiam.</p>
     </div>
 
     <div class="carta">
-      <h3>2. Quem estava dentro</h3>
-      <p>Aqui está a parte que surpreende: <strong>não era o povo pobre</strong>. Eram padres, advogados, médicos, poetas, militares, donos de mina e gente que cobrava imposto para a Coroa.</p>
-      <p>Gente estudada, muita dela formada na Europa — e gente que <em>devia dinheiro</em> a Portugal. Os trabalhadores escravizados, que eram a maioria da população, ficaram de fora do plano.</p>
+      <h3>Aí acharam ouro</h3>
+      <p>Por volta de <strong>1700</strong> acharam muito ouro em Minas Gerais. Muito mesmo — foi a maior corrida do ouro que o mundo tinha visto até então.</p>
+      <p>Gente do Brasil inteiro e de Portugal largou tudo e foi para lá. Vilas nasceram do nada no meio da montanha. Vila Rica (hoje Ouro Preto) ficou uma das cidades mais ricas do mundo.</p>
+    </div>
+
+    <div class="carta destaque">
+      <h3>💰 O quinto: a conta que criou o problema</h3>
+      <p>O rei cobrava <strong>o quinto</strong>: de cada <strong>5 partes</strong> de ouro achado, <strong>1 era dele</strong>.</p>
+      <p>Achou 100 gramas? 20 gramas iam para Portugal, sobravam 80.<br>
+      Achou 500 gramas? 100 para o rei.</p>
+      <p>E o ouro não voltava em nada: não virava escola, nem estrada, nem hospital em Minas. Atravessava o oceano e sumia.</p>
     </div>
 
     <div class="carta">
-      <h3>3. Por que fizeram</h3>
-      <p>Portugal cobrava <strong>o quinto</strong>: de cada 5 partes de ouro, 1 ia para o rei. Quando o ouro começou a acabar e a conta não fechava, veio a ameaça da <strong>derrama</strong> — cobrar toda a dívida atrasada de uma vez.</p>
-      <p>E tinha outra coisa: em Minas, <strong>tudo era caríssimo</strong>. Comida vinha de longe, por estrada ruim, no lombo de mula.</p>
+      <h3>Quando o ouro começou a acabar</h3>
+      <p>Por volta de <strong>1780</strong> o ouro fácil tinha acabado. Mas Portugal exigia a mesma quantidade todo ano, combinada de antemão — se não chegasse, ficava anotado como dívida.</p>
+      <p>E existia uma ameaça para cobrar essa dívida: a <strong>derrama</strong>.</p>
+      <p><strong>Derrama</strong> = os soldados entravam nas casas e cobravam de todo mundo, de uma vez só, tudo que faltava. Não importava se a pessoa tinha achado ouro ou não. Quem não pagasse, perdia o que tinha.</p>
+      <p>Em 1789 correu a notícia: <em>a derrama vem aí</em>. Foi essa notícia que juntou as pessoas no porão.</p>
     </div>
 
-    <h2>🧠 Pensando alto com o Droidec</h2>
-    <p>Olha a tabela de preços da Ilha do Ouro. Eu vou resolver pensando em voz alta:</p>
+    <h2>🗓️ A linha do tempo</h2>
+    <div class="linha-tempo">
+      <div class="momento"><b>1700</b><span>Acham ouro em Minas. Começa a corrida.</span></div>
+      <div class="momento"><b>1750</b><span>Auge. Vila Rica fica riquíssima — e o quinto pesa cada vez mais.</span></div>
+      <div class="momento"><b>1780</b><span>O ouro fácil acaba. A dívida com Portugal cresce.</span></div>
+      <div class="momento destaque-tempo"><b>1789</b><span>Medo da derrama. O grupo combina o plano — e é denunciado.</span></div>
+      <div class="momento"><b>1792</b><span>Julgamento: 24 condenados.</span></div>
+      <div class="momento"><b>1822</b><span>Só agora o Brasil fica independente — 33 anos depois.</span></div>
+      <div class="momento"><b>1963</b><span>A bandeira do grupo vira a bandeira de Minas Gerais.</span></div>
+    </div>
+
+    <div class="acoes">
+      <button class="btn fraco" data-ir="t-gancho">← Voltar</button>
+      <span class="espaco"></span>
+      <button class="btn" data-ir="t-aula2">Continuar →</button>
+    </div>
+  </section>
+
+  <!-- ===== BLOCO 2B — QUEM ERA + A CONTA ===== -->
+  <section class="tela" id="t-aula2">
+    <p class="kicker">Estudar · parte 2 de 3</p>
+    <h1>Quem estava no porão</h1>
+
+    <p>Essa é a parte que mais cai em prova, e a que mais engana: <strong>não era o povo pobre</strong>.</p>
+
+    <div class="carta">
+      <h3>Os que estavam dentro</h3>
+      <table class="quem">
+        <tr><td>⛪</td><td><strong>Padres</strong> — eram os mais estudados da colônia; muitos sabiam latim e liam livros proibidos.</td></tr>
+        <tr><td>⚖️</td><td><strong>Advogados, médicos, dentistas</strong> — formados em Coimbra, em Portugal.</td></tr>
+        <tr><td>✒️</td><td><strong>Poetas</strong> — Cláudio Manuel da Costa, Tomás Antônio Gonzaga, Alvarenga Peixoto.</td></tr>
+        <tr><td>🎖️</td><td><strong>Militares</strong> — incluindo o comandante da tropa da capitania. E um alferes chamado <strong>Joaquim José da Silva Xavier</strong>, o Tiradentes.</td></tr>
+        <tr><td>⛏️</td><td><strong>Donos de mina e de terra</strong> — metade deles tinha pessoas escravizadas trabalhando.</td></tr>
+        <tr><td>🧾</td><td><strong>Contratadores de impostos</strong> — gente que cobrava imposto para o rei. Esses eram os que mais deviam.</td></tr>
+      </table>
+    </div>
+
+    <div class="carta destaque">
+      <h3>🤔 Por que gente rica ia se arriscar?</h3>
+      <p><strong>Porque eram justamente eles que iam perder mais na derrama.</strong> Quem devia muito ao rei perdia casa, terra e mina de uma vez.</p>
+      <p>E tinha outra coisa: eles liam. Em 1776 os Estados Unidos tinham se separado da Inglaterra, e esses livros chegavam escondidos em Minas. Eles pensaram: <em>se lá deu certo, aqui pode dar</em>.</p>
+    </div>
+
+    <div class="carta">
+      <h3>Quem NÃO estava</h3>
+      <p>As pessoas <strong>escravizadas</strong>, que eram a maior parte da população de Minas, ficaram de fora do plano — e o plano não pretendia libertar todas elas.</p>
+      <p>É por isso que a gente diz que o movimento era da <strong>elite</strong>: era uma briga sobre impostos e sobre quem manda, não sobre liberdade para todo mundo.</p>
+    </div>
+
+    <h2>🧮 A conta dos preços — passo a passo</h2>
+    <p>Em Minas, comida custava uma fortuna: tudo vinha de longe, por estrada ruim, no lombo de mula, levando semanas. As provas gostam de pedir <em>quantas vezes mais caro</em>. Olha como eu faço:</p>
 
     <div class="tabela-caixa">
       <table>
@@ -216,39 +298,80 @@
 
     <div class="carta destaque">
       <p><em>Quantas vezes o sal é mais caro na ilha?</em></p>
-      <p>Primeiro eu reparo que é <strong>a mesma mercadoria nos dois lugares</strong> — dá para comparar.<br>
-      Depois eu vejo qual é o maior: 2 400 na ilha, 200 no porto.<br>
-      Então eu divido o maior pelo menor: <strong>2 400 ÷ 200 = 12</strong>.<br>
-      Concluo: o sal custa <strong>12 vezes mais</strong> na ilha. Com o dinheiro de 1 saco lá, eu levaria 12 sacos no porto.</p>
+      <p><strong>Passo 1 — é a mesma coisa nos dois lugares?</strong> Sal e sal. É. Então dá para comparar.</p>
+      <p><strong>Passo 2 — qual é o maior?</strong> 2 400 na ilha, 200 no porto. O maior é o da ilha.</p>
+      <p><strong>Passo 3 — divido o maior pelo menor:</strong> 2 400 ÷ 200.</p>
+      <p><strong>Passo 4 — truque para facilitar:</strong> corto um zero de cada lado → 240 ÷ 20 → corto de novo → 24 ÷ 2 = <strong>12</strong>.</p>
+      <p><strong>Passo 5 — confiro ao contrário:</strong> 200 × 12 = 2 400. Fechou. ✅</p>
+      <p><strong>Passo 6 — o que isso quer dizer?</strong> Com o dinheiro de 1 saco de sal na ilha, no porto eu levaria <strong>12 sacos</strong>.</p>
     </div>
 
-    <p>Repara no que eu fiz: eu não chutei o número. Eu falei <em>por que</em> comparei, <em>o que</em> dividi e <em>o que isso quer dizer</em>. É isso que você vai treinar hoje.</p>
+    <p>Repara: eu não chutei. Eu falei <em>o que</em> comparei, <em>o que</em> dividi, <em>como</em> conferi e <em>o que significa</em>. É isso que o professor quer ouvir — e é isso que você vai treinar já já.</p>
 
-    <h2>🏴 A bandeira e o nome</h2>
+    <div class="acoes">
+      <button class="btn fraco" data-ir="t-aula1">← Voltar</button>
+      <span class="espaco"></span>
+      <button class="btn" data-ir="t-aula3">Continuar →</button>
+    </div>
+  </section>
+
+  <!-- ===== BLOCO 2C — NOMES, BANDEIRA E COLA ===== -->
+  <section class="tela" id="t-aula3">
+    <p class="kicker">Estudar · parte 3 de 3</p>
+    <h1>Dois nomes e uma bandeira</h1>
+
+    <div class="carta">
+      <h3>Por que a mesma história tem dois nomes</h3>
+      <p><strong>Inconfidência</strong> vem de “confiança”. In- quer dizer <em>não</em>. Então inconfidência = <strong>quebra de confiança, traição</strong>.</p>
+      <p>Quem usou essa palavra foi <strong>Portugal</strong>, no papel do julgamento: para o rei, aquela gente tinha traído.</p>
+      <p><strong>Conjuração</strong> vem de “jurar junto”. Quer dizer <strong>pessoas que se juntam e combinam um plano</strong>.</p>
+      <p>Hoje os historiadores preferem <strong>Conjuração Mineira</strong>, porque descreve o que aconteceu sem repetir a acusação de quem julgou.</p>
+    </div>
+
+    <div class="carta destaque">
+      <h3>🔑 A ideia mais importante da aula</h3>
+      <p><strong>Quem escolhe a palavra também conta a história do seu jeito.</strong></p>
+      <p>Pensa num jogo: se eu chamo você de “trapaceiro” ou de “estrategista”, é a mesma jogada — mas a palavra já diz de que lado eu estou.</p>
+    </div>
+
+    <h2>🏴 A bandeira</h2>
     <svg class="arte" viewBox="0 0 300 200" role="img" aria-label="Bandeira branca com um triângulo vermelho ao centro e a frase Libertas Quae Sera Tamen em volta.">
       <rect x="10" y="20" width="280" height="160" rx="4" fill="var(--carta)" stroke="var(--linha)" stroke-width="3"/>
       <path d="M150 55 L235 155 L65 155 Z" fill="var(--errado)" opacity=".85"/>
-      <text x="150" y="44" text-anchor="middle" font-family="var(--display)" font-size="15" fill="var(--tinta)">LIBERTAS</text>
-      <text x="150" y="176" text-anchor="middle" font-family="var(--display)" font-size="15" fill="var(--tinta)">QUAE SERA TAMEN</text>
+      <text x="150" y="44" text-anchor="middle" font-size="15" fill="var(--tinta)">LIBERTAS</text>
+      <text x="150" y="176" text-anchor="middle" font-size="15" fill="var(--tinta)">QUAE SERA TAMEN</text>
     </svg>
 
     <div class="lema">“Libertas Quae Sera Tamen”
-      <small>Liberdade, ainda que tardia — a frase que eles escolheram para a bandeira.</small>
+      <small>Liberdade, ainda que tardia — ou seja: liberdade, mesmo que demore a chegar.</small>
     </div>
 
     <div class="carta">
-      <h3>Dois nomes para a mesma história</h3>
-      <p><strong>Inconfidência</strong> = quebra de confiança, traição. Foi assim que <em>Portugal</em> chamou — porque para o rei aquilo era um crime.</p>
-      <p><strong>Conjuração</strong> = quando pessoas se juntam e combinam um plano. É o nome usado hoje, porque descreve o que aconteceu sem tomar o lado de quem julgou.</p>
-      <p>Guarda essa ideia: <strong>quem escolhe a palavra também conta a história</strong>.</p>
+      <p>A frase é latim, tirada de um poeta romano chamado Virgílio. Eles escolheram porque sabiam que ia demorar.</p>
+      <p>E demorou mesmo: o plano foi descoberto, e o Brasil só ficou independente em 1822 — <strong>33 anos depois</strong>.</p>
+      <p>Em <strong>8 de janeiro de 1963</strong> essa bandeira virou a bandeira oficial do estado de Minas Gerais. É a mesma que está na foto do seu livro.</p>
+    </div>
+
+    <h2>📋 A cola — o que você precisa saber</h2>
+    <div class="carta destaque">
+      <ul class="cola">
+        <li><strong>Quando:</strong> 1789. Julgamento em 1792.</li>
+        <li><strong>Onde:</strong> Minas Gerais, quando o Brasil era colônia de Portugal.</li>
+        <li><strong>Quem:</strong> a elite estudada — padres, advogados, médicos, poetas, militares, donos de mina e contratadores de impostos. <em>Não</em> o povo pobre nem os escravizados.</li>
+        <li><strong>Por quê:</strong> o quinto (1 de cada 5 partes do ouro) e o medo da derrama.</li>
+        <li><strong>Deu certo?</strong> Não. Foi denunciado antes de começar.</li>
+        <li><strong>Os dois nomes:</strong> inconfidência (traição, nome de Portugal) e conjuração (juntar-se, nome de hoje).</li>
+        <li><strong>A bandeira:</strong> triângulo e <em>Libertas Quae Sera Tamen</em> — virou a de Minas em 1963.</li>
+      </ul>
     </div>
 
     <div class="acoes">
-      <button class="btn fraco" data-ir="t-gancho">← Voltar</button>
+      <button class="btn fraco" data-ir="t-aula2">← Voltar</button>
       <span class="espaco"></span>
-      <button class="btn" data-ir="t-guiado">Treinar →</button>
+      <button class="btn" data-ir="t-guiado">Treinar agora →</button>
     </div>
   </section>
+
 
   <!-- ===== BLOCO 3 — TREINO GUIADO ===== -->
   <section class="tela" id="t-guiado">
@@ -310,6 +433,16 @@
       <button class="btn" id="copiar">📋 Copiar resumo pro papai</button>
     </div>
     <p class="passo" id="copiado"></p>
+
+    <div class="carta" style="margin-top:26px">
+      <h3>Quer treinar de novo?</h3>
+      <p>Dá para reler a explicação sem perder nada, ou apagar tudo e refazer os exercícios do zero.</p>
+      <div class="acoes">
+        <button class="btn fraco" data-ir="t-aula1">📖 Estudar de novo</button>
+        <span class="espaco"></span>
+        <button class="btn perigo" id="zerar-fim">🔄 Limpar e recomeçar</button>
+      </div>
+    </div>
   </section>
 
 </main>
@@ -320,7 +453,7 @@
 
   var DATA = "2026-09-29";
   var TOPICO = "Conjuração Mineira";
-  var CHAVE = "zion-conjuracao-2026-09-29";
+  var CHAVE = "zion-conjuracao-2026-09-29-v2";
 
   var GUIADO = [
     {
@@ -409,13 +542,14 @@
   } catch (e) {}
   function gravar() { try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) {} }
 
-  var TELAS = ["t-gancho", "t-regra", "t-guiado", "t-desafio", "t-explica", "t-fim"];
+  var TELAS = ["t-gancho", "t-aula1", "t-aula2", "t-aula3", "t-guiado", "t-desafio", "t-explica", "t-fim"];
 
   function mostrar(id) {
     for (var i = 0; i < TELAS.length; i++) {
       document.getElementById(TELAS[i]).classList.toggle("on", TELAS[i] === id);
     }
     estado.tela = id; gravar();
+    document.getElementById("zerar-topo").hidden = !temProgresso();
     window.scrollTo(0, 0);
     progresso();
     if (id === "t-guiado") pintarGuiado();
@@ -425,11 +559,10 @@
   }
 
   function progresso() {
-    var total = 2 + GUIADO.length + DESAFIO.length + 2;
+    var total = 4 + GUIADO.length + DESAFIO.length + 1;
     var feito = 0;
     var ordem = TELAS.indexOf(estado.tela);
-    if (ordem >= 1) feito += 1;
-    if (ordem >= 2) feito += 1;
+    for (var k = 1; k <= 4 && ordem >= k; k++) feito += 1;
     feito += contar(estado.respG);
     feito += contar(estado.respD);
     if (estado.texto.length >= 40) feito += 1;
@@ -537,7 +670,7 @@
   });
   gVoltar.addEventListener("click", function () {
     if (estado.iG > 0) { estado.iG--; gravar(); pintarGuiado(); window.scrollTo(0, 0); }
-    else mostrar("t-regra");
+    else mostrar("t-aula3");
   });
 
   /* ---------- bloco desafio ---------- */
@@ -661,6 +794,23 @@
       document.body.removeChild(ta);
     }
   });
+
+
+  /* ---------- limpar respostas e recomeçar ---------- */
+  function temProgresso() {
+    return contar(estado.respG) > 0 || contar(estado.respD) > 0 || estado.texto.length > 0;
+  }
+  function zerar() {
+    if (!window.confirm("Isso apaga as respostas e começa tudo de novo. Pode?")) return;
+    estado = { iG: 0, iD: 0, respG: [], respD: [], texto: "", tela: "t-gancho" };
+    try { localStorage.removeItem(CHAVE); } catch (e) {}
+    txt.value = "";
+    document.getElementById("copiado").textContent = "";
+    gravar();
+    mostrar("t-gancho");
+  }
+  document.getElementById("zerar-topo").addEventListener("click", zerar);
+  document.getElementById("zerar-fim").addEventListener("click", zerar);
 
   /* ---------- navegação simples ---------- */
   var irs = document.querySelectorAll("[data-ir]");

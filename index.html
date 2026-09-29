@@ -1,551 +1,674 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rota de Estudos do Zion</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Lexend:wght@300;400;600&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;800&display=swap">
 <style>
-  :root{
-    --bg:#EAF1F3; --surface:#FFFFFF; --surface2:#EEF4F6;
-    --ink:#16303A; --muted:#57717A; --line:#CBD9DD;
-    --accent:#1C7293; --gold:#D97B29; --ok:#2E7D4F; --err:#B23B3B; --on-accent:#FFFFFF;
-    --shadow:0 2px 0 rgba(22,48,58,.10), 0 10px 24px -14px rgba(22,48,58,.5);
-    --r:16px;
-    --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
-    --body:"Lexend","Segoe UI",system-ui,sans-serif;
+  :root {
+    --fundo:      #F4E7CC;
+    --carta:      #FDF6E6;
+    --carta-alt:  #F0E1C0;
+    --madeira:    #7B4A21;
+    --tinta:      #33261A;
+    --tinta-fraca:#75604B;
+    --linha:      #DDC79B;
+    --ouro:       #C88A1E;
+    --mar:        #1C6A86;
+    --certo:      #1F7A45;
+    --certo-bg:   #DCF0E2;
+    --errado:     #B23A2E;
+    --errado-bg:  #F8DFDB;
+    --display: "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
+    --corpo: "Nunito", "Segoe UI", system-ui, sans-serif;
   }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
-      --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
-      --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
-      --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --fundo:      #0F1B26;
+      --carta:      #172835;
+      --carta-alt:  #1E3242;
+      --madeira:    #E0A868;
+      --tinta:      #E8EDF2;
+      --tinta-fraca:#9DB0BF;
+      --linha:      #2A4254;
+      --ouro:       #E9BE63;
+      --mar:        #6FC1DD;
+      --certo:      #5FD48F;
+      --certo-bg:   #16382A;
+      --errado:     #F08A7C;
+      --errado-bg:  #3A1F1C;
     }
   }
-  :root[data-theme="dark"]{
-    --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
-    --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
-    --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
-    --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
+  :root[data-theme="dark"] {
+    --fundo:      #0F1B26;
+    --carta:      #172835;
+    --carta-alt:  #1E3242;
+    --madeira:    #E0A868;
+    --tinta:      #E8EDF2;
+    --tinta-fraca:#9DB0BF;
+    --linha:      #2A4254;
+    --ouro:       #E9BE63;
+    --mar:        #6FC1DD;
+    --certo:      #5FD48F;
+    --certo-bg:   #16382A;
+    --errado:     #F08A7C;
+    --errado-bg:  #3A1F1C;
   }
 
-  body{background:var(--bg); color:var(--ink); font-family:var(--body); font-weight:300;
-       line-height:1.6; -webkit-text-size-adjust:100%;}
-  .wrap{max-width:660px; margin:0 auto; padding:18px 16px 56px; display:flex; flex-direction:column; gap:18px;}
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; background: var(--fundo); color: var(--tinta);
+    font-family: var(--corpo); font-size: 18px; line-height: 1.55;
+  }
+  .topo {
+    position: sticky; top: 0; z-index: 5; background: var(--fundo);
+    border-bottom: 1px solid var(--linha); padding: 10px 16px 0;
+  }
+  .brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .brand strong { font-family: var(--display); font-size: 19px; color: var(--madeira); }
+  .brand span { font-size: 13px; color: var(--tinta-fraca); }
+  .barra { height: 8px; background: var(--linha); border-radius: 99px; margin: 10px 0; overflow: hidden; }
+  .barra i { display: block; height: 100%; width: 0; background: var(--ouro); border-radius: 99px; transition: width .35s ease; }
 
-  header{display:flex; flex-direction:column; gap:10px;}
-  .brand{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
-  .brand b{font-family:var(--display); font-weight:800; font-size:1.05rem; letter-spacing:.2px;}
-  .brand span{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);}
-  .rota{display:flex; align-items:center; gap:0; list-style:none; padding:0; margin:0;}
-  .rota li{flex:1; display:flex; align-items:center; gap:0;}
-  .rota i{display:block; width:13px; height:13px; border-radius:50%; border:2px solid var(--line);
-          background:var(--surface); flex:none;}
-  .rota li[data-on] i{border-color:var(--accent); background:var(--accent);}
-  .rota li[data-now] i{border-color:var(--gold); background:var(--gold); box-shadow:0 0 0 4px color-mix(in srgb, var(--gold) 25%, transparent);}
-  .rota li::after{content:""; height:2px; background:var(--line); flex:1; margin:0 2px;}
-  .rota li:last-child::after{display:none;}
-  .rota li[data-on]::after{background:var(--accent);}
+  main { max-width: 640px; margin: 0 auto; padding: 18px 16px 48px; }
+  .tela { display: none; }
+  .tela.on { display: block; animation: sobe .25s ease both; }
+  @keyframes sobe { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
-  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
-        box-shadow:var(--shadow); padding:22px 20px; display:flex; flex-direction:column; gap:16px;}
-  .eyebrow{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:600;}
-  h1{font-family:var(--display); font-weight:800; font-size:1.75rem; line-height:1.15; margin:0; text-wrap:balance;}
-  h2{font-family:var(--display); font-weight:800; font-size:1.3rem; line-height:1.2; margin:0; text-wrap:balance;}
-  p{margin:0; max-width:60ch;}
-  .lead{font-size:1.05rem;}
-  .muted{color:var(--muted); font-size:.92rem;}
+  h1 { font-family: var(--display); font-size: 30px; line-height: 1.15; margin: 6px 0 12px; text-wrap: balance; }
+  h2 { font-family: var(--display); font-size: 23px; margin: 26px 0 8px; text-wrap: balance; }
+  .kicker {
+    font-family: var(--display); font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--mar); margin: 0;
+  }
+  p { margin: 0 0 14px; }
 
-  button{font-family:inherit; font-size:1rem; cursor:pointer; border-radius:12px; border:1px solid var(--line);
-         background:var(--surface2); color:var(--ink); padding:14px 18px; min-height:52px; transition:transform .12s, background .12s, border-color .12s;}
-  button:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
-  button:hover:not(:disabled){border-color:var(--accent);}
-  button:active:not(:disabled){transform:translateY(1px);}
-  button:disabled{cursor:default; opacity:1;}
-  .go{background:var(--accent); border-color:var(--accent); color:var(--on-accent); font-family:var(--display);
-      font-weight:600; font-size:1.1rem; align-self:flex-start; padding:14px 26px;}
-  .go:hover{filter:brightness(1.08);}
-  .ghost{background:transparent; border-style:dashed; font-size:.9rem; min-height:44px; padding:10px 16px;}
+  .carta { background: var(--carta); border: 1px solid var(--linha); border-radius: 14px; padding: 18px; margin: 16px 0; }
+  .carta.destaque { border-color: var(--ouro); border-width: 2px; }
+  .carta h3 { font-family: var(--display); font-size: 19px; margin: 0 0 8px; }
+  .carta p:last-child { margin-bottom: 0; }
 
-  @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important;}}
+  .cena { background: var(--carta-alt); border-left: 5px solid var(--ouro); border-radius: 0 12px 12px 0; padding: 16px 18px; margin: 16px 0; }
+  .fala { color: var(--mar); font-weight: 600; }
 
-  .opcoes{display:grid; gap:10px;}
-  @media (min-width:520px){ .opcoes.tres{grid-template-columns:repeat(3,1fr);} .opcoes.duas{grid-template-columns:repeat(2,1fr);} }
-  .opcoes button{font-weight:500; text-align:left; line-height:1.35;}
-  .opcoes button[data-state="ok"]{background:color-mix(in srgb, var(--ok) 18%, var(--surface)); border-color:var(--ok); color:var(--ok);}
-  .opcoes button[data-state="no"]{background:color-mix(in srgb, var(--err) 14%, var(--surface)); border-color:var(--err); color:var(--err);}
+  .lema {
+    font-family: var(--display); font-size: 22px; text-align: center; color: var(--ouro);
+    background: var(--carta-alt); border-radius: 12px; padding: 14px; margin: 16px 0;
+  }
+  .lema small { display: block; font-family: var(--corpo); font-size: 15px; color: var(--tinta-fraca); margin-top: 4px; }
 
-  .fb{border-left:4px solid var(--line); padding:10px 14px; border-radius:0 10px 10px 0; background:var(--surface2); font-size:.95rem;}
-  .fb[data-k="ok"]{border-color:var(--ok);}
-  .fb[data-k="no"]{border-color:var(--err);}
-  .fb[data-k="dica"]{border-color:var(--gold);}
-  .fb[data-k="modelo"]{border-color:var(--accent);}
-  .fb b{font-family:var(--display);}
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-variant-numeric: tabular-nums; }
+  th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--linha); }
+  th { font-family: var(--display); font-size: 15px; color: var(--madeira); }
+  td.num { text-align: right; }
+  .tabela-caixa { overflow-x: auto; }
 
-  .regra{display:flex; flex-direction:column; gap:6px; padding:14px; border:1px solid var(--line);
-         border-radius:12px; background:var(--surface2);}
-  .regra .nome{font-family:var(--display); font-weight:800; font-size:1.05rem; color:var(--accent);}
-  .grupo{display:flex; flex-direction:column; gap:12px;}
+  .botoes { display: grid; gap: 10px; margin: 16px 0; }
+  .op {
+    display: block; width: 100%; text-align: left; font: inherit; font-weight: 600;
+    background: var(--carta); color: var(--tinta); border: 2px solid var(--linha);
+    border-radius: 12px; padding: 14px 16px; cursor: pointer; min-height: 56px;
+  }
+  .op:hover:not([disabled]) { border-color: var(--ouro); }
+  .op:focus-visible { outline: 3px solid var(--mar); outline-offset: 2px; }
+  .op.certo { border-color: var(--certo); background: var(--certo-bg); }
+  .op.errado { border-color: var(--errado); background: var(--errado-bg); }
+  .op[disabled] { cursor: default; }
 
-  .citacao{font-style:italic; padding:10px 14px; border-left:3px solid var(--line); color:var(--muted); font-size:1rem;}
+  .avisa { border-radius: 12px; padding: 14px 16px; margin: 14px 0; font-weight: 600; }
+  .avisa.ok { background: var(--certo-bg); color: var(--certo); }
+  .avisa.no { background: var(--errado-bg); color: var(--errado); }
+  .avisa.dica { background: var(--carta-alt); color: var(--tinta); }
+  .avisa p { margin: 6px 0 0; font-weight: 400; color: var(--tinta); }
 
-  .contexto{background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:.95rem;}
+  .acoes { display: flex; gap: 10px; align-items: center; margin-top: 18px; flex-wrap: wrap; }
+  .btn {
+    font: inherit; font-family: var(--display); font-size: 17px; border-radius: 12px;
+    padding: 12px 22px; cursor: pointer; border: 2px solid var(--madeira);
+    background: var(--madeira); color: var(--carta); min-height: 52px;
+  }
+  .btn.fraco { background: transparent; color: var(--madeira); }
+  .btn[disabled] { opacity: .45; cursor: default; }
+  .btn:focus-visible { outline: 3px solid var(--mar); outline-offset: 2px; }
+  .espaco { flex: 1; }
+  .passo { font-size: 14px; color: var(--tinta-fraca); }
 
-  .contador{font-size:.85rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
-  .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:-4px;}
-  .nav .ghost{min-height:42px; padding:8px 16px; color:var(--muted);}
-  .nav .ghost:hover{color:var(--accent);}
-  .nav .contador{text-align:right;}
+  textarea {
+    width: 100%; min-height: 150px; font: inherit; padding: 14px; border-radius: 12px;
+    border: 2px solid var(--linha); background: var(--carta); color: var(--tinta); resize: vertical;
+  }
+  textarea:focus { outline: none; border-color: var(--ouro); }
+  .chaves { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  .chave { background: var(--carta-alt); border-radius: 99px; padding: 6px 14px; font-size: 15px; font-weight: 600; color: var(--madeira); }
+  .conta { font-size: 14px; color: var(--tinta-fraca); text-align: right; }
 
-  textarea{width:100%; box-sizing:border-box; font-family:var(--body); font-size:1.05rem; line-height:1.6;
-           padding:14px; border-radius:12px; border:1px solid var(--line); background:var(--surface2); color:var(--ink);
-           min-height:150px; resize:vertical;}
-  textarea:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
-  .chips{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{font-size:.85rem; padding:6px 12px; border-radius:999px; border:1px dashed var(--gold); color:var(--gold);}
-  .placar{display:flex; align-items:baseline; gap:10px; font-family:var(--display); font-weight:800; font-size:2.4rem; color:var(--accent);}
-  .placar small{font-family:var(--body); font-weight:400; font-size:1rem; color:var(--muted);}
-  .resumo{width:100%; box-sizing:border-box; font-family:ui-monospace,"Consolas",monospace; font-size:.8rem; min-height:200px;}
-  .linha{height:1px; background:var(--line); border:0; margin:0;}
-  footer{text-align:center; font-size:.8rem; color:var(--muted);}
+  .placar { font-family: var(--display); font-size: 46px; color: var(--ouro); text-align: center; margin: 10px 0 0; }
+  .placar small { display: block; font-family: var(--corpo); font-size: 16px; color: var(--tinta-fraca); }
 
-  .grupos{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:4px 0;}
-  .grupo-caixa{display:flex; flex-wrap:wrap; gap:4px; max-width:132px; justify-content:center;
-               padding:10px 12px; border:2px dashed var(--accent); border-radius:14px;
-               background:var(--surface2); font-size:1.55rem; line-height:1.1;}
-  .conta{font-family:var(--display); font-weight:800; font-size:1.35rem; color:var(--accent); letter-spacing:.02em;}
-
-  .passos{margin:0; padding-left:1.4em; display:flex; flex-direction:column; gap:4px;}
-  .passos li{padding-left:2px;}
-  .ruim{color:var(--err); text-decoration:line-through; text-decoration-thickness:1px;}
-
-  .tabterm{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
-           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
-  .tabterm b{font-family:var(--display); font-weight:600; color:var(--muted); font-size:.92rem;}
-  .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1.02rem; color:var(--ink);}
-  .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
-  .destaque{color:var(--accent); font-weight:600;}
-
-  .silabas{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:6px 0;}
-  .sil{display:flex; flex-direction:column; align-items:center; gap:4px;}
-  .sil b{font-family:var(--display); font-weight:600; font-size:1.2rem; padding:10px 16px;
-         border-radius:10px; background:var(--surface2); border:1px solid var(--line);}
-  .sil small{font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
-  .sil[data-forte] b{background:var(--gold); border-color:var(--gold); color:var(--on-accent); font-weight:800;}
-  .sil[data-forte] small{color:var(--gold); font-weight:700;}
-
-  .tabterm{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
-           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
-  .tabterm b{font-family:var(--display); font-weight:600; color:var(--muted); font-size:.92rem;}
-  .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1rem; color:var(--ink);}
-  .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
-  .pessoas{display:grid; grid-template-columns:auto auto; gap:4px 16px; justify-content:start;
-           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);
-           font-family:ui-monospace,"Consolas",monospace; font-size:1rem;}
-  .pessoas b{font-family:var(--display); color:var(--accent);}
-
-  .ciclo{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; padding:6px 0;}
-  .ciclo span{padding:9px 14px; border-radius:999px; background:var(--surface2); border:1px solid var(--line);
-              font-size:.95rem;}
-  .ciclo i{font-style:normal; color:var(--gold); font-weight:800;}
-  .versus{display:grid; gap:10px;}
-  @media (min-width:520px){ .versus{grid-template-columns:1fr 1fr;} }
-  .versus > div{padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
-  .versus h3{margin:0 0 6px; font-family:var(--display); font-size:1rem; color:var(--accent);}
-  .versus ul{margin:0; padding-left:1.1em; font-size:.92rem; color:var(--muted); display:flex; flex-direction:column; gap:3px;}
-
-  .frasev{font-size:1.08rem; padding:10px 14px; border-left:3px solid var(--accent);
-          background:var(--surface2); border-radius:0 10px 10px 0; line-height:1.8;}
-  .frasev em{font-style:normal; background:var(--gold); color:var(--on-accent);
-             padding:2px 7px; border-radius:6px; font-weight:700;}
-  .frasev s{color:var(--muted); text-decoration-thickness:1px;}
+  svg.arte { width: 100%; height: auto; max-width: 340px; display: block; margin: 16px auto; }
 </style>
 
-<div class="wrap">
-  <header>
-    <div class="brand"><b>Droidec</b><span>28/09 · Zoro Perdido no Tempo · Português — Presente, passado e futuro</span></div>
-    <ul class="rota" id="rota"></ul>
-  </header>
-  <main id="tela"></main>
-  <footer>Feito pro Zion 🏴‍☠️</footer>
+<div class="topo">
+  <div class="brand">
+    <strong>🏴‍☠️ Rota de Estudos</strong>
+    <span>29/09 · Ilha do Ouro · Conjuração Mineira</span>
+  </div>
+  <div class="barra"><i id="barra"></i></div>
 </div>
 
+<main>
+
+  <!-- ===== BLOCO 1 — GANCHO ===== -->
+  <section class="tela on" id="t-gancho">
+    <p class="kicker">Missão de hoje</p>
+    <h1>O plano no porão da Ilha do Ouro</h1>
+
+    <div class="cena">
+      <p>O Sunny atraca numa ilha que tira ouro da montanha. Tem ouro em tudo — e ninguém tem dinheiro.</p>
+      <p>O governador leva <strong>um quinto</strong> de todo ouro achado. E quando a conta não fecha, ele manda cobrar tudo de uma vez, de todo mundo, no mesmo dia.</p>
+      <p>Numa noite, seis pessoas se juntam num porão: um padre, um advogado, um poeta, um médico, um oficial e um dono de mina. Eles desenham uma bandeira com uma frase em latim.</p>
+      <p><span class="fala">— Espera aí — fala a Nami. — Nenhum deles é pobre. Por que gente rica faria isso?</span></p>
+    </div>
+
+    <p>Essa história aconteceu de verdade, em <strong>1789</strong>, em Minas Gerais. Bora entender?</p>
+
+    <div class="acoes">
+      <span class="espaco"></span>
+      <button class="btn" data-ir="t-regra">Bora! →</button>
+    </div>
+  </section>
+
+  <!-- ===== BLOCO 2 — A REGRA ===== -->
+  <section class="tela" id="t-regra">
+    <p class="kicker">Eu faço · o Droidec explica</p>
+    <h1>Três coisas para entender tudo</h1>
+
+    <div class="carta">
+      <h3>1. O que foi</h3>
+      <p>Em <strong>1789</strong>, o Brasil era colônia de Portugal. Um grupo de Minas Gerais planejou separar Minas de Portugal e criar um país novo.</p>
+      <p><strong>O plano nunca começou.</strong> Alguém contou para o governo antes. Em 1792 os participantes foram julgados e condenados.</p>
+    </div>
+
+    <div class="carta">
+      <h3>2. Quem estava dentro</h3>
+      <p>Aqui está a parte que surpreende: <strong>não era o povo pobre</strong>. Eram padres, advogados, médicos, poetas, militares, donos de mina e gente que cobrava imposto para a Coroa.</p>
+      <p>Gente estudada, muita dela formada na Europa — e gente que <em>devia dinheiro</em> a Portugal. Os trabalhadores escravizados, que eram a maioria da população, ficaram de fora do plano.</p>
+    </div>
+
+    <div class="carta">
+      <h3>3. Por que fizeram</h3>
+      <p>Portugal cobrava <strong>o quinto</strong>: de cada 5 partes de ouro, 1 ia para o rei. Quando o ouro começou a acabar e a conta não fechava, veio a ameaça da <strong>derrama</strong> — cobrar toda a dívida atrasada de uma vez.</p>
+      <p>E tinha outra coisa: em Minas, <strong>tudo era caríssimo</strong>. Comida vinha de longe, por estrada ruim, no lombo de mula.</p>
+    </div>
+
+    <h2>🧠 Pensando alto com o Droidec</h2>
+    <p>Olha a tabela de preços da Ilha do Ouro. Eu vou resolver pensando em voz alta:</p>
+
+    <div class="tabela-caixa">
+      <table>
+        <tr><th>Mercadoria</th><th>No porto (réis)</th><th>Na Ilha do Ouro (réis)</th></tr>
+        <tr><td>1 saco de sal</td><td class="num">200</td><td class="num">2 400</td></tr>
+        <tr><td>1 rolo de corda</td><td class="num">150</td><td class="num">1 800</td></tr>
+      </table>
+    </div>
+
+    <div class="carta destaque">
+      <p><em>Quantas vezes o sal é mais caro na ilha?</em></p>
+      <p>Primeiro eu reparo que é <strong>a mesma mercadoria nos dois lugares</strong> — dá para comparar.<br>
+      Depois eu vejo qual é o maior: 2 400 na ilha, 200 no porto.<br>
+      Então eu divido o maior pelo menor: <strong>2 400 ÷ 200 = 12</strong>.<br>
+      Concluo: o sal custa <strong>12 vezes mais</strong> na ilha. Com o dinheiro de 1 saco lá, eu levaria 12 sacos no porto.</p>
+    </div>
+
+    <p>Repara no que eu fiz: eu não chutei o número. Eu falei <em>por que</em> comparei, <em>o que</em> dividi e <em>o que isso quer dizer</em>. É isso que você vai treinar hoje.</p>
+
+    <h2>🏴 A bandeira e o nome</h2>
+    <svg class="arte" viewBox="0 0 300 200" role="img" aria-label="Bandeira branca com um triângulo vermelho ao centro e a frase Libertas Quae Sera Tamen em volta.">
+      <rect x="10" y="20" width="280" height="160" rx="4" fill="var(--carta)" stroke="var(--linha)" stroke-width="3"/>
+      <path d="M150 55 L235 155 L65 155 Z" fill="var(--errado)" opacity=".85"/>
+      <text x="150" y="44" text-anchor="middle" font-family="var(--display)" font-size="15" fill="var(--tinta)">LIBERTAS</text>
+      <text x="150" y="176" text-anchor="middle" font-family="var(--display)" font-size="15" fill="var(--tinta)">QUAE SERA TAMEN</text>
+    </svg>
+
+    <div class="lema">“Libertas Quae Sera Tamen”
+      <small>Liberdade, ainda que tardia — a frase que eles escolheram para a bandeira.</small>
+    </div>
+
+    <div class="carta">
+      <h3>Dois nomes para a mesma história</h3>
+      <p><strong>Inconfidência</strong> = quebra de confiança, traição. Foi assim que <em>Portugal</em> chamou — porque para o rei aquilo era um crime.</p>
+      <p><strong>Conjuração</strong> = quando pessoas se juntam e combinam um plano. É o nome usado hoje, porque descreve o que aconteceu sem tomar o lado de quem julgou.</p>
+      <p>Guarda essa ideia: <strong>quem escolhe a palavra também conta a história</strong>.</p>
+    </div>
+
+    <div class="acoes">
+      <button class="btn fraco" data-ir="t-gancho">← Voltar</button>
+      <span class="espaco"></span>
+      <button class="btn" data-ir="t-guiado">Treinar →</button>
+    </div>
+  </section>
+
+  <!-- ===== BLOCO 3 — TREINO GUIADO ===== -->
+  <section class="tela" id="t-guiado">
+    <p class="kicker">Nós fazemos · treino com dica</p>
+    <h1 id="g-titulo">Treino guiado</h1>
+    <p class="passo" id="g-passo"></p>
+    <div id="g-corpo"></div>
+    <div class="acoes">
+      <button class="btn fraco" id="g-voltar">← Voltar</button>
+      <span class="espaco"></span>
+      <button class="btn" id="g-proximo" disabled>Próximo →</button>
+    </div>
+  </section>
+
+  <!-- ===== BLOCO 4 — DESAFIO ===== -->
+  <section class="tela" id="t-desafio">
+    <p class="kicker">Você faz · sem dica</p>
+    <h1 id="d-titulo">Desafio da Ilha</h1>
+    <p class="passo" id="d-passo"></p>
+    <div id="d-corpo"></div>
+    <div class="acoes">
+      <button class="btn fraco" id="d-voltar">← Voltar</button>
+      <span class="espaco"></span>
+      <button class="btn" id="d-proximo" disabled>Próximo →</button>
+    </div>
+  </section>
+
+  <!-- ===== BLOCO 5 — EXPLIQUE ===== -->
+  <section class="tela" id="t-explica">
+    <p class="kicker">O bloco mais importante</p>
+    <h1>Explica pro Chopper</h1>
+    <div class="cena">
+      <p><span class="fala">— Droidec, eu não entendi uma coisa — diz o Chopper. — Por que a mesma história tem dois nomes? Qual deles eu devo usar?</span></p>
+    </div>
+    <p>Responde pra ele com as suas palavras. Tenta usar estas três:</p>
+    <div class="chaves">
+      <span class="chave">Portugal</span>
+      <span class="chave">traição</span>
+      <span class="chave">se juntar</span>
+    </div>
+    <textarea id="txt" placeholder="Chopper, os dois nomes são..." aria-label="Sua explicação"></textarea>
+    <p class="conta"><span id="conta">0</span> letras (precisa de 40)</p>
+    <div class="acoes">
+      <button class="btn fraco" id="e-voltar">← Voltar</button>
+      <span class="espaco"></span>
+      <button class="btn" id="e-proximo" disabled>Terminar →</button>
+    </div>
+  </section>
+
+  <!-- ===== BLOCO 6 — FECHAMENTO ===== -->
+  <section class="tela" id="t-fim">
+    <p class="kicker">Missão cumprida</p>
+    <h1>Fim da rota de hoje</h1>
+    <p class="placar" id="placar">—<small>de primeira</small></p>
+    <div class="carta destaque" id="merito"></div>
+    <div class="acoes">
+      <button class="btn fraco" id="f-voltar">← Voltar</button>
+      <span class="espaco"></span>
+      <button class="btn" id="copiar">📋 Copiar resumo pro papai</button>
+    </div>
+    <p class="passo" id="copiado"></p>
+  </section>
+
+</main>
+
 <script>
-(function(){
+(function () {
   "use strict";
 
+  var DATA = "2026-09-29";
+  var TOPICO = "Conjuração Mineira";
+  var CHAVE = "zion-conjuracao-2026-09-29";
+
   var GUIADO = [
-    {contexto:null, frase:"Ontem o Chopper pescou um peixe enorme.",
-     pergunta:"Qual é o VERBO dessa frase?",
-     opcoes:["pescou","ontem","peixe"],
-     certa:0, dica:"Verbo é a palavra da AÇÃO. Faz o teste do “eu”: eu pesquei — dá. Eu ontem — não dá.",
-     porque:"O verbo é PESCOU, porque é o que alguém fez. “Ontem” é palavra de tempo e “peixe” é uma coisa."},
-    {contexto:"Agora a mesma frase, mas sem a palavra ontem:", frase:"O Chopper pescou um peixe enorme.",
-     pergunta:"Em que tempo ela está?",
-     opcoes:["Passado","Presente","Futuro"],
-     certa:0, dica:"Sumiu o “ontem”, mas o verbo continua lá. Olha só o fim dele: pesc-OU.",
-     porque:"Passado. A terminação -ou já entrega sozinha: a ação aconteceu e acabou. A palavra de tempo era só um empurrãozinho."},
-    {contexto:null, frase:"A Nami desenha um mapa novo.",
-     pergunta:"Em que tempo está?",
-     opcoes:["Presente","Passado","Futuro"],
-     certa:0, dica:"Termina em -ou, -eu ou -iu? Tem R antes do fim? Se a resposta for não pros dois, sobra um tempo só.",
-     porque:"Presente: desenh-A. É o que ela faz agora. Sem R e sem -ou, não é futuro nem passado."},
-    {contexto:null, frase:"O Zoro treinará amanhã bem cedo.",
-     pergunta:"Qual pista DENTRO DO VERBO mostra que é futuro?",
-     opcoes:["O R antes do fim: treina-R-á","A palavra amanhã","A palavra cedo"],
-     certa:0, dica:"A pergunta é sobre o próprio verbo, não sobre o resto da frase. O que treinará tem que faRá, viajaRemos e apresentaRão também têm?",
-     porque:"Todo verbo no futuro carrega um R antes da terminação: treinará, fará, viajaremos. Esse R é o carimbo do futuro."},
-    {contexto:"Essa frase não tem nenhuma palavra de tempo:", frase:"O Luffy comerá toda a carne da mesa.",
-     pergunta:"Em que tempo está?",
-     opcoes:["Futuro","Presente","Passado"],
-     certa:0, dica:"Procura o R: com-e-R-á.",
-     porque:"Futuro: comeRÁ. Ainda vai acontecer — e a frase provou que dá pra saber sem nenhum “amanhã” escrito."}
+    {
+      p: "Em que ano o grupo de Minas Gerais combinou o plano?",
+      o: ["1500", "1789", "1889", "1963"],
+      c: 1,
+      dica: "É o mesmo ano de uma revolução famosa na França. Século 18.",
+      ok: "Isso. 1789 — o plano foi combinado, descoberto, e em 1792 veio o julgamento.",
+      no: "Foi 1789. O 1500 é o descobrimento, e 1963 é quando a bandeira virou a de Minas."
+    },
+    {
+      p: "Quem fazia parte do grupo que combinou o plano?",
+      o: ["Os trabalhadores escravizados", "Gente estudada e rica: padres, advogados, poetas, militares", "Soldados portugueses", "Pescadores e marinheiros"],
+      c: 1,
+      dica: "Lembra do porão da Ilha do Ouro: quem estava lá tinha estudo e tinha o que perder.",
+      ok: "Exato. Era a elite letrada da capitania — e vários deles deviam dinheiro à Coroa.",
+      no: "Era a gente estudada e rica. A maioria da população, que era escravizada, ficou de fora do plano."
+    },
+    {
+      p: "A palavra “inconfidência” foi usada por quem?",
+      o: ["Pelos participantes do plano", "Por Portugal, que julgou o caso", "Pelos historiadores de hoje", "Pelo povo de Minas"],
+      c: 1,
+      dica: "Inconfidência quer dizer traição. Quem chamaria aquilo de traição?",
+      ok: "Isso mesmo. Para o rei era crime, então o nome que ele deu foi “inconfidência”.",
+      no: "Foi Portugal. Para a Coroa aquilo era traição — e quem escolhe a palavra conta a história do seu jeito."
+    },
+    {
+      p: "Um rolo de corda custa 150 réis no porto e 1 800 réis na Ilha do Ouro. Quantas vezes mais caro?",
+      o: ["6 vezes", "12 vezes", "18 vezes", "120 vezes"],
+      c: 1,
+      dica: "Mesmo caminho do Droidec: divide o maior pelo menor. 1 800 ÷ 150.",
+      ok: "Boa! 1 800 ÷ 150 = 12. Com o dinheiro de 1 rolo na ilha, dava para levar 12 no porto.",
+      no: "1 800 ÷ 150 = 12. Dica para conferir: 150 × 12 = 1 800."
+    }
   ];
 
   var DESAFIO = [
-    {contexto:null,
-     pergunta:"Qual destas palavras é um VERBO?",
-     opcoes:["correu","ontem","manhã"],
-     certa:0, nota:"“Correu” é ação: eu corri, ele correu. “Ontem” e “manhã” marcam tempo, mas ninguém “faz” um ontem."},
-    {contexto:null, frase:"Os marujos limpam o convés do navio.",
-     pergunta:"Em que tempo está?",
-     opcoes:["Presente","Passado","Futuro"],
-     certa:0, nota:"limp-AM: sem R e sem -aram. É o que eles fazem agora. Repara que a frase não tem nenhuma palavra de tempo — e mesmo assim dá pra saber."},
-    {contexto:null, frase:"O Usopp encontrou uma caixa no porão.",
-     pergunta:"Em que tempo está?",
-     opcoes:["Passado","Presente","Futuro"],
-     certa:0, nota:"Pegadinha sem palavra de tempo: encontr-OU já é passado. Cuidado pra não achar que é presente só porque não tem “ontem” escrito."},
-    {contexto:null, frase:"Amanhã o Sanji fará um bolo de morango.",
-     pergunta:"Qual é o verbo?",
-     opcoes:["fará","amanhã","bolo"],
-     certa:0, nota:"O verbo é FARÁ, a ação. “Amanhã” é tempo e “bolo” é coisa. Na hora de retirar verbos de um texto, é esse tipo de troca que derruba."},
-    {contexto:null,
-     pergunta:"Que letra aparece em TODO verbo no futuro?",
-     opcoes:["O R: fará, viajaremos, apresentarão, visitará","O S","O M"],
-     certa:0, nota:"É o carimbo do futuro. Quando bater a dúvida, procura o R antes da terminação."},
-    {contexto:"O Brook copiou uma frase e disse que o verbo era “biblioteca”.", frase:"O Brook tocou violino na biblioteca.",
-     pergunta:"Ele está certo?",
-     opcoes:["Não — biblioteca é um lugar; o verbo é tocou","Sim, biblioteca é o verbo","Os dois são verbos"],
-     certa:0, nota:"Lugar não é verbo. O teste do “eu” resolve: eu toquei — dá; eu biblioteca — não dá."},
-    {contexto:"Transforma para o PASSADO:", frase:"A Robin lê um livro antigo.",
-     pergunta:"Como fica?",
-     opcoes:["A Robin leu um livro antigo","A Robin lerá um livro antigo","A Robin lendo um livro antigo"],
-     certa:0, nota:"lê → leu. A opção com R (lerá) é o futuro, e “lendo” não marca tempo nenhum."},
-    {contexto:null, frase:"Nós viajaremos para a próxima ilha.",
-     pergunta:"Se mudar para o passado, como fica?",
-     opcoes:["Nós viajamos para a próxima ilha","Nós viajaremos para a próxima ilha","Nós viajar para a próxima ilha"],
-     certa:0, nota:"Tira o R do futuro e a ação volta pro passado: viajaremos → viajamos."}
+    {
+      p: "“Libertas Quae Sera Tamen” quer dizer o quê?",
+      o: ["Ouro para todos", "Liberdade, ainda que tardia", "Minas Gerais para sempre", "Viva o rei"],
+      c: 1,
+      ok: "Isso. “Ainda que tardia” = mesmo que demore a chegar.",
+      no: "É “Liberdade, ainda que tardia”. Ou seja: mesmo que demore, vale a pena."
+    },
+    {
+      p: "A bandeira de Minas Gerais de hoje tem a ver com essa história?",
+      o: ["Não, é outra coisa totalmente diferente", "Tem: desde 1963 ela usa o triângulo e a mesma frase em latim", "Tem, e ela é de 1789", "Só a cor é parecida"],
+      c: 1,
+      ok: "Certo. A bandeira do estado é de 1963 e foi inspirada na bandeira daquele grupo.",
+      no: "Tem sim — mas cuidado com a data: a bandeira do estado é de 1963, não de 1789."
+    },
+    {
+      p: "🪤 Pegadinha: o plano queria libertar as pessoas escravizadas?",
+      o: ["Sim, esse era o objetivo principal", "Não — vários dos participantes eram donos de escravizados", "Sim, e libertou todas", "O plano nem falava de Portugal"],
+      c: 1,
+      ok: "Boa, você não caiu. Metade deles tinha escravizados — o plano era sobre impostos e poder, não sobre libertar.",
+      no: "Não. Vários participantes eram donos de escravizados. O plano era contra os impostos de Portugal."
+    },
+    {
+      p: "🪤 Pegadinha: o plano chegou a acontecer?",
+      o: ["Sim, Minas ficou independente por 3 anos", "Não — foi denunciado antes de começar", "Sim, e Portugal aceitou", "Aconteceu, mas ninguém percebeu"],
+      c: 1,
+      ok: "Exato. Nunca saiu do papel: alguém contou ao governo e os participantes foram presos.",
+      no: "Não aconteceu. Foi denunciado antes de começar — por isso o julgamento veio em 1792."
+    },
+    {
+      p: "Um fardo de tecido custa 300 réis no porto e 5 400 réis na Ilha do Ouro. Quantas vezes mais caro?",
+      o: ["9 vezes", "15 vezes", "18 vezes", "54 vezes"],
+      c: 2,
+      ok: "Isso! 5 400 ÷ 300 = 18. Confere: 300 × 18 = 5 400.",
+      no: "5 400 ÷ 300 = 18. Um jeito fácil: corta os dois zeros — vira 54 ÷ 3 = 18."
+    },
+    {
+      p: "Por que tudo era tão caro na região das minas?",
+      o: ["Porque lá ninguém queria vender", "Porque a comida vinha de longe, por estradas ruins, no lombo de mula", "Porque o ouro estragava a comida", "Porque o rei proibia comer"],
+      c: 1,
+      ok: "Certo. Quanto mais difícil o transporte, mais caro chega — isso vale até hoje.",
+      no: "Era o transporte: tudo vinha de longe por estrada ruim, e o preço subia no caminho."
+    }
   ];
 
-  var KEY = "zion-tempos-verbais-2026-09-28";
-  var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
-  var S = JSON.parse(JSON.stringify(VAZIO));
-  try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
-  function salva(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+  var estado = { iG: 0, iD: 0, respG: [], respD: [], texto: "", tela: "t-gancho" };
+  try {
+    var salvo = JSON.parse(localStorage.getItem(CHAVE));
+    if (salvo && salvo.respG) estado = salvo;
+  } catch (e) {}
+  function gravar() { try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) {} }
 
-  var el = function(t,c,x){ var n=document.createElement(t); if(c) n.className=c; if(x!=null) n.textContent=x; return n; };
-  var tela = document.getElementById("tela");
-  var TELAS = [gancho, regra, treino, desafio, explicacao, fim];
+  var TELAS = ["t-gancho", "t-regra", "t-guiado", "t-desafio", "t-explica", "t-fim"];
 
-  function rota(){
-    var ul = document.getElementById("rota"); ul.innerHTML="";
-    for(var i=0;i<TELAS.length;i++){
-      var li = el("li"); li.appendChild(el("i"));
-      if(i < S.tela) li.setAttribute("data-on","");
-      if(i === S.tela) li.setAttribute("data-now","");
-      ul.appendChild(li);
+  function mostrar(id) {
+    for (var i = 0; i < TELAS.length; i++) {
+      document.getElementById(TELAS[i]).classList.toggle("on", TELAS[i] === id);
     }
+    estado.tela = id; gravar();
+    window.scrollTo(0, 0);
+    progresso();
+    if (id === "t-guiado") pintarGuiado();
+    if (id === "t-desafio") pintarDesafio();
+    if (id === "t-explica") pintarExplica();
+    if (id === "t-fim") pintarFim();
   }
-  function vai(n){ S.tela = n; salva(); render(); window.scrollTo(0,0); }
-  function render(){ rota(); tela.innerHTML=""; tela.appendChild(TELAS[S.tela]()); }
 
-  function card(){ var c = el("div","card"); for(var i=0;i<arguments.length;i++) c.appendChild(arguments[i]); return c; }
-  function eyebrow(t){ return el("div","eyebrow",t); }
-  function botao(t,fn){ var b = el("button","go",t); b.addEventListener("click",fn); return b; }
+  function progresso() {
+    var total = 2 + GUIADO.length + DESAFIO.length + 2;
+    var feito = 0;
+    var ordem = TELAS.indexOf(estado.tela);
+    if (ordem >= 1) feito += 1;
+    if (ordem >= 2) feito += 1;
+    feito += contar(estado.respG);
+    feito += contar(estado.respD);
+    if (estado.texto.length >= 40) feito += 1;
+    if (estado.tela === "t-fim") feito = total;
+    document.getElementById("barra").style.width = Math.round((feito / total) * 100) + "%";
+  }
+  function contar(a) { var n = 0; for (var i = 0; i < a.length; i++) if (a[i] != null) n++; return n; }
 
-  function navbar(rotulo, voltar){
-    var n = el("div","nav");
-    if(voltar){
-      var b = el("button","ghost","← Voltar");
-      b.addEventListener("click", function(){ voltar(); window.scrollTo(0,0); });
-      n.appendChild(b);
-    } else n.appendChild(el("span"));
-    n.appendChild(el("span","contador", rotulo));
+  /* ---------- um item de pergunta (serve para os dois blocos) ---------- */
+  function montarItem(cfg) {
+    var item = cfg.item, resp = cfg.resp, alvo = cfg.alvo, guiado = cfg.guiado;
+    alvo.innerHTML = "";
+
+    var pergunta = document.createElement("p");
+    pergunta.style.fontWeight = "700";
+    pergunta.style.fontSize = "20px";
+    pergunta.textContent = item.p;
+    alvo.appendChild(pergunta);
+
+    var caixa = document.createElement("div");
+    caixa.className = "botoes";
+    alvo.appendChild(caixa);
+
+    var respondido = resp != null;          // { escolha, tentativas } ou null
+    var aviso = document.createElement("div");
+
+    item.o.forEach(function (texto, idx) {
+      var b = document.createElement("button");
+      b.className = "op";
+      b.type = "button";
+      b.textContent = texto;
+      if (respondido) {
+        b.disabled = true;
+        if (idx === item.c) b.classList.add("certo");
+        else if (idx === resp.escolha && resp.escolha !== item.c) b.classList.add("errado");
+      } else {
+        b.addEventListener("click", function () { responder(idx); });
+      }
+      caixa.appendChild(b);
+    });
+
+    alvo.appendChild(aviso);
+
+    var tentativas = 0;
+
+    function responder(idx) {
+      tentativas++;
+      var acertou = idx === item.c;
+
+      if (guiado && !acertou && tentativas === 1) {
+        aviso.className = "avisa dica";
+        aviso.innerHTML = "🤔 Quase. <p>" + item.dica + "</p><p>Tenta de novo.</p>";
+        var bs = caixa.querySelectorAll(".op");
+        bs[idx].classList.add("errado");
+        bs[idx].disabled = true;
+        return;
+      }
+
+      resp = { escolha: idx, tentativas: tentativas };
+      cfg.salvar(resp);
+      travar();
+    }
+
+    function travar() {
+      var bs = caixa.querySelectorAll(".op");
+      for (var i = 0; i < bs.length; i++) {
+        bs[i].disabled = true;
+        bs[i].classList.remove("certo", "errado");
+        if (i === item.c) bs[i].classList.add("certo");
+        else if (i === resp.escolha && resp.escolha !== item.c) bs[i].classList.add("errado");
+      }
+      var acertou = resp.escolha === item.c;
+      aviso.className = "avisa " + (acertou ? "ok" : "no");
+      aviso.innerHTML = (acertou ? "✅ Isso aí!" : "❌ Dessa vez não.") +
+        "<p>" + (acertou ? item.ok : item.no) + "</p>";
+      cfg.liberar();
+    }
+
+    if (respondido) travar();
+    return respondido;
+  }
+
+  /* ---------- bloco guiado ---------- */
+  var gProximo = document.getElementById("g-proximo");
+  var gVoltar = document.getElementById("g-voltar");
+
+  function pintarGuiado() {
+    var i = estado.iG;
+    document.getElementById("g-passo").textContent = "Item " + (i + 1) + " de " + GUIADO.length;
+    gProximo.disabled = true;
+    gProximo.textContent = (i === GUIADO.length - 1) ? "Ir pro desafio →" : "Próximo →";
+    montarItem({
+      item: GUIADO[i],
+      resp: estado.respG[i] || null,
+      alvo: document.getElementById("g-corpo"),
+      guiado: true,
+      salvar: function (r) { estado.respG[i] = r; gravar(); progresso(); },
+      liberar: function () { gProximo.disabled = false; }
+    });
+  }
+
+  gProximo.addEventListener("click", function () {
+    if (estado.iG < GUIADO.length - 1) { estado.iG++; gravar(); pintarGuiado(); window.scrollTo(0, 0); }
+    else mostrar("t-desafio");
+  });
+  gVoltar.addEventListener("click", function () {
+    if (estado.iG > 0) { estado.iG--; gravar(); pintarGuiado(); window.scrollTo(0, 0); }
+    else mostrar("t-regra");
+  });
+
+  /* ---------- bloco desafio ---------- */
+  var dProximo = document.getElementById("d-proximo");
+  var dVoltar = document.getElementById("d-voltar");
+
+  function pintarDesafio() {
+    var i = estado.iD;
+    document.getElementById("d-passo").textContent = "Item " + (i + 1) + " de " + DESAFIO.length;
+    dProximo.disabled = true;
+    dProximo.textContent = (i === DESAFIO.length - 1) ? "Explicar pro Chopper →" : "Próximo →";
+    montarItem({
+      item: DESAFIO[i],
+      resp: estado.respD[i] || null,
+      alvo: document.getElementById("d-corpo"),
+      guiado: false,
+      salvar: function (r) { estado.respD[i] = r; gravar(); progresso(); },
+      liberar: function () { dProximo.disabled = false; }
+    });
+  }
+
+  dProximo.addEventListener("click", function () {
+    if (estado.iD < DESAFIO.length - 1) { estado.iD++; gravar(); pintarDesafio(); window.scrollTo(0, 0); }
+    else mostrar("t-explica");
+  });
+  dVoltar.addEventListener("click", function () {
+    if (estado.iD > 0) { estado.iD--; gravar(); pintarDesafio(); window.scrollTo(0, 0); }
+    else mostrar("t-guiado");
+  });
+
+  /* ---------- bloco explicação ---------- */
+  var txt = document.getElementById("txt");
+  var eProximo = document.getElementById("e-proximo");
+
+  function pintarExplica() {
+    txt.value = estado.texto;
+    atualizarTexto();
+  }
+  function atualizarTexto() {
+    var n = txt.value.trim().length;
+    document.getElementById("conta").textContent = n;
+    eProximo.disabled = n < 40;
+    estado.texto = txt.value;
+    gravar(); progresso();
+  }
+  txt.addEventListener("input", atualizarTexto);
+  eProximo.addEventListener("click", function () { mostrar("t-fim"); });
+  document.getElementById("e-voltar").addEventListener("click", function () {
+    estado.iD = DESAFIO.length - 1; gravar(); mostrar("t-desafio");
+  });
+
+  /* ---------- fechamento ---------- */
+  function acertos(lista, base) {
+    var n = 0;
+    for (var i = 0; i < lista.length; i++) {
+      if (lista[i] && lista[i].escolha === base[i].c && lista[i].tentativas === 1) n++;
+    }
     return n;
   }
-  function pula(campo, valor, telaN){ S[campo] = valor; if(telaN!=null) S.tela = telaN; salva(); render(); }
-
-  function opcoesClasse(n){ return n<=2 ? "opcoes duas" : "opcoes tres"; }
-
-  /* ---------- 1. gancho ---------- */
-  function gancho(){
-    var p1 = el("p","lead","O Zoro já se perdeu em todas as ilhas do Grand Line. Agora ele conseguiu uma coisa nova: se perder no TEMPO.");
-    var p2 = el("p","lead","Ele lê “Luffy comerá toda a carne” e pergunta: “isso já aconteceu? tô com fome de ontem ou de amanhã?”. A frase não tem ontem, nem hoje, nem amanhã escrito — e ele trava.");
-    var p3 = el("p","lead","Hoje você é a bússola do Zoro. Missão: descobrir o tempo de qualquer frase olhando SÓ para o verbo.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"Zoro Perdido no Tempo"), p1, p2, p3, botao("Bora achar o caminho! →", function(){ vai(1); }));
-  }
-
-  /* ---------- 2. a regra ---------- */
-  function frase(html){
-    var d = el("div","frasev"); d.innerHTML = html; return d;
-  }
-
-  function tabterm(linhas){
-    var t = el("div","tabterm");
-    linhas.forEach(function(l){
-      t.appendChild(el("b",null,l[0]));
-      var s = el("span"); s.innerHTML = l[1];
-      t.appendChild(s);
-    });
-    return t;
-  }
-
-  function regra(){
-    var g = el("div","grupo");
-
-    var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. Verbo é a palavra da AÇÃO"));
-    r1.appendChild(el("p","muted","Verbo é o que alguém FAZ, ou o que acontece. “Ontem”, “amanhã”, “hoje” são palavras de TEMPO, não de ação. “Biblioteca”, “parque”, “livro” são coisas e lugares."));
-    r1.appendChild(frase("Ontem o Chopper <em>pescou</em> um peixe enorme."));
-    r1.appendChild(el("p","muted","Teste rápido: dá pra pôr “eu” na frente e fazer? Eu pesquei — dá. Eu ontem — não dá. Então o verbo é PESCOU."));
-    g.appendChild(r1);
-
-    var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. O tempo está no FIM do verbo"));
-    r2.appendChild(el("p","muted","A palavra “ontem” só ajuda. Quem manda mesmo é a terminação do verbo:"));
-    r2.appendChild(tabterm([
-      ["PASSADO", "pesc<em>ou</em> · corr<em>eu</em> · sorr<em>iu</em> · estud<em>ei</em> · estud<em>aram</em>"],
-      ["PRESENTE", "pesc<em>a</em> · pesc<em>o</em> · pesc<em>am</em> · corr<em>e</em> · estud<em>am</em>"],
-      ["FUTURO", "pesca<em>rá</em> · pesca<em>rei</em> · pesca<em>remos</em> · corre<em>rão</em>"]
-    ]));
-    g.appendChild(r2);
-
-    var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. O R entrega o futuro"));
-    r3.appendChild(el("p","muted","Todo verbo no futuro tem um R antes da terminação: fa<b>R</b>á, viaja<b>R</b>emos, apresenta<b>R</b>ão, visita<b>R</b>á. Achou esse R? É amanhã."));
-    g.appendChild(r3);
-
-    var citacao = el("div","citacao","Zoro, coçando a cabeça: “‘Os alunos estudam para a prova.’ Não tem ontem nem amanhã aqui. E agora?”");
-
-    var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F5E1} Zoro pensa alto: "));
-    modelo.appendChild(document.createTextNode(
-      "primeiro eu procuro a AÇÃO da frase. Alunos é gente, prova é coisa… estudam é o que eles fazem. Achei o verbo: estudam. " +
-      "Agora eu olho só para o fim dele: termina em -am. Tem R? Não tem, então não é futuro. Termina em -ou, -eu ou -aram? Também não. " +
-      "Sobra o presente: é uma coisa que eles fazem agora, todo dia. Pronto — e eu nem precisei de nenhuma palavra de tempo na frase."));
-
-    return card(
-      navbar("A regra", function(){ vai(0); }),
-      eyebrow("A regra"),
-      el("h2",null,"O verbo é a bússola do tempo"),
-      el("p",null,"Muita frase não tem “ontem”, “hoje” nem “amanhã”. E não precisa: o próprio verbo já diz quando a coisa acontece."),
-      g,
-      el("p","muted","Vê o Zoro se achando no tempo, passo a passo:"),
-      citacao, modelo,
-      el("p","muted","A ordem é sempre essa: ACHA O VERBO → OLHA O FIM DELE → DECIDE O TEMPO."),
-      botao("Entendi, quero treinar →", function(){ vai(2); })
-    );
-  }
-
-  function montaOpcoes(q, ops, onEscolher){
-    q.opcoes.forEach(function(txt,i){
-      var b = el("button",null,txt);
-      b.addEventListener("click", function(){ if(!b.disabled) onEscolher(i,b); });
-      ops.appendChild(b);
-    });
-  }
-
-  /* ---------- 3. treino guiado ---------- */
-  function treino(){
-    var idx = S.iG;
-    if(idx >= GUIADO.length){
-      return card(
-        navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Bússola calibrada!"),
-        el("p",null,"Você já acha o verbo e lê a terminação. Agora é sem dica — e com frases sem nenhuma palavra de tempo."),
-        botao("Ir pro desafio →", function(){ vai(3); }));
-    }
-    var q = GUIADO[idx], feito = S.guiado[idx];
-    var c = el("div","card");
-    c.appendChild(navbar("Treino · " + (idx+1) + " de " + GUIADO.length, function(){
-      if(idx > 0) pula("iG", idx-1); else vai(1);
-    }));
-    if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
-    if(q.frase) c.appendChild(frase(q.frase));
-    c.appendChild(el("h2",null,q.pergunta));
-
-    var ops = el("div", opcoesClasse(q.opcoes.length));
-    var fb = el("div","fb"); fb.style.display="none";
-    var tentativa = 0;
-
-    function trava(){ Array.prototype.forEach.call(ops.children,function(x){ x.disabled=true; }); }
-    function proxima(){ c.appendChild(botao("Próxima →", function(){ pula("iG", idx+1); window.scrollTo(0,0); })); }
-    function diz(k, negrito, resto){
-      fb.style.display=""; fb.setAttribute("data-k",k); fb.innerHTML="";
-      fb.appendChild(el("b",null,negrito)); fb.appendChild(document.createTextNode(resto));
-    }
-
-    montaOpcoes(q, ops, function(i,b){
-      if(i === q.certa){
-        b.setAttribute("data-state","ok"); trava();
-        diz("ok","Isso mesmo! ", q.porque);
-        S.guiado[idx] = {feito:true, acertou: tentativa===0}; salva();
-        proxima();
-      } else {
-        tentativa++;
-        b.setAttribute("data-state","no");
-        if(tentativa === 1){
-          diz("dica","Quase. ", q.dica + " Tenta de novo.");
-        } else {
-          ops.children[q.certa].setAttribute("data-state","ok"); trava();
-          diz("no","A certa era: “" + q.opcoes[q.certa] + "”. ", q.porque);
-          S.guiado[idx] = {feito:true, acertou:false}; salva();
-          proxima();
-        }
+  function errados(lista, base) {
+    var out = [];
+    for (var i = 0; i < lista.length; i++) {
+      if (lista[i] && !(lista[i].escolha === base[i].c && lista[i].tentativas === 1)) {
+        out.push((i + 1) + ". " + base[i].p);
       }
-    });
-    c.appendChild(ops); c.appendChild(fb);
-
-    if(feito){
-      ops.children[q.certa].setAttribute("data-state","ok"); trava();
-      diz(feito.acertou ? "ok" : "no",
-          feito.acertou ? "Você acertou de primeira. " : "Aqui você precisou de dica. ",
-          q.porque);
-      proxima();
     }
-    return c;
+    return out;
   }
 
-  /* ---------- 4. desafio ---------- */
-  function desafio(){
-    var idx = S.iD;
-    if(idx >= DESAFIO.length){
-      var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
-      return card(
-        navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Rota encontrada! \u{1F9ED}"),
-        el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
-        botao("Última parada →", function(){ vai(4); }));
-    }
-    var q = DESAFIO[idx], feito = S.desafio[idx];
-    var c = el("div","card");
-    c.appendChild(navbar("Desafio · " + (idx+1) + " de " + DESAFIO.length, function(){
-      if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
-    }));
-    if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
-    if(q.frase) c.appendChild(frase(q.frase));
-    c.appendChild(el("h2",null,q.pergunta));
+  function pintarFim() {
+    var aG = acertos(estado.respG, GUIADO), aD = acertos(estado.respD, DESAFIO);
+    var total = GUIADO.length + DESAFIO.length;
+    document.getElementById("placar").innerHTML = (aG + aD) + " / " + total + "<small>de primeira</small>";
 
-    var ops = el("div", opcoesClasse(q.opcoes.length));
-    var fb = el("div","fb"); fb.style.display="none";
-    function resolve(certo, negrito){
-      Array.prototype.forEach.call(ops.children,function(x,i){
-        x.disabled = true;
-        if(i === q.certa) x.setAttribute("data-state","ok");
-      });
-      fb.style.display=""; fb.setAttribute("data-k", certo?"ok":"no"); fb.innerHTML="";
-      fb.appendChild(el("b",null,negrito));
-      fb.appendChild(document.createTextNode(q.nota));
-      c.appendChild(botao("Próxima →", function(){ pula("iD", idx+1); window.scrollTo(0,0); }));
-    }
-    montaOpcoes(q, ops, function(i,b){
-      var certo = i === q.certa;
-      if(!certo) b.setAttribute("data-state","no");
-      S.desafio[idx] = {acertou:certo, marcou:q.opcoes[i]}; salva();
-      resolve(certo, certo ? "Certo! " : "Essa não é a melhor resposta. ");
-    });
-    c.appendChild(ops); c.appendChild(fb);
+    var pegadinhas = 0;
+    if (estado.respD[2] && estado.respD[2].escolha === DESAFIO[2].c && estado.respD[2].tentativas === 1) pegadinhas++;
+    if (estado.respD[3] && estado.respD[3].escolha === DESAFIO[3].c && estado.respD[3].tentativas === 1) pegadinhas++;
 
-    if(feito){
-      if(!feito.acertou){
-        Array.prototype.forEach.call(ops.children,function(x){ if(x.textContent === feito.marcou) x.setAttribute("data-state","no"); });
-      }
-      resolve(feito.acertou, feito.acertou ? "Você acertou: “" + q.opcoes[q.certa] + "”. " : "Você marcou “" + feito.marcou + "”, mas a melhor resposta era “" + q.opcoes[q.certa] + "”. ");
-    }
-    return c;
+    var frase;
+    if (pegadinhas === 2) frase = "Você pegou as <strong>duas pegadinhas</strong> — a do “libertou os escravizados” e a do “chegou a acontecer”. Essas duas derrubam muita gente grande.";
+    else if (pegadinhas === 1) frase = "Você pegou <strong>uma das duas pegadinhas</strong>. A outra vale reler: o plano nunca começou, e quem estava nele tinha escravizados.";
+    else frase = "As duas pegadinhas passaram batido dessa vez — e elas são o coração da matéria. Vale voltar no bloco do Droidec e reler a parte do “quem estava dentro”.";
+
+    document.getElementById("merito").innerHTML =
+      "<h3>O que ficou de hoje</h3><p>" + frase + "</p>" +
+      "<p>Treino guiado: " + aG + "/" + GUIADO.length + " · Desafio: " + aD + "/" + DESAFIO.length + "</p>";
   }
 
-  /* ---------- 5. explique como Droidec ---------- */
-  function explicacao(){
-    var c2 = el("div","card");
-    c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
-    c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Zoro?"));
-    c2.appendChild(el("p","lead","O Zoro só consegue achar o tempo quando a frase tem “ontem” ou “amanhã” escrito. Explica pra ele, com as TUAS palavras, como descobrir o tempo de uma frase que NÃO tem nenhuma palavra de tempo."));
-    var chips = el("div","chips");
-    ["achar o verbo","olhar o fim do verbo","o R do futuro"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
-    c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
-    c2.appendChild(chips);
-    var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Zoro, primeiro você procura...");
-    var cont = el("div","contador","0 letras");
-    var b = botao("Terminei →", function(){ vai(5); });
-    b.disabled = true; b.style.opacity = ".45";
-    function check(){
-      S.texto = ta.value; salva();
-      var n = ta.value.trim().length;
-      cont.textContent = n + " letras" + (n<40 ? " — escreve mais um pouquinho" : " — pode seguir!");
-      b.disabled = n < 40; b.style.opacity = n < 40 ? ".45" : "1";
+  document.getElementById("f-voltar").addEventListener("click", function () { mostrar("t-explica"); });
+
+  document.getElementById("copiar").addEventListener("click", function () {
+    var aG = acertos(estado.respG, GUIADO), aD = acertos(estado.respD, DESAFIO);
+    var linhas = [];
+    linhas.push("ROTA DE ESTUDOS DO ZION — " + DATA);
+    linhas.push("Tópico: " + TOPICO + " (História, 4º ano)");
+    linhas.push("");
+    linhas.push("PLACAR DE PRIMEIRA");
+    linhas.push("Treino guiado: " + aG + "/" + GUIADO.length);
+    linhas.push("Desafio: " + aD + "/" + DESAFIO.length);
+    linhas.push("");
+    var eG = errados(estado.respG, GUIADO), eD = errados(estado.respD, DESAFIO);
+    linhas.push("ERROU OU PRECISOU DE 2 TENTATIVAS");
+    if (!eG.length && !eD.length) linhas.push("(nenhum)");
+    eG.forEach(function (t) { linhas.push("[guiado] " + t); });
+    eD.forEach(function (t) { linhas.push("[desafio] " + t); });
+    linhas.push("");
+    linhas.push("EXPLICAÇÃO DELE (por que a história tem dois nomes):");
+    linhas.push(estado.texto.trim() || "(não escreveu)");
+    var texto = linhas.join("\n");
+
+    function feito() { document.getElementById("copiado").textContent = "✅ Copiado! Agora é só colar pro papai."; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(feito, manual);
+    } else manual();
+
+    function manual() {
+      var ta = document.createElement("textarea");
+      ta.value = texto; document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); feito(); }
+      catch (e) { document.getElementById("copiado").textContent = "Não deu para copiar sozinho — segura o dedo no texto e copia."; }
+      document.body.removeChild(ta);
     }
-    ta.addEventListener("input", check);
-    c2.appendChild(ta); c2.appendChild(cont); c2.appendChild(b);
-    check();
-    return c2;
+  });
+
+  /* ---------- navegação simples ---------- */
+  var irs = document.querySelectorAll("[data-ir]");
+  for (var i = 0; i < irs.length; i++) {
+    irs[i].addEventListener("click", function () { mostrar(this.getAttribute("data-ir")); });
   }
 
-  /* ---------- 6. fim ---------- */
-  function fim(){
-    var tg=0, ag=0, td=0, ad=0, i;
-    for(i=0;i<GUIADO.length;i++){ if(S.guiado[i]){ tg++; if(S.guiado[i].acertou) ag++; } }
-    for(i=0;i<DESAFIO.length;i++){ if(S.desafio[i]){ td++; if(S.desafio[i].acertou) ad++; } }
-    var total = tg+td, acertos = ag+ad;
-
-    var c = el("div","card");
-    c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
-    c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Zoro de volta ao presente \u{1F9ED}"));
-    var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
-    pl.appendChild(el("small",null,"acertos de primeira"));
-    c.appendChild(pl);
-
-    var msg = "Você já descobre o tempo pelo verbo, sem depender das palavras ontem e amanhã — era esse o pulo do gato.";
-    if(ad <= 4) msg = "Achar o verbo ainda escapa às vezes. Antes de responder qualquer folha, faz o teste do “eu”: eu pesquei dá, eu ontem não dá.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as frases sem nenhuma palavra de tempo e as pegadinhas de “ontem não é verbo”.";
-    c.appendChild(el("p",null, msg + " Agora volta na tua folha e confere: em cada frase, qual é a palavra da AÇÃO e como ela termina?"));
-
-    c.appendChild(el("hr","linha"));
-    c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
-
-    var txt = ["AULA DE HOJE — Português: Presente, passado e futuro (Zoro Perdido no Tempo)",
-               "Data: " + new Date().toLocaleDateString("pt-BR"),
-               "",
-               "Treino guiado: " + ag + "/" + tg + " de primeira",
-               "Desafio: " + ad + "/" + td + " de primeira",
-               "TOTAL: " + acertos + "/" + total,
-               ""];
-    var errou = [];
-    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push("Desafio " + (i+1) + ": marcou “" + S.desafio[i].marcou + "”, era “" + DESAFIO[i].opcoes[DESAFIO[i].certa] + "”");
-    for(i=0;i<GUIADO.length;i++) if(S.guiado[i] && !S.guiado[i].acertou) errou.push("Treino " + (i+1) + " (precisou de dica)");
-    txt.push("Errou / tropeçou:");
-    txt.push(errou.length ? "- " + errou.join("\n- ") : "- nada");
-    txt.push("", "EXPLICAÇÃO DO ZION (na íntegra):", (S.texto||"").trim() || "(não escreveu)");
-    var resumo = txt.join("\n");
-
-    var ta = el("textarea","resumo"); ta.value = resumo; ta.setAttribute("readonly","");
-    var b = botao("📋 Copiar resumo pro papai", function(){
-      ta.select();
-      var ok = false;
-      try{ ok = document.execCommand("copy"); }catch(e){}
-      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(resumo).then(function(){}, function(){}); ok = true; }
-      b.textContent = ok ? "✅ Copiado! Manda pro papai" : "Seleciona o texto abaixo e copia";
-    });
-    c.appendChild(b);
-    c.appendChild(ta);
-
-    var reset = el("button","ghost","Começar tudo de novo");
-    reset.addEventListener("click", function(){
-      S = JSON.parse(JSON.stringify(VAZIO)); salva(); render(); window.scrollTo(0,0);
-    });
-    c.appendChild(reset);
-    return c;
-  }
-
-  render();
+  mostrar(estado.tela || "t-gancho");
 })();
 </script>
+</html>

@@ -1,802 +1,561 @@
-<!doctype html>
-<html lang="pt-BR">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rota de Estudos do Zion</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Lexend:wght@300;400;600&display=swap">
 <style>
-  :root {
-    --fundo:      #F4E7CC;
-    --carta:      #FDF6E6;
-    --carta-alt:  #F0E1C0;
-    --madeira:    #7B4A21;
-    --tinta:      #33261A;
-    --tinta-fraca:#75604B;
-    --linha:      #DDC79B;
-    --ouro:       #C88A1E;
-    --mar:        #1C6A86;
-    --certo:      #1F7A45;
-    --certo-bg:   #DCF0E2;
-    --errado:     #B23A2E;
-    --errado-bg:  #F8DFDB;
-    --display: "Baloo 2", "Comic Sans MS", system-ui, sans-serif;
-    --corpo: "Nunito", "Segoe UI", system-ui, sans-serif;
+  :root{
+    --bg:#EAF1F3; --surface:#FFFFFF; --surface2:#EEF4F6;
+    --ink:#16303A; --muted:#57717A; --line:#CBD9DD;
+    --accent:#1C7293; --gold:#D97B29; --ok:#2E7D4F; --err:#B23B3B; --on-accent:#FFFFFF;
+    --shadow:0 2px 0 rgba(22,48,58,.10), 0 10px 24px -14px rgba(22,48,58,.5);
+    --r:16px;
+    --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+    --body:"Lexend","Segoe UI",system-ui,sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --fundo:      #0F1B26;
-      --carta:      #172835;
-      --carta-alt:  #1E3242;
-      --madeira:    #E0A868;
-      --tinta:      #E8EDF2;
-      --tinta-fraca:#9DB0BF;
-      --linha:      #2A4254;
-      --ouro:       #E9BE63;
-      --mar:        #6FC1DD;
-      --certo:      #5FD48F;
-      --certo-bg:   #16382A;
-      --errado:     #F08A7C;
-      --errado-bg:  #3A1F1C;
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
+      --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
+      --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
+      --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
     }
   }
-  :root[data-theme="dark"] {
-    --fundo:      #0F1B26;
-    --carta:      #172835;
-    --carta-alt:  #1E3242;
-    --madeira:    #E0A868;
-    --tinta:      #E8EDF2;
-    --tinta-fraca:#9DB0BF;
-    --linha:      #2A4254;
-    --ouro:       #E9BE63;
-    --mar:        #6FC1DD;
-    --certo:      #5FD48F;
-    --certo-bg:   #16382A;
-    --errado:     #F08A7C;
-    --errado-bg:  #3A1F1C;
+  :root[data-theme="dark"]{
+    --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
+    --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
+    --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
+    --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
   }
 
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  body {
-    margin: 0; background: var(--fundo); color: var(--tinta);
-    font-family: var(--corpo); font-size: 18px; line-height: 1.55;
-  }
-  .topo {
-    position: sticky; top: 0; z-index: 5; background: var(--fundo);
-    border-bottom: 1px solid var(--linha); padding: 10px 16px 0;
-  }
-  .brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .brand strong { font-family: var(--display); font-size: 19px; color: var(--madeira); }
-  .brand span { font-size: 13px; color: var(--tinta-fraca); }
-  .barra { height: 8px; background: var(--linha); border-radius: 99px; margin: 10px 0; overflow: hidden; }
-  .barra i { display: block; height: 100%; width: 0; background: var(--ouro); border-radius: 99px; transition: width .35s ease; }
+  body{background:var(--bg); color:var(--ink); font-family:var(--body); font-weight:300;
+       line-height:1.6; -webkit-text-size-adjust:100%;}
+  .wrap{max-width:660px; margin:0 auto; padding:18px 16px 56px; display:flex; flex-direction:column; gap:18px;}
 
-  main { max-width: 640px; margin: 0 auto; padding: 18px 16px 48px; }
-  .tela { display: none; }
-  .tela.on { display: block; animation: sobe .25s ease both; }
-  @keyframes sobe { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  header{display:flex; flex-direction:column; gap:10px;}
+  .brand{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
+  .brand b{font-family:var(--display); font-weight:800; font-size:1.05rem; letter-spacing:.2px;}
+  .brand span{font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);}
+  .rota{display:flex; align-items:center; gap:0; list-style:none; padding:0; margin:0;}
+  .rota li{flex:1; display:flex; align-items:center; gap:0;}
+  .rota i{display:block; width:13px; height:13px; border-radius:50%; border:2px solid var(--line);
+          background:var(--surface); flex:none;}
+  .rota li[data-on] i{border-color:var(--accent); background:var(--accent);}
+  .rota li[data-now] i{border-color:var(--gold); background:var(--gold); box-shadow:0 0 0 4px color-mix(in srgb, var(--gold) 25%, transparent);}
+  .rota li::after{content:""; height:2px; background:var(--line); flex:1; margin:0 2px;}
+  .rota li:last-child::after{display:none;}
+  .rota li[data-on]::after{background:var(--accent);}
 
-  h1 { font-family: var(--display); font-size: 30px; line-height: 1.15; margin: 6px 0 12px; text-wrap: balance; }
-  h2 { font-family: var(--display); font-size: 23px; margin: 26px 0 8px; text-wrap: balance; }
-  .kicker {
-    font-family: var(--display); font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--mar); margin: 0;
-  }
-  p { margin: 0 0 14px; }
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--r);
+        box-shadow:var(--shadow); padding:22px 20px; display:flex; flex-direction:column; gap:16px;}
+  .eyebrow{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:600;}
+  h1{font-family:var(--display); font-weight:800; font-size:1.75rem; line-height:1.15; margin:0; text-wrap:balance;}
+  h2{font-family:var(--display); font-weight:800; font-size:1.3rem; line-height:1.2; margin:0; text-wrap:balance;}
+  p{margin:0; max-width:60ch;}
+  .lead{font-size:1.05rem;}
+  .muted{color:var(--muted); font-size:.92rem;}
 
-  .carta { background: var(--carta); border: 1px solid var(--linha); border-radius: 14px; padding: 18px; margin: 16px 0; }
-  .carta.destaque { border-color: var(--ouro); border-width: 2px; }
-  .carta h3 { font-family: var(--display); font-size: 19px; margin: 0 0 8px; }
-  .carta p:last-child { margin-bottom: 0; }
+  button{font-family:inherit; font-size:1rem; cursor:pointer; border-radius:12px; border:1px solid var(--line);
+         background:var(--surface2); color:var(--ink); padding:14px 18px; min-height:52px; transition:transform .12s, background .12s, border-color .12s;}
+  button:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  button:hover:not(:disabled){border-color:var(--accent);}
+  button:active:not(:disabled){transform:translateY(1px);}
+  button:disabled{cursor:default; opacity:1;}
+  .go{background:var(--accent); border-color:var(--accent); color:var(--on-accent); font-family:var(--display);
+      font-weight:600; font-size:1.1rem; align-self:flex-start; padding:14px 26px;}
+  .go:hover{filter:brightness(1.08);}
+  .ghost{background:transparent; border-style:dashed; font-size:.9rem; min-height:44px; padding:10px 16px;}
 
-  .cena { background: var(--carta-alt); border-left: 5px solid var(--ouro); border-radius: 0 12px 12px 0; padding: 16px 18px; margin: 16px 0; }
-  .fala { color: var(--mar); font-weight: 600; }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important;}}
 
-  .lema {
-    font-family: var(--display); font-size: 22px; text-align: center; color: var(--ouro);
-    background: var(--carta-alt); border-radius: 12px; padding: 14px; margin: 16px 0;
-  }
-  .lema small { display: block; font-family: var(--corpo); font-size: 15px; color: var(--tinta-fraca); margin-top: 4px; }
+  .opcoes{display:grid; gap:10px;}
+  @media (min-width:520px){ .opcoes.tres{grid-template-columns:repeat(3,1fr);} .opcoes.duas{grid-template-columns:repeat(2,1fr);} }
+  .opcoes button{font-weight:500; text-align:left; line-height:1.35;}
+  .opcoes button[data-state="ok"]{background:color-mix(in srgb, var(--ok) 18%, var(--surface)); border-color:var(--ok); color:var(--ok);}
+  .opcoes button[data-state="no"]{background:color-mix(in srgb, var(--err) 14%, var(--surface)); border-color:var(--err); color:var(--err);}
 
-  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-variant-numeric: tabular-nums; }
-  th, td { padding: 9px 10px; text-align: left; border-bottom: 1px solid var(--linha); }
-  th { font-family: var(--display); font-size: 15px; color: var(--madeira); }
-  td.num { text-align: right; }
-  .tabela-caixa { overflow-x: auto; }
+  .fb{border-left:4px solid var(--line); padding:10px 14px; border-radius:0 10px 10px 0; background:var(--surface2); font-size:.95rem;}
+  .fb[data-k="ok"]{border-color:var(--ok);}
+  .fb[data-k="no"]{border-color:var(--err);}
+  .fb[data-k="dica"]{border-color:var(--gold);}
+  .fb[data-k="modelo"]{border-color:var(--accent);}
+  .fb b{font-family:var(--display);}
 
-  .botoes { display: grid; gap: 10px; margin: 16px 0; }
-  .op {
-    display: block; width: 100%; text-align: left; font: inherit; font-weight: 600;
-    background: var(--carta); color: var(--tinta); border: 2px solid var(--linha);
-    border-radius: 12px; padding: 14px 16px; cursor: pointer; min-height: 56px;
-  }
-  .op:hover:not([disabled]) { border-color: var(--ouro); }
-  .op:focus-visible { outline: 3px solid var(--mar); outline-offset: 2px; }
-  .op.certo { border-color: var(--certo); background: var(--certo-bg); }
-  .op.errado { border-color: var(--errado); background: var(--errado-bg); }
-  .op[disabled] { cursor: default; }
+  .regra{display:flex; flex-direction:column; gap:6px; padding:14px; border:1px solid var(--line);
+         border-radius:12px; background:var(--surface2);}
+  .regra .nome{font-family:var(--display); font-weight:800; font-size:1.05rem; color:var(--accent);}
+  .grupo{display:flex; flex-direction:column; gap:12px;}
 
-  .avisa { border-radius: 12px; padding: 14px 16px; margin: 14px 0; font-weight: 600; }
-  .avisa.ok { background: var(--certo-bg); color: var(--certo); }
-  .avisa.no { background: var(--errado-bg); color: var(--errado); }
-  .avisa.dica { background: var(--carta-alt); color: var(--tinta); }
-  .avisa p { margin: 6px 0 0; font-weight: 400; color: var(--tinta); }
+  .citacao{font-style:italic; padding:10px 14px; border-left:3px solid var(--line); color:var(--muted); font-size:1rem;}
 
-  .acoes { display: flex; gap: 10px; align-items: center; margin-top: 18px; flex-wrap: wrap; }
-  .btn {
-    font: inherit; font-family: var(--display); font-size: 17px; border-radius: 12px;
-    padding: 12px 22px; cursor: pointer; border: 2px solid var(--madeira);
-    background: var(--madeira); color: var(--carta); min-height: 52px;
-  }
-  .btn.fraco { background: transparent; color: var(--madeira); }
-  .btn[disabled] { opacity: .45; cursor: default; }
-  .btn:focus-visible { outline: 3px solid var(--mar); outline-offset: 2px; }
-  .espaco { flex: 1; }
-  .passo { font-size: 14px; color: var(--tinta-fraca); }
+  .contexto{background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:.95rem;}
 
-  textarea {
-    width: 100%; min-height: 150px; font: inherit; padding: 14px; border-radius: 12px;
-    border: 2px solid var(--linha); background: var(--carta); color: var(--tinta); resize: vertical;
-  }
-  textarea:focus { outline: none; border-color: var(--ouro); }
-  .chaves { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
-  .chave { background: var(--carta-alt); border-radius: 99px; padding: 6px 14px; font-size: 15px; font-weight: 600; color: var(--madeira); }
-  .conta { font-size: 14px; color: var(--tinta-fraca); text-align: right; }
+  .contador{font-size:.85rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:-4px;}
+  .nav .ghost{min-height:42px; padding:8px 16px; color:var(--muted);}
+  .nav .ghost:hover{color:var(--accent);}
+  .nav .contador{text-align:right;}
 
-  .placar { font-family: var(--display); font-size: 46px; color: var(--ouro); text-align: center; margin: 10px 0 0; }
-  .placar small { display: block; font-family: var(--corpo); font-size: 16px; color: var(--tinta-fraca); }
+  textarea{width:100%; box-sizing:border-box; font-family:var(--body); font-size:1.05rem; line-height:1.6;
+           padding:14px; border-radius:12px; border:1px solid var(--line); background:var(--surface2); color:var(--ink);
+           min-height:150px; resize:vertical;}
+  textarea:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{font-size:.85rem; padding:6px 12px; border-radius:999px; border:1px dashed var(--gold); color:var(--gold);}
+  .placar{display:flex; align-items:baseline; gap:10px; font-family:var(--display); font-weight:800; font-size:2.4rem; color:var(--accent);}
+  .placar small{font-family:var(--body); font-weight:400; font-size:1rem; color:var(--muted);}
+  .resumo{width:100%; box-sizing:border-box; font-family:ui-monospace,"Consolas",monospace; font-size:.8rem; min-height:200px;}
+  .linha{height:1px; background:var(--line); border:0; margin:0;}
+  footer{text-align:center; font-size:.8rem; color:var(--muted);}
 
-  svg.arte { width: 100%; height: auto; max-width: 340px; display: block; margin: 16px auto; }
-  /* ---------- linha do tempo ---------- */
-  .linha-tempo { display: grid; gap: 0; margin: 16px 0; }
-  .momento {
-    display: grid; grid-template-columns: 62px 1fr; gap: 14px; align-items: start;
-    padding: 12px 0 12px 0; border-left: 3px solid var(--linha); padding-left: 16px; margin-left: 8px;
-  }
-  .momento b { font-family: var(--display); font-size: 19px; color: var(--madeira); font-variant-numeric: tabular-nums; }
-  .momento span { font-size: 16px; }
-  .momento.destaque-tempo { border-left-color: var(--ouro); background: var(--carta-alt); border-radius: 0 10px 10px 0; }
-  .momento.destaque-tempo b { color: var(--ouro); }
+  .grupos{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:4px 0;}
+  .grupo-caixa{display:flex; flex-wrap:wrap; gap:4px; max-width:132px; justify-content:center;
+               padding:10px 12px; border:2px dashed var(--accent); border-radius:14px;
+               background:var(--surface2); font-size:1.55rem; line-height:1.1;}
+  .conta{font-family:var(--display); font-weight:800; font-size:1.35rem; color:var(--accent); letter-spacing:.02em;}
 
-  /* ---------- quem participou ---------- */
-  table.quem td { vertical-align: top; border-bottom: 1px solid var(--linha); }
-  table.quem td:first-child { width: 38px; font-size: 22px; }
-  table.quem tr:last-child td { border-bottom: none; }
+  .passos{margin:0; padding-left:1.4em; display:flex; flex-direction:column; gap:4px;}
+  .passos li{padding-left:2px;}
+  .ruim{color:var(--err); text-decoration:line-through; text-decoration-thickness:1px;}
 
-  /* ---------- a cola ---------- */
-  ul.cola { margin: 0; padding-left: 20px; }
-  ul.cola li { margin-bottom: 10px; }
-  ul.cola li:last-child { margin-bottom: 0; }
+  .tabterm{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
+           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
+  .tabterm b{font-family:var(--display); font-weight:600; color:var(--muted); font-size:.92rem;}
+  .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1.02rem; color:var(--ink);}
+  .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
+  .destaque{color:var(--accent); font-weight:600;}
 
-  .btn.perigo { border-color: var(--errado); color: var(--errado); background: transparent; font-size: 15px; padding: 10px 16px; }
+  .silabas{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:6px 0;}
+  .sil{display:flex; flex-direction:column; align-items:center; gap:4px;}
+  .sil b{font-family:var(--display); font-weight:600; font-size:1.2rem; padding:10px 16px;
+         border-radius:10px; background:var(--surface2); border:1px solid var(--line);}
+  .sil small{font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
+  .sil[data-forte] b{background:var(--gold); border-color:var(--gold); color:var(--on-accent); font-weight:800;}
+  .sil[data-forte] small{color:var(--gold); font-weight:700;}
+
+  .tabterm{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
+           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
+  .tabterm b{font-family:var(--display); font-weight:600; color:var(--muted); font-size:.92rem;}
+  .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1rem; color:var(--ink);}
+  .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
+  .pessoas{display:grid; grid-template-columns:auto auto; gap:4px 16px; justify-content:start;
+           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);
+           font-family:ui-monospace,"Consolas",monospace; font-size:1rem;}
+  .pessoas b{font-family:var(--display); color:var(--accent);}
+
+  .ciclo{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; padding:6px 0;}
+  .ciclo span{padding:9px 14px; border-radius:999px; background:var(--surface2); border:1px solid var(--line);
+              font-size:.95rem;}
+  .ciclo i{font-style:normal; color:var(--gold); font-weight:800;}
+  .versus{display:grid; gap:10px;}
+  @media (min-width:520px){ .versus{grid-template-columns:1fr 1fr;} }
+  .versus > div{padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
+  .versus h3{margin:0 0 6px; font-family:var(--display); font-size:1rem; color:var(--accent);}
+  .versus ul{margin:0; padding-left:1.1em; font-size:.92rem; color:var(--muted); display:flex; flex-direction:column; gap:3px;}
+
+  .frasev{font-size:1.08rem; padding:10px 14px; border-left:3px solid var(--accent);
+          background:var(--surface2); border-radius:0 10px 10px 0; line-height:1.8;}
+  .frasev em{font-style:normal; background:var(--gold); color:var(--on-accent);
+             padding:2px 7px; border-radius:6px; font-weight:700;}
+  .frasev s{color:var(--muted); text-decoration-thickness:1px;}
 </style>
 
-<div class="topo">
-  <div class="brand">
-    <strong>🏴‍☠️ Rota de Estudos</strong>
-    <span>30/09 · Den Den Mushi · EU, MIM ou ME</span>
-  </div>
-  <div class="barra"><i id="barra"></i></div>
+<div class="wrap">
+  <header>
+    <div class="brand"><b>Droidec</b><span>01/10 · Luffy no Mercado · Geografia — Consumo, propaganda e direitos</span></div>
+    <ul class="rota" id="rota"></ul>
+  </header>
+  <main id="tela"></main>
+  <footer>Feito pro Zion 🏴‍☠️</footer>
 </div>
 
-<main>
-
-  <!-- ===== BLOCO 1 — GANCHO ===== -->
-  <section class="tela on" id="t-gancho">
-    <p class="kicker">Missão de hoje</p>
-    <h1>O Den Den Mushi pifou</h1>
-
-    <div class="cena">
-      <p>O caracol-telefone do Sunny levou um tombo. Agora todo recado que chega vem com os pronomes trocados.</p>
-      <p>Chegou isso aqui da ilha vizinha:</p>
-      <p><span class="fala">“O capitão chamou eu para conversar. O mapa é para mim ler. Entre eu e você, o Den Den tá ruim.”</span></p>
-      <p>O Chopper leu três vezes e falou:</p>
-      <p><span class="fala">— Tem alguma coisa errada aí, mas eu não sei dizer o quê!</span></p>
-    </div>
-
-    <p>Duas dessas três frases estão erradas. Hoje você vai aprender a consertar — e tem um pronome que você ainda não usou: o <strong>me</strong>.</p>
-
-    <div class="acoes">
-      <button class="btn perigo" id="zerar-topo" hidden>🔄 Limpar respostas</button>
-      <span class="espaco"></span>
-      <button class="btn" data-ir="t-aula1">Bora! →</button>
-    </div>
-  </section>
-
-  <!-- ===== BLOCO 2A — EU E MIM ===== -->
-  <section class="tela" id="t-aula1">
-    <p class="kicker">Estudar · parte 1 de 3</p>
-    <h1>EU e MIM: o que você já domina</h1>
-
-    <p>Na sua folha você acertou quase tudo dessa parte. Vamos passar rápido só para firmar.</p>
-
-    <div class="carta">
-      <h3>EU = quem faz a ação</h3>
-      <p>Se a pessoa é quem <em>faz</em>, é <strong>eu</strong>.</p>
-      <p><strong>Eu</strong> terminei a tarefa. · <strong>Eu</strong> gosto de quadrinhos. · <strong>Eu</strong> preciso estudar.</p>
-      <p>Teste: dá para trocar por <em>ele</em> e continuar fazendo sentido? “<em>Ele</em> terminou a tarefa.” Fez sentido → é <strong>eu</strong>.</p>
-    </div>
-
-    <div class="carta">
-      <h3>MIM = depois de para, por, de, com, entre…</h3>
-      <p>Essas palavrinhas se chamam <strong>preposições</strong>. Depois delas, quando <u>não vem verbo</u>, é <strong>mim</strong>.</p>
-      <p>O presente é para <strong>mim</strong>. · Ela guardou um lugar para <strong>mim</strong>. · Não faça isso por <strong>mim</strong>. · Entre <strong>mim</strong> e você.</p>
-    </div>
-
-    <div class="carta destaque">
-      <h3>⚠️ A exceção: “para eu” + verbo</h3>
-      <p>Se depois do <em>para</em> vier um <strong>verbo</strong> e a pessoa for quem vai fazer aquilo, volta a ser <strong>eu</strong>.</p>
-      <p>Este livro é para <strong>eu ler</strong>. (quem lê sou eu)<br>
-      A professora pediu para <strong>eu organizar</strong> os livros. (quem organiza sou eu)</p>
-      <p><strong>O teste de 1 segundo:</strong> depois do “para”, tem verbo?<br>
-      Tem verbo → <strong>eu</strong>. Não tem → <strong>mim</strong>.</p>
-    </div>
-
-    <div class="carta">
-      <p>Compara os dois:</p>
-      <p>“A professora trouxe uma atividade para <strong>mim</strong>.” → depois de <em>para</em> não tem verbo.<br>
-      “A professora pediu para <strong>eu</strong> <u>fazer</u> a atividade.” → tem o verbo <em>fazer</em>.</p>
-    </div>
-
-    <div class="acoes">
-      <button class="btn fraco" data-ir="t-gancho">← Voltar</button>
-      <span class="espaco"></span>
-      <button class="btn" data-ir="t-aula2">Continuar →</button>
-    </div>
-  </section>
-
-  <!-- ===== BLOCO 2B — O ME ===== -->
-  <section class="tela" id="t-aula2">
-    <p class="kicker">Estudar · parte 2 de 3</p>
-    <h1>O terceiro pronome: ME</h1>
-
-    <div class="cena">
-      <p>Agora a parte nova — e é bem esta que apareceu na sua folha três vezes:</p>
-      <p><span class="fala">“O diretor chamou ___ para conversar.”</span></p>
-    </div>
-
-    <div class="carta destaque">
-      <h3>Aqui não é eu nem mim</h3>
-      <p>“O diretor chamou <s>eu</s>” ❌<br>
-      “O diretor chamou <s>mim</s>” ❌<br>
-      “O diretor <strong>me</strong> chamou para conversar.” ✅</p>
-      <p>Existe um terceiro pronome que quase ninguém lembra na hora: o <strong>me</strong>.</p>
-    </div>
-
-    <div class="carta">
-      <h3>Quando usar ME</h3>
-      <p>Quando o verbo age <strong>direto na pessoa</strong>, sem nenhuma preposição na frente.</p>
-      <p>O Zoro <strong>me</strong> chamou. · A Nami <strong>me</strong> viu. · O Chopper <strong>me</strong> ajudou. · O Luffy <strong>me</strong> esperou. · A Robin <strong>me</strong> levou.</p>
-      <p>Repara: <em>chamou, viu, ajudou, esperou, levou</em> — nenhum deles tem “para”, “por” ou “de” antes da pessoa. O verbo cai direto nela.</p>
-    </div>
-
-    <div class="carta destaque">
-      <h3>🔍 O teste do ELE</h3>
-      <p>Não sabe qual usar? Troca a pessoa por <strong>ele</strong> e escuta:</p>
-      <p>“O diretor chamou <strong>ele</strong>.” → soou natural? Então o verbo age direto → use <strong>me</strong>.</p>
-      <p>“O presente é para <strong>ele</strong>.” → tem o <em>para</em> antes → use <strong>mim</strong>.</p>
-      <p>“<strong>Ele</strong> chegou primeiro.” → é quem faz → use <strong>eu</strong>.</p>
-    </div>
-
-    <div class="carta">
-      <h3>Onde o ME fica na frase</h3>
-      <p>No Brasil a gente quase sempre põe <strong>antes do verbo</strong>:</p>
-      <p>✅ O professor <strong>me</strong> chamou.<br>
-      ✅ Ele <strong>me</strong> ajudou com a tarefa.<br>
-      (Existe “chamou-me”, com tracinho, mas isso é jeito de livro antigo. Fica com o de antes.)</p>
-    </div>
-
-    <div class="acoes">
-      <button class="btn fraco" data-ir="t-aula1">← Voltar</button>
-      <span class="espaco"></span>
-      <button class="btn" data-ir="t-aula3">Continuar →</button>
-    </div>
-  </section>
-
-  <!-- ===== BLOCO 2C — COLA ===== -->
-  <section class="tela" id="t-aula3">
-    <p class="kicker">Estudar · parte 3 de 3</p>
-    <h1>As três perguntas, em ordem</h1>
-
-    <p>Quando bater a dúvida, faz essas três perguntas na sequência. A primeira que der “sim” manda.</p>
-
-    <div class="carta destaque">
-      <h3>1️⃣ A pessoa é quem faz a ação?</h3>
-      <p>Sim → <strong>EU</strong>.</p>
-      <p><em>___ terminei a tarefa primeiro.</em> → quem terminou fui eu → <strong>Eu</strong> terminei.</p>
-    </div>
-
-    <div class="carta destaque">
-      <h3>2️⃣ Vem logo depois de para, por, de, com, entre?</h3>
-      <p>Tem verbo depois? → <strong>EU</strong>. Não tem? → <strong>MIM</strong>.</p>
-      <p><em>O mapa é para ___ guardar.</em> → tem o verbo <u>guardar</u> → para <strong>eu</strong> guardar.<br>
-      <em>O mapa é para ___.</em> → não tem verbo → para <strong>mim</strong>.</p>
-    </div>
-
-    <div class="carta destaque">
-      <h3>3️⃣ O verbo cai direto na pessoa, sem preposição?</h3>
-      <p>Sim → <strong>ME</strong>, e ele vai antes do verbo.</p>
-      <p><em>O professor chamou ___.</em> → não tem preposição → O professor <strong>me</strong> chamou.</p>
-    </div>
-
-    <h2>📋 A cola</h2>
-    <div class="carta">
-      <ul class="cola">
-        <li><strong>EU</strong> → é quem faz: <em>Eu fiz a atividade.</em></li>
-        <li><strong>MIM</strong> → depois de preposição, sem verbo: <em>É para mim.</em></li>
-        <li><strong>para EU + verbo</strong> → quando eu vou fazer: <em>para eu ler.</em></li>
-        <li><strong>ME</strong> → o verbo cai direto na pessoa: <em>Ele me chamou.</em></li>
-        <li>Na dúvida, troca por <strong>ele</strong> e escuta.</li>
-      </ul>
-    </div>
-
-    <div class="carta destaque">
-      <h3>Voltando ao Den Den Mushi</h3>
-      <p>“O capitão chamou eu para conversar.” → ❌ O capitão <strong>me</strong> chamou para conversar.</p>
-      <p>“O mapa é para mim ler.” → ❌ tem verbo → O mapa é para <strong>eu</strong> ler.</p>
-      <p>“Entre eu e você…” → ❌ depois de <em>entre</em>, sem verbo → Entre <strong>mim</strong> e você.</p>
-      <p>Três recados, três consertos. Bora treinar.</p>
-    </div>
-
-    <div class="acoes">
-      <button class="btn fraco" data-ir="t-aula2">← Voltar</button>
-      <span class="espaco"></span>
-      <button class="btn" data-ir="t-guiado">Treinar agora →</button>
-    </div>
-  </section>
-
-
-  <!-- ===== BLOCO 3 — TREINO GUIADO ===== -->
-  <section class="tela" id="t-guiado">
-    <p class="kicker">Nós fazemos · treino com dica</p>
-    <h1 id="g-titulo">Treino guiado</h1>
-    <p class="passo" id="g-passo"></p>
-    <div id="g-corpo"></div>
-    <div class="acoes">
-      <button class="btn fraco" id="g-voltar">← Voltar</button>
-      <span class="espaco"></span>
-      <button class="btn" id="g-proximo" disabled>Próximo →</button>
-    </div>
-  </section>
-
-  <!-- ===== BLOCO 4 — DESAFIO ===== -->
-  <section class="tela" id="t-desafio">
-    <p class="kicker">Você faz · sem dica</p>
-    <h1 id="d-titulo">Desafio da Ilha</h1>
-    <p class="passo" id="d-passo"></p>
-    <div id="d-corpo"></div>
-    <div class="acoes">
-      <button class="btn fraco" id="d-voltar">← Voltar</button>
-      <span class="espaco"></span>
-      <button class="btn" id="d-proximo" disabled>Próximo →</button>
-    </div>
-  </section>
-
-  <!-- ===== BLOCO 5 — EXPLIQUE ===== -->
-  <section class="tela" id="t-explica">
-    <p class="kicker">O bloco mais importante</p>
-    <h1>Explica pro Chopper</h1>
-    <div class="cena">
-      <p><span class="fala">— Droidec, socorro — diz o Chopper. — Como é que eu sei quando usar MIM e quando usar ME? Os dois não são a mesma coisa?</span></p>
-    </div>
-    <p>Responde pra ele com as suas palavras. Tenta usar estas três:</p>
-    <div class="chaves">
-      <span class="chave">preposição (para, por)</span>
-      <span class="chave">verbo</span>
-      <span class="chave">direto na pessoa</span>
-    </div>
-    <textarea id="txt" placeholder="Chopper, a diferença é que..." aria-label="Sua explicação"></textarea>
-    <p class="conta"><span id="conta">0</span> letras (precisa de 40)</p>
-    <div class="acoes">
-      <button class="btn fraco" id="e-voltar">← Voltar</button>
-      <span class="espaco"></span>
-      <button class="btn" id="e-proximo" disabled>Terminar →</button>
-    </div>
-  </section>
-
-  <!-- ===== BLOCO 6 — FECHAMENTO ===== -->
-  <section class="tela" id="t-fim">
-    <p class="kicker">Missão cumprida</p>
-    <h1>Fim da rota de hoje</h1>
-    <p class="placar" id="placar">—<small>de primeira</small></p>
-    <div class="carta destaque" id="merito"></div>
-    <div class="acoes">
-      <button class="btn fraco" id="f-voltar">← Voltar</button>
-      <span class="espaco"></span>
-      <button class="btn" id="copiar">📋 Copiar resumo pro papai</button>
-    </div>
-    <p class="passo" id="copiado"></p>
-
-    <div class="carta" style="margin-top:26px">
-      <h3>Quer treinar de novo?</h3>
-      <p>Dá para reler a explicação sem perder nada, ou apagar tudo e refazer os exercícios do zero.</p>
-      <div class="acoes">
-        <button class="btn fraco" data-ir="t-aula1">📖 Estudar de novo</button>
-        <span class="espaco"></span>
-        <button class="btn perigo" id="zerar-fim">🔄 Limpar e recomeçar</button>
-      </div>
-    </div>
-  </section>
-
-</main>
-
 <script>
-(function () {
+(function(){
   "use strict";
 
-  var DATA = "2026-09-30";
-  var TOPICO = "Pronomes: eu, mim e me";
-  var CHAVE = "zion-eu-mim-2026-09-30";
-
   var GUIADO = [
-    {
-      p: "___ cheguei primeiro no porto.",
-      o: ["Eu", "Mim", "Me"],
-      c: 0,
-      dica: "Pergunta 1: quem chegou? A pessoa é quem faz a ação?",
-      ok: "Isso. Quem chegou foi você — é quem faz a ação, então é EU.",
-      no: "É EU. Quem chegou é quem faz a ação — e quem faz é sempre EU."
-    },
-    {
-      p: "A Nami guardou um lugar para ___.",
-      o: ["eu", "mim", "me"],
-      c: 1,
-      dica: "Pergunta 2: vem depois de “para”. Tem verbo logo em seguida?",
-      ok: "Boa. Depois do “para” não vem verbo nenhum — então é MIM.",
-      no: "É MIM. Depois do “para” não tem verbo (a frase acaba ali), e aí fica MIM."
-    },
-    {
-      p: "O Luffy pediu para ___ segurar o leme.",
-      o: ["eu", "mim", "me"],
-      c: 0,
-      dica: "Também vem depois de “para” — mas repara na palavra seguinte: <em>segurar</em>.",
-      ok: "Exato! Tem o verbo <em>segurar</em> depois, e quem vai segurar é você → para EU segurar.",
-      no: "É EU. Tem o verbo <em>segurar</em> logo depois, e quem vai segurar é você: para eu segurar."
-    },
-    {
-      p: "O Zoro ___ chamou para treinar.",
-      o: ["eu", "mim", "me"],
-      c: 2,
-      dica: "Tem alguma preposição (para, por, de) antes do espaço? Faz o teste do ELE: “O Zoro chamou ele.”",
-      ok: "Isso aí! O verbo <em>chamou</em> cai direto na pessoa, sem preposição → ME, antes do verbo.",
-      no: "É ME. Não tem preposição nenhuma antes: o verbo <em>chamar</em> cai direto na pessoa → “O Zoro me chamou”."
-    }
+    {contexto:"O Luffy já tem quatro casacos guardados. Ele vê um anúncio de um casaco novo e quer comprar na hora.",
+     pergunta:"Comprar esse quinto casaco é o quê?",
+     opcoes:["Consumismo — ele não precisa, só quis depois de ver o anúncio","Consumo normal — todo mundo precisa de casaco","Economia"],
+     certa:0, dica:"Faz a pergunta que separa os dois: ele PRECISA ou só QUER porque viu em algum lugar?",
+     porque:"Consumismo é o consumo exagerado: comprar muito mais do que se precisa, quase sempre influenciado pela propaganda."},
+    {contexto:"No cartaz da carne está escrito tudo: o peso, o preço e “COMPRE JÁ, A MELHOR DO MUNDO!”.",
+     pergunta:"Além de informar, o que a propaganda está fazendo?",
+     opcoes:["Incentivando as pessoas a comprar","Só informando, nada mais","Ensinando a cozinhar"],
+     certa:0, dica:"Pensa em quem pagou pelo cartaz: é quem vende. O que essa pessoa quer que aconteça?",
+     porque:"A propaganda informa as características, mas o objetivo dela é convencer você a comprar. Os dois lados andam juntos."},
+    {contexto:null,
+     pergunta:"Onde a gente encontra propaganda?",
+     opcoes:["Em todo lugar: ruas, jornais, revistas, internet, televisão e rádio","Só na televisão","Só dentro das lojas"],
+     certa:0, dica:"Pensa no teu dia: do caminho da escola até o vídeo que você assiste. Em quantos lugares aparece anúncio?",
+     porque:"Os anúncios estão por toda parte — por isso é tão importante reconhecer quando um está tentando te convencer."},
+    {contexto:"Imagina a ilha inteira comprando cinco vezes mais do que precisa, todo mês.",
+     pergunta:"O que acontece como consequência?",
+     opcoes:["Aumenta a produção, a retirada de recursos da natureza e a quantidade de resíduos","Nada muda fora das lojas","A natureza se recupera mais rápido"],
+     certa:0, dica:"Tudo que é vendido precisou ser fabricado, e tudo que é fabricado saiu de algum lugar e vira lixo um dia.",
+     porque:"É a fila inteira: mais consumo → mais produção → mais recursos tirados da natureza → mais resíduos."},
+    {contexto:"A Nami ensina um truque pro Luffy usar antes de qualquer compra.",
+     pergunta:"Qual é a melhor pergunta pra fazer antes de comprar?",
+     opcoes:["“Eu preciso mesmo disso, ou só quero porque vi um anúncio?”","“Isso é bonito?”","“Alguém da tripulação tem um igual?”"],
+     certa:0, dica:"A pergunta boa é a que separa necessidade de vontade momentânea.",
+     porque:"Essa pergunta é o freio: ela coloca a decisão de volta na tua mão, em vez de deixar com quem fez o anúncio."}
   ];
 
   var DESAFIO = [
-    {
-      p: "Entre ___ e você não existe segredo.",
-      o: ["eu", "mim", "me"],
-      c: 1,
-      ok: "Certo. <em>Entre</em> é preposição e não vem verbo depois → MIM.",
-      no: "É MIM. <em>Entre</em> é preposição, e depois dela não tem verbo: entre mim e você."
-    },
-    {
-      p: "Esse mapa é para ___ estudar hoje à noite.",
-      o: ["eu", "mim", "me"],
-      c: 0,
-      ok: "Boa! O verbo <em>estudar</em> vem depois e quem estuda é você → para EU estudar.",
-      no: "É EU. Veio o verbo <em>estudar</em> depois do “para”, e quem vai estudar é você."
-    },
-    {
-      p: "🪤 O capitão ___ esperou no cais até de noite.",
-      o: ["eu", "mim", "me"],
-      c: 2,
-      ok: "Você não caiu! <em>Esperou</em> cai direto na pessoa, sem preposição → ME.",
-      no: "É ME. Faz o teste: “O capitão esperou ele” — funciona, então o verbo cai direto na pessoa: “me esperou”."
-    },
-    {
-      p: "🪤 A professora chamou ___ para conversar.",
-      o: ["eu", "mim", "me"],
-      c: 2,
-      ok: "Essa é a pegadinha da sua folha, e você acertou. <em>Chamou</em> não tem preposição → “me chamou”.",
-      no: "É ME — e essa é exatamente a que apareceu três vezes na sua folha. O certo é “A professora me chamou para conversar”."
-    },
-    {
-      p: "Não faça isso por ___. Faça porque você quer.",
-      o: ["eu", "mim", "me"],
-      c: 1,
-      ok: "Isso. <em>Por</em> é preposição e não tem verbo depois → MIM.",
-      no: "É MIM. Depois da preposição <em>por</em> não veio verbo nenhum."
-    },
-    {
-      p: "Qual frase está escrita certa?",
-      o: [
-        "O professor chamou eu para conversar.",
-        "O professor chamou mim para conversar.",
-        "O professor me chamou para conversar."
-      ],
-      c: 2,
-      ok: "Perfeito. Nem eu, nem mim: o verbo <em>chamar</em> pede ME, e ele fica antes do verbo.",
-      no: "A certa é “O professor me chamou para conversar”. As outras duas tentam usar eu/mim onde só cabe ME."
-    }
+    {contexto:"Pegadinha!",
+     pergunta:"Todo consumo é consumismo?",
+     opcoes:["Não — consumir o que a gente precisa é normal; consumismo é o exagero","Sim, comprar qualquer coisa é consumismo","Só é consumismo se for caro"],
+     certa:0, nota:"Comprar comida, material escolar e roupa é consumo e é necessário. Consumismo é comprar muito além da necessidade."},
+    {contexto:"Dona Zara vende pastel numa barraca montada na praça. Não tem loja fixa nem registro, e amanhã pode montar em outro lugar.",
+     pergunta:"Que tipo de comércio é esse?",
+     opcoes:["Comércio informal","Comércio formal, em estabelecimento","Prestação de serviço público"],
+     certa:0, nota:"Comércio informal acontece em praças, calçadas e semáforos, sem registro. Por isso quem trabalha assim fica sem as garantias de um emprego formal."},
+    {contexto:"Uma loja enorme vende alimento, roupa, televisão e geladeira, tudo no mesmo lugar.",
+     pergunta:"Como se chama esse estabelecimento?",
+     opcoes:["Hipermercado","Padaria","Camelô"],
+     certa:0, nota:"Hipermercado é o estabelecimento de grandes dimensões com ampla variedade, de alimentos a eletrodomésticos. Já o shopping center reúne muitas lojas diferentes num só espaço."},
+    {contexto:null,
+     pergunta:"Qual destes é prestação de SERVIÇO (e não venda de produto)?",
+     opcoes:["Uma consulta com o médico","Uma camiseta na loja","Um pão na padaria"],
+     certa:0, nota:"Serviço não é produto: ninguém leva a consulta para casa numa sacola. Educação, transporte e saúde são exemplos de serviço."},
+    {contexto:"Rede de esgoto, posto de saúde, escola, coleta de lixo e ônibus do bairro.",
+     pergunta:"Como se chamam esses serviços?",
+     opcoes:["Serviços públicos — essenciais, garantidos pelo governo","Serviços particulares de luxo","Comércio informal"],
+     certa:0, nota:"São considerados essenciais porque garantem direitos fundamentais. O governo presta diretamente ou contrata empresas para isso."},
+    {contexto:"Na caixa de cereal vêm o peso, a validade, os ingredientes e quem fabricou.",
+     pergunta:"Qual direito do consumidor está sendo cumprido aí?",
+     opcoes:["O direito de receber todas as informações sobre o produto","O direito de pagar menos","Nenhum, é só enfeite da embalagem"],
+     certa:0, nota:"É um direito garantido pelo Código de Defesa do Consumidor, de 1990. Sem essas informações, você compra sem saber o que está levando."},
+    {contexto:"Um anúncio promete que o sorvete novo faz a criança voar.",
+     pergunta:"O que há de errado?",
+     opcoes:["É propaganda enganosa, e o consumidor tem direito de ser protegido contra ela","Nada, propaganda pode prometer qualquer coisa","Só está errado se o sorvete for caro"],
+     certa:0, nota:"Prometer o que o produto não faz é enganar. O CDC protege o consumidor exatamente contra esse tipo de anúncio."},
+    {contexto:"Pegadinha final.",
+     pergunta:"Criança também é consumidora?",
+     opcoes:["Sim — consumidor é toda pessoa que compra OU utiliza produtos e serviços","Não, só quem tem dinheiro próprio","Só a partir dos 18 anos"],
+     certa:0, nota:"Você usa produtos e serviços todos os dias, então tem os mesmos direitos: informação, segurança e propaganda honesta."}
   ];
 
-  var estado = { iG: 0, iD: 0, respG: [], respD: [], texto: "", tela: "t-gancho" };
-  try {
-    var salvo = JSON.parse(localStorage.getItem(CHAVE));
-    if (salvo && salvo.respG) estado = salvo;
-  } catch (e) {}
-  function gravar() { try { localStorage.setItem(CHAVE, JSON.stringify(estado)); } catch (e) {} }
+  var KEY = "zion-consumo-propaganda-2026-10-01";
+  var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
+  var S = JSON.parse(JSON.stringify(VAZIO));
+  try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
+  function salva(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
-  var TELAS = ["t-gancho", "t-aula1", "t-aula2", "t-aula3", "t-guiado", "t-desafio", "t-explica", "t-fim"];
+  var el = function(t,c,x){ var n=document.createElement(t); if(c) n.className=c; if(x!=null) n.textContent=x; return n; };
+  var tela = document.getElementById("tela");
+  var TELAS = [gancho, regra, treino, desafio, explicacao, fim];
 
-  function mostrar(id) {
-    for (var i = 0; i < TELAS.length; i++) {
-      document.getElementById(TELAS[i]).classList.toggle("on", TELAS[i] === id);
+  function rota(){
+    var ul = document.getElementById("rota"); ul.innerHTML="";
+    for(var i=0;i<TELAS.length;i++){
+      var li = el("li"); li.appendChild(el("i"));
+      if(i < S.tela) li.setAttribute("data-on","");
+      if(i === S.tela) li.setAttribute("data-now","");
+      ul.appendChild(li);
     }
-    estado.tela = id; gravar();
-    document.getElementById("zerar-topo").hidden = !temProgresso();
-    window.scrollTo(0, 0);
-    progresso();
-    if (id === "t-guiado") pintarGuiado();
-    if (id === "t-desafio") pintarDesafio();
-    if (id === "t-explica") pintarExplica();
-    if (id === "t-fim") pintarFim();
   }
+  function vai(n){ S.tela = n; salva(); render(); window.scrollTo(0,0); }
+  function render(){ rota(); tela.innerHTML=""; tela.appendChild(TELAS[S.tela]()); }
 
-  function progresso() {
-    var total = 4 + GUIADO.length + DESAFIO.length + 1;
-    var feito = 0;
-    var ordem = TELAS.indexOf(estado.tela);
-    for (var k = 1; k <= 4 && ordem >= k; k++) feito += 1;
-    feito += contar(estado.respG);
-    feito += contar(estado.respD);
-    if (estado.texto.length >= 40) feito += 1;
-    if (estado.tela === "t-fim") feito = total;
-    document.getElementById("barra").style.width = Math.round((feito / total) * 100) + "%";
-  }
-  function contar(a) { var n = 0; for (var i = 0; i < a.length; i++) if (a[i] != null) n++; return n; }
+  function card(){ var c = el("div","card"); for(var i=0;i<arguments.length;i++) c.appendChild(arguments[i]); return c; }
+  function eyebrow(t){ return el("div","eyebrow",t); }
+  function botao(t,fn){ var b = el("button","go",t); b.addEventListener("click",fn); return b; }
 
-  /* ---------- um item de pergunta (serve para os dois blocos) ---------- */
-  function montarItem(cfg) {
-    var item = cfg.item, resp = cfg.resp, alvo = cfg.alvo, guiado = cfg.guiado;
-    alvo.innerHTML = "";
-
-    var pergunta = document.createElement("p");
-    pergunta.style.fontWeight = "700";
-    pergunta.style.fontSize = "20px";
-    pergunta.textContent = item.p;
-    alvo.appendChild(pergunta);
-
-    var caixa = document.createElement("div");
-    caixa.className = "botoes";
-    alvo.appendChild(caixa);
-
-    var respondido = resp != null;          // { escolha, tentativas } ou null
-    var aviso = document.createElement("div");
-
-    item.o.forEach(function (texto, idx) {
-      var b = document.createElement("button");
-      b.className = "op";
-      b.type = "button";
-      b.textContent = texto;
-      if (respondido) {
-        b.disabled = true;
-        if (idx === item.c) b.classList.add("certo");
-        else if (idx === resp.escolha && resp.escolha !== item.c) b.classList.add("errado");
-      } else {
-        b.addEventListener("click", function () { responder(idx); });
-      }
-      caixa.appendChild(b);
-    });
-
-    alvo.appendChild(aviso);
-
-    var tentativas = 0;
-
-    function responder(idx) {
-      tentativas++;
-      var acertou = idx === item.c;
-
-      if (guiado && !acertou && tentativas === 1) {
-        aviso.className = "avisa dica";
-        aviso.innerHTML = "🤔 Quase. <p>" + item.dica + "</p><p>Tenta de novo.</p>";
-        var bs = caixa.querySelectorAll(".op");
-        bs[idx].classList.add("errado");
-        bs[idx].disabled = true;
-        return;
-      }
-
-      resp = { escolha: idx, tentativas: tentativas };
-      cfg.salvar(resp);
-      travar();
-    }
-
-    function travar() {
-      var bs = caixa.querySelectorAll(".op");
-      for (var i = 0; i < bs.length; i++) {
-        bs[i].disabled = true;
-        bs[i].classList.remove("certo", "errado");
-        if (i === item.c) bs[i].classList.add("certo");
-        else if (i === resp.escolha && resp.escolha !== item.c) bs[i].classList.add("errado");
-      }
-      var acertou = resp.escolha === item.c;
-      aviso.className = "avisa " + (acertou ? "ok" : "no");
-      aviso.innerHTML = (acertou ? "✅ Isso aí!" : "❌ Dessa vez não.") +
-        "<p>" + (acertou ? item.ok : item.no) + "</p>";
-      cfg.liberar();
-    }
-
-    if (respondido) travar();
-    return respondido;
-  }
-
-  /* ---------- bloco guiado ---------- */
-  var gProximo = document.getElementById("g-proximo");
-  var gVoltar = document.getElementById("g-voltar");
-
-  function pintarGuiado() {
-    var i = estado.iG;
-    document.getElementById("g-passo").textContent = "Item " + (i + 1) + " de " + GUIADO.length;
-    gProximo.disabled = true;
-    gProximo.textContent = (i === GUIADO.length - 1) ? "Ir pro desafio →" : "Próximo →";
-    montarItem({
-      item: GUIADO[i],
-      resp: estado.respG[i] || null,
-      alvo: document.getElementById("g-corpo"),
-      guiado: true,
-      salvar: function (r) { estado.respG[i] = r; gravar(); progresso(); },
-      liberar: function () { gProximo.disabled = false; }
-    });
-  }
-
-  gProximo.addEventListener("click", function () {
-    if (estado.iG < GUIADO.length - 1) { estado.iG++; gravar(); pintarGuiado(); window.scrollTo(0, 0); }
-    else mostrar("t-desafio");
-  });
-  gVoltar.addEventListener("click", function () {
-    if (estado.iG > 0) { estado.iG--; gravar(); pintarGuiado(); window.scrollTo(0, 0); }
-    else mostrar("t-aula3");
-  });
-
-  /* ---------- bloco desafio ---------- */
-  var dProximo = document.getElementById("d-proximo");
-  var dVoltar = document.getElementById("d-voltar");
-
-  function pintarDesafio() {
-    var i = estado.iD;
-    document.getElementById("d-passo").textContent = "Item " + (i + 1) + " de " + DESAFIO.length;
-    dProximo.disabled = true;
-    dProximo.textContent = (i === DESAFIO.length - 1) ? "Explicar pro Chopper →" : "Próximo →";
-    montarItem({
-      item: DESAFIO[i],
-      resp: estado.respD[i] || null,
-      alvo: document.getElementById("d-corpo"),
-      guiado: false,
-      salvar: function (r) { estado.respD[i] = r; gravar(); progresso(); },
-      liberar: function () { dProximo.disabled = false; }
-    });
-  }
-
-  dProximo.addEventListener("click", function () {
-    if (estado.iD < DESAFIO.length - 1) { estado.iD++; gravar(); pintarDesafio(); window.scrollTo(0, 0); }
-    else mostrar("t-explica");
-  });
-  dVoltar.addEventListener("click", function () {
-    if (estado.iD > 0) { estado.iD--; gravar(); pintarDesafio(); window.scrollTo(0, 0); }
-    else mostrar("t-guiado");
-  });
-
-  /* ---------- bloco explicação ---------- */
-  var txt = document.getElementById("txt");
-  var eProximo = document.getElementById("e-proximo");
-
-  function pintarExplica() {
-    txt.value = estado.texto;
-    atualizarTexto();
-  }
-  function atualizarTexto() {
-    var n = txt.value.trim().length;
-    document.getElementById("conta").textContent = n;
-    eProximo.disabled = n < 40;
-    estado.texto = txt.value;
-    gravar(); progresso();
-  }
-  txt.addEventListener("input", atualizarTexto);
-  eProximo.addEventListener("click", function () { mostrar("t-fim"); });
-  document.getElementById("e-voltar").addEventListener("click", function () {
-    estado.iD = DESAFIO.length - 1; gravar(); mostrar("t-desafio");
-  });
-
-  /* ---------- fechamento ---------- */
-  function acertos(lista, base) {
-    var n = 0;
-    for (var i = 0; i < lista.length; i++) {
-      if (lista[i] && lista[i].escolha === base[i].c && lista[i].tentativas === 1) n++;
-    }
+  function navbar(rotulo, voltar){
+    var n = el("div","nav");
+    if(voltar){
+      var b = el("button","ghost","← Voltar");
+      b.addEventListener("click", function(){ voltar(); window.scrollTo(0,0); });
+      n.appendChild(b);
+    } else n.appendChild(el("span"));
+    n.appendChild(el("span","contador", rotulo));
     return n;
   }
-  function errados(lista, base) {
-    var out = [];
-    for (var i = 0; i < lista.length; i++) {
-      if (lista[i] && !(lista[i].escolha === base[i].c && lista[i].tentativas === 1)) {
-        out.push((i + 1) + ". " + base[i].p);
+  function pula(campo, valor, telaN){ S[campo] = valor; if(telaN!=null) S.tela = telaN; salva(); render(); }
+
+  function opcoesClasse(n){ return n<=2 ? "opcoes duas" : "opcoes tres"; }
+
+  /* ---------- 1. gancho ---------- */
+  function gancho(){
+    var p1 = el("p","lead","A tripulação atraca numa ilha de mercado. Luffy vê um cartaz gigante: “CARNE DOURADA — A MELHOR DO MUNDO! COMPRE JÁ!”. Dois minutos depois ele quer comprar cinco.");
+    var p2 = el("p","lead","A Nami segura a carteira: “Espera. Você está com fome, ou está com vontade porque viu o cartaz?”");
+    var p3 = el("p","lead","Hoje você vira o conselheiro do Luffy. Missão: entender como a propaganda mexe com a gente, o que é consumismo e quais direitos todo consumidor tem — inclusive você.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"Luffy no Mercado da Ilha"), p1, p2, p3, botao("Bora às compras! →", function(){ vai(1); }));
+  }
+
+  /* ---------- 2. a regra ---------- */
+  function regra(){
+    var g = el("div","grupo");
+
+    var r1 = el("div","regra");
+    r1.appendChild(el("div","nome","1. Consumo ≠ consumismo"));
+    var v = el("div","versus");
+    var a = el("div");
+    a.appendChild(el("h3",null,"Consumo"));
+    var ua = el("ul");
+    ["Comprar o que a gente precisa","Comida, roupa, material de escola","Normal: todo mundo consome"].forEach(function(t){ ua.appendChild(el("li",null,t)); });
+    a.appendChild(ua);
+    var b = el("div");
+    b.appendChild(el("h3",null,"Consumismo"));
+    var ub = el("ul");
+    ["Comprar MUITO MAIS do que precisa","A quinta mochila, o décimo brinquedo igual","É o consumo exagerado"].forEach(function(t){ ub.appendChild(el("li",null,t)); });
+    b.appendChild(ub);
+    v.appendChild(a); v.appendChild(b);
+    r1.appendChild(v);
+    r1.appendChild(el("p","muted","A pergunta que separa os dois: eu PRECISO disso, ou eu só QUERO porque vi em algum lugar?"));
+    g.appendChild(r1);
+
+    var r2 = el("div","regra");
+    r2.appendChild(el("div","nome","2. A propaganda tem dois lados"));
+    r2.appendChild(el("p","muted","Ela INFORMA as características do produto — isso ajuda. Mas também INCENTIVA você a comprar, e é aí que mora o perigo. Ela está em todo lugar: rua, TV, rádio, jornal, revista e internet."));
+    r2.appendChild(el("p","muted","Reconhecer uma propaganda é o primeiro passo para não ser levado por ela."));
+    g.appendChild(r2);
+
+    var r3 = el("div","regra");
+    r3.appendChild(el("div","nome","3. A conta não para na loja"));
+    var ciclo = el("div","ciclo");
+    ["consumismo","<i>→</i>","mais produção","<i>→</i>","mais recursos tirados da natureza","<i>→</i>","mais resíduos"].forEach(function(t){
+      var s = el("span"); s.innerHTML = t; ciclo.appendChild(s);
+    });
+    r3.appendChild(ciclo);
+    r3.appendChild(el("p","muted","Cada compra a mais puxa essa fila inteira. Por isso consumo consciente e meio ambiente andam juntos."));
+    g.appendChild(r3);
+
+    var r4 = el("div","regra");
+    r4.appendChild(el("div","nome","O resto da unidade, em 4 linhas"));
+    var ul = el("ul","passos");
+    ["<b>Comércio</b> = compra e venda de mercadorias (mercado, farmácia, loja, camelô, internet).",
+     "<b>Comércio informal</b> = sem registro e sem ponto fixo, em praças e calçadas; quem trabalha assim não tem direitos trabalhistas.",
+     "<b>Serviços</b> = não vendem produto, fazem algo por você (médico, escola, ônibus). Os <b>públicos</b> são essenciais e o governo precisa garantir.",
+     "<b>Direitos do consumidor</b> = a lei (CDC, de 1990) garante informação completa, segurança, propaganda honesta e serviço público de qualidade."].forEach(function(t){
+      var li = el("li"); li.innerHTML = t; ul.appendChild(li);
+    });
+    r4.appendChild(ul);
+    g.appendChild(r4);
+
+    var citacao = el("div","citacao","Luffy, apontando o cartaz: “Mas tá escrito A MELHOR DO MUNDO! Então é a melhor, né?”");
+
+    var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
+    modelo.appendChild(el("b",null,"\u{1F4B0} Nami pensa alto: "));
+    modelo.appendChild(document.createTextNode(
+      "primeiro eu pergunto: quem escreveu esse cartaz? Quem vende a carne. Então ele não está só informando — ele quer que a gente compre. " +
+      "Depois eu pergunto: eu preciso de cinco porções de carne hoje? Não, uma já dá. " +
+      "E por último: o que acontece se eu comprar as cinco? Sobra comida, vira lixo, e o dinheiro some do cofre. " +
+      "Conclusão: compro uma. Isso é consumo. Comprar as cinco por causa do cartaz seria consumismo."));
+
+    return card(
+      navbar("A regra", function(){ vai(0); }),
+      eyebrow("A regra"),
+      el("h2",null,"Quem decide a compra: você ou a propaganda?"),
+      g,
+      el("p","muted","Vê a Nami decidindo, passo a passo:"),
+      citacao, modelo,
+      el("p","muted","As três perguntas antes de comprar: QUEM ESTÁ ME DIZENDO ISSO? EU PRECISO MESMO? O QUE ACONTECE DEPOIS?"),
+      botao("Entendi, quero treinar →", function(){ vai(2); })
+    );
+  }
+
+  function montaOpcoes(q, ops, onEscolher){
+    q.opcoes.forEach(function(txt,i){
+      var b = el("button",null,txt);
+      b.addEventListener("click", function(){ if(!b.disabled) onEscolher(i,b); });
+      ops.appendChild(b);
+    });
+  }
+
+  /* ---------- 3. treino guiado ---------- */
+  function treino(){
+    var idx = S.iG;
+    if(idx >= GUIADO.length){
+      return card(
+        navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
+        eyebrow("Treino guiado"), el("h2",null,"Carteira salva!"),
+        el("p",null,"Você já separa precisar de querer. Agora é sem dica — e com as pegadinhas da unidade inteira."),
+        botao("Ir pro desafio →", function(){ vai(3); }));
+    }
+    var q = GUIADO[idx], feito = S.guiado[idx];
+    var c = el("div","card");
+    c.appendChild(navbar("Treino · " + (idx+1) + " de " + GUIADO.length, function(){
+      if(idx > 0) pula("iG", idx-1); else vai(1);
+    }));
+    if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.frase) c.appendChild(frase(q.frase));
+    c.appendChild(el("h2",null,q.pergunta));
+
+    var ops = el("div", opcoesClasse(q.opcoes.length));
+    var fb = el("div","fb"); fb.style.display="none";
+    var tentativa = 0;
+
+    function trava(){ Array.prototype.forEach.call(ops.children,function(x){ x.disabled=true; }); }
+    function proxima(){ c.appendChild(botao("Próxima →", function(){ pula("iG", idx+1); window.scrollTo(0,0); })); }
+    function diz(k, negrito, resto){
+      fb.style.display=""; fb.setAttribute("data-k",k); fb.innerHTML="";
+      fb.appendChild(el("b",null,negrito)); fb.appendChild(document.createTextNode(resto));
+    }
+
+    montaOpcoes(q, ops, function(i,b){
+      if(i === q.certa){
+        b.setAttribute("data-state","ok"); trava();
+        diz("ok","Isso mesmo! ", q.porque);
+        S.guiado[idx] = {feito:true, acertou: tentativa===0}; salva();
+        proxima();
+      } else {
+        tentativa++;
+        b.setAttribute("data-state","no");
+        if(tentativa === 1){
+          diz("dica","Quase. ", q.dica + " Tenta de novo.");
+        } else {
+          ops.children[q.certa].setAttribute("data-state","ok"); trava();
+          diz("no","A certa era: “" + q.opcoes[q.certa] + "”. ", q.porque);
+          S.guiado[idx] = {feito:true, acertou:false}; salva();
+          proxima();
+        }
       }
+    });
+    c.appendChild(ops); c.appendChild(fb);
+
+    if(feito){
+      ops.children[q.certa].setAttribute("data-state","ok"); trava();
+      diz(feito.acertou ? "ok" : "no",
+          feito.acertou ? "Você acertou de primeira. " : "Aqui você precisou de dica. ",
+          q.porque);
+      proxima();
     }
-    return out;
+    return c;
   }
 
-  function pintarFim() {
-    var aG = acertos(estado.respG, GUIADO), aD = acertos(estado.respD, DESAFIO);
-    var total = GUIADO.length + DESAFIO.length;
-    document.getElementById("placar").innerHTML = (aG + aD) + " / " + total + "<small>de primeira</small>";
-
-    var pegadinhas = 0;
-    if (estado.respD[2] && estado.respD[2].escolha === DESAFIO[2].c && estado.respD[2].tentativas === 1) pegadinhas++;
-    if (estado.respD[3] && estado.respD[3].escolha === DESAFIO[3].c && estado.respD[3].tentativas === 1) pegadinhas++;
-
-    var frase;
-    if (pegadinhas === 2) frase = "Você pegou as <strong>duas pegadinhas do ME</strong> — o “esperou” e o “chamou”. Eram exatamente essas que tinham escapado na folha da escola.";
-    else if (pegadinhas === 1) frase = "Você pegou <strong>uma das duas pegadinhas do ME</strong>. Na outra, lembra: se não tem preposição antes, o verbo cai direto na pessoa → me.";
-    else frase = "As duas pegadinhas do ME passaram batido — e são justamente o que caiu na folha. Vale voltar na parte 2 e refazer o teste do ELE.";
-
-    document.getElementById("merito").innerHTML =
-      "<h3>O que ficou de hoje</h3><p>" + frase + "</p>" +
-      "<p>Treino guiado: " + aG + "/" + GUIADO.length + " · Desafio: " + aD + "/" + DESAFIO.length + "</p>";
-  }
-
-  document.getElementById("f-voltar").addEventListener("click", function () { mostrar("t-explica"); });
-
-  document.getElementById("copiar").addEventListener("click", function () {
-    var aG = acertos(estado.respG, GUIADO), aD = acertos(estado.respD, DESAFIO);
-    var linhas = [];
-    linhas.push("ROTA DE ESTUDOS DO ZION — " + DATA);
-    linhas.push("Tópico: " + TOPICO + " (Língua Portuguesa, Year 4)");
-    linhas.push("");
-    linhas.push("PLACAR DE PRIMEIRA");
-    linhas.push("Treino guiado: " + aG + "/" + GUIADO.length);
-    linhas.push("Desafio: " + aD + "/" + DESAFIO.length);
-    linhas.push("");
-    var eG = errados(estado.respG, GUIADO), eD = errados(estado.respD, DESAFIO);
-    linhas.push("ERROU OU PRECISOU DE 2 TENTATIVAS");
-    if (!eG.length && !eD.length) linhas.push("(nenhum)");
-    eG.forEach(function (t) { linhas.push("[guiado] " + t); });
-    eD.forEach(function (t) { linhas.push("[desafio] " + t); });
-    linhas.push("");
-    linhas.push("EXPLICAÇÃO DELE (diferença entre MIM e ME):");
-    linhas.push(estado.texto.trim() || "(não escreveu)");
-    var texto = linhas.join("\n");
-
-    function feito() { document.getElementById("copiado").textContent = "✅ Copiado! Agora é só colar pro papai."; }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(texto).then(feito, manual);
-    } else manual();
-
-    function manual() {
-      var ta = document.createElement("textarea");
-      ta.value = texto; document.body.appendChild(ta); ta.select();
-      try { document.execCommand("copy"); feito(); }
-      catch (e) { document.getElementById("copiado").textContent = "Não deu para copiar sozinho — segura o dedo no texto e copia."; }
-      document.body.removeChild(ta);
+  /* ---------- 4. desafio ---------- */
+  function desafio(){
+    var idx = S.iD;
+    if(idx >= DESAFIO.length){
+      var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
+      return card(
+        navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
+        eyebrow("Desafio"), el("h2",null,"Compras conscientes! \u{1F6D2}"),
+        el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
+        botao("Última parada →", function(){ vai(4); }));
     }
-  });
+    var q = DESAFIO[idx], feito = S.desafio[idx];
+    var c = el("div","card");
+    c.appendChild(navbar("Desafio · " + (idx+1) + " de " + DESAFIO.length, function(){
+      if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
+    }));
+    if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.frase) c.appendChild(frase(q.frase));
+    c.appendChild(el("h2",null,q.pergunta));
 
+    var ops = el("div", opcoesClasse(q.opcoes.length));
+    var fb = el("div","fb"); fb.style.display="none";
+    function resolve(certo, negrito){
+      Array.prototype.forEach.call(ops.children,function(x,i){
+        x.disabled = true;
+        if(i === q.certa) x.setAttribute("data-state","ok");
+      });
+      fb.style.display=""; fb.setAttribute("data-k", certo?"ok":"no"); fb.innerHTML="";
+      fb.appendChild(el("b",null,negrito));
+      fb.appendChild(document.createTextNode(q.nota));
+      c.appendChild(botao("Próxima →", function(){ pula("iD", idx+1); window.scrollTo(0,0); }));
+    }
+    montaOpcoes(q, ops, function(i,b){
+      var certo = i === q.certa;
+      if(!certo) b.setAttribute("data-state","no");
+      S.desafio[idx] = {acertou:certo, marcou:q.opcoes[i]}; salva();
+      resolve(certo, certo ? "Certo! " : "Essa não é a melhor resposta. ");
+    });
+    c.appendChild(ops); c.appendChild(fb);
 
-  /* ---------- limpar respostas e recomeçar ---------- */
-  function temProgresso() {
-    return contar(estado.respG) > 0 || contar(estado.respD) > 0 || estado.texto.length > 0;
+    if(feito){
+      if(!feito.acertou){
+        Array.prototype.forEach.call(ops.children,function(x){ if(x.textContent === feito.marcou) x.setAttribute("data-state","no"); });
+      }
+      resolve(feito.acertou, feito.acertou ? "Você acertou: “" + q.opcoes[q.certa] + "”. " : "Você marcou “" + feito.marcou + "”, mas a melhor resposta era “" + q.opcoes[q.certa] + "”. ");
+    }
+    return c;
   }
-  function zerar() {
-    if (!window.confirm("Isso apaga as respostas e começa tudo de novo. Pode?")) return;
-    estado = { iG: 0, iD: 0, respG: [], respD: [], texto: "", tela: "t-gancho" };
-    try { localStorage.removeItem(CHAVE); } catch (e) {}
-    txt.value = "";
-    document.getElementById("copiado").textContent = "";
-    gravar();
-    mostrar("t-gancho");
-  }
-  document.getElementById("zerar-topo").addEventListener("click", zerar);
-  document.getElementById("zerar-fim").addEventListener("click", zerar);
 
-  /* ---------- navegação simples ---------- */
-  var irs = document.querySelectorAll("[data-ir]");
-  for (var i = 0; i < irs.length; i++) {
-    irs[i].addEventListener("click", function () { mostrar(this.getAttribute("data-ir")); });
+  /* ---------- 5. explique como Droidec ---------- */
+  function explicacao(){
+    var c2 = el("div","card");
+    c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
+    c2.appendChild(eyebrow("Explique como Droidec"));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
+    c2.appendChild(el("p","lead","O Luffy já tem quatro chapéus de palha iguais guardados, e quer comprar o quinto porque viu um anúncio. Explica pra ele, com as TUAS palavras, o que é consumismo e o que ele pode se perguntar ANTES de comprar."));
+    var chips = el("div","chips");
+    ["precisar x querer","propaganda","consumo exagerado"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
+    c2.appendChild(chips);
+    var ta = el("textarea"); ta.value = S.texto || "";
+    ta.setAttribute("placeholder","Luffy, consumismo é quando...");
+    var cont = el("div","contador","0 letras");
+    var b = botao("Terminei →", function(){ vai(5); });
+    b.disabled = true; b.style.opacity = ".45";
+    function check(){
+      S.texto = ta.value; salva();
+      var n = ta.value.trim().length;
+      cont.textContent = n + " letras" + (n<40 ? " — escreve mais um pouquinho" : " — pode seguir!");
+      b.disabled = n < 40; b.style.opacity = n < 40 ? ".45" : "1";
+    }
+    ta.addEventListener("input", check);
+    c2.appendChild(ta); c2.appendChild(cont); c2.appendChild(b);
+    check();
+    return c2;
   }
 
-  mostrar(estado.tela || "t-gancho");
+  /* ---------- 6. fim ---------- */
+  function fim(){
+    var tg=0, ag=0, td=0, ad=0, i;
+    for(i=0;i<GUIADO.length;i++){ if(S.guiado[i]){ tg++; if(S.guiado[i].acertou) ag++; } }
+    for(i=0;i<DESAFIO.length;i++){ if(S.desafio[i]){ td++; if(S.desafio[i].acertou) ad++; } }
+    var total = tg+td, acertos = ag+ad;
+
+    var c = el("div","card");
+    c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
+    c.appendChild(eyebrow("Fim da rota"));
+    c.appendChild(el("h2",null,"Mercado da Ilha, dominado \u{1F6D2}"));
+    var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
+    pl.appendChild(el("small",null,"acertos de primeira"));
+    c.appendChild(pl);
+
+    var msg = "Você já enxerga a propaganda agindo e sabe quais direitos tem como consumidor — inclusive sendo criança.";
+    if(ad <= 4) msg = "A diferença entre consumo e consumismo ainda embaralha. Antes de responder a folha, faz as três perguntas: quem está me dizendo? preciso mesmo? o que acontece depois?";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de “todo consumo é consumismo” e de criança ser consumidora.";
+    c.appendChild(el("p",null, msg + " Agora responde a folha: conta a história das três cenas, diz se é consumismo e inventa um final diferente."));
+
+    c.appendChild(el("hr","linha"));
+    c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
+
+    var txt = ["AULA DE HOJE — Geografia: Consumo, propaganda, comércio e direitos do consumidor (Luffy no Mercado)",
+               "Data: " + new Date().toLocaleDateString("pt-BR"),
+               "",
+               "Treino guiado: " + ag + "/" + tg + " de primeira",
+               "Desafio: " + ad + "/" + td + " de primeira",
+               "TOTAL: " + acertos + "/" + total,
+               ""];
+    var errou = [];
+    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push("Desafio " + (i+1) + ": marcou “" + S.desafio[i].marcou + "”, era “" + DESAFIO[i].opcoes[DESAFIO[i].certa] + "”");
+    for(i=0;i<GUIADO.length;i++) if(S.guiado[i] && !S.guiado[i].acertou) errou.push("Treino " + (i+1) + " (precisou de dica)");
+    txt.push("Errou / tropeçou:");
+    txt.push(errou.length ? "- " + errou.join("\n- ") : "- nada");
+    txt.push("", "EXPLICAÇÃO DO ZION (na íntegra):", (S.texto||"").trim() || "(não escreveu)");
+    var resumo = txt.join("\n");
+
+    var ta = el("textarea","resumo"); ta.value = resumo; ta.setAttribute("readonly","");
+    var b = botao("📋 Copiar resumo pro papai", function(){
+      ta.select();
+      var ok = false;
+      try{ ok = document.execCommand("copy"); }catch(e){}
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(resumo).then(function(){}, function(){}); ok = true; }
+      b.textContent = ok ? "✅ Copiado! Manda pro papai" : "Seleciona o texto abaixo e copia";
+    });
+    c.appendChild(b);
+    c.appendChild(ta);
+
+    var reset = el("button","ghost","Começar tudo de novo");
+    reset.addEventListener("click", function(){
+      S = JSON.parse(JSON.stringify(VAZIO)); salva(); render(); window.scrollTo(0,0);
+    });
+    c.appendChild(reset);
+    return c;
+  }
+
+  render();
 })();
 </script>
-</html>

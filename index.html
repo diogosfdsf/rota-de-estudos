@@ -155,11 +155,17 @@
   .frasev em{font-style:normal; background:var(--gold); color:var(--on-accent);
              padding:2px 7px; border-radius:6px; font-weight:700;}
   .frasev s{color:var(--muted); text-decoration-thickness:1px;}
+
+  .ficha{display:grid; gap:8px;}
+  .ficha > div{display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:baseline;
+               padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--surface2);}
+  .ficha b{font-family:var(--display); font-weight:600; color:var(--accent); font-size:.95rem;}
+  .ficha span{font-size:.93rem; color:var(--muted);}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>01/10 · Luffy no Mercado · Geografia — Consumo, propaganda e direitos</span></div>
+    <div class="brand"><b>Droidec</b><span>05/10 · O Caderno da Vivi · Português — Pesquisa de receita árabe</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -171,69 +177,69 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"O Luffy já tem quatro casacos guardados. Ele vê um anúncio de um casaco novo e quer comprar na hora.",
-     pergunta:"Comprar esse quinto casaco é o quê?",
-     opcoes:["Consumismo — ele não precisa, só quis depois de ver o anúncio","Consumo normal — todo mundo precisa de casaco","Economia"],
-     certa:0, dica:"Faz a pergunta que separa os dois: ele PRECISA ou só QUER porque viu em algum lugar?",
-     porque:"Consumismo é o consumo exagerado: comprar muito mais do que se precisa, quase sempre influenciado pela propaganda."},
-    {contexto:"No cartaz da carne está escrito tudo: o peso, o preço e “COMPRE JÁ, A MELHOR DO MUNDO!”.",
-     pergunta:"Além de informar, o que a propaganda está fazendo?",
-     opcoes:["Incentivando as pessoas a comprar","Só informando, nada mais","Ensinando a cozinhar"],
-     certa:0, dica:"Pensa em quem pagou pelo cartaz: é quem vende. O que essa pessoa quer que aconteça?",
-     porque:"A propaganda informa as características, mas o objetivo dela é convencer você a comprar. Os dois lados andam juntos."},
-    {contexto:null,
-     pergunta:"Onde a gente encontra propaganda?",
-     opcoes:["Em todo lugar: ruas, jornais, revistas, internet, televisão e rádio","Só na televisão","Só dentro das lojas"],
-     certa:0, dica:"Pensa no teu dia: do caminho da escola até o vídeo que você assiste. Em quantos lugares aparece anúncio?",
-     porque:"Os anúncios estão por toda parte — por isso é tão importante reconhecer quando um está tentando te convencer."},
-    {contexto:"Imagina a ilha inteira comprando cinco vezes mais do que precisa, todo mês.",
-     pergunta:"O que acontece como consequência?",
-     opcoes:["Aumenta a produção, a retirada de recursos da natureza e a quantidade de resíduos","Nada muda fora das lojas","A natureza se recupera mais rápido"],
-     certa:0, dica:"Tudo que é vendido precisou ser fabricado, e tudo que é fabricado saiu de algum lugar e vira lixo um dia.",
-     porque:"É a fila inteira: mais consumo → mais produção → mais recursos tirados da natureza → mais resíduos."},
-    {contexto:"A Nami ensina um truque pro Luffy usar antes de qualquer compra.",
-     pergunta:"Qual é a melhor pergunta pra fazer antes de comprar?",
-     opcoes:["“Eu preciso mesmo disso, ou só quero porque vi um anúncio?”","“Isso é bonito?”","“Alguém da tripulação tem um igual?”"],
-     certa:0, dica:"A pergunta boa é a que separa necessidade de vontade momentânea.",
-     porque:"Essa pergunta é o freio: ela coloca a decisão de volta na tua mão, em vez de deixar com quem fez o anúncio."}
+    {contexto:"Na pesquisa sobre a esfiha, a Vivi achou: “½ xícara (chá) de azeite”.",
+     pergunta:"Em qual campo da ficha isso entra?",
+     opcoes:["Ingredientes","Utensílios","Curiosidades ou origem"],
+     certa:0, dica:"Pergunta do escriba: isso vai DENTRO da comida, ou é uma coisa que eu uso e depois lavo?",
+     porque:"Azeite vai dentro da comida, então é ingrediente — e já veio com a quantidade, do jeito certo."},
+    {contexto:"Agora apareceu: “assadeira retangular”.",
+     pergunta:"Em qual campo entra?",
+     opcoes:["Utensílios","Ingredientes","Modo de preparo"],
+     certa:0, dica:"Ninguém come a assadeira. O que acontece com ela depois que a comida sai?",
+     porque:"Assadeira é utensílio: você usa pra assar e depois lava. Forno, tigela e colher entram na mesma lista."},
+    {contexto:"No site estava escrito: “Misture tudo numa tigela até ficar homogêneo.”",
+     pergunta:"Como fica melhor no teu registro?",
+     opcoes:["Com as minhas palavras e dizendo o que é “tudo”: “Misture a farinha, o sal e a água na tigela até virar uma massa lisa.”","Copiando exatamente igual ao site","Pulando esse passo, porque está confuso"],
+     certa:0, dica:"Lembra das duas regras: escrever com as suas palavras, e deixar claro pra quem nunca fez.",
+     porque:"Registrar é entender e reescrever do seu jeito. De quebra, você conserta o “tudo”, que ninguém sabe o que é."},
+    {contexto:"A Vivi descobriu: “O tabule é um prato típico do Líbano e da Síria, feito com trigo, tomate, cebola e muita salsinha.”",
+     pergunta:"Em qual campo da ficha isso entra?",
+     opcoes:["Curiosidades ou origem da receita","Modo de preparo","Utensílios"],
+     certa:0, dica:"Essa frase não ensina a fazer nada — ela conta de onde o prato veio.",
+     porque:"Origem, história e significado do nome entram em Curiosidades. É a parte que mostra que você pesquisou de verdade."},
+    {contexto:"Hora de escolher onde pesquisar.",
+     pergunta:"Qual fonte é mais confiável para uma pesquisa de receita?",
+     opcoes:["Um livro de receitas ou um site de culinária conhecido","Um comentário solto num vídeo","O que um amigo acha que talvez seja"],
+     certa:0, dica:"Fonte boa é aquela que você consegue dizer o nome e mostrar pra professora.",
+     porque:"Livro, site de culinária e enciclopédia dão informação checada. E você ainda consegue anotar de onde tirou."}
   ];
 
   var DESAFIO = [
-    {contexto:"Pegadinha!",
-     pergunta:"Todo consumo é consumismo?",
-     opcoes:["Não — consumir o que a gente precisa é normal; consumismo é o exagero","Sim, comprar qualquer coisa é consumismo","Só é consumismo se for caro"],
-     certa:0, nota:"Comprar comida, material escolar e roupa é consumo e é necessário. Consumismo é comprar muito além da necessidade."},
-    {contexto:"Dona Zara vende pastel numa barraca montada na praça. Não tem loja fixa nem registro, e amanhã pode montar em outro lugar.",
-     pergunta:"Que tipo de comércio é esse?",
-     opcoes:["Comércio informal","Comércio formal, em estabelecimento","Prestação de serviço público"],
-     certa:0, nota:"Comércio informal acontece em praças, calçadas e semáforos, sem registro. Por isso quem trabalha assim fica sem as garantias de um emprego formal."},
-    {contexto:"Uma loja enorme vende alimento, roupa, televisão e geladeira, tudo no mesmo lugar.",
-     pergunta:"Como se chama esse estabelecimento?",
-     opcoes:["Hipermercado","Padaria","Camelô"],
-     certa:0, nota:"Hipermercado é o estabelecimento de grandes dimensões com ampla variedade, de alimentos a eletrodomésticos. Já o shopping center reúne muitas lojas diferentes num só espaço."},
-    {contexto:null,
-     pergunta:"Qual destes é prestação de SERVIÇO (e não venda de produto)?",
-     opcoes:["Uma consulta com o médico","Uma camiseta na loja","Um pão na padaria"],
-     certa:0, nota:"Serviço não é produto: ninguém leva a consulta para casa numa sacola. Educação, transporte e saúde são exemplos de serviço."},
-    {contexto:"Rede de esgoto, posto de saúde, escola, coleta de lixo e ônibus do bairro.",
-     pergunta:"Como se chamam esses serviços?",
-     opcoes:["Serviços públicos — essenciais, garantidos pelo governo","Serviços particulares de luxo","Comércio informal"],
-     certa:0, nota:"São considerados essenciais porque garantem direitos fundamentais. O governo presta diretamente ou contrata empresas para isso."},
-    {contexto:"Na caixa de cereal vêm o peso, a validade, os ingredientes e quem fabricou.",
-     pergunta:"Qual direito do consumidor está sendo cumprido aí?",
-     opcoes:["O direito de receber todas as informações sobre o produto","O direito de pagar menos","Nenhum, é só enfeite da embalagem"],
-     certa:0, nota:"É um direito garantido pelo Código de Defesa do Consumidor, de 1990. Sem essas informações, você compra sem saber o que está levando."},
-    {contexto:"Um anúncio promete que o sorvete novo faz a criança voar.",
-     pergunta:"O que há de errado?",
-     opcoes:["É propaganda enganosa, e o consumidor tem direito de ser protegido contra ela","Nada, propaganda pode prometer qualquer coisa","Só está errado se o sorvete for caro"],
-     certa:0, nota:"Prometer o que o produto não faz é enganar. O CDC protege o consumidor exatamente contra esse tipo de anúncio."},
-    {contexto:"Pegadinha final.",
-     pergunta:"Criança também é consumidora?",
-     opcoes:["Sim — consumidor é toda pessoa que compra OU utiliza produtos e serviços","Não, só quem tem dinheiro próprio","Só a partir dos 18 anos"],
-     certa:0, nota:"Você usa produtos e serviços todos os dias, então tem os mesmos direitos: informação, segurança e propaganda honesta."}
+    {contexto:"Lista embolada da esfiha: hortelã, processador, trigo.",
+     pergunta:"Qual deles é UTENSÍLIO?",
+     opcoes:["Processador","Hortelã","Trigo"],
+     certa:0, nota:"Processador é máquina: você usa e depois lava. Hortelã e trigo vão dentro da comida."},
+    {contexto:"Três anotações de ingrediente.",
+     pergunta:"Qual está completa?",
+     opcoes:["1 xícara (chá) de trigo para quibe","trigo","um pouco de trigo"],
+     certa:0, nota:"Ingrediente sem quantidade não serve: quem lê não sabe quanto pegar. Sempre o quê + quanto."},
+    {contexto:"Pegadinha da pesquisa.",
+     pergunta:"Registrar uma pesquisa é copiar o texto do site para o caderno?",
+     opcoes:["Não — é entender, separar nos campos e escrever com as minhas palavras, anotando de onde veio","Sim, desde que seja um site bom","Sim, se eu copiar bem rápido"],
+     certa:0, nota:"Copiar mostra que você achou. Reescrever mostra que você entendeu — e é isso que a professora está avaliando."},
+    {contexto:"Quibe, esfiha, tabule e coalhada.",
+     pergunta:"De onde vêm esses pratos?",
+     opcoes:["Dos países árabes do Oriente Médio, principalmente Líbano e Síria","Da Itália","Do Japão"],
+     certa:0, nota:"São pratos da região do Levante, no Oriente Médio. O nome quibe vem do árabe kibbeh, que quer dizer bola — pelo formato que ele ganha na mão."},
+    {contexto:"Hoje tem quibe em padaria de todo canto do Brasil.",
+     pergunta:"Como esses pratos chegaram aqui?",
+     opcoes:["Com os imigrantes sírios e libaneses, no fim do século XIX e começo do século XX","Com os portugueses, em 1500","Foram inventados no Brasil"],
+     certa:0, nota:"As famílias que vieram da Síria e do Líbano trouxeram a comida junto. Aqui, o cordeiro da receita original foi trocado por carne bovina, mais fácil de achar."},
+    {contexto:"Três jeitos de escrever o mesmo passo.",
+     pergunta:"Qual está escrito como passo de modo de preparo?",
+     opcoes:["Deixe o trigo de molho na água por 20 minutos.","O trigo de molho na água.","Molho de trigo com água."],
+     certa:0, nota:"Passo começa com verbo de ação e diz o que fazer. As outras duas só dão nome às coisas."},
+    {contexto:"A professora vai olhar a ficha inteira.",
+     pergunta:"O que NÃO pode faltar numa ficha de pesquisa?",
+     opcoes:["Dizer de onde veio a informação (a fonte)","Um desenho colorido","O nome de quem te ajudou a cozinhar"],
+     certa:0, nota:"A fonte é o que prova que você pesquisou. Pode ser o nome do site, o livro ou “minha avó me contou”."},
+    {contexto:"Pegadinha final: “2 colheres (sopa) de hortelã picada”.",
+     pergunta:"Nessa linha, a colher é o quê?",
+     opcoes:["É a MEDIDA; o ingrediente é a hortelã","É o ingrediente","É uma curiosidade"],
+     certa:0, nota:"Xícara, colher e copo aparecem como medida dentro do ingrediente. A colher só vai pra lista de utensílios se você for usar ela pra mexer."}
   ];
 
-  var KEY = "zion-consumo-propaganda-2026-10-01";
+  var KEY = "zion-receita-arabe-2026-10-05";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -275,10 +281,10 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","A tripulação atraca numa ilha de mercado. Luffy vê um cartaz gigante: “CARNE DOURADA — A MELHOR DO MUNDO! COMPRE JÁ!”. Dois minutos depois ele quer comprar cinco.");
-    var p2 = el("p","lead","A Nami segura a carteira: “Espera. Você está com fome, ou está com vontade porque viu o cartaz?”");
-    var p3 = el("p","lead","Hoje você vira o conselheiro do Luffy. Missão: entender como a propaganda mexe com a gente, o que é consumismo e quais direitos todo consumidor tem — inclusive você.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"Luffy no Mercado da Ilha"), p1, p2, p3, botao("Bora às compras! →", function(){ vai(1); }));
+    var p1 = el("p","lead","Em Alabasta, o reino do deserto, a princesa Vivi descobriu um problema: as receitas antigas do palácio só existiam na cabeça das cozinheiras. Ninguém tinha escrito nada.");
+    var p2 = el("p","lead","Ela decidiu montar um Caderno de Receitas do Reino. Mas descobriu que não basta perguntar e sair escrevendo: precisa PESQUISAR direito e REGISTRAR organizado, senão vira bagunça.");
+    var p3 = el("p","lead","Hoje você é o escriba da Vivi. Missão: aprender a transformar uma pesquisa de receita numa ficha que qualquer um entende — e descobrir a história por trás dos pratos árabes.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O Caderno da Vivi"), p1, p2, p3, botao("Bora pesquisar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
@@ -286,69 +292,47 @@
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. Consumo ≠ consumismo"));
-    var v = el("div","versus");
-    var a = el("div");
-    a.appendChild(el("h3",null,"Consumo"));
-    var ua = el("ul");
-    ["Comprar o que a gente precisa","Comida, roupa, material de escola","Normal: todo mundo consome"].forEach(function(t){ ua.appendChild(el("li",null,t)); });
-    a.appendChild(ua);
-    var b = el("div");
-    b.appendChild(el("h3",null,"Consumismo"));
-    var ub = el("ul");
-    ["Comprar MUITO MAIS do que precisa","A quinta mochila, o décimo brinquedo igual","É o consumo exagerado"].forEach(function(t){ ub.appendChild(el("li",null,t)); });
-    b.appendChild(ub);
-    v.appendChild(a); v.appendChild(b);
-    r1.appendChild(v);
-    r1.appendChild(el("p","muted","A pergunta que separa os dois: eu PRECISO disso, ou eu só QUERO porque vi em algum lugar?"));
+    r1.appendChild(el("div","nome","1. Pesquisar é procurar em fonte boa — e anotar de onde veio"));
+    r1.appendChild(el("p","muted","Fonte boa é livro de receitas, site de culinária conhecido, enciclopédia ou alguém da família que cozinha de verdade. Sempre anote ONDE achou: é isso que transforma um palpite em pesquisa."));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. A propaganda tem dois lados"));
-    r2.appendChild(el("p","muted","Ela INFORMA as características do produto — isso ajuda. Mas também INCENTIVA você a comprar, e é aí que mora o perigo. Ela está em todo lugar: rua, TV, rádio, jornal, revista e internet."));
-    r2.appendChild(el("p","muted","Reconhecer uma propaganda é o primeiro passo para não ser levado por ela."));
+    r2.appendChild(el("div","nome","2. Registrar é separar em campos"));
+    r2.appendChild(el("p","muted","A informação que você achou vem toda embolada num texto corrido. Registrar é colocar cada pedaço no lugar certo da ficha:"));
+    var f = el("div","ficha");
+    [["Ingredientes","o que vai DENTRO da comida, com quantidade e medida"],
+     ["Utensílios","o que você USA e depois lava (tigela, assadeira, forno)"],
+     ["Modo de preparo","os passos numerados, um verbo de ação em cada"],
+     ["Curiosidades / origem","de onde o prato veio, o que o nome significa, como chegou aqui"]].forEach(function(l){
+      var d = el("div"); d.appendChild(el("b",null,l[0])); d.appendChild(el("span",null,l[1])); f.appendChild(d);
+    });
+    r2.appendChild(f);
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. A conta não para na loja"));
-    var ciclo = el("div","ciclo");
-    ["consumismo","<i>→</i>","mais produção","<i>→</i>","mais recursos tirados da natureza","<i>→</i>","mais resíduos"].forEach(function(t){
-      var s = el("span"); s.innerHTML = t; ciclo.appendChild(s);
-    });
-    r3.appendChild(ciclo);
-    r3.appendChild(el("p","muted","Cada compra a mais puxa essa fila inteira. Por isso consumo consciente e meio ambiente andam juntos."));
+    r3.appendChild(el("div","nome","3. Com as SUAS palavras"));
+    r3.appendChild(el("p","muted","Copiar o texto do site palavra por palavra não é registrar pesquisa — é copiar. Leia, entenda, feche a página e escreva do seu jeito. Se não conseguir escrever sem olhar, é sinal de que ainda não entendeu."));
     g.appendChild(r3);
 
-    var r4 = el("div","regra");
-    r4.appendChild(el("div","nome","O resto da unidade, em 4 linhas"));
-    var ul = el("ul","passos");
-    ["<b>Comércio</b> = compra e venda de mercadorias (mercado, farmácia, loja, camelô, internet).",
-     "<b>Comércio informal</b> = sem registro e sem ponto fixo, em praças e calçadas; quem trabalha assim não tem direitos trabalhistas.",
-     "<b>Serviços</b> = não vendem produto, fazem algo por você (médico, escola, ônibus). Os <b>públicos</b> são essenciais e o governo precisa garantir.",
-     "<b>Direitos do consumidor</b> = a lei (CDC, de 1990) garante informação completa, segurança, propaganda honesta e serviço público de qualidade."].forEach(function(t){
-      var li = el("li"); li.innerHTML = t; ul.appendChild(li);
-    });
-    r4.appendChild(ul);
-    g.appendChild(r4);
-
-    var citacao = el("div","citacao","Luffy, apontando o cartaz: “Mas tá escrito A MELHOR DO MUNDO! Então é a melhor, né?”");
+    var citacao = el("div","citacao","No livro antigo do palácio está escrito tudo embolado: “Para a esfiha misture a farinha com o fermento e a água morna e deixe a massa descansar enquanto refoga a carne com cebola e tomate numa frigideira.”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F4B0} Nami pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F4DC} Vivi pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu pergunto: quem escreveu esse cartaz? Quem vende a carne. Então ele não está só informando — ele quer que a gente compre. " +
-      "Depois eu pergunto: eu preciso de cinco porções de carne hoje? Não, uma já dá. " +
-      "E por último: o que acontece se eu comprar as cinco? Sobra comida, vira lixo, e o dinheiro some do cofre. " +
-      "Conclusão: compro uma. Isso é consumo. Comprar as cinco por causa do cartaz seria consumismo."));
+      "primeiro eu garimpo os INGREDIENTES: farinha, fermento, água morna, carne, cebola, tomate. Anoto cada um e já marco que preciso descobrir a quantidade. " +
+      "Depois eu procuro os UTENSÍLIOS escondidos no texto: apareceu “frigideira”, então ela vai pra lista. " +
+      "Agora o MODO DE PREPARO: eu quebro aquele textão em passos, um verbo em cada — 1. Misture a farinha, o fermento e a água morna. 2. Deixe a massa descansar. 3. Refogue a carne com cebola e tomate. " +
+      "E no fim eu anoto de onde tirei tudo isso. Pronto: virou ficha."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Quem decide a compra: você ou a propaganda?"),
+      el("h2",null,"Como virar pesquisador de receita"),
+      el("p",null,"Pesquisar não é achar um texto e copiar. É procurar, entender, separar e escrever do seu jeito."),
       g,
-      el("p","muted","Vê a Nami decidindo, passo a passo:"),
+      el("p","muted","Vê a Vivi transformando um textão em ficha, passo a passo:"),
       citacao, modelo,
-      el("p","muted","As três perguntas antes de comprar: QUEM ESTÁ ME DIZENDO ISSO? EU PRECISO MESMO? O QUE ACONTECE DEPOIS?"),
+      el("p","muted","A pergunta que organiza tudo: ESSA INFORMAÇÃO VAI EM QUAL CAMPO DA FICHA?"),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -367,8 +351,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Carteira salva!"),
-        el("p",null,"Você já separa precisar de querer. Agora é sem dica — e com as pegadinhas da unidade inteira."),
+        eyebrow("Treino guiado"), el("h2",null,"Ficha organizada!"),
+        el("p",null,"Você já sabe em que campo cada informação entra. Agora é sem dica — e com as pegadinhas da pesquisa."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -429,7 +413,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Compras conscientes! \u{1F6D2}"),
+        eyebrow("Desafio"), el("h2",null,"Pesquisa pronta! \u{1F4D6}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -476,14 +460,14 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
-    c2.appendChild(el("p","lead","O Luffy já tem quatro chapéus de palha iguais guardados, e quer comprar o quinto porque viu um anúncio. Explica pra ele, com as TUAS palavras, o que é consumismo e o que ele pode se perguntar ANTES de comprar."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pra Vivi?"));
+    c2.appendChild(el("p","lead","O Usopp disse pra Vivi que pesquisar é só copiar o texto do site e colar no caderno. Explica pra ela, com as TUAS palavras, por que isso não é pesquisar de verdade — e o que você faz em vez disso."));
     var chips = el("div","chips");
-    ["precisar x querer","propaganda","consumo exagerado"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["minhas palavras","campos da ficha","de onde veio"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Luffy, consumismo é quando...");
+    ta.setAttribute("placeholder","Vivi, copiar não vale porque...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -509,20 +493,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Mercado da Ilha, dominado \u{1F6D2}"));
+    c.appendChild(el("h2",null,"Caderno da Vivi, completo \u{1F4DC}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já enxerga a propaganda agindo e sabe quais direitos tem como consumidor — inclusive sendo criança.";
-    if(ad <= 4) msg = "A diferença entre consumo e consumismo ainda embaralha. Antes de responder a folha, faz as três perguntas: quem está me dizendo? preciso mesmo? o que acontece depois?";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de “todo consumo é consumismo” e de criança ser consumidora.";
-    c.appendChild(el("p",null, msg + " Agora responde a folha: conta a história das três cenas, diz se é consumismo e inventa um final diferente."));
+    var msg = "Você já separa a pesquisa em campos e escreve com as suas palavras — é isso que a professora quer ver na ficha.";
+    if(ad <= 4) msg = "Separar ingrediente de utensílio ainda confunde. Antes de preencher a ficha, pergunta em cada item: isso vai DENTRO da comida ou vai pra pia?";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas da colher que é medida e do copiar-colar que não é pesquisa.";
+    c.appendChild(el("p",null, msg + " Agora preenche a tua ficha do quibe: um campo por vez, com as tuas palavras, e anota de onde tirou cada informação."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Geografia: Consumo, propaganda, comércio e direitos do consumidor (Luffy no Mercado)",
+    var txt = ["AULA DE HOJE — Português: Pesquisa e registro de uma receita árabe (O Caderno da Vivi)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

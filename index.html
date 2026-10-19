@@ -161,11 +161,20 @@
                padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--surface2);}
   .ficha b{font-family:var(--display); font-weight:600; color:var(--accent); font-size:.95rem;}
   .ficha span{font-size:.93rem; color:var(--muted);}
+
+  .verbos{display:flex; flex-direction:column; gap:8px; padding:6px 0;}
+  .vb{display:flex; align-items:baseline; gap:2px; flex-wrap:wrap; font-family:var(--display); font-size:1.25rem;}
+  .vb .rad{background:var(--accent); color:var(--on-accent); padding:3px 9px; border-radius:8px 0 0 8px; font-weight:800;}
+  .vb .ter{background:var(--gold); color:var(--on-accent); padding:3px 9px; border-radius:0 8px 8px 0; font-weight:800;}
+  .vb .rad[data-muda]{background:var(--err); color:#fff;}
+  .vb small{font-family:var(--body); font-size:.85rem; color:var(--muted); margin-left:8px;}
+  .legenda{display:flex; gap:14px; flex-wrap:wrap; font-size:.85rem; color:var(--muted);}
+  .legenda i{font-style:normal; display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:5px;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>05/10 · O Caderno da Vivi · Português — Pesquisa de receita árabe</span></div>
+    <div class="brand"><b>Droidec</b><span>19/10 · O Log Pose do Jinbe · Português — Verbos regulares e irregulares</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -177,69 +186,69 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"Na pesquisa sobre a esfiha, a Vivi achou: “½ xícara (chá) de azeite”.",
-     pergunta:"Em qual campo da ficha isso entra?",
-     opcoes:["Ingredientes","Utensílios","Curiosidades ou origem"],
-     certa:0, dica:"Pergunta do escriba: isso vai DENTRO da comida, ou é uma coisa que eu uso e depois lavo?",
-     porque:"Azeite vai dentro da comida, então é ingrediente — e já veio com a quantidade, do jeito certo."},
-    {contexto:"Agora apareceu: “assadeira retangular”.",
-     pergunta:"Em qual campo entra?",
-     opcoes:["Utensílios","Ingredientes","Modo de preparo"],
-     certa:0, dica:"Ninguém come a assadeira. O que acontece com ela depois que a comida sai?",
-     porque:"Assadeira é utensílio: você usa pra assar e depois lava. Forno, tigela e colher entram na mesma lista."},
-    {contexto:"No site estava escrito: “Misture tudo numa tigela até ficar homogêneo.”",
-     pergunta:"Como fica melhor no teu registro?",
-     opcoes:["Com as minhas palavras e dizendo o que é “tudo”: “Misture a farinha, o sal e a água na tigela até virar uma massa lisa.”","Copiando exatamente igual ao site","Pulando esse passo, porque está confuso"],
-     certa:0, dica:"Lembra das duas regras: escrever com as suas palavras, e deixar claro pra quem nunca fez.",
-     porque:"Registrar é entender e reescrever do seu jeito. De quebra, você conserta o “tudo”, que ninguém sabe o que é."},
-    {contexto:"A Vivi descobriu: “O tabule é um prato típico do Líbano e da Síria, feito com trigo, tomate, cebola e muita salsinha.”",
-     pergunta:"Em qual campo da ficha isso entra?",
-     opcoes:["Curiosidades ou origem da receita","Modo de preparo","Utensílios"],
-     certa:0, dica:"Essa frase não ensina a fazer nada — ela conta de onde o prato veio.",
-     porque:"Origem, história e significado do nome entram em Curiosidades. É a parte que mostra que você pesquisou de verdade."},
-    {contexto:"Hora de escolher onde pesquisar.",
-     pergunta:"Qual fonte é mais confiável para uma pesquisa de receita?",
-     opcoes:["Um livro de receitas ou um site de culinária conhecido","Um comentário solto num vídeo","O que um amigo acha que talvez seja"],
-     certa:0, dica:"Fonte boa é aquela que você consegue dizer o nome e mostrar pra professora.",
-     porque:"Livro, site de culinária e enciclopédia dão informação checada. E você ainda consegue anotar de onde tirou."}
+    {contexto:"O infinitivo do verbo é NADAR.",
+     pergunta:"Qual é o radical dele?",
+     opcoes:["nad","nadar","ar"],
+     certa:0, dica:"No infinitivo, tira o -ar, -er ou -ir. O que sobrar é o radical.",
+     porque:"nadar − ar = nad. Esse pedaço é que carrega o sentido do verbo e aparece em nado, nadei, nadarei."},
+    {contexto:"Olha estas três formas do verbo pular:", formas:[["pul","o","eu pulo"],["pul","ei","eu pulei"],["pul","ará","ele pulará"]],
+     pergunta:"O radical mudou em alguma delas?",
+     opcoes:["Não — “pul” continuou igual nas três","Sim, mudou nas três","Sim, mudou só na última"],
+     certa:0, dica:"Tapa o fim da palavra com o dedo e olha só o começo das três.",
+     porque:"O “pul” ficou firme. Quando o radical não muda, o verbo é REGULAR — e dá pra prever todas as formas."},
+    {contexto:"Agora o verbo trazer:", formas:[["traz","er","infinitivo"],["trag","o","eu trago",1],["troux","e","eu trouxe",1]],
+     pergunta:"E aqui, o que aconteceu com o radical?",
+     opcoes:["Mudou: “traz” virou “trag” e depois “troux”","Continuou igual","Sumiu"],
+     certa:0, dica:"Compara só os começos: traz… trag… troux…",
+     porque:"O radical mudou duas vezes. Quando isso acontece, o verbo é IRREGULAR: não dá pra prever a forma."},
+    {contexto:"Atenção ao que a pergunta pede.",
+     pergunta:"Quando um enunciado fala da PARTE INICIAL do verbo, ele está falando de quê?",
+     opcoes:["Do radical — o começo da palavra","Da terminação — o fim da palavra","Do nome do verbo"],
+     certa:0, dica:"Inicial é início, é o começo. Qual das duas partes fica no começo?",
+     porque:"Parte inicial = radical. Se a pergunta fosse sobre o fim, ela diria “terminação” ou “final”. Ler o enunciado com calma vale metade da nota."},
+    {contexto:"Dois verbos para comparar: CANTAR e IR.",
+     pergunta:"Qual deles é mais previsível?",
+     opcoes:["Cantar — dá pra adivinhar: canto, cantei, cantarei","Ir — é sempre igual","Os dois são iguais"],
+     certa:0, dica:"Tenta adivinhar o passado de cada um sem pensar muito. Em qual deles você erraria?",
+     porque:"Cantar segue o padrão. Já o IR muda completamente: eu vou, eu fui, eu irei — nem parece o mesmo verbo."}
   ];
 
   var DESAFIO = [
-    {contexto:"Lista embolada da esfiha: hortelã, processador, trigo.",
-     pergunta:"Qual deles é UTENSÍLIO?",
-     opcoes:["Processador","Hortelã","Trigo"],
-     certa:0, nota:"Processador é máquina: você usa e depois lava. Hortelã e trigo vão dentro da comida."},
-    {contexto:"Três anotações de ingrediente.",
-     pergunta:"Qual está completa?",
-     opcoes:["1 xícara (chá) de trigo para quibe","trigo","um pouco de trigo"],
-     certa:0, nota:"Ingrediente sem quantidade não serve: quem lê não sabe quanto pegar. Sempre o quê + quanto."},
-    {contexto:"Pegadinha da pesquisa.",
-     pergunta:"Registrar uma pesquisa é copiar o texto do site para o caderno?",
-     opcoes:["Não — é entender, separar nos campos e escrever com as minhas palavras, anotando de onde veio","Sim, desde que seja um site bom","Sim, se eu copiar bem rápido"],
-     certa:0, nota:"Copiar mostra que você achou. Reescrever mostra que você entendeu — e é isso que a professora está avaliando."},
-    {contexto:"Quibe, esfiha, tabule e coalhada.",
-     pergunta:"De onde vêm esses pratos?",
-     opcoes:["Dos países árabes do Oriente Médio, principalmente Líbano e Síria","Da Itália","Do Japão"],
-     certa:0, nota:"São pratos da região do Levante, no Oriente Médio. O nome quibe vem do árabe kibbeh, que quer dizer bola — pelo formato que ele ganha na mão."},
-    {contexto:"Hoje tem quibe em padaria de todo canto do Brasil.",
-     pergunta:"Como esses pratos chegaram aqui?",
-     opcoes:["Com os imigrantes sírios e libaneses, no fim do século XIX e começo do século XX","Com os portugueses, em 1500","Foram inventados no Brasil"],
-     certa:0, nota:"As famílias que vieram da Síria e do Líbano trouxeram a comida junto. Aqui, o cordeiro da receita original foi trocado por carne bovina, mais fácil de achar."},
-    {contexto:"Três jeitos de escrever o mesmo passo.",
-     pergunta:"Qual está escrito como passo de modo de preparo?",
-     opcoes:["Deixe o trigo de molho na água por 20 minutos.","O trigo de molho na água.","Molho de trigo com água."],
-     certa:0, nota:"Passo começa com verbo de ação e diz o que fazer. As outras duas só dão nome às coisas."},
-    {contexto:"A professora vai olhar a ficha inteira.",
-     pergunta:"O que NÃO pode faltar numa ficha de pesquisa?",
-     opcoes:["Dizer de onde veio a informação (a fonte)","Um desenho colorido","O nome de quem te ajudou a cozinhar"],
-     certa:0, nota:"A fonte é o que prova que você pesquisou. Pode ser o nome do site, o livro ou “minha avó me contou”."},
-    {contexto:"Pegadinha final: “2 colheres (sopa) de hortelã picada”.",
-     pergunta:"Nessa linha, a colher é o quê?",
-     opcoes:["É a MEDIDA; o ingrediente é a hortelã","É o ingrediente","É uma curiosidade"],
-     certa:0, nota:"Xícara, colher e copo aparecem como medida dentro do ingrediente. A colher só vai pra lista de utensílios se você for usar ela pra mexer."}
+    {contexto:"Infinitivo: CORRER.",
+     pergunta:"Qual é o radical?",
+     opcoes:["corr","correr","er"],
+     certa:0, nota:"correr − er = corr. Ele reaparece em corro, corri, correrei."},
+    {contexto:"Verbo BEBER:", formas:[["beb","o","eu bebo"],["beb","i","eu bebi"],["beb","erei","eu beberei"]],
+     pergunta:"Regular ou irregular?",
+     opcoes:["Regular — o radical “beb” não muda","Irregular — o radical muda"],
+     certa:0, nota:"Radical firme nas três formas: regular, e por isso previsível."},
+    {contexto:"Verbo VER:", formas:[["vej","o","eu vejo",1],["vi","","eu vi",1],["ver","ei","eu verei"]],
+     pergunta:"Regular ou irregular?",
+     opcoes:["Irregular — “ver” virou “vej” e depois “vi”","Regular — só o fim mudou"],
+     certa:0, nota:"O começo pulou duas vezes. Irregular — e dos bem famosos."},
+    {contexto:"Uma pergunta da folha dizia: “O que você percebe sobre a parte inicial de cada verbo?”",
+     pergunta:"Qual destas respostas responde o que foi perguntado?",
+     opcoes:["A parte inicial continua igual em todas as formas conjugadas","Todos terminam com a letra O","São três verbos diferentes"],
+     certa:0, nota:"Pegadinha de enunciado: falar da letra final responde outra pergunta. Quando o enunciado diz “parte inicial”, a resposta tem que falar do radical."},
+    {contexto:"Dois verbos: PESCAR e TRAZER.",
+     pergunta:"Qual muda de um jeito MENOS previsível?",
+     opcoes:["Trazer — trago, trouxe: ninguém adivinha","Pescar — pesco, pesquei","Os dois mudam igual"],
+     certa:0, nota:"Em pescar o radical “pesc” se mantém. Em trazer ele vira trag e troux: imprevisível."},
+    {contexto:"O verbo IR é o campeão dos irregulares.",
+     pergunta:"Por quê?",
+     opcoes:["Porque muda completamente: vou, fui, irei — quase não sobra nada do original","Porque é curtinho","Porque ninguém usa"],
+     certa:0, nota:"Em alguns verbos o radical só se ajusta; no IR ele troca de identidade. E mesmo assim é um dos verbos que a gente mais usa."},
+    {contexto:"Verbo SALTAR:", formas:[["salt","o","eu salto"],["salt","ei","eu saltei"],["salt","arão","eles saltarão"]],
+     pergunta:"Como classificar?",
+     opcoes:["Regular","Irregular"],
+     certa:0, nota:"“salt” nas três. Regular — e serve de modelo para todos os verbos terminados em -ar."},
+    {contexto:"Pegadinha final.",
+     pergunta:"Verbo irregular é verbo errado?",
+     opcoes:["Não — é só um verbo que não segue o padrão dos outros","Sim, é um erro de português","Sim, por isso ninguém deve usar"],
+     certa:0, nota:"Irregular quer dizer “fora da regra”, não “errado”. Ser, ir, fazer, dizer e ter são irregulares — e estão entre os mais usados da língua."}
   ];
 
-  var KEY = "zion-receita-arabe-2026-10-05";
+  var KEY = "zion-regulares-irregulares-2026-10-19";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -281,58 +290,79 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","Em Alabasta, o reino do deserto, a princesa Vivi descobriu um problema: as receitas antigas do palácio só existiam na cabeça das cozinheiras. Ninguém tinha escrito nada.");
-    var p2 = el("p","lead","Ela decidiu montar um Caderno de Receitas do Reino. Mas descobriu que não basta perguntar e sair escrevendo: precisa PESQUISAR direito e REGISTRAR organizado, senão vira bagunça.");
-    var p3 = el("p","lead","Hoje você é o escriba da Vivi. Missão: aprender a transformar uma pesquisa de receita numa ficha que qualquer um entende — e descobrir a história por trás dos pratos árabes.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"O Caderno da Vivi"), p1, p2, p3, botao("Bora pesquisar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","O Jinbe explica pro Luffy como funciona o Log Pose, a bússola que marca a rota entre as ilhas.");
+    var p2 = el("p","lead","“No primeiro mar, a agulha é mansa: aponta sempre do mesmo jeito, e dá pra adivinhar onde ela vai parar. Mas no Novo Mundo ela pula sozinha, muda de ideia e aponta pro lado contrário. Aí não tem como prever.”");
+    var p3 = el("p","lead","Os verbos são iguaizinhos. Uns seguem sempre o mesmo caminho; outros mudam no meio e ninguém adivinha. Hoje você aprende a diferenciar os dois — e a enxergar as DUAS PARTES que todo verbo tem.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O Log Pose do Jinbe"), p1, p2, p3, botao("Bora navegar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
+  function vb(rad, ter, nota, muda){
+    var d = el("div","vb");
+    var r = el("span","rad", rad); if(muda) r.setAttribute("data-muda","");
+    d.appendChild(r);
+    d.appendChild(el("span","ter", ter));
+    if(nota) d.appendChild(el("small",null,nota));
+    return d;
+  }
+
+  function listaVb(itens){
+    var w = el("div","verbos");
+    itens.forEach(function(i){ w.appendChild(vb(i[0], i[1], i[2], i[3])); });
+    return w;
+  }
+
   function regra(){
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. Pesquisar é procurar em fonte boa — e anotar de onde veio"));
-    r1.appendChild(el("p","muted","Fonte boa é livro de receitas, site de culinária conhecido, enciclopédia ou alguém da família que cozinha de verdade. Sempre anote ONDE achou: é isso que transforma um palpite em pesquisa."));
+    r1.appendChild(el("div","nome","1. Todo verbo tem duas partes"));
+    r1.appendChild(el("p","muted","A parte do COMEÇO é o RADICAL: é ela que carrega o sentido do verbo. A parte do FIM é a TERMINAÇÃO: é ela que diz a pessoa e o tempo."));
+    r1.appendChild(listaVb([["cant","ar","← no infinitivo, tira o -ar, -er ou -ir e o que sobra é o radical"],
+                            ["cant","o","eu canto (hoje)"],
+                            ["cant","ei","eu cantei (ontem)"],
+                            ["cant","arei","eu cantarei (amanhã)"]]));
+    var leg = el("div","legenda");
+    var l1 = el("span"); l1.innerHTML = '<i style="background:var(--accent)"></i>radical (o começo)';
+    var l2 = el("span"); l2.innerHTML = '<i style="background:var(--gold)"></i>terminação (o fim)';
+    leg.appendChild(l1); leg.appendChild(l2);
+    r1.appendChild(leg);
+    r1.appendChild(el("p","muted","Repara: o “cant” nunca saiu do lugar. Quem muda é só o fim."));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. Registrar é separar em campos"));
-    r2.appendChild(el("p","muted","A informação que você achou vem toda embolada num texto corrido. Registrar é colocar cada pedaço no lugar certo da ficha:"));
-    var f = el("div","ficha");
-    [["Ingredientes","o que vai DENTRO da comida, com quantidade e medida"],
-     ["Utensílios","o que você USA e depois lava (tigela, assadeira, forno)"],
-     ["Modo de preparo","os passos numerados, um verbo de ação em cada"],
-     ["Curiosidades / origem","de onde o prato veio, o que o nome significa, como chegou aqui"]].forEach(function(l){
-      var d = el("div"); d.appendChild(el("b",null,l[0])); d.appendChild(el("span",null,l[1])); f.appendChild(d);
-    });
-    r2.appendChild(f);
+    r2.appendChild(el("div","nome","2. Verbo REGULAR: o radical não muda"));
+    r2.appendChild(el("p","muted","Segue sempre o mesmo caminho, como o Log Pose do primeiro mar. Por isso é PREVISÍVEL: você consegue adivinhar a forma sem nunca ter ouvido."));
+    r2.appendChild(listaVb([["vend","o","eu vendo"],["vend","i","eu vendi"],["part","o","eu parto"],["part","i","eu parti"]]));
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. Com as SUAS palavras"));
-    r3.appendChild(el("p","muted","Copiar o texto do site palavra por palavra não é registrar pesquisa — é copiar. Leia, entenda, feche a página e escreva do seu jeito. Se não conseguir escrever sem olhar, é sinal de que ainda não entendeu."));
+    r3.appendChild(el("div","nome","3. Verbo IRREGULAR: o radical muda"));
+    r3.appendChild(el("p","muted","A agulha pula. O começo do verbo se transforma no meio do caminho — e aí não dá para prever:"));
+    r3.appendChild(listaVb([["faç","o","eu faço",1],["fiz","","eu fiz — o “faz” virou “fiz”",1],
+                            ["dig","o","eu digo",1],["diss","e","eu disse",1],
+                            ["vou","","eu vou — do verbo IR, mudou tudo!",1],["fui","","eu fui",1]]));
+    r3.appendChild(el("p","muted","Irregular não quer dizer errado: quer dizer que não segue o padrão. E são justamente os verbos mais usados: ser, ir, fazer, dizer, ter."));
     g.appendChild(r3);
 
-    var citacao = el("div","citacao","No livro antigo do palácio está escrito tudo embolado: “Para a esfiha misture a farinha com o fermento e a água morna e deixe a massa descansar enquanto refoga a carne com cebola e tomate numa frigideira.”");
+    var citacao = el("div","citacao","Jinbe, com o Log Pose na mão: “Vamos testar dois verbos: VENDER e TRAZER.”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F4DC} Vivi pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F9ED} Jinbe pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu garimpo os INGREDIENTES: farinha, fermento, água morna, carne, cebola, tomate. Anoto cada um e já marco que preciso descobrir a quantidade. " +
-      "Depois eu procuro os UTENSÍLIOS escondidos no texto: apareceu “frigideira”, então ela vai pra lista. " +
-      "Agora o MODO DE PREPARO: eu quebro aquele textão em passos, um verbo em cada — 1. Misture a farinha, o fermento e a água morna. 2. Deixe a massa descansar. 3. Refogue a carne com cebola e tomate. " +
-      "E no fim eu anoto de onde tirei tudo isso. Pronto: virou ficha."));
+      "primeiro eu acho o radical no infinitivo: VENDER, tiro o -er, sobra “vend”. TRAZER, tiro o -er, sobra “traz”. " +
+      "Agora eu conjugo os dois e vigio só o começo. Vender: eu vendo, eu vendi, eu venderei — “vend” firme nas três. A agulha não pulou: é REGULAR. " +
+      "Trazer: eu trago… opa, virou “trag”. E no passado: eu trouxe — virou “troux”! A agulha pulou duas vezes: é IRREGULAR. " +
+      "Repara que eu nunca olhei para o fim da palavra. O que entrega a resposta é sempre o COMEÇO."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Como virar pesquisador de receita"),
-      el("p",null,"Pesquisar não é achar um texto e copiar. É procurar, entender, separar e escrever do seu jeito."),
+      el("h2",null,"A agulha que pula: regulares e irregulares"),
       g,
-      el("p","muted","Vê a Vivi transformando um textão em ficha, passo a passo:"),
+      el("p","muted","Vê o Jinbe classificando dois verbos, passo a passo:"),
       citacao, modelo,
-      el("p","muted","A pergunta que organiza tudo: ESSA INFORMAÇÃO VAI EM QUAL CAMPO DA FICHA?"),
+      el("p","muted","O teste é sempre o mesmo: ACHA O RADICAL → CONJUGA → O COMEÇO MUDOU?"),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -351,8 +381,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Ficha organizada!"),
-        el("p",null,"Você já sabe em que campo cada informação entra. Agora é sem dica — e com as pegadinhas da pesquisa."),
+        eyebrow("Treino guiado"), el("h2",null,"Rota traçada!"),
+        el("p",null,"Você já acha o radical e vigia o começo do verbo. Agora é sem dica — e com as pegadinhas de enunciado."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -361,6 +391,7 @@
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.formas) c.appendChild(listaVb(q.formas));
     if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
@@ -413,7 +444,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Pesquisa pronta! \u{1F4D6}"),
+        eyebrow("Desafio"), el("h2",null,"Agulha dominada! \u{1F9ED}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -423,6 +454,7 @@
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.formas) c.appendChild(listaVb(q.formas));
     if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
@@ -460,14 +492,21 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pra Vivi?"));
-    c2.appendChild(el("p","lead","O Usopp disse pra Vivi que pesquisar é só copiar o texto do site e colar no caderno. Explica pra ela, com as TUAS palavras, por que isso não é pesquisar de verdade — e o que você faz em vez disso."));
+    c2.appendChild(el("h2",null,"Compare os dois e explique"));
+    c2.appendChild(el("p","lead","Olha estas quatro formas:"));
+    var ex = el("div","verbos");
+    ex.appendChild(vb("pul","o","eu pulo"));
+    ex.appendChild(vb("pul","ei","eu pulei"));
+    ex.appendChild(vb("trag","o","eu trago",1));
+    ex.appendChild(vb("troux","e","eu trouxe",1));
+    c2.appendChild(ex);
+    c2.appendChild(el("p","lead","Escreve, com as TUAS palavras, o que acontece com o RADICAL de cada um dos dois verbos (pular e trazer) e qual deles é mais previsível. Essa é exatamente a resposta que a folha pede."));
     var chips = el("div","chips");
-    ["minhas palavras","campos da ficha","de onde veio"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["radical","terminação","previsível"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Vivi, copiar não vale porque...");
+    ta.setAttribute("placeholder","No verbo pular, o radical...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -493,20 +532,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Caderno da Vivi, completo \u{1F4DC}"));
+    c.appendChild(el("h2",null,"Log Pose calibrado \u{1F9ED}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já separa a pesquisa em campos e escreve com as suas palavras — é isso que a professora quer ver na ficha.";
-    if(ad <= 4) msg = "Separar ingrediente de utensílio ainda confunde. Antes de preencher a ficha, pergunta em cada item: isso vai DENTRO da comida ou vai pra pia?";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas da colher que é medida e do copiar-colar que não é pesquisa.";
-    c.appendChild(el("p",null, msg + " Agora preenche a tua ficha do quibe: um campo por vez, com as tuas palavras, e anota de onde tirou cada informação."));
+    var msg = "Você já olha para o RADICAL antes de responder — é isso que separa o regular do irregular.";
+    if(ad <= 4) msg = "Separar radical de terminação ainda confunde. Antes de responder a folha, tira o -ar/-er/-ir do infinitivo e marca o que sobrou.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de enunciado: parte inicial é o radical, não a terminação.";
+    c.appendChild(el("p",null, msg + " Agora volta na folha: nas perguntas que pedem para COMPARAR, responde o que acontece com o radical de cada verbo."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Português: Pesquisa e registro de uma receita árabe (O Caderno da Vivi)",
+    var txt = ["AULA DE HOJE — Português: Verbos regulares e irregulares / radical (O Log Pose do Jinbe)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

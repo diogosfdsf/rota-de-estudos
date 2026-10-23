@@ -2,26 +2,26 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Lexend:wght@300;400;600&display=swap">
 <style>
   :root{
-    --bg:#EAF1F3; --surface:#FFFFFF; --surface2:#EEF4F6;
-    --ink:#16303A; --muted:#57717A; --line:#CBD9DD;
-    --accent:#1C7293; --gold:#D97B29; --ok:#2E7D4F; --err:#B23B3B; --on-accent:#FFFFFF;
-    --shadow:0 2px 0 rgba(22,48,58,.10), 0 10px 24px -14px rgba(22,48,58,.5);
+    --bg:#F3EBDD; --surface:#FFFBF3; --surface2:#F6EEDF;
+    --ink:#2E2216; --muted:#77634C; --line:#DDCDB3;
+    --accent:#7A4FA3; --gold:#C9792A; --ok:#2E7D4F; --err:#B23B3B; --on-accent:#FFFFFF;
+    --shadow:0 2px 0 rgba(46,34,22,.10), 0 10px 24px -14px rgba(46,34,22,.5);
     --r:16px;
     --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
     --body:"Lexend","Segoe UI",system-ui,sans-serif;
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
-      --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
-      --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
+      --bg:#0E1222; --surface:#161B30; --surface2:#1D2440;
+      --ink:#E8E6F2; --muted:#9C9AB8; --line:#2A3253;
+      --accent:#B591E0; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#14102A;
       --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
-    --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
-    --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
+    --bg:#0E1222; --surface:#161B30; --surface2:#1D2440;
+    --ink:#E8E6F2; --muted:#9C9AB8; --line:#2A3253;
+    --accent:#B591E0; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#14102A;
     --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
   }
 
@@ -78,14 +78,15 @@
   .fb[data-k="modelo"]{border-color:var(--accent);}
   .fb b{font-family:var(--display);}
 
-  .regra{display:flex; flex-direction:column; gap:6px; padding:14px; border:1px solid var(--line);
+  .regra{display:flex; flex-direction:column; gap:8px; padding:14px; border:1px solid var(--line);
          border-radius:12px; background:var(--surface2);}
   .regra .nome{font-family:var(--display); font-weight:800; font-size:1.05rem; color:var(--accent);}
+  .regra .macete{font-size:.92rem; padding:6px 10px; border-radius:8px; border:1px dashed var(--gold); color:var(--ink);}
+  .regra .macete b{color:var(--gold); font-family:var(--display);}
   .grupo{display:flex; flex-direction:column; gap:12px;}
 
   .citacao{font-style:italic; padding:10px 14px; border-left:3px solid var(--line); color:var(--muted); font-size:1rem;}
-
-  .contexto{background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:.95rem;}
+  .contexto{background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:1.02rem;}
 
   .contador{font-size:.85rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
   .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:-4px;}
@@ -105,91 +106,24 @@
   .linha{height:1px; background:var(--line); border:0; margin:0;}
   footer{text-align:center; font-size:.8rem; color:var(--muted);}
 
-  .grupos{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:4px 0;}
-  .grupo-caixa{display:flex; flex-wrap:wrap; gap:4px; max-width:132px; justify-content:center;
-               padding:10px 12px; border:2px dashed var(--accent); border-radius:14px;
-               background:var(--surface2); font-size:1.55rem; line-height:1.1;}
-  .conta{font-family:var(--display); font-weight:800; font-size:1.35rem; color:var(--accent); letter-spacing:.02em;}
-
-  .passos{margin:0; padding-left:1.4em; display:flex; flex-direction:column; gap:4px;}
-  .passos li{padding-left:2px;}
-  .ruim{color:var(--err); text-decoration:line-through; text-decoration-thickness:1px;}
-
-  .tabterm{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
-           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
-  .tabterm b{font-family:var(--display); font-weight:600; color:var(--muted); font-size:.92rem;}
-  .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1.02rem; color:var(--ink);}
-  .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
-  .destaque{color:var(--accent); font-weight:600;}
-
   .silabas{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:6px 0;}
   .sil{display:flex; flex-direction:column; align-items:center; gap:4px;}
-  .sil b{font-family:var(--display); font-weight:600; font-size:1.2rem; padding:10px 16px;
-         border-radius:10px; background:var(--surface2); border:1px solid var(--line);}
-  .sil small{font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
+  .sil b{font-family:var(--display); font-weight:600; font-size:1.2rem; padding:10px 14px;
+         border-radius:10px; background:var(--surface); border:1px solid var(--line);}
+  .sil small{font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
   .sil[data-forte] b{background:var(--gold); border-color:var(--gold); color:var(--on-accent); font-weight:800;}
   .sil[data-forte] small{color:var(--gold); font-weight:700;}
 
-  .tabterm{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
-           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
-  .tabterm b{font-family:var(--display); font-weight:600; color:var(--muted); font-size:.92rem;}
-  .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1rem; color:var(--ink);}
-  .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
-  .pessoas{display:grid; grid-template-columns:auto auto; gap:4px 16px; justify-content:start;
-           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);
-           font-family:ui-monospace,"Consolas",monospace; font-size:1rem;}
-  .pessoas b{font-family:var(--display); color:var(--accent);}
-
-  .ciclo{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; padding:6px 0;}
-  .ciclo span{padding:9px 14px; border-radius:999px; background:var(--surface2); border:1px solid var(--line);
-              font-size:.95rem;}
-  .ciclo i{font-style:normal; color:var(--gold); font-weight:800;}
-  .versus{display:grid; gap:10px;}
-  @media (min-width:520px){ .versus{grid-template-columns:1fr 1fr;} }
-  .versus > div{padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
-  .versus h3{margin:0 0 6px; font-family:var(--display); font-size:1rem; color:var(--accent);}
-  .versus ul{margin:0; padding-left:1.1em; font-size:.92rem; color:var(--muted); display:flex; flex-direction:column; gap:3px;}
-
-  .frasev{font-size:1.08rem; padding:10px 14px; border-left:3px solid var(--accent);
-          background:var(--surface2); border-radius:0 10px 10px 0; line-height:1.8;}
-  .frasev em{font-style:normal; background:var(--gold); color:var(--on-accent);
-             padding:2px 7px; border-radius:6px; font-weight:700;}
-  .frasev s{color:var(--muted); text-decoration-thickness:1px;}
-
-  .ficha{display:grid; gap:8px;}
-  .ficha > div{display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:baseline;
-               padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--surface2);}
-  .ficha b{font-family:var(--display); font-weight:600; color:var(--accent); font-size:.95rem;}
-  .ficha span{font-size:.93rem; color:var(--muted);}
-
-  .verbos{display:flex; flex-direction:column; gap:8px; padding:6px 0;}
-  .vb{display:flex; align-items:baseline; gap:2px; flex-wrap:wrap; font-family:var(--display); font-size:1.25rem;}
-  .vb .rad{background:var(--accent); color:var(--on-accent); padding:3px 9px; border-radius:8px 0 0 8px; font-weight:800;}
-  .vb .ter{background:var(--gold); color:var(--on-accent); padding:3px 9px; border-radius:0 8px 8px 0; font-weight:800;}
-  .vb .rad[data-muda]{background:var(--err); color:#fff;}
-  .vb small{font-family:var(--body); font-size:.85rem; color:var(--muted); margin-left:8px;}
-  .legenda{display:flex; gap:14px; flex-wrap:wrap; font-size:.85rem; color:var(--muted);}
-  .legenda i{font-style:normal; display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:5px;}
-
-  .figura{display:flex; border:2px solid var(--ink); border-radius:6px; overflow:hidden;
-          width:100%; max-width:340px; box-sizing:border-box; margin:4px auto; background:var(--surface);}
-  .figura > div{flex:1; height:48px; border-right:1px solid var(--ink);}
-  .figura > div:last-child{border-right:0;}
-  .figura > div[data-on]{background:var(--gold);}
-  .figura.desigual > div{flex:none;}
-  .grade{display:grid; gap:0; border:2px solid var(--ink); border-radius:6px; overflow:hidden;
-         width:168px; margin:4px auto; background:var(--surface);}
-  .grade > div{height:56px; border-right:1px solid var(--ink); border-bottom:1px solid var(--ink);}
-  .grade > div[data-on]{background:var(--gold);}
-  .fracao{font-family:var(--display); font-weight:800; font-size:1.6rem; text-align:center;
-          line-height:1; color:var(--accent); margin:2px 0 6px;}
-  .fracao small{display:block; font-size:1.6rem; border-top:3px solid var(--accent); padding-top:2px; margin-top:2px;}
-  .legenda-fig{text-align:center; font-size:.85rem; color:var(--muted);}
+  .tabv{width:100%; border-collapse:collapse; font-size:.92rem;}
+  .tabv th, .tabv td{padding:6px 8px; border-bottom:1px solid var(--line); text-align:left;}
+  .tabv th{font-family:var(--display); color:var(--muted); font-weight:600;}
+  .tabv td em{font-style:normal; color:var(--gold); font-weight:700;}
+  .tabv-wrap{overflow-x:auto;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>22/10 · A Serra do Franky · Matemática — Frações de um todo</span></div>
+    <div class="brand"><b>Droidec</b><span>23/10 · A Canção do Brook · Português — Revisão para a prova</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -201,69 +135,82 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"Uma tábua cortada em pedaços iguais, com um pintado.", fig:[4,[0],null],
-     pergunta:"Qual fração está pintada?",
-     opcoes:["1/4","4/1","1/3"],
-     certa:0, dica:"Conta TODAS as partes primeiro — esse número vai embaixo. Depois conta só as pintadas.",
-     porque:"São 4 partes iguais no total (embaixo) e 1 pintada (em cima): 1/4. Em inglês, one fourth."},
-    {contexto:null, fig:[6,[0,1,2,3,4],null],
-     pergunta:"E agora?",
-     opcoes:["5/6","6/5","5/1"],
-     certa:0, dica:"Mesma ordem de sempre: quantas partes ao todo? Quantas pintadas?",
-     porque:"6 partes iguais, 5 pintadas: 5/6. O número maior fica embaixo porque é o total."},
-    {contexto:"Cuidado com esta tábua:", fig:[4,[0],[120,60,100,50]],
-     pergunta:"Dá pra escrever uma fração para a parte pintada?",
-     opcoes:["Não — os pedaços não são do mesmo tamanho","Sim: 1/4","Sim: 1/2"],
-     certa:0, dica:"Olha bem a largura de cada pedaço. Eles são iguais?",
-     porque:"Fração só vale quando o todo é dividido em partes IGUAIS. Com pedaços diferentes, nenhuma fração descreve a figura."},
-    {contexto:"Uma figura foi dividida em 8 partes iguais e 3 estão pintadas.",
-     pergunta:"Qual número vai EMBAIXO, no denominador?",
-     opcoes:["8 — o total de partes iguais do todo","3 — as partes pintadas","11 — os dois somados"],
-     certa:0, dica:"O denominador responde: em quantas partes o inteiro foi dividido?",
-     porque:"Embaixo vai sempre o total de partes do todo (8). Em cima, só as contadas (3). Fica 3/8."},
-    {contexto:"Vocabulário da aula de matemática, que é em inglês.",
-     pergunta:"Uma figura dividida em 5 partes iguais: cada parte se chama…",
-     opcoes:["fifths (quintos)","fourths (quartos)","thirds (terços)"],
-     certa:0, dica:"O nome da parte vem do número de baixo: 3 → thirds, 4 → fourths, 5 → ?",
-     porque:"5 equal parts are fifths. Mesma lógica: 6 → sixths, 8 → eighths, 10 → tenths."}
+    {contexto:"O Brook escreveu uma canção em linhas curtas sobre o mar. Quem ouve sente saudade e alegria ao mesmo tempo.",
+     pergunta:"Essa saudade e alegria que a canção passa é…",
+     opcoes:["a poesia","o poema","o poeta"],
+     certa:0, dica:"Poema é o texto, poeta é a pessoa. E o SENTIMENTO, como se chama?",
+     porque:"Poesia é a emoção, a arte. O texto escrito é o poema e o Brook, que criou, é o poeta."},
+    {contexto:"No caderno do Brook tem um bloco com 3 linhas, separado dos outros por um espaço em branco.",
+     pergunta:"Como se chama uma estrofe de 3 versos?",
+     opcoes:["terceto","dístico","quarteto"],
+     certa:0, dica:"Dístico tem 2 (di = dois), quarteto tem 4. E 3?",
+     porque:"Terceto = 3 versos (lembra de TRÊS). Dístico = 2, quarteto ou quadrinha = 4."},
+    {contexto:"“A Robin queria ler ___ um capítulo, ___ a lamparina apagou.”",
+     pergunta:"Qual palavra vai na SEGUNDA lacuna?",
+     opcoes:["mas","mais"],
+     certa:0, dica:"Faz o teste da troca: dá pra colocar PORÉM ali? Ou MENOS?",
+     porque:"“…porém a lamparina apagou” faz sentido, então é MAS (ideia contrária). Na primeira lacuna vai MAIS: “ler menos um capítulo” também cabe."},
+    {contexto:"Fala a palavra CANETA como se estivesse chamando alguém lá do outro lado do Sunny: ca… NE… ta!",
+     pergunta:"A sílaba forte é NE, a penúltima. Então caneta é…",
+     opcoes:["paroxítona","oxítona","proparoxítona"],
+     certa:0, dica:"Conta de trás pra frente: ta é a última, NE é a…?",
+     porque:"ca-NE-ta: a forte é a penúltima, então é paroxítona. Repara que ela não tem acento — o som é que manda."},
+    {contexto:"“Amanhã o Sanji ______ um bolo de laranja.” (preparar)",
+     pergunta:"Qual forma combina com “amanhã”?",
+     opcoes:["preparará","preparou","prepara"],
+     certa:0, dica:"Amanhã é passado, presente ou futuro?",
+     porque:"Amanhã é pista de FUTURO: preparar + -á = preparará. Preparou é passado (ontem) e prepara é presente (hoje)."}
   ];
 
   var DESAFIO = [
-    {contexto:null, grade:[3,9,[0,1,3,4]],
-     pergunta:"Qual fração está pintada?",
-     opcoes:["4/9","9/4","4/5"],
-     certa:0, nota:"Conta a grade inteira: 9 quadradinhos iguais. Pintados: 4. Fica 4/9 — e as partes se chamam ninths."},
-    {contexto:null, fig:[10,[0,1,2,3,4,5,6],null],
-     pergunta:"Qual fração está pintada?",
-     opcoes:["7/10","10/7","7/3"],
-     certa:0, nota:"10 partes iguais, 7 pintadas: 7/10, seven tenths. O que não está pintado é 3/10."},
-    {contexto:"Pegadinha:", fig:[3,[1],[140,70,110]],
-     pergunta:"Que fração representa a parte pintada?",
-     opcoes:["Nenhuma — as partes não são iguais","1/3","1/2"],
-     certa:0, nota:"Parece 1/3 porque são três pedaços, mas eles têm tamanhos diferentes. Sem partes iguais, não há fração."},
-    {contexto:"Proper fraction é a fração que vale MENOS que um inteiro.",
-     pergunta:"Qual destas é proper fraction?",
-     opcoes:["3/4","5/4","4/4"],
-     certa:0, nota:"Em 3/4 o número de cima é menor que o de baixo: menos que um todo. 4/4 é exatamente um inteiro e 5/4 é mais que um."},
-    {contexto:"Desafio do fim da folha: esta figura é 3/5 de um todo.", fig:[3,[0,1,2],null],
-     pergunta:"Quantas partes iguais tem o todo inteiro?",
-     opcoes:["5","3","8"],
-     certa:0, nota:"O número de baixo já conta: 5 partes. Como você tem 3 dessas partes, o todo seria esta figura mais 2 partes iguais."},
-    {contexto:"Mesma figura de 3/5.",
-     pergunta:"O que você precisa desenhar para mostrar o todo?",
-     opcoes:["Mais 2 partes do mesmo tamanho, ao lado","Mais 5 partes","Mais 3 partes"],
-     certa:0, nota:"3 partes você já tem; faltam 2 para chegar às 5. E elas precisam ter exatamente o mesmo tamanho das outras."},
-    {contexto:"De volta ao vocabulário.",
-     pergunta:"4 equal parts are called…",
-     opcoes:["fourths (ou quarters)","fifths","halves"],
-     certa:0, nota:"Fourths ou quarters — os dois valem. Halves são 2 partes e fifths são 5."},
-    {contexto:"No jogo da página 117 você rola dois dados e usa o MAIOR número como denominador.",
-     pergunta:"Saiu 3 e 6. Que fração você monta?",
-     opcoes:["3/6","6/3","9/3"],
-     certa:0, nota:"O maior (6) vai embaixo, como denominador; o outro (3) em cima. Aí você procura no tabuleiro uma figura dividida em 6 partes iguais e pinta 3."}
+    {contexto:"“O vento cantava nas velas do Sunny.”",
+     pergunta:"Que palavra mágica do poema aparece aqui?",
+     opcoes:["Personificação","Metáfora","Nenhuma, é sentido real"],
+     certa:0, nota:"O vento não canta de verdade — ele ganhou uma ação de gente. Dar vida a coisas que não estão vivas é personificação."},
+    {contexto:"“O Luffy é o sol da tripulação.”",
+     pergunta:"Que palavra mágica do poema aparece aqui?",
+     opcoes:["Metáfora","Personificação","Nenhuma, é sentido real"],
+     certa:0, nota:"O Luffy não é uma estrela. O poeta junta duas coisas diferentes (Luffy e sol) sem usar “como”, pra dizer que ele ilumina e alegra todo mundo. É metáfora, a comparação escondida."},
+    {contexto:"“O Zoro treinou a manhã inteira, ___ se perdeu no caminho de volta.”",
+     pergunta:"Mas ou mais?",
+     opcoes:["mas","mais"],
+     certa:0, nota:"“…porém se perdeu” funciona: é uma coisa contra o que se esperava. Então é MAS, sem I."},
+    {contexto:"“A Nami é a navegadora ___ esperta dos mares.”",
+     pergunta:"Mas ou mais?",
+     opcoes:["mais","mas"],
+     certa:0, nota:"“A navegadora menos esperta” encaixa (mesmo que não seja verdade!). Troca por MENOS → é MAIS, com I."},
+    {contexto:"Pegadinha da palavra comprida: REFRIGERANTE. Fala chamando de longe: re-fri-ge-RAN-te.",
+     pergunta:"Como ela se classifica?",
+     opcoes:["paroxítona","proparoxítona","oxítona"],
+     certa:0, nota:"Comprida não quer dizer proparoxítona! A forte é RAN, a penúltima → paroxítona. E proparoxítona SEMPRE tem acento — refrigerante não tem."},
+    {contexto:"TAMBOR (o do Usopp). Fala chamando: tam… BOR!",
+     pergunta:"Como ela se classifica?",
+     opcoes:["oxítona","paroxítona","proparoxítona"],
+     certa:0, nota:"tam-BOR: a forte é a última sílaba → oxítona. Mesmo sem acento! Nem toda oxítona tem acento."},
+    {contexto:"“Ontem a Nami desenhou um mapa novo.”",
+     pergunta:"Qual é o verbo e em que tempo ele está?",
+     opcoes:["desenhou — pretérito (passado)","desenhou — presente","mapa — pretérito"],
+     certa:0, nota:"Verbo é a palavra da AÇÃO: desenhou. “Ontem” e a terminação -ou mostram pretérito (passado). Mapa é uma coisa, não ação."},
+    {contexto:"“A festa começa quando o Franky ______ para o convés.” (verbo vir)",
+     pergunta:"Qual forma completa a frase?",
+     opcoes:["vier","vir","veio"],
+     certa:0, nota:"Depois de “quando”, falando de algo que ainda vai acontecer, o verbo vir fica VIER: quando ele vier, se ele vier. É irregular, por isso parece estranho. Veio é passado."},
+    {contexto:"Um poema tem 3 blocos separados por espaço em branco. Cada bloco tem 4 linhas.",
+     pergunta:"Quantas estrofes e quantos versos?",
+     opcoes:["3 estrofes e 12 versos","12 estrofes e 3 versos","3 estrofes e 4 versos"],
+     certa:0, nota:"Cada bloco é uma estrofe (3) e cada linha é um verso: 4 + 4 + 4 = 12. Na prova, conta os versos de TODAS as estrofes e soma."}
   ];
 
-  var KEY = "zion-fracoes-todo-2026-10-22";
+  // a certa vem sempre primeiro nos dados; gira as opções para ela variar de posição
+  [GUIADO, DESAFIO].forEach(function(lista, j){
+    lista.forEach(function(q, i){
+      var n = q.opcoes.length, r = (i*2 + j + 1) % n;
+      q.opcoes = q.opcoes.slice(r).concat(q.opcoes.slice(0, r));
+      q.certa = (q.certa - r + n) % n;
+    });
+  });
+
+  var KEY = "zion-revisao-portugues-2026-10-23";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -305,94 +252,85 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","O Franky pegou uma tábua comprida pra consertar o corrimão do Sunny e cortou em pedaços. Só que cortou no olho: uns pedaços grandes, outros pequenos.");
-    var p2 = el("p","lead","O Usopp olhou e perguntou: “Quanto da tábua você já usou? Metade? Um terço?” E o Franky travou — com pedaços de tamanhos diferentes, não dá pra responder.");
-    var p3 = el("p","lead","Hoje você aprende a linguagem dos pedaços: as FRAÇÕES. E a primeira regra é justamente a que o Franky esqueceu. SUPER!");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"A Serra do Franky"), p1, p2, p3, botao("Bora cortar certo! →", function(){ vai(1); }));
+    var p1 = el("p","lead","O Brook escreveu uma canção nova pro show de hoje à noite no Sunny. Mas uma onda molhou o caderno dele e borrou um monte de coisas.");
+    var p2 = el("p","lead","Sumiram uns MAS e uns MAIS, os verbos ficaram sem tempo, e ninguém lembra qual sílaba cantar mais forte. Sem isso, a música desafina.");
+    var p3 = el("p","lead","Você vai arrumar o caderno — e de quebra revisar tudo o que cai na prova de Português. Yohohoho! Bora?");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"A Canção do Brook"), p1, p2, p3, botao("Bora afinar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
-  function figura(n, pintadas, desigual){
-    var w = el("div","figura");
-    if(desigual) w.className = "figura desigual";
-    for(var i=0;i<n;i++){
-      var d = el("div");
-      if(desigual) d.style.width = desigual[i] + "px";
-      if(pintadas.indexOf(i) >= 0) d.setAttribute("data-on","");
+  function silabas(partes, forte, rotulos){
+    var w = el("div","silabas");
+    partes.forEach(function(s,i){
+      var d = el("div","sil");
+      if(i === forte) d.setAttribute("data-forte","");
+      d.appendChild(el("b",null,s));
+      d.appendChild(el("small",null,rotulos[i]));
       w.appendChild(d);
-    }
+    });
     return w;
   }
 
-  function grade(cols, total, pintadas){
-    var w = el("div","grade");
-    w.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
-    for(var i=0;i<total;i++){
-      var d = el("div");
-      if(pintadas.indexOf(i) >= 0) d.setAttribute("data-on","");
-      w.appendChild(d);
-    }
-    return w;
-  }
-
-  function fracao(cima, baixo, nota){
-    var f = el("div","fracao", String(cima));
-    f.appendChild(el("small",null,String(baixo)));
-    var box = el("div");
-    box.appendChild(f);
-    if(nota) box.appendChild(el("div","legenda-fig",nota));
-    return box;
+  function bloco(nome, texto, macete){
+    var r = el("div","regra");
+    r.appendChild(el("div","nome",nome));
+    var p = el("p","muted"); p.innerHTML = texto; r.appendChild(p);
+    if(macete){ var m = el("div","macete"); m.innerHTML = "<b>Macete: </b>" + macete; r.appendChild(m); }
+    return r;
   }
 
   function regra(){
     var g = el("div","grupo");
 
-    var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. Fração só existe com partes IGUAIS"));
-    r1.appendChild(el("p","muted","O todo precisa ser dividido em pedaços do mesmo tamanho. Se um pedaço é maior que o outro, não dá pra escrever fração nenhuma."));
-    r1.appendChild(figura(4, [0], false));
-    r1.appendChild(el("div","legenda-fig","4 partes iguais → dá pra falar em fração ✓"));
-    r1.appendChild(figura(4, [0], [120, 60, 100, 50]));
-    r1.appendChild(el("div","legenda-fig","partes de tamanhos diferentes → não dá ✗ (foi o erro do Franky)"));
-    g.appendChild(r1);
+    g.appendChild(bloco("1. Poema, poesia e poeta",
+      "<b>Poema</b> é o texto, em linhas curtas. <b>Poesia</b> é a emoção, a arte — pode estar até num pôr do sol. <b>Poeta</b> é quem cria. Cada linha é um <b>verso</b>; cada bloco de versos é uma <b>estrofe</b>: dístico (2), terceto (3), quarteto ou quadrinha (4). <b>Rima</b> é o som igual no fim (canção / coração). <b>Ritmo</b> é a música da leitura, com sílabas fortes e fracas.",
+      "o poeta cria um poema para mostrar a sua poesia."));
 
-    var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. Embaixo é quantas partes; em cima é quantas contei"));
-    r2.appendChild(figura(8, [0,1,2,3,4], false));
-    r2.appendChild(fracao(5, 8, "5 de 8 partes pintadas"));
-    var ul = el("ul","passos");
-    ["<b>Denominador</b> (embaixo, 8): em quantas partes iguais o TODO foi dividido.",
-     "<b>Numerador</b> (em cima, 5): quantas dessas partes estão pintadas ou contadas.",
-     "Na escola, em inglês: <i>the denominator tells how many equal parts are in 1 whole; the numerator tells how many equal parts are counted</i>."].forEach(function(t){
-      var li = el("li"); li.innerHTML = t; ul.appendChild(li);
-    });
-    r2.appendChild(ul);
-    r2.appendChild(el("p","muted","O nome da parte vem do número de baixo: 2 = halves (metades), 3 = thirds (terços), 4 = fourths/quarters (quartos), 5 = fifths (quintos), 6 = sixths (sextos), 8 = eighths (oitavos), 10 = tenths (décimos)."));
-    g.appendChild(r2);
+    g.appendChild(bloco("2. As palavras mágicas",
+      "<b>Metáfora</b>: junta duas coisas diferentes sem usar “como” — “o mar é um tapete azul”. <b>Personificação</b>: uma coisa sem vida faz coisa de gente — “a lua sorriu pra mim”.",
+      "tem coisa agindo como pessoa? Personificação. Uma coisa “É” outra? Metáfora."));
 
-    var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. Proper fraction: menos que um todo"));
-    r3.appendChild(el("p","muted","Quando o número de cima é MENOR que o de baixo, a fração vale menos que 1 inteiro. Isso se chama proper fraction (fração própria). 5/8 é proper fraction; 8/8 já é o todo completo."));
-    g.appendChild(r3);
+    g.appendChild(bloco("3. MAS ou MAIS",
+      "<b>MAIS</b> (com I) é quantidade, o contrário de menos. <b>MAS</b> (sem I) é ideia contrária, igual a porém.",
+      "troca por MENOS → é MAIS. Troca por PORÉM → é MAS."));
 
-    var citacao = el("div","citacao","Usopp aponta pra uma tábua cortada em 6 pedaços iguais, com 2 pintados de azul: “E essa aí, Franky?”");
+    var r4 = bloco("4. A sílaba forte",
+      "Conta de trás pra frente. A forte é a <b>última</b>: oxítona. A <b>penúltima</b>: paroxítona. A <b>antepenúltima</b>: proparoxítona — e essa sempre tem acento.",
+      "fala a palavra CHAMANDO alguém de longe. A sílaba que estica é a forte. Nunca chuta pelo tamanho!");
+    g.appendChild(r4);
 
+    var r5 = el("div","regra");
+    r5.appendChild(el("div","nome","5. O tempo do verbo"));
+    r5.appendChild(el("p","muted","O verbo é a ação. A terminação mostra QUANDO ela acontece:"));
+    var tw = el("div","tabv-wrap");
+    var t = el("table","tabv");
+    t.innerHTML = "<tr><th></th><th>falar</th><th>comer</th><th>partir</th></tr>" +
+      "<tr><td>Ontem (pretérito)</td><td>eu fal<em>ei</em>, ele fal<em>ou</em>, eles fal<em>aram</em></td><td>com<em>i</em>, com<em>eu</em>, com<em>eram</em></td><td>part<em>i</em>, part<em>iu</em>, part<em>iram</em></td></tr>" +
+      "<tr><td>Hoje (presente)</td><td>fal<em>o</em>, fal<em>a</em>, fal<em>am</em></td><td>com<em>o</em>, com<em>e</em>, com<em>em</em></td><td>part<em>o</em>, part<em>e</em>, part<em>em</em></td></tr>" +
+      "<tr><td>Amanhã (futuro)</td><td>fal<em>arei</em>, fal<em>ará</em>, fal<em>arão</em></td><td>com<em>erei</em>, com<em>erá</em>, com<em>erão</em></td><td>part<em>irei</em>, part<em>irá</em>, part<em>irão</em></td></tr>";
+    tw.appendChild(t); r5.appendChild(tw);
+    var m5 = el("div","macete"); m5.innerHTML = "<b>Macete: </b>procura a palavra-pista. Ontem → passado. Hoje/agora → presente. Amanhã/no próximo → futuro.";
+    r5.appendChild(m5);
+    g.appendChild(r5);
+
+    var citacao = el("div","citacao","O Usopp aponta pro caderno: “Brook, COMPUTADOR é proparoxítona, né? É enorme!”");
+    var sil = silabas(["com","pu","ta","dor"], 3, ["", "antepenúlt.","penúltima","última"]);
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F527} Franky pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F3BB} Brook pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu confiro o mais importante: os pedaços são todos do mesmo tamanho? São. Então pode. " +
-      "Agora eu conto TODAS as partes, pintadas e não pintadas: seis. Esse número vai embaixo, é o denominador. " +
-      "Depois eu conto só as pintadas: duas. Esse vai em cima, é o numerador. " +
-      "Escrevo dois sobre seis. E confiro: dois é menor que seis, então é menos de uma tábua inteira — proper fraction. SUPER!"));
+      "tamanho não conta, Usopp. Primeiro eu separo: com-pu-ta-dor, quatro sílabas. " +
+      "Depois eu falo chamando de longe: “computaDOOOR!”. A voz esticou no DOR. " +
+      "Agora conto de trás pra frente: DOR é a última. Última forte é oxítona. " +
+      "E confiro: se fosse proparoxítona, teria acento obrigatório — e computador não tem. Yohohoho!"));
 
     return card(
-      navbar("A regra", function(){ vai(0); }),
-      eyebrow("A regra"),
-      el("h2",null,"A linguagem dos pedaços"),
+      navbar("As regras", function(){ vai(0); }),
+      eyebrow("O que cai na prova"),
+      el("h2",null,"As 5 páginas do caderno do Brook"),
       g,
-      el("p","muted","Vê o Franky lendo uma figura, passo a passo:"),
-      citacao, modelo,
-      el("p","muted","A ordem nunca muda: SÃO IGUAIS? → CONTA TODAS (embaixo) → CONTA AS PINTADAS (em cima)."),
+      el("p","muted","Vê o Brook descobrindo a sílaba forte, passo a passo:"),
+      citacao, sil, modelo,
+      el("p","muted","Ordem certa: SEPARA → FALA CHAMANDO → CONTA DE TRÁS PRA FRENTE."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -411,8 +349,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Serra afiada!"),
-        el("p",null,"Você já lê uma figura e escreve a fração. Agora é sem dica — e com o desafio de descobrir o TODO a partir do pedaço."),
+        eyebrow("Treino guiado"), el("h2",null,"Caderno quase seco!"),
+        el("p",null,"Você passou pelas cinco páginas com ajuda. Agora é sem dica, e com as pegadinhas que costumam cair na prova."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -421,9 +359,6 @@
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
-    if(q.fig) c.appendChild(figura(q.fig[0], q.fig[1], q.fig[2]));
-    if(q.grade) c.appendChild(grade(q.grade[0], q.grade[1], q.grade[2]));
-    if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -475,7 +410,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Tábuas no esquadro! \u{1F4D0}"),
+        eyebrow("Desafio"), el("h2",null,"Canção afinada! \u{1F3B5}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -485,9 +420,6 @@
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
-    if(q.fig) c.appendChild(figura(q.fig[0], q.fig[1], q.fig[2]));
-    if(q.grade) c.appendChild(grade(q.grade[0], q.grade[1], q.grade[2]));
-    if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -524,16 +456,15 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
-    c2.appendChild(el("p","lead","O Luffy olhou esta figura e chutou “é 3!”."));
-    c2.appendChild(figura(5, [0,1,2], false));
-    c2.appendChild(el("p","lead","Explica pra ele, com as TUAS palavras, qual é a fração certa e como você descobriu — o que você conta primeiro e onde cada número vai."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Chopper?"));
+    c2.appendChild(el("p","lead","O Chopper disse: “CAMARADA é proparoxítona, porque é uma palavra grandona!”"));
+    c2.appendChild(el("p","lead","Explica pra ele, com as TUAS palavras, como descobrir de verdade a sílaba forte — o que fazer primeiro, depois e no fim — e qual é a resposta certa."));
     var chips = el("div","chips");
-    ["partes iguais","denominador","numerador"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["separar as sílabas","chamar de longe","contar de trás pra frente"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Luffy, primeiro eu conto...");
+    ta.setAttribute("placeholder","Chopper, primeiro você...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -559,20 +490,22 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Corrimão do Sunny, pronto \u{1F527}"));
+    c.appendChild(el("h2",null,"O show pode começar \u{1F3BB}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já conta as partes na ordem certa e sabe onde cada número vai — é isso que a folha cobra.";
-    if(ad <= 4) msg = "Contar o total antes das pintadas ainda escapa. Antes da folha, repete em voz alta: todas embaixo, pintadas em cima.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas das partes desiguais e do pedaço que não é o todo.";
-    c.appendChild(el("p",null, msg + " Agora faz a folha: conta as partes de cada figura, escreve a fração e no fim descobre como seria o todo inteiro."));
+    var tonicaOk = S.desafio[4] && S.desafio[4].acertou && S.desafio[5] && S.desafio[5].acertou;
+    var msg = tonicaOk
+      ? "Você classificou palavras SEM acento pelo som, inclusive a comprida que engana — era a parte mais difícil."
+      : "A sílaba forte ainda escorrega quando a palavra não tem acento. Antes da prova, fala cinco palavras chamando de longe e conta de trás pra frente.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de mas/mais, da palavra comprida e do verbo vier.";
+    c.appendChild(el("p",null, msg + " Agora pega a folha de revisão da escola e faz os exercícios sozinho."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Matemática: Frações de um todo / Fractions of a Whole (A Serra do Franky)",
+    var txt = ["AULA DE HOJE — Português: Revisão para a prova (A Canção do Brook)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",
@@ -580,7 +513,7 @@
                "TOTAL: " + acertos + "/" + total,
                ""];
     var errou = [];
-    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push("Desafio " + (i+1) + ": marcou “" + S.desafio[i].marcou + "”, era “" + DESAFIO[i].opcoes[DESAFIO[i].certa] + "”");
+    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push("Desafio " + (i+1) + " (" + DESAFIO[i].contexto + "): marcou “" + S.desafio[i].marcou + "”, era “" + DESAFIO[i].opcoes[DESAFIO[i].certa] + "”");
     for(i=0;i<GUIADO.length;i++) if(S.guiado[i] && !S.guiado[i].acertou) errou.push("Treino " + (i+1) + " (precisou de dica)");
     txt.push("Errou / tropeçou:");
     txt.push(errou.length ? "- " + errou.join("\n- ") : "- nada");

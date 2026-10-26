@@ -2,26 +2,26 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Lexend:wght@300;400;600&display=swap">
 <style>
   :root{
-    --bg:#F3EBDD; --surface:#FFFBF3; --surface2:#F6EEDF;
-    --ink:#2E2216; --muted:#77634C; --line:#DDCDB3;
-    --accent:#7A4FA3; --gold:#C9792A; --ok:#2E7D4F; --err:#B23B3B; --on-accent:#FFFFFF;
-    --shadow:0 2px 0 rgba(46,34,22,.10), 0 10px 24px -14px rgba(46,34,22,.5);
+    --bg:#EAF1F3; --surface:#FFFFFF; --surface2:#EEF4F6;
+    --ink:#16303A; --muted:#57717A; --line:#CBD9DD;
+    --accent:#1C7293; --gold:#D97B29; --ok:#2E7D4F; --err:#B23B3B; --on-accent:#FFFFFF;
+    --shadow:0 2px 0 rgba(22,48,58,.10), 0 10px 24px -14px rgba(22,48,58,.5);
     --r:16px;
     --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
     --body:"Lexend","Segoe UI",system-ui,sans-serif;
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#0E1222; --surface:#161B30; --surface2:#1D2440;
-      --ink:#E8E6F2; --muted:#9C9AB8; --line:#2A3253;
-      --accent:#B591E0; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#14102A;
+      --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
+      --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
+      --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
       --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0E1222; --surface:#161B30; --surface2:#1D2440;
-    --ink:#E8E6F2; --muted:#9C9AB8; --line:#2A3253;
-    --accent:#B591E0; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#14102A;
+    --bg:#0A1620; --surface:#11212C; --surface2:#16303A;
+    --ink:#E4EEF1; --muted:#86A3AC; --line:#223E48;
+    --accent:#4FB8DE; --gold:#F0A050; --ok:#57C98A; --err:#E27272; --on-accent:#06222E;
     --shadow:0 2px 0 rgba(0,0,0,.35), 0 12px 28px -16px rgba(0,0,0,.9);
   }
 
@@ -78,15 +78,14 @@
   .fb[data-k="modelo"]{border-color:var(--accent);}
   .fb b{font-family:var(--display);}
 
-  .regra{display:flex; flex-direction:column; gap:8px; padding:14px; border:1px solid var(--line);
+  .regra{display:flex; flex-direction:column; gap:6px; padding:14px; border:1px solid var(--line);
          border-radius:12px; background:var(--surface2);}
   .regra .nome{font-family:var(--display); font-weight:800; font-size:1.05rem; color:var(--accent);}
-  .regra .macete{font-size:.92rem; padding:6px 10px; border-radius:8px; border:1px dashed var(--gold); color:var(--ink);}
-  .regra .macete b{color:var(--gold); font-family:var(--display);}
   .grupo{display:flex; flex-direction:column; gap:12px;}
 
   .citacao{font-style:italic; padding:10px 14px; border-left:3px solid var(--line); color:var(--muted); font-size:1rem;}
-  .contexto{background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:1.02rem;}
+
+  .contexto{background:var(--surface2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:.95rem;}
 
   .contador{font-size:.85rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; font-weight:600;}
   .nav{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:-4px;}
@@ -106,24 +105,100 @@
   .linha{height:1px; background:var(--line); border:0; margin:0;}
   footer{text-align:center; font-size:.8rem; color:var(--muted);}
 
+  .grupos{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:4px 0;}
+  .grupo-caixa{display:flex; flex-wrap:wrap; gap:4px; max-width:132px; justify-content:center;
+               padding:10px 12px; border:2px dashed var(--accent); border-radius:14px;
+               background:var(--surface2); font-size:1.55rem; line-height:1.1;}
+  .conta{font-family:var(--display); font-weight:800; font-size:1.35rem; color:var(--accent); letter-spacing:.02em;}
+
+  .passos{margin:0; padding-left:1.4em; display:flex; flex-direction:column; gap:4px;}
+  .passos li{padding-left:2px;}
+  .ruim{color:var(--err); text-decoration:line-through; text-decoration-thickness:1px;}
+
+  .tabterm{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
+           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
+  .tabterm b{font-family:var(--display); font-weight:600; color:var(--muted); font-size:.92rem;}
+  .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1.02rem; color:var(--ink);}
+  .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
+  .destaque{color:var(--accent); font-weight:600;}
+
   .silabas{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:6px 0;}
   .sil{display:flex; flex-direction:column; align-items:center; gap:4px;}
-  .sil b{font-family:var(--display); font-weight:600; font-size:1.2rem; padding:10px 14px;
-         border-radius:10px; background:var(--surface); border:1px solid var(--line);}
-  .sil small{font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
+  .sil b{font-family:var(--display); font-weight:600; font-size:1.2rem; padding:10px 16px;
+         border-radius:10px; background:var(--surface2); border:1px solid var(--line);}
+  .sil small{font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
   .sil[data-forte] b{background:var(--gold); border-color:var(--gold); color:var(--on-accent); font-weight:800;}
   .sil[data-forte] small{color:var(--gold); font-weight:700;}
 
-  .tabv{width:100%; border-collapse:collapse; font-size:.92rem;}
-  .tabv th, .tabv td{padding:6px 8px; border-bottom:1px solid var(--line); text-align:left;}
-  .tabv th{font-family:var(--display); color:var(--muted); font-weight:600;}
-  .tabv td em{font-style:normal; color:var(--gold); font-weight:700;}
-  .tabv-wrap{overflow-x:auto;}
+  .tabterm{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
+           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
+  .tabterm b{font-family:var(--display); font-weight:600; color:var(--muted); font-size:.92rem;}
+  .tabterm span{font-family:ui-monospace,"Consolas",monospace; font-size:1rem; color:var(--ink);}
+  .tabterm span em{font-style:normal; color:var(--gold); font-weight:700;}
+  .pessoas{display:grid; grid-template-columns:auto auto; gap:4px 16px; justify-content:start;
+           padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);
+           font-family:ui-monospace,"Consolas",monospace; font-size:1rem;}
+  .pessoas b{font-family:var(--display); color:var(--accent);}
+
+  .ciclo{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; padding:6px 0;}
+  .ciclo span{padding:9px 14px; border-radius:999px; background:var(--surface2); border:1px solid var(--line);
+              font-size:.95rem;}
+  .ciclo i{font-style:normal; color:var(--gold); font-weight:800;}
+  .versus{display:grid; gap:10px;}
+  @media (min-width:520px){ .versus{grid-template-columns:1fr 1fr;} }
+  .versus > div{padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface2);}
+  .versus h3{margin:0 0 6px; font-family:var(--display); font-size:1rem; color:var(--accent);}
+  .versus ul{margin:0; padding-left:1.1em; font-size:.92rem; color:var(--muted); display:flex; flex-direction:column; gap:3px;}
+
+  .frasev{font-size:1.08rem; padding:10px 14px; border-left:3px solid var(--accent);
+          background:var(--surface2); border-radius:0 10px 10px 0; line-height:1.8;}
+  .frasev em{font-style:normal; background:var(--gold); color:var(--on-accent);
+             padding:2px 7px; border-radius:6px; font-weight:700;}
+  .frasev s{color:var(--muted); text-decoration-thickness:1px;}
+
+  .ficha{display:grid; gap:8px;}
+  .ficha > div{display:grid; grid-template-columns:auto 1fr; gap:4px 12px; align-items:baseline;
+               padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--surface2);}
+  .ficha b{font-family:var(--display); font-weight:600; color:var(--accent); font-size:.95rem;}
+  .ficha span{font-size:.93rem; color:var(--muted);}
+
+  .verbos{display:flex; flex-direction:column; gap:8px; padding:6px 0;}
+  .vb{display:flex; align-items:baseline; gap:2px; flex-wrap:wrap; font-family:var(--display); font-size:1.25rem;}
+  .vb .rad{background:var(--accent); color:var(--on-accent); padding:3px 9px; border-radius:8px 0 0 8px; font-weight:800;}
+  .vb .ter{background:var(--gold); color:var(--on-accent); padding:3px 9px; border-radius:0 8px 8px 0; font-weight:800;}
+  .vb .rad[data-muda]{background:var(--err); color:#fff;}
+  .vb small{font-family:var(--body); font-size:.85rem; color:var(--muted); margin-left:8px;}
+  .legenda{display:flex; gap:14px; flex-wrap:wrap; font-size:.85rem; color:var(--muted);}
+  .legenda i{font-style:normal; display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:5px;}
+
+  .figura{display:flex; border:2px solid var(--ink); border-radius:6px; overflow:hidden;
+          width:100%; max-width:340px; box-sizing:border-box; margin:4px auto; background:var(--surface);}
+  .figura > div{flex:1; height:48px; border-right:1px solid var(--ink);}
+  .figura > div:last-child{border-right:0;}
+  .figura > div[data-on]{background:var(--gold);}
+  .figura.desigual > div{flex:none;}
+  .grade{display:grid; gap:0; border:2px solid var(--ink); border-radius:6px; overflow:hidden;
+         width:168px; margin:4px auto; background:var(--surface);}
+  .grade > div{height:56px; border-right:1px solid var(--ink); border-bottom:1px solid var(--ink);}
+  .grade > div[data-on]{background:var(--gold);}
+  .fracao{font-family:var(--display); font-weight:800; font-size:1.6rem; text-align:center;
+          line-height:1; color:var(--accent); margin:2px 0 6px;}
+  .fracao small{display:block; font-size:1.6rem; border-top:3px solid var(--accent); padding-top:2px; margin-top:2px;}
+  .legenda-fig{text-align:center; font-size:.85rem; color:var(--muted);}
+
+  .poema{border:1px solid var(--line); border-radius:12px; background:var(--surface2); padding:12px 14px;
+         display:flex; flex-direction:column; gap:2px;}
+  .poema .v{display:flex; align-items:baseline; justify-content:space-between; gap:14px; padding:5px 0;
+            border-bottom:1px dashed var(--line); font-size:1.02rem;}
+  .poema .v:last-child{border-bottom:0;}
+  .poema .v u{text-decoration:none; font-weight:700; color:var(--accent);}
+  .poema .v b{font-family:var(--display); font-weight:800; color:var(--gold); font-size:1.1rem; flex:none;}
+  .poema .vazio{color:var(--muted); font-size:.85rem; text-align:center; padding-top:6px;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>23/10 · A Canção do Brook · Português — Revisão para a prova</span></div>
+    <div class="brand"><b>Droidec</b><span>26/10 · O Poema do Luffy · Português — Soneto, rimas e reticências</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -135,82 +210,68 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:"O Brook escreveu uma canção em linhas curtas sobre o mar. Quem ouve sente saudade e alegria ao mesmo tempo.",
-     pergunta:"Essa saudade e alegria que a canção passa é…",
-     opcoes:["a poesia","o poema","o poeta"],
-     certa:0, dica:"Poema é o texto, poeta é a pessoa. E o SENTIMENTO, como se chama?",
-     porque:"Poesia é a emoção, a arte. O texto escrito é o poema e o Brook, que criou, é o poeta."},
-    {contexto:"No caderno do Brook tem um bloco com 3 linhas, separado dos outros por um espaço em branco.",
-     pergunta:"Como se chama uma estrofe de 3 versos?",
-     opcoes:["terceto","dístico","quarteto"],
-     certa:0, dica:"Dístico tem 2 (di = dois), quarteto tem 4. E 3?",
-     porque:"Terceto = 3 versos (lembra de TRÊS). Dístico = 2, quarteto ou quadrinha = 4."},
-    {contexto:"“A Robin queria ler ___ um capítulo, ___ a lamparina apagou.”",
-     pergunta:"Qual palavra vai na SEGUNDA lacuna?",
-     opcoes:["mas","mais"],
-     certa:0, dica:"Faz o teste da troca: dá pra colocar PORÉM ali? Ou MENOS?",
-     porque:"“…porém a lamparina apagou” faz sentido, então é MAS (ideia contrária). Na primeira lacuna vai MAIS: “ler menos um capítulo” também cabe."},
-    {contexto:"Fala a palavra CANETA como se estivesse chamando alguém lá do outro lado do Sunny: ca… NE… ta!",
-     pergunta:"A sílaba forte é NE, a penúltima. Então caneta é…",
-     opcoes:["paroxítona","oxítona","proparoxítona"],
-     certa:0, dica:"Conta de trás pra frente: ta é a última, NE é a…?",
-     porque:"ca-NE-ta: a forte é a penúltima, então é paroxítona. Repara que ela não tem acento — o som é que manda."},
-    {contexto:"“Amanhã o Sanji ______ um bolo de laranja.” (preparar)",
-     pergunta:"Qual forma combina com “amanhã”?",
-     opcoes:["preparará","preparou","prepara"],
-     certa:0, dica:"Amanhã é passado, presente ou futuro?",
-     porque:"Amanhã é pista de FUTURO: preparar + -á = preparará. Preparou é passado (ontem) e prepara é presente (hoje)."}
+    {contexto:null,
+     pergunta:"Em que parte do verso a gente procura a rima?",
+     opcoes:["Na última palavra, no fim do verso","Na primeira palavra","No meio do verso"],
+     certa:0, dica:"Pensa em como você percebe que dois versos “combinam” quando alguém lê em voz alta.",
+     porque:"A rima do soneto mora no fim: é a última palavra de cada verso que repete o som de outra."},
+    {contexto:"Marca as letras desta estrofe:", versos:[["O sol nasceu atrás do mo<u>rro</u>","A"],["e o mar ficou todo dou<u>rado</u>","B"],["Eu chamo e ninguém soco<u>rro</u>","?"],["o barco já está molh<u>ado</u>","?"]],
+     pergunta:"Que letras faltam nos dois últimos versos?",
+     opcoes:["A e B","C e D","B e A"],
+     certa:0, dica:"“socorro” tem o mesmo som final de qual verso lá de cima? E “molhado”?",
+     porque:"socorro rima com morro (A) e molhado rima com dourado (B). O esquema fica ABAB — rimas alternadas."},
+    {contexto:"Agora esta:", versos:[["A noite trouxe uma can<u>ção</u>","A"],["que veio junto com o lu<u>ar</u>","B"],["e fez a gente até can<u>tar</u>","?"],["com a mão sobre o cora<u>ção</u>","?"]],
+     pergunta:"E aqui?",
+     opcoes:["B e A — o primeiro verso rima com o último","A e B","C e D"],
+     certa:0, dica:"Repara que o som do primeiro verso só volta lá no final da estrofe.",
+     porque:"cantar rima com luar (B) e coração rima com canção (A). O esquema é ABBA — o primeiro abraça o último."},
+    {contexto:null,
+     pergunta:"Quantos versos tem um soneto, e como ele se divide?",
+     opcoes:["14 versos: dois quartetos (4 versos) e dois tercetos (3 versos)","10 versos: duas estrofes de 5","12 versos: três estrofes de 4"],
+     certa:0, dica:"Quarteto vem de quatro; terceto vem de três. Soma: 4 + 4 + 3 + 3.",
+     porque:"4 + 4 + 3 + 3 = 14. Essa é a forma fixa do soneto, usada há séculos."},
+    {contexto:"No fim de um verso o poeta escreveu: “…e o menino ficou olhando…”",
+     pergunta:"O que as reticências fazem na leitura?",
+     opcoes:["Dão uma pausa e deixam a cena continuar na imaginação de quem lê","Avisam que a frase acabou de vez","Indicam que houve um erro"],
+     certa:0, dica:"Lê a frase em voz alta parando nos pontinhos. O que você sente: que acabou, ou que continua?",
+     porque:"As reticências seguram a leitura por um instante: criam pausa, suspense e a sensação de que algo continua sem ser dito."}
   ];
 
   var DESAFIO = [
-    {contexto:"“O vento cantava nas velas do Sunny.”",
-     pergunta:"Que palavra mágica do poema aparece aqui?",
-     opcoes:["Personificação","Metáfora","Nenhuma, é sentido real"],
-     certa:0, nota:"O vento não canta de verdade — ele ganhou uma ação de gente. Dar vida a coisas que não estão vivas é personificação."},
-    {contexto:"“O Luffy é o sol da tripulação.”",
-     pergunta:"Que palavra mágica do poema aparece aqui?",
-     opcoes:["Metáfora","Personificação","Nenhuma, é sentido real"],
-     certa:0, nota:"O Luffy não é uma estrela. O poeta junta duas coisas diferentes (Luffy e sol) sem usar “como”, pra dizer que ele ilumina e alegra todo mundo. É metáfora, a comparação escondida."},
-    {contexto:"“O Zoro treinou a manhã inteira, ___ se perdeu no caminho de volta.”",
-     pergunta:"Mas ou mais?",
-     opcoes:["mas","mais"],
-     certa:0, nota:"“…porém se perdeu” funciona: é uma coisa contra o que se esperava. Então é MAS, sem I."},
-    {contexto:"“A Nami é a navegadora ___ esperta dos mares.”",
-     pergunta:"Mas ou mais?",
-     opcoes:["mais","mas"],
-     certa:0, nota:"“A navegadora menos esperta” encaixa (mesmo que não seja verdade!). Troca por MENOS → é MAIS, com I."},
-    {contexto:"Pegadinha da palavra comprida: REFRIGERANTE. Fala chamando de longe: re-fri-ge-RAN-te.",
-     pergunta:"Como ela se classifica?",
-     opcoes:["paroxítona","proparoxítona","oxítona"],
-     certa:0, nota:"Comprida não quer dizer proparoxítona! A forte é RAN, a penúltima → paroxítona. E proparoxítona SEMPRE tem acento — refrigerante não tem."},
-    {contexto:"TAMBOR (o do Usopp). Fala chamando: tam… BOR!",
-     pergunta:"Como ela se classifica?",
-     opcoes:["oxítona","paroxítona","proparoxítona"],
-     certa:0, nota:"tam-BOR: a forte é a última sílaba → oxítona. Mesmo sem acento! Nem toda oxítona tem acento."},
-    {contexto:"“Ontem a Nami desenhou um mapa novo.”",
-     pergunta:"Qual é o verbo e em que tempo ele está?",
-     opcoes:["desenhou — pretérito (passado)","desenhou — presente","mapa — pretérito"],
-     certa:0, nota:"Verbo é a palavra da AÇÃO: desenhou. “Ontem” e a terminação -ou mostram pretérito (passado). Mapa é uma coisa, não ação."},
-    {contexto:"“A festa começa quando o Franky ______ para o convés.” (verbo vir)",
-     pergunta:"Qual forma completa a frase?",
-     opcoes:["vier","vir","veio"],
-     certa:0, nota:"Depois de “quando”, falando de algo que ainda vai acontecer, o verbo vir fica VIER: quando ele vier, se ele vier. É irregular, por isso parece estranho. Veio é passado."},
-    {contexto:"Um poema tem 3 blocos separados por espaço em branco. Cada bloco tem 4 linhas.",
-     pergunta:"Quantas estrofes e quantos versos?",
-     opcoes:["3 estrofes e 12 versos","12 estrofes e 3 versos","3 estrofes e 4 versos"],
-     certa:0, nota:"Cada bloco é uma estrofe (3) e cada linha é um verso: 4 + 4 + 4 = 12. Na prova, conta os versos de TODAS as estrofes e soma."}
+    {contexto:"Marca o esquema:", versos:[["Guardei a estrela na jan<u>ela</u>","?"],["pra ver se o sonho ficava n<u>ela</u>","?"],["O mar bateu de leve no ch<u>ão</u>","?"],["e respondeu que sonho é ilus<u>ão</u>","?"]],
+     pergunta:"Qual é o esquema desta estrofe?",
+     opcoes:["AABB","ABAB","ABBA"],
+     certa:0, nota:"janela e nela rimam (A, A); chão e ilusão rimam (B, B). Dois pares seguidos: rimas emparelhadas, AABB."},
+    {contexto:"Numa nova estrofe do mesmo poema aparecem sons que não rimam com nada que veio antes. Já foram usadas as letras A, B, C e D.",
+     pergunta:"Que letra você usa agora?",
+     opcoes:["E — a próxima ainda não utilizada","A — recomeça do começo","D — repete a última"],
+     certa:0, nota:"Cada som novo ganha uma letra nova, seguindo a ordem do alfabeto. Repetir uma letra só quando o SOM se repete."},
+    {contexto:"Pegadinha.",
+     pergunta:"As reticências servem para mostrar que a ideia terminou de vez?",
+     opcoes:["Não — elas fazem o contrário: deixam a frase em suspenso","Sim, é o mesmo que ponto final","Sim, indicam o fim do poema"],
+     certa:0, nota:"Ponto final fecha. Reticências deixam a porta encostada: a frase continua na cabeça de quem lê."},
+    {contexto:"Um poeta escreveu assim: “e tudo acontecia de-va-ga-ri-nho”.",
+     pergunta:"Por que ele separou a palavra em sílabas?",
+     opcoes:["Para obrigar o leitor a ler devagar — a forma da palavra imita o sentido dela","Porque a palavra estava errada","Para a palavra caber na linha"],
+     certa:0, nota:"É um recurso de propósito: você lê sílaba por sílaba e sente a lentidão que a palavra descreve. A escrita faz o que diz."},
+    {contexto:"No meio de um poema: “A chuva – a chuva! em pleno carnaval.”",
+     pergunta:"Que efeito a repetição com travessão causa?",
+     opcoes:["Mostra espanto, como se a pessoa não acreditasse no que está vendo","Mostra que o poeta esqueceu e escreveu duas vezes","Indica uma pergunta"],
+     certa:0, nota:"Repetir a palavra com o travessão é um grito de surpresa dentro do verso: algo apareceu onde ninguém esperava."},
+    {contexto:"Sobre a forma do soneto.",
+     pergunta:"Quais estrofes têm 3 versos?",
+     opcoes:["As duas últimas — os tercetos","As duas primeiras","Todas as quatro"],
+     certa:0, nota:"As duas primeiras (quartetos) têm 4 versos cada; as duas últimas (tercetos), 3 cada."},
+    {contexto:"Quatro versos terminam assim: vento / estrela / sento / janela.",
+     pergunta:"Qual é o esquema?",
+     opcoes:["ABAB","AABB","ABBA"],
+     certa:0, nota:"vento rima com sento (A) e estrela com janela (B), alternando: ABAB."},
+    {contexto:"Última: por que marcar o esquema de rimas ajuda a ler poesia?",
+     opcoes:["Porque mostra que o poema tem uma estrutura pensada, não foi escrito à toa","Porque deixa o poema mais curto","Porque só assim o poema rima"],
+     certa:0, nota:"Enxergar o esquema é enxergar o trabalho do poeta: ele escolheu cada palavra do fim para encaixar num desenho sonoro."}
   ];
 
-  // a certa vem sempre primeiro nos dados; gira as opções para ela variar de posição
-  [GUIADO, DESAFIO].forEach(function(lista, j){
-    lista.forEach(function(q, i){
-      var n = q.opcoes.length, r = (i*2 + j + 1) % n;
-      q.opcoes = q.opcoes.slice(r).concat(q.opcoes.slice(0, r));
-      q.certa = (q.certa - r + n) % n;
-    });
-  });
-
-  var KEY = "zion-revisao-portugues-2026-10-23";
+  var KEY = "zion-soneto-rimas-2026-10-26";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -252,85 +313,81 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","O Brook escreveu uma canção nova pro show de hoje à noite no Sunny. Mas uma onda molhou o caderno dele e borrou um monte de coisas.");
-    var p2 = el("p","lead","Sumiram uns MAS e uns MAIS, os verbos ficaram sem tempo, e ninguém lembra qual sílaba cantar mais forte. Sem isso, a música desafina.");
-    var p3 = el("p","lead","Você vai arrumar o caderno — e de quebra revisar tudo o que cai na prova de Português. Yohohoho! Bora?");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"A Canção do Brook"), p1, p2, p3, botao("Bora afinar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","Depois de um banquete, o Luffy resolveu escrever um poema de agradecimento pro Sanji. Escreveu quatorze versos e ficou todo orgulhoso.");
+    var p2 = el("p","lead","A Robin leu e sorriu: “Ficou bonito. Mas repara: no fim de cada verso tem um som que combina com outro. Isso tem nome, e dá pra marcar com letras.”");
+    var p3 = el("p","lead","Hoje você aprende a enxergar a arquitetura escondida de um poema: o esquema de rimas, e os truques que os poetas usam pra mudar o jeito que a gente lê.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O Poema do Luffy"), p1, p2, p3, botao("Bora ler! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
-  function silabas(partes, forte, rotulos){
-    var w = el("div","silabas");
-    partes.forEach(function(s,i){
-      var d = el("div","sil");
-      if(i === forte) d.setAttribute("data-forte","");
-      d.appendChild(el("b",null,s));
-      d.appendChild(el("small",null,rotulos[i]));
+  function poema(linhas, nota){
+    var w = el("div","poema");
+    linhas.forEach(function(l){
+      var d = el("div","v");
+      var t = el("span"); t.innerHTML = l[0];
+      d.appendChild(t);
+      d.appendChild(el("b",null,l[1] || "?"));
       w.appendChild(d);
     });
+    if(nota) w.appendChild(el("div","vazio",nota));
     return w;
-  }
-
-  function bloco(nome, texto, macete){
-    var r = el("div","regra");
-    r.appendChild(el("div","nome",nome));
-    var p = el("p","muted"); p.innerHTML = texto; r.appendChild(p);
-    if(macete){ var m = el("div","macete"); m.innerHTML = "<b>Macete: </b>" + macete; r.appendChild(m); }
-    return r;
   }
 
   function regra(){
     var g = el("div","grupo");
 
-    g.appendChild(bloco("1. Poema, poesia e poeta",
-      "<b>Poema</b> é o texto, em linhas curtas. <b>Poesia</b> é a emoção, a arte — pode estar até num pôr do sol. <b>Poeta</b> é quem cria. Cada linha é um <b>verso</b>; cada bloco de versos é uma <b>estrofe</b>: dístico (2), terceto (3), quarteto ou quadrinha (4). <b>Rima</b> é o som igual no fim (canção / coração). <b>Ritmo</b> é a música da leitura, com sílabas fortes e fracas.",
-      "o poeta cria um poema para mostrar a sua poesia."));
+    var r1 = el("div","regra");
+    r1.appendChild(el("div","nome","1. A rima mora no FIM do verso"));
+    r1.appendChild(el("p","muted","Rima é a repetição de sons parecidos — e, no soneto, ela aparece na última palavra de cada verso. Para achar, leia só o finalzinho de cada linha."));
+    r1.appendChild(poema([["O vento empurra o nosso <u>mar</u>","A"],
+                          ["e o Sunny corta a escuri<u>dão</u>","B"],
+                          ["Ninguém consegue nos pa<u>rar</u>","A"],
+                          ["quando bate o cora<u>ção</u>","B"]]));
+    r1.appendChild(el("p","muted","mar / parar rimam → as duas ganham a letra A. dão / ção rimam → letra B. O esquema aqui é ABAB."));
+    g.appendChild(r1);
 
-    g.appendChild(bloco("2. As palavras mágicas",
-      "<b>Metáfora</b>: junta duas coisas diferentes sem usar “como” — “o mar é um tapete azul”. <b>Personificação</b>: uma coisa sem vida faz coisa de gente — “a lua sorriu pra mim”.",
-      "tem coisa agindo como pessoa? Personificação. Uma coisa “É” outra? Metáfora."));
+    var r2 = el("div","regra");
+    r2.appendChild(el("div","nome","2. Como marcar o esquema"));
+    var ul = el("ul","passos");
+    ["Leia o fim do primeiro verso e marque <b>A</b>.",
+     "No verso seguinte: o som é igual a algum que já apareceu? Então repita a mesma letra.",
+     "Se o som é novo, use a <b>próxima letra</b> ainda não utilizada: B, C, D, E…",
+     "Esquemas comuns: <b>AABB</b> (emparelhadas), <b>ABAB</b> (alternadas) e <b>ABBA</b> (o primeiro rima com o último)."].forEach(function(t){
+      var li = el("li"); li.innerHTML = t; ul.appendChild(li);
+    });
+    r2.appendChild(ul);
+    r2.appendChild(el("p","muted","Um SONETO tem 14 versos: dois quartetos (4 versos cada) e dois tercetos (3 versos cada). As letras seguem do começo ao fim do poema, sem repetir uma letra já usada para um som diferente."));
+    g.appendChild(r2);
 
-    g.appendChild(bloco("3. MAS ou MAIS",
-      "<b>MAIS</b> (com I) é quantidade, o contrário de menos. <b>MAS</b> (sem I) é ideia contrária, igual a porém.",
-      "troca por MENOS → é MAIS. Troca por PORÉM → é MAS."));
+    var r3 = el("div","regra");
+    r3.appendChild(el("div","nome","3. Os truques do poeta"));
+    var ul2 = el("ul","passos");
+    ["<b>Reticências (…)</b> — seguram a leitura por um instante. Dão uma pausa, criam suspense e deixam a cena continuar na cabeça de quem lê, como se a frase não tivesse acabado.",
+     "<b>Palavra separada em sílabas</b> — ex.: de-va-ga-ri-nho. Obriga você a ler devagar, sílaba por sílaba. A forma da palavra imita o que ela significa.",
+     "<b>Repetição com travessão</b> — ex.: “a chuva – a chuva!”. Mostra espanto, surpresa, como se a pessoa não acreditasse no que viu."].forEach(function(t){
+      var li = el("li"); li.innerHTML = t; ul2.appendChild(li);
+    });
+    r3.appendChild(ul2);
+    g.appendChild(r3);
 
-    var r4 = bloco("4. A sílaba forte",
-      "Conta de trás pra frente. A forte é a <b>última</b>: oxítona. A <b>penúltima</b>: paroxítona. A <b>antepenúltima</b>: proparoxítona — e essa sempre tem acento.",
-      "fala a palavra CHAMANDO alguém de longe. A sílaba que estica é a forte. Nunca chuta pelo tamanho!");
-    g.appendChild(r4);
+    var citacao = el("div","citacao","Robin aponta para os dois últimos versos do poema do Luffy: “…e o cheiro da comida no co-zi-nhei-ro…”");
 
-    var r5 = el("div","regra");
-    r5.appendChild(el("div","nome","5. O tempo do verbo"));
-    r5.appendChild(el("p","muted","O verbo é a ação. A terminação mostra QUANDO ela acontece:"));
-    var tw = el("div","tabv-wrap");
-    var t = el("table","tabv");
-    t.innerHTML = "<tr><th></th><th>falar</th><th>comer</th><th>partir</th></tr>" +
-      "<tr><td>Ontem (pretérito)</td><td>eu fal<em>ei</em>, ele fal<em>ou</em>, eles fal<em>aram</em></td><td>com<em>i</em>, com<em>eu</em>, com<em>eram</em></td><td>part<em>i</em>, part<em>iu</em>, part<em>iram</em></td></tr>" +
-      "<tr><td>Hoje (presente)</td><td>fal<em>o</em>, fal<em>a</em>, fal<em>am</em></td><td>com<em>o</em>, com<em>e</em>, com<em>em</em></td><td>part<em>o</em>, part<em>e</em>, part<em>em</em></td></tr>" +
-      "<tr><td>Amanhã (futuro)</td><td>fal<em>arei</em>, fal<em>ará</em>, fal<em>arão</em></td><td>com<em>erei</em>, com<em>erá</em>, com<em>erão</em></td><td>part<em>irei</em>, part<em>irá</em>, part<em>irão</em></td></tr>";
-    tw.appendChild(t); r5.appendChild(tw);
-    var m5 = el("div","macete"); m5.innerHTML = "<b>Macete: </b>procura a palavra-pista. Ontem → passado. Hoje/agora → presente. Amanhã/no próximo → futuro.";
-    r5.appendChild(m5);
-    g.appendChild(r5);
-
-    var citacao = el("div","citacao","O Usopp aponta pro caderno: “Brook, COMPUTADOR é proparoxítona, né? É enorme!”");
-    var sil = silabas(["com","pu","ta","dor"], 3, ["", "antepenúlt.","penúltima","última"]);
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F3BB} Brook pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F4D6} Robin pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "tamanho não conta, Usopp. Primeiro eu separo: com-pu-ta-dor, quatro sílabas. " +
-      "Depois eu falo chamando de longe: “computaDOOOR!”. A voz esticou no DOR. " +
-      "Agora conto de trás pra frente: DOR é a última. Última forte é oxítona. " +
-      "E confiro: se fosse proparoxítona, teria acento obrigatório — e computador não tem. Yohohoho!"));
+      "primeiro eu olho só a última palavra de cada verso, porque é ali que a rima mora. " +
+      "Depois eu comparo os sons: se dois terminam igual, ganham a mesma letra; se aparece um som novo, pego a próxima letra que ainda não usei. " +
+      "E aí eu reparo nos detalhes estranhos: por que esse “co-zi-nhei-ro” está picado? Porque o poeta quer que eu leia devagar, saboreando — a palavra imita o gesto de sentir o cheiro com calma. " +
+      "As reticências do começo fazem a mesma coisa: me obrigam a respirar antes de continuar."));
 
     return card(
-      navbar("As regras", function(){ vai(0); }),
-      eyebrow("O que cai na prova"),
-      el("h2",null,"As 5 páginas do caderno do Brook"),
+      navbar("A regra", function(){ vai(0); }),
+      eyebrow("A regra"),
+      el("h2",null,"A arquitetura escondida do poema"),
       g,
-      el("p","muted","Vê o Brook descobrindo a sílaba forte, passo a passo:"),
-      citacao, sil, modelo,
-      el("p","muted","Ordem certa: SEPARA → FALA CHAMANDO → CONTA DE TRÁS PRA FRENTE."),
+      el("p","muted","Vê a Robin lendo, passo a passo:"),
+      citacao, modelo,
+      el("p","muted","A ordem: OLHA O FIM DO VERSO → SOM IGUAL? MESMA LETRA → SOM NOVO? PRÓXIMA LETRA."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -349,8 +406,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Caderno quase seco!"),
-        el("p",null,"Você passou pelas cinco páginas com ajuda. Agora é sem dica, e com as pegadinhas que costumam cair na prova."),
+        eyebrow("Treino guiado"), el("h2",null,"Ouvido afinado!"),
+        el("p",null,"Você já marca as letras na ordem certa. Agora é sem dica — e com os truques do poeta."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -359,6 +416,8 @@
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.versos) c.appendChild(poema(q.versos, q.nota2));
+    if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -410,7 +469,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Canção afinada! \u{1F3B5}"),
+        eyebrow("Desafio"), el("h2",null,"Poema decifrado! \u{1F4DD}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -420,6 +479,8 @@
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
+    if(q.versos) c.appendChild(poema(q.versos, q.nota2));
+    if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
     var ops = el("div", opcoesClasse(q.opcoes.length));
@@ -456,15 +517,14 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Chopper?"));
-    c2.appendChild(el("p","lead","O Chopper disse: “CAMARADA é proparoxítona, porque é uma palavra grandona!”"));
-    c2.appendChild(el("p","lead","Explica pra ele, com as TUAS palavras, como descobrir de verdade a sílaba forte — o que fazer primeiro, depois e no fim — e qual é a resposta certa."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
+    c2.appendChild(el("p","lead","O Luffy quer marcar o esquema de rimas do poema dele sozinho, mas não sabe nem por onde começar. Explica pra ele, com as TUAS palavras, o passo a passo: onde olhar em cada verso, quando repetir a letra e quando usar uma letra nova."));
     var chips = el("div","chips");
-    ["separar as sílabas","chamar de longe","contar de trás pra frente"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["fim do verso","som igual","letra nova"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Chopper, primeiro você...");
+    ta.setAttribute("placeholder","Luffy, primeiro você olha...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -490,22 +550,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"O show pode começar \u{1F3BB}"));
+    c.appendChild(el("h2",null,"Poema do Luffy, publicado \u{1F4D6}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var tonicaOk = S.desafio[4] && S.desafio[4].acertou && S.desafio[5] && S.desafio[5].acertou;
-    var msg = tonicaOk
-      ? "Você classificou palavras SEM acento pelo som, inclusive a comprida que engana — era a parte mais difícil."
-      : "A sílaba forte ainda escorrega quando a palavra não tem acento. Antes da prova, fala cinco palavras chamando de longe e conta de trás pra frente.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de mas/mais, da palavra comprida e do verbo vier.";
-    c.appendChild(el("p",null, msg + " Agora pega a folha de revisão da escola e faz os exercícios sozinho."));
+    var msg = "Você já lê um poema enxergando a estrutura — rimas, pausas e o jeito que o poeta escreve de propósito.";
+    if(ad <= 4) msg = "Marcar as letras ainda embaralha. Antes da folha, repete: olho o fim do verso, som igual repete a letra, som novo ganha letra nova.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive os truques das reticências e da palavra picada em sílabas.";
+    c.appendChild(el("p",null, msg + " Agora termina a folha: faltam explicar o efeito das reticências, a palavra separada em sílabas e o teu desenho do soneto."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Português: Revisão para a prova (A Canção do Brook)",
+    var txt = ["AULA DE HOJE — Português: Soneto, esquema de rimas e recursos expressivos (O Poema do Luffy)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",
@@ -513,7 +571,7 @@
                "TOTAL: " + acertos + "/" + total,
                ""];
     var errou = [];
-    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push("Desafio " + (i+1) + " (" + DESAFIO[i].contexto + "): marcou “" + S.desafio[i].marcou + "”, era “" + DESAFIO[i].opcoes[DESAFIO[i].certa] + "”");
+    for(i=0;i<DESAFIO.length;i++) if(S.desafio[i] && !S.desafio[i].acertou) errou.push("Desafio " + (i+1) + ": marcou “" + S.desafio[i].marcou + "”, era “" + DESAFIO[i].opcoes[DESAFIO[i].certa] + "”");
     for(i=0;i<GUIADO.length;i++) if(S.guiado[i] && !S.guiado[i].acertou) errou.push("Treino " + (i+1) + " (precisou de dica)");
     txt.push("Errou / tropeçou:");
     txt.push(errou.length ? "- " + errou.join("\n- ") : "- nada");

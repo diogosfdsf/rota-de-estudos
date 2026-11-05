@@ -194,11 +194,21 @@
   .poema .v u{text-decoration:none; font-weight:700; color:var(--accent);}
   .poema .v b{font-family:var(--display); font-weight:800; color:var(--gold); font-size:1.1rem; flex:none;}
   .poema .vazio{color:var(--muted); font-size:.85rem; text-align:center; padding-top:6px;}
+
+  .selo{display:inline-block; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+        font-weight:800; padding:4px 10px; border-radius:999px; background:var(--accent);
+        color:var(--on-accent); font-family:var(--display); margin-bottom:4px;}
+  .selo[data-m="sci"]{background:var(--gold);}
+  .ficha2{display:grid; grid-template-columns:auto 1fr; gap:6px 14px; align-items:baseline;
+          padding:11px 13px; border:1px solid var(--line); border-radius:11px; background:var(--surface2);}
+  .ficha2 b{font-family:var(--display); font-weight:700; color:var(--accent); font-size:.95rem;}
+  .ficha2 span{font-size:.93rem;}
+  .en{color:var(--gold); font-weight:700;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>26/10 · O Poema do Luffy · Português — Soneto, rimas e reticências</span></div>
+    <div class="brand"><b>Droidec</b><span>05/11 · Véspera de Prova · Revisão — Geografia + Science</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -210,68 +220,77 @@
   "use strict";
 
   var GUIADO = [
-    {contexto:null,
-     pergunta:"Em que parte do verso a gente procura a rima?",
-     opcoes:["Na última palavra, no fim do verso","Na primeira palavra","No meio do verso"],
-     certa:0, dica:"Pensa em como você percebe que dois versos “combinam” quando alguém lê em voz alta.",
-     porque:"A rima do soneto mora no fim: é a última palavra de cada verso que repete o som de outra."},
-    {contexto:"Marca as letras desta estrofe:", versos:[["O sol nasceu atrás do mo<u>rro</u>","A"],["e o mar ficou todo dou<u>rado</u>","B"],["Eu chamo e ninguém soco<u>rro</u>","?"],["o barco já está molh<u>ado</u>","?"]],
-     pergunta:"Que letras faltam nos dois últimos versos?",
-     opcoes:["A e B","C e D","B e A"],
-     certa:0, dica:"“socorro” tem o mesmo som final de qual verso lá de cima? E “molhado”?",
-     porque:"socorro rima com morro (A) e molhado rima com dourado (B). O esquema fica ABAB — rimas alternadas."},
-    {contexto:"Agora esta:", versos:[["A noite trouxe uma can<u>ção</u>","A"],["que veio junto com o lu<u>ar</u>","B"],["e fez a gente até can<u>tar</u>","?"],["com a mão sobre o cora<u>ção</u>","?"]],
-     pergunta:"E aqui?",
-     opcoes:["B e A — o primeiro verso rima com o último","A e B","C e D"],
-     certa:0, dica:"Repara que o som do primeiro verso só volta lá no final da estrofe.",
-     porque:"cantar rima com luar (B) e coração rima com canção (A). O esquema é ABBA — o primeiro abraça o último."},
-    {contexto:null,
-     pergunta:"Quantos versos tem um soneto, e como ele se divide?",
-     opcoes:["14 versos: dois quartetos (4 versos) e dois tercetos (3 versos)","10 versos: duas estrofes de 5","12 versos: três estrofes de 4"],
-     certa:0, dica:"Quarteto vem de quatro; terceto vem de três. Soma: 4 + 4 + 3 + 3.",
-     porque:"4 + 4 + 3 + 3 = 14. Essa é a forma fixa do soneto, usada há séculos."},
-    {contexto:"No fim de um verso o poeta escreveu: “…e o menino ficou olhando…”",
-     pergunta:"O que as reticências fazem na leitura?",
-     opcoes:["Dão uma pausa e deixam a cena continuar na imaginação de quem lê","Avisam que a frase acabou de vez","Indicam que houve um erro"],
-     certa:0, dica:"Lê a frase em voz alta parando nos pontinhos. O que você sente: que acabou, ou que continua?",
-     porque:"As reticências seguram a leitura por um instante: criam pausa, suspense e a sensação de que algo continua sem ser dito."}
+    {selo:"geo", contexto:"Duas fábricas de sapato: uma tem esteira e máquinas e faz 2 mil pares iguais por dia; na outra, o seu Antônio corta e costura cada par à mão.",
+     pergunta:"Qual é a principal diferença entre as duas produções?",
+     opcoes:["A industrial usa máquinas e produz em grande quantidade; a artesanal é feita à mão e as peças saem diferentes entre si","A artesanal é mais moderna","Só a industrial transforma matéria-prima"],
+     certa:0, dica:"Pensa em duas coisas: QUEM faz (máquina ou mão) e QUANTO sai (muito e igual, ou pouco e diferente).",
+     porque:"É exatamente essa a resposta da revisão: a indústria usa máquinas e equipamentos modernos em grande quantidade; o artesanato é feito à mão, com algumas ferramentas e técnicas diferentes. E atenção: os DOIS transformam matéria-prima em produto."},
+    {selo:"geo", contexto:"Caminhões levam os lápis da fábrica até as lojas de várias cidades.",
+     pergunta:"Que etapa do processo é essa?",
+     opcoes:["Circulação","Produção","Comercialização"],
+     certa:0, dica:"As quatro etapas, na ordem: produção → circulação → comercialização → consumo. Transportar é qual delas?",
+     porque:"Circulação é o transporte e a distribuição dos produtos até os lugares onde serão vendidos."},
+    {selo:"sci", contexto:"Birds singing, thunder and waves crashing.",
+     pergunta:"What kind of sounds are these?",
+     opcoes:["Natural sounds","Artificial sounds","Both"],
+     certa:0, dica:"Natural sounds come from nature, without people or machines making them.",
+     porque:"They come from the natural environment, so they are natural sounds. A car horn, an alarm clock and an instrument being played are artificial sounds."},
+    {selo:"sci", contexto:"You press the ruler harder on the table and it vibrates much faster.",
+     pergunta:"What happens to the sound?",
+     opcoes:["It has a higher pitch","It has a lower pitch","Nothing changes"],
+     certa:0, dica:"Faster vibration → higher. Slower vibration → lower. É a regra do experimento da régua.",
+     porque:"When an object vibrates faster it produces a higher-pitched sound; when it vibrates more slowly, a lower-pitched sound."},
+    {selo:"geo", contexto:"Uma enfermeira atende um paciente no hospital.",
+     pergunta:"Isso é comércio ou serviço?",
+     opcoes:["Serviço — atende uma necessidade da pessoa, sem vender mercadoria","Comércio — ela trabalha e recebe por isso","Os dois ao mesmo tempo"],
+     certa:0, dica:"Comércio é compra e venda de MERCADORIA. Serviço atende uma necessidade sem produzir mercadoria.",
+     porque:"Saúde é serviço, assim como educação, transporte, água, energia e esgoto. Na revisão, a enfermeira e o motorista são S; a livraria, o supermercado e a mochila pela internet são C."}
   ];
 
   var DESAFIO = [
-    {contexto:"Marca o esquema:", versos:[["Guardei a estrela na jan<u>ela</u>","?"],["pra ver se o sonho ficava n<u>ela</u>","?"],["O mar bateu de leve no ch<u>ão</u>","?"],["e respondeu que sonho é ilus<u>ão</u>","?"]],
-     pergunta:"Qual é o esquema desta estrofe?",
-     opcoes:["AABB","ABAB","ABBA"],
-     certa:0, nota:"janela e nela rimam (A, A); chão e ilusão rimam (B, B). Dois pares seguidos: rimas emparelhadas, AABB."},
-    {contexto:"Numa nova estrofe do mesmo poema aparecem sons que não rimam com nada que veio antes. Já foram usadas as letras A, B, C e D.",
-     pergunta:"Que letra você usa agora?",
-     opcoes:["E — a próxima ainda não utilizada","A — recomeça do começo","D — repete a última"],
-     certa:0, nota:"Cada som novo ganha uma letra nova, seguindo a ordem do alfabeto. Repetir uma letra só quando o SOM se repete."},
-    {contexto:"Pegadinha.",
-     pergunta:"As reticências servem para mostrar que a ideia terminou de vez?",
-     opcoes:["Não — elas fazem o contrário: deixam a frase em suspenso","Sim, é o mesmo que ponto final","Sim, indicam o fim do poema"],
-     certa:0, nota:"Ponto final fecha. Reticências deixam a porta encostada: a frase continua na cabeça de quem lê."},
-    {contexto:"Um poeta escreveu assim: “e tudo acontecia de-va-ga-ri-nho”.",
-     pergunta:"Por que ele separou a palavra em sílabas?",
-     opcoes:["Para obrigar o leitor a ler devagar — a forma da palavra imita o sentido dela","Porque a palavra estava errada","Para a palavra caber na linha"],
-     certa:0, nota:"É um recurso de propósito: você lê sílaba por sílaba e sente a lentidão que a palavra descreve. A escrita faz o que diz."},
-    {contexto:"No meio de um poema: “A chuva – a chuva! em pleno carnaval.”",
-     pergunta:"Que efeito a repetição com travessão causa?",
-     opcoes:["Mostra espanto, como se a pessoa não acreditasse no que está vendo","Mostra que o poeta esqueceu e escreveu duas vezes","Indica uma pergunta"],
-     certa:0, nota:"Repetir a palavra com o travessão é um grito de surpresa dentro do verso: algo apareceu onde ninguém esperava."},
-    {contexto:"Sobre a forma do soneto.",
-     pergunta:"Quais estrofes têm 3 versos?",
-     opcoes:["As duas últimas — os tercetos","As duas primeiras","Todas as quatro"],
-     certa:0, nota:"As duas primeiras (quartetos) têm 4 versos cada; as duas últimas (tercetos), 3 cada."},
-    {contexto:"Quatro versos terminam assim: vento / estrela / sento / janela.",
-     pergunta:"Qual é o esquema?",
-     opcoes:["ABAB","AABB","ABBA"],
-     certa:0, nota:"vento rima com sento (A) e estrela com janela (B), alternando: ABAB."},
-    {contexto:"Última: por que marcar o esquema de rimas ajuda a ler poesia?",
-     opcoes:["Porque mostra que o poema tem uma estrutura pensada, não foi escrito à toa","Porque deixa o poema mais curto","Porque só assim o poema rima"],
-     certa:0, nota:"Enxergar o esquema é enxergar o trabalho do poeta: ele escolheu cada palavra do fim para encaixar num desenho sonoro."}
+    {selo:"geo", contexto:"Uma loja gigante vende alimentos, roupas, televisão e geladeira, tudo no mesmo lugar.",
+     pergunta:"Como se chama esse estabelecimento?",
+     opcoes:["Hipermercado","Shopping center","Comércio informal"],
+     certa:0, nota:"Hipermercado é UMA loja grande com muitos tipos de produto. Shopping center reúne VÁRIAS lojas e serviços num mesmo espaço."},
+    {selo:"geo", contexto:"Pensa no Código de Defesa do Consumidor.",
+     pergunta:"Qual destes NÃO é um direito do consumidor?",
+     opcoes:["Receber o produto sempre de graça na primeira compra","Receber informações sobre o produto","Proteção contra propaganda enganosa"],
+     certa:0, nota:"Os direitos são: informação sobre produtos e serviços, proteção contra riscos, proteção contra propaganda enganosa e acesso a serviços públicos de qualidade."},
+    {selo:"geo", contexto:"A família do Luffy já tem cinco liquidificadores, mas comprou mais um porque viu um anúncio.",
+     pergunta:"Como se chama isso?",
+     opcoes:["Consumismo","Consumo","Comercialização"],
+     certa:0, nota:"Consumismo é comprar muito mais do que se precisa. Ele aumenta a exploração dos recursos naturais e a produção de resíduos."},
+    {selo:"geo", contexto:"Na revisão apareceram dois exemplos de matéria-prima virando produto.",
+     pergunta:"A cana-de-açúcar é matéria-prima de quê?",
+     opcoes:["Açúcar e etanol","Vidro","Papel"],
+     certa:0, nota:"Cana-de-açúcar → açúcar e etanol. E o outro exemplo da revisão: areia → vidro."},
+    {selo:"geo", contexto:"Uma carga de soja vai do Brasil até outro país atravessando o oceano.",
+     pergunta:"Qual meio de transporte é esse?",
+     opcoes:["Hidroviário","Rodoviário","Ferroviário"],
+     certa:0, nota:"Os quatro meios: rodoviário (estradas), ferroviário (trilhos), hidroviário (rios e mares) e aéreo (aviões). A escolha depende do produto, da distância e do destino."},
+    {selo:"sci", contexto:"This is the outside part of the ear, the one you can touch.",
+     pergunta:"Which part catches the sound first?",
+     opcoes:["The pinna","The eardrum","The cochlea"],
+     certa:0, nota:"The path of sound: pinna → ear canal → eardrum → middle ear → inner ear (cochlea) → brain."},
+    {selo:"sci", contexto:"It is a thin membrane that vibrates when sound reaches it.",
+     pergunta:"Which part is it?",
+     opcoes:["The eardrum","The Eustachian tube","The pinna"],
+     certa:0, nota:"The eardrum vibrates with the sound. The Eustachian tube balances the pressure inside the ear."},
+    {selo:"sci", contexto:"You hit the drum much harder than before.",
+     pergunta:"Stronger vibrations change what?",
+     opcoes:["The volume — the sound gets louder","The pitch — the sound gets higher","Nothing"],
+     certa:0, nota:"Pegadinha clássica da prova: VELOCIDADE da vibração muda o PITCH (agudo/grave); FORÇA da vibração muda o VOLUME (alto/baixo)."},
+    {selo:"sci", contexto:"Vocabulary check.",
+     pergunta:"What do decibels (dB) measure?",
+     opcoes:["How loud a sound is","How high or low a sound is","How fast sound travels"],
+     certa:0, nota:"Decibels measure volume — how loud a sound is. Pitch is how high or low it is."},
+    {selo:"sci", contexto:"Ways to protect your hearing.",
+     pergunta:"Which one is NOT a good idea?",
+     opcoes:["Turning the headphones up to the maximum","Moving away from very loud sounds","Wearing hearing protection in noisy places"],
+     certa:0, nota:"Very loud sounds can damage the tiny hair cells inside the cochlea. Keep the volume low, move away, wear protection and take breaks."}
   ];
 
-  var KEY = "zion-soneto-rimas-2026-10-26";
+  var KEY = "zion-revisao-prova-2026-11-05";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -313,81 +332,133 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","Depois de um banquete, o Luffy resolveu escrever um poema de agradecimento pro Sanji. Escreveu quatorze versos e ficou todo orgulhoso.");
-    var p2 = el("p","lead","A Robin leu e sorriu: “Ficou bonito. Mas repara: no fim de cada verso tem um som que combina com outro. Isso tem nome, e dá pra marcar com letras.”");
-    var p3 = el("p","lead","Hoje você aprende a enxergar a arquitetura escondida de um poema: o esquema de rimas, e os truques que os poetas usam pra mudar o jeito que a gente lê.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"O Poema do Luffy"), p1, p2, p3, botao("Bora ler! →", function(){ vai(1); }));
+    var p1 = el("p","lead","É a noite antes da prova. A tripulação inteira está na biblioteca do Sunny: amanhã cai GEOGRAFIA e SCIENCE na mesma manhã.");
+    var p2 = el("p","lead","A Robin separou os mapas da produção e do comércio. O Chopper, que é médico, trouxe o desenho da orelha e o caderno de sons.");
+    var p3 = el("p","lead","Hoje não tem conteúdo novo: é revisão. Vamos passar pelos dois mapas e depois testar tudo — inclusive as respostas em inglês.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"Véspera de Prova no Sunny"), p1, p2, p3, botao("Bora revisar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
-  function poema(linhas, nota){
-    var w = el("div","poema");
-    linhas.forEach(function(l){
-      var d = el("div","v");
-      var t = el("span"); t.innerHTML = l[0];
-      d.appendChild(t);
-      d.appendChild(el("b",null,l[1] || "?"));
-      w.appendChild(d);
+  function ficha2(pares){
+    var f = el("div","ficha2");
+    pares.forEach(function(p){
+      f.appendChild(el("b",null,p[0]));
+      var s = el("span"); s.innerHTML = p[1];
+      f.appendChild(s);
     });
-    if(nota) w.appendChild(el("div","vazio",nota));
-    return w;
+    return f;
+  }
+
+  function lista(itens){
+    var ul = el("ul","passos");
+    itens.forEach(function(t){ var li = el("li"); li.innerHTML = t; ul.appendChild(li); });
+    return ul;
   }
 
   function regra(){
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. A rima mora no FIM do verso"));
-    r1.appendChild(el("p","muted","Rima é a repetição de sons parecidos — e, no soneto, ela aparece na última palavra de cada verso. Para achar, leia só o finalzinho de cada linha."));
-    r1.appendChild(poema([["O vento empurra o nosso <u>mar</u>","A"],
-                          ["e o Sunny corta a escuri<u>dão</u>","B"],
-                          ["Ninguém consegue nos pa<u>rar</u>","A"],
-                          ["quando bate o cora<u>ção</u>","B"]]));
-    r1.appendChild(el("p","muted","mar / parar rimam → as duas ganham a letra A. dão / ção rimam → letra B. O esquema aqui é ABAB."));
+    r1.appendChild(el("div","nome","GEOGRAFIA · 1. Indústria × Artesanato"));
+    r1.appendChild(ficha2([
+      ["Indústria","transforma <b>matéria-prima</b> em produto usando <b>máquinas</b>, em <b>grande quantidade</b>"],
+      ["Artesanato","depende das <b>habilidades do artesão</b>: mãos, ferramentas e técnicas; as peças saem <b>diferentes entre si</b>"],
+      ["Em comum","os dois <b>transformam matéria-prima em produto</b>"],
+      ["Trabalhadores","mesmo com máquinas, as pessoas <b>operam e controlam</b> os equipamentos, <b>acompanham as etapas</b>, <b>verificam a qualidade</b> e fazem <b>manutenção</b>"],
+      ["Meio ambiente","a indústria pode <b>poluir o ar e a água</b>, gerar <b>resíduos</b> e consumir <b>muitos recursos naturais</b>"]
+    ]));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. Como marcar o esquema"));
-    var ul = el("ul","passos");
-    ["Leia o fim do primeiro verso e marque <b>A</b>.",
-     "No verso seguinte: o som é igual a algum que já apareceu? Então repita a mesma letra.",
-     "Se o som é novo, use a <b>próxima letra</b> ainda não utilizada: B, C, D, E…",
-     "Esquemas comuns: <b>AABB</b> (emparelhadas), <b>ABAB</b> (alternadas) e <b>ABBA</b> (o primeiro rima com o último)."].forEach(function(t){
-      var li = el("li"); li.innerHTML = t; ul.appendChild(li);
-    });
-    r2.appendChild(ul);
-    r2.appendChild(el("p","muted","Um SONETO tem 14 versos: dois quartetos (4 versos cada) e dois tercetos (3 versos cada). As letras seguem do começo ao fim do poema, sem repetir uma letra já usada para um som diferente."));
+    r2.appendChild(el("div","nome","GEOGRAFIA · 2. Comércio × Serviços"));
+    r2.appendChild(ficha2([
+      ["Comércio","<b>compra e venda</b> de mercadorias: supermercado, farmácia, livraria, loja, barraca e internet"],
+      ["Hipermercado","<b>uma</b> loja grande que vende muitos tipos de produto"],
+      ["Shopping center","reúne <b>várias</b> lojas e serviços no mesmo espaço"],
+      ["Comércio informal","em praças, calçadas e semáforos, <b>sem registro</b>"],
+      ["Serviços","<b>não produzem mercadoria</b>: atendem necessidades das pessoas — educação, transporte, saúde, água, energia, esgoto"],
+      ["Público × privado","público = governo (ou empresa contratada por ele); privado = empresa ou pessoa particular"]
+    ]));
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. Os truques do poeta"));
-    var ul2 = el("ul","passos");
-    ["<b>Reticências (…)</b> — seguram a leitura por um instante. Dão uma pausa, criam suspense e deixam a cena continuar na cabeça de quem lê, como se a frase não tivesse acabado.",
-     "<b>Palavra separada em sílabas</b> — ex.: de-va-ga-ri-nho. Obriga você a ler devagar, sílaba por sílaba. A forma da palavra imita o que ela significa.",
-     "<b>Repetição com travessão</b> — ex.: “a chuva – a chuva!”. Mostra espanto, surpresa, como se a pessoa não acreditasse no que viu."].forEach(function(t){
-      var li = el("li"); li.innerHTML = t; ul2.appendChild(li);
-    });
-    r3.appendChild(ul2);
+    r3.appendChild(el("div","nome","GEOGRAFIA · 3. Consumo, propaganda e direitos"));
+    r3.appendChild(lista([
+      "A <b>propaganda</b> divulga produtos e serviços e <b>influencia as escolhas</b> das pessoas — ela incentiva a comprar mais.",
+      "<b>Consumismo</b> é comprar <b>muito mais do que se precisa</b>. Aumenta a exploração dos recursos naturais e a produção de resíduos.",
+      "<b>Consumidor</b> é quem compra ou utiliza produtos e serviços.",
+      "<b>Direitos do consumidor</b> (Código de Defesa do Consumidor): receber informações sobre o produto, proteção contra riscos, proteção contra propaganda enganosa e acesso a serviços públicos de qualidade."
+    ]));
     g.appendChild(r3);
 
-    var citacao = el("div","citacao","Robin aponta para os dois últimos versos do poema do Luffy: “…e o cheiro da comida no co-zi-nhei-ro…”");
+    var r4 = el("div","regra");
+    r4.appendChild(el("div","nome","GEOGRAFIA · 4. A cadeia: produção → circulação → comercialização → consumo"));
+    r4.appendChild(ficha2([
+      ["Produção","transforma a matéria-prima em produto. Ex.: <b>areia → vidro</b>; <b>cana-de-açúcar → açúcar e etanol</b>"],
+      ["Circulação","o <b>transporte e a distribuição</b> até as lojas — rodoviário, ferroviário, hidroviário e aéreo"],
+      ["Comercialização","o produto fica <b>disponível para venda</b> nos estabelecimentos"],
+      ["Consumo","a pessoa <b>compra e utiliza</b> o produto"]
+    ]));
+    r4.appendChild(el("p","muted","As quatro dependem uma da outra: são etapas do mesmo processo. Sem produção não há o que transportar; sem circulação o produto não chega à loja; sem comércio ninguém consome."));
+    g.appendChild(r4);
+
+    var r5 = el("div","regra");
+    r5.appendChild(el("div","nome","SCIENCE · 1. Sounds and music"));
+    r5.appendChild(ficha2([
+      ["<span class='en'>Natural sounds</span>","vêm da natureza: <i>birds singing, thunder, waves crashing</i>"],
+      ["<span class='en'>Artificial sounds</span>","feitos por pessoas ou máquinas: <i>a car horn, an alarm clock, a musical instrument</i>"],
+      ["<span class='en'>Music</span>","helps people <b>express feelings</b>, <b>celebrate</b>, <b>share traditions</b> and <b>connect</b> with others. Ex.: <i>samba during Carnival in Brazil</i>"]
+    ]));
+    g.appendChild(r5);
+
+    var r6 = el("div","regra");
+    r6.appendChild(el("div","nome","SCIENCE · 2. Parts of the ear"));
+    r6.appendChild(ficha2([
+      ["<span class='en'>Pinna</span>","a parte de fora, que <b>recolhe</b> o som"],
+      ["<span class='en'>Ear canal</span>","o túnel por onde o som <b>viaja</b> para dentro"],
+      ["<span class='en'>Eardrum</span>","a membrana que <b>vibra</b> quando o som chega"],
+      ["<span class='en'>Middle ear</span>","leva as vibrações adiante"],
+      ["<span class='en'>Eustachian tube</span>","equilibra a <b>pressão</b> dentro da orelha"],
+      ["<span class='en'>Inner ear</span>","tem a <b>cochlea</b>; transforma vibração em sinal para o <b>brain</b>"]
+    ]));
+    r6.appendChild(el("p","muted","O caminho do som: pinna → ear canal → eardrum → middle ear → inner ear (cochlea) → brain."));
+    g.appendChild(r6);
+
+    var r7 = el("div","regra");
+    r7.appendChild(el("div","nome","SCIENCE · 3. Vocabulary + vibrations"));
+    r7.appendChild(ficha2([
+      ["<span class='en'>Vibration</span>","a quick <b>back-and-forth movement</b> that produces sound"],
+      ["<span class='en'>Sound</span>","energy produced by vibrations that we can <b>hear</b>"],
+      ["<span class='en'>Pitch</span>","how <b>high or low</b> a sound is"],
+      ["<span class='en'>Volume</span>","how <b>loud or soft</b> a sound is"],
+      ["<span class='en'>Decibels (dB)</span>","the <b>unit</b> used to measure how loud a sound is"]
+    ]));
+    r7.appendChild(lista([
+      "Vibra <b>mais rápido</b> → som mais <b>agudo</b> (<span class='en'>higher pitch</span>). Vibra <b>mais devagar</b> → som mais <b>grave</b> (<span class='en'>lower pitch</span>).",
+      "Vibração <b>mais forte</b> → som mais <b>alto</b> (<span class='en'>louder</span>). Mais fraca → mais baixo (<span class='en'>softer</span>).",
+      "Sons muito altos podem <b>danificar as células ciliadas</b> da cochlea (<span class='en'>hair cells</span>). Proteção: <i>keep the volume low, move away from loud sounds, wear hearing protection, take breaks</i>."
+    ]));
+    g.appendChild(r7);
+
+    var citacao = el("div","citacao","Na prova vai cair: “Explique por que produção, circulação, comércio e consumo dependem uns dos outros.”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F4D6} Robin pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F4DA} Robin pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu olho só a última palavra de cada verso, porque é ali que a rima mora. " +
-      "Depois eu comparo os sons: se dois terminam igual, ganham a mesma letra; se aparece um som novo, pego a próxima letra que ainda não usei. " +
-      "E aí eu reparo nos detalhes estranhos: por que esse “co-zi-nhei-ro” está picado? Porque o poeta quer que eu leia devagar, saboreando — a palavra imita o gesto de sentir o cheiro com calma. " +
-      "As reticências do começo fazem a mesma coisa: me obrigam a respirar antes de continuar."));
+      "primeiro eu repito a pergunta dentro da resposta, pra ela já começar de pé: “Eles dependem uns dos outros porque…”. " +
+      "Depois eu dou o motivo: são etapas do mesmo processo. " +
+      "E aí eu mostro o encaixe, uma etapa puxando a outra: o consumo depende do comércio, que depende da circulação, que depende da produção. " +
+      "Pronto: frase completa, motivo e exemplo. É isso que a professora procura — resposta de uma palavra não vale nota cheia."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
-      eyebrow("A regra"),
-      el("h2",null,"A arquitetura escondida do poema"),
+      eyebrow("Os dois mapas"),
+      el("h2",null,"Tudo o que cai amanhã"),
+      el("p",null,"Leia uma vez com calma. Depois feche os olhos e tente lembrar os quatro blocos de Geografia e os três de Science."),
       g,
-      el("p","muted","Vê a Robin lendo, passo a passo:"),
+      el("p","muted","Agora a parte mais importante: como responder as perguntas abertas."),
       citacao, modelo,
-      el("p","muted","A ordem: OLHA O FIM DO VERSO → SOM IGUAL? MESMA LETRA → SOM NOVO? PRÓXIMA LETRA."),
+      el("p","muted","A fórmula: REPITA A PERGUNTA → DÊ O MOTIVO → DÊ UM EXEMPLO."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -406,8 +477,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Ouvido afinado!"),
-        el("p",null,"Você já marca as letras na ordem certa. Agora é sem dica — e com os truques do poeta."),
+        eyebrow("Treino guiado"), el("h2",null,"Aquecimento feito!"),
+        el("p",null,"Agora o simulado: 10 questões das duas matérias, sem dica, do jeito que cai amanhã."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -415,8 +486,8 @@
     c.appendChild(navbar("Treino · " + (idx+1) + " de " + GUIADO.length, function(){
       if(idx > 0) pula("iG", idx-1); else vai(1);
     }));
+        if(q.selo){ var sl = el("span","selo", q.selo === "sci" ? "Science" : "Geografia"); if(q.selo === "sci") sl.setAttribute("data-m","sci"); var wrap = el("div"); wrap.appendChild(sl); c.appendChild(wrap); }
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
-    if(q.versos) c.appendChild(poema(q.versos, q.nota2));
     if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
@@ -469,7 +540,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Poema decifrado! \u{1F4DD}"),
+        eyebrow("Desafio"), el("h2",null,"Simulado completo! \u{1F4DA}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -478,8 +549,8 @@
     c.appendChild(navbar("Desafio · " + (idx+1) + " de " + DESAFIO.length, function(){
       if(idx > 0) pula("iD", idx-1); else pula("iG", GUIADO.length, 2);
     }));
+        if(q.selo){ var sl = el("span","selo", q.selo === "sci" ? "Science" : "Geografia"); if(q.selo === "sci") sl.setAttribute("data-m","sci"); var wrap = el("div"); wrap.appendChild(sl); c.appendChild(wrap); }
     if(q.contexto) c.appendChild(el("div","contexto", q.contexto));
-    if(q.versos) c.appendChild(poema(q.versos, q.nota2));
     if(q.frase) c.appendChild(frase(q.frase));
     c.appendChild(el("h2",null,q.pergunta));
 
@@ -517,14 +588,15 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
-    c2.appendChild(el("p","lead","O Luffy quer marcar o esquema de rimas do poema dele sozinho, mas não sabe nem por onde começar. Explica pra ele, com as TUAS palavras, o passo a passo: onde olhar em cada verso, quando repetir a letra e quando usar uma letra nova."));
+    c2.appendChild(el("h2",null,"A pergunta em inglês da prova"));
+    c2.appendChild(el("p","lead","Na Science review tem esta pergunta, e ela vale resposta escrita: <b>“Explain one way sound can be dangerous and describe one thing you can do to protect your hearing.”</b>"));
+    c2.appendChild(el("p","lead","Escreve a tua resposta <b>em inglês</b>, do jeito que você escreveria na prova. Duas frases já bastam: o perigo e a proteção."));
     var chips = el("div","chips");
-    ["fim do verso","som igual","letra nova"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
-    c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
+    ["loud sounds","hair cells / cochlea","keep the volume low"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    c2.appendChild(el("p","muted","Palavras que ajudam:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Luffy, primeiro você olha...");
+    ta.setAttribute("placeholder","Loud sounds can...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -550,20 +622,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Poema do Luffy, publicado \u{1F4D6}"));
+    c.appendChild(el("h2",null,"Pronto pra prova \u{1F680}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já lê um poema enxergando a estrutura — rimas, pausas e o jeito que o poeta escreve de propósito.";
-    if(ad <= 4) msg = "Marcar as letras ainda embaralha. Antes da folha, repete: olho o fim do verso, som igual repete a letra, som novo ganha letra nova.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive os truques das reticências e da palavra picada em sílabas.";
-    c.appendChild(el("p",null, msg + " Agora termina a folha: faltam explicar o efeito das reticências, a palavra separada em sílabas e o teu desenho do soneto."));
+    var msg = "Você chega amanhã sabendo as duas matérias e, melhor ainda, sabendo como escrever as respostas abertas.";
+    if(ad <= 4) msg = "Vale reler os dois mapas antes de dormir, principalmente o vocabulário de Science em inglês. Amanhã de manhã, uma passada rápida basta.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, nas duas matérias. Dorme cedo que amanhã é só repetir o que já está na cabeça.";
+    c.appendChild(el("p",null, msg + " Antes de dormir: lê os dois mapas mais uma vez, em voz alta. Amanhã de manhã, só o vocabulário de Science."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Português: Soneto, esquema de rimas e recursos expressivos (O Poema do Luffy)",
+    var txt = ["REVISÃO DE PROVA — Geografia (cap. 8, 9 e 10) + Science (Unit 3: Sound)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

@@ -208,7 +208,7 @@
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>08/11 · Véspera de Prova II · Revisão — História + English</span></div>
+    <div class="brand"><b>Droidec</b><span>12/11 · A Travessia da Nami · Geografia — Clima e vegetação do Brasil</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -220,77 +220,77 @@
   "use strict";
 
   var GUIADO = [
-    {selo:"História", contexto:"No começo da colonização, a criação de gado ficava perto do litoral. Mas essas terras estavam ocupadas pelas plantações de cana-de-açúcar.",
-     pergunta:"Por que a pecuária avançou para o interior?",
-     opcoes:["Em busca de pastagens, porque a terra do litoral já era usada pela cana-de-açúcar","Porque o gado não gostava do mar","Porque Portugal proibiu o gado no litoral"],
-     certa:0, dica:"Pensa no que o gado precisa para viver: espaço e capim. Onde sobrava isso?",
-     porque:"A criação avançou em busca de pastagens — e, ao avançar, formou fazendas e povoados, contribuindo para a ocupação de novas áreas. Os rios ajudavam, dando água aos animais."},
-    {selo:"História", contexto:"Os jesuítas criaram comunidades chamadas missões (ou reduções).",
-     pergunta:"Qual era o principal objetivo deles?",
-     opcoes:["Espalhar a religião católica — catequizar os indígenas","Procurar ouro no interior","Vender mercadorias para Portugal"],
-     certa:0, dica:"Jesuíta era religioso. O que um religioso quer espalhar?",
-     porque:"Eles vieram para espalhar a religião católica. Nas missões ensinavam a religião, aprendiam línguas indígenas, e os indígenas faziam agricultura, criação de animais e produção de objetos."},
-    {selo:"English", alt:true, contexto:"Two words that sound the same but are written differently.",
-     pergunta:"Which pair are homophones?",
-     opcoes:["see / sea","bat / bat","big / small"],
-     certa:0, dica:"Homophone = same SOUND, different spelling. Say them out loud.",
-     porque:"<i>See</i> and <i>sea</i> sound the same but are spelled differently: homophones. <i>Bat</i> and <i>bat</i> are the same word with two meanings: a homonym."},
-    {selo:"História", contexto:"O ouro foi encontrado na região que hoje é Minas Gerais, nos séculos XVII e XVIII.",
-     pergunta:"Qual foi uma das principais mudanças?",
-     opcoes:["O aumento da população e o surgimento de cidades e vilas","A volta das pessoas para Portugal","O fim do comércio no Brasil"],
-     certa:0, dica:"Muita gente se deslocou para lá em busca de trabalho e riqueza. O que acontece com um lugar quando chega muita gente?",
-     porque:"Aumentou a população, surgiram cidades e vilas e apareceram novos ofícios e atividades de trabalho."},
-    {selo:"English", alt:true, contexto:"In the word SHIP, the letters s + h make one single sound.",
-     pergunta:"What is that called?",
-     opcoes:["A digraph","A blend","A syllable"],
-     certa:0, dica:"Digraph = two letters, ONE sound. Blend = you still hear BOTH letters.",
-     porque:"<b>Digraphs</b>: ph, th, ch, sh, wh, ck — two letters, one sound. <b>Blends</b>: br, sn, dr, sk, st, sl, fr — you hear both letters, like in <i>frog</i>."}
+    {selo:"Tempo × clima", contexto:"O Usopp anotou no diário de bordo: “Hoje choveu a tarde toda em Goiânia.”",
+     pergunta:"Ele está falando de tempo ou de clima?",
+     opcoes:["Tempo — é como está a atmosfera hoje, num momento","Clima — é o padrão de muitos anos","Os dois significam a mesma coisa"],
+     certa:0, dica:"Uma palavra entrega: HOJE. Clima é o que se repete por muitos anos.",
+     porque:"Tempo é o estado da atmosfera agora e muda de um dia pro outro. Clima é o padrão que se repete num lugar ao longo de muitos anos."},
+    {selo:"Clima", contexto:"Primeira parada da Nami: faz calor o ano inteiro e chove quase todo dia.",
+     pergunta:"Que clima é esse, e em que região do Brasil ela está?",
+     opcoes:["Equatorial, na região Norte","Semiárido, no Nordeste","Subtropical, no Sul"],
+     certa:0, dica:"Quente + úmido + chuva o ano todo. Pensa na maior floresta do país.",
+     porque:"É o clima equatorial, típico da região Norte — e é ele que sustenta a Floresta Amazônica."},
+    {selo:"Vegetação", alt:true, contexto:"Noutra parada, a Nami vê plantas com espinhos no lugar das folhas, cactos e arbustos que perderam quase todas as folhas.",
+     pergunta:"Que vegetação é essa?",
+     opcoes:["Caatinga","Floresta Amazônica","Pampa"],
+     certa:0, dica:"Espinho e folha pequena servem para uma coisa só: perder menos água.",
+     porque:"É a Caatinga, do clima semiárido. As plantas são adaptadas à seca — e esse é o único bioma que existe só no Brasil."},
+    {selo:"Clima", contexto:"A Nami reparou que, quanto mais o navio se afastava da linha do Equador em direção ao sul, mais frio ficava.",
+     pergunta:"Que fator do clima explica isso?",
+     opcoes:["A latitude — a distância até a linha do Equador","A altitude","A proximidade do mar"],
+     certa:0, dica:"Latitude tem a ver com estar perto ou longe do Equador. Altitude tem a ver com estar alto ou baixo.",
+     porque:"Quanto mais perto do Equador, mais quente; quanto mais longe, mais frio. Isso é a latitude."},
+    {selo:"Vegetação", alt:true, contexto:"Calor e chuva o ano todo, com água de sobra para as plantas.",
+     pergunta:"Que vegetação combina com o clima equatorial?",
+     opcoes:["Floresta Amazônica — densa, com árvores altíssimas","Caatinga","Campos do Pampa"],
+     certa:0, nota:null, dica:"Com água de sobra, a planta cresce o quanto quiser. O que aparece?",
+     porque:"Água e calor o ano todo permitem uma floresta densa, de árvores altíssimas e muita biodiversidade."}
   ];
 
   var DESAFIO = [
-    {selo:"História", contexto:"Portugal queria controlar o ouro que saía das minas.",
-     pergunta:"O que era o quinto?",
-     opcoes:["Um imposto de 20% do ouro encontrado, entregue à Coroa portuguesa","Uma moeda de ouro","O quinto dia de trabalho na mina"],
-     certa:0, nota:"Quinto = a quinta parte = 20%. Era o imposto mais importante cobrado sobre a mineração."},
-    {selo:"História", contexto:"Nesses locais o ouro era derretido e transformado em barras com uma marca oficial.",
-     pergunta:"Qual era o objetivo das Casas de Fundição?",
-     opcoes:["Dificultar a circulação do ouro em pó, que podia ser escondido sem pagar imposto","Facilitar a circulação do ouro em pó","Distribuir ouro para a população"],
-     certa:0, nota:"Pegadinha da revisão: elas DIFICULTAVAM a circulação do ouro em pó. A barra com marca provava que o imposto tinha sido pago."},
-    {selo:"História", contexto:"Fim do século XVIII, em Minas Gerais.",
-     pergunta:"O que foi a Conjuração Mineira?",
-     opcoes:["Um movimento contra o domínio português, descoberto antes de ser colocado em prática","Uma festa das cidades mineradoras","Um acordo entre Portugal e os mineradores"],
-     certa:0, nota:"Joaquim José da Silva Xavier, o Tiradentes, foi um dos participantes mais conhecidos: preso, condenado e executado em 1792."},
-    {selo:"História", contexto:"“Libertas Quae Sera Tamen”.",
-     pergunta:"O que significa o lema?",
-     opcoes:["“Liberdade, ainda que tardia” — defendiam a liberdade mesmo que ela demorasse a chegar","“Liberdade para todos agora”","“Portugal sempre”"],
-     certa:0, nota:"Na prova, não basta traduzir: explique que os inconfidentes defendiam a liberdade do Brasil em relação ao domínio português, mesmo que demorasse."},
-    {selo:"História", contexto:"Trabalhava com ferro, produzindo ferramentas e objetos de metal.",
-     pergunta:"Que ofício urbano é esse?",
-     opcoes:["Ferreiro","Boticário","Carpinteiro"],
-     certa:0, nota:"Os outros: sapateiro (calçados), carpinteiro (madeira), pedreiro (casas e igrejas), barbeiro (cabelo e barba), boticário (remédios)."},
-    {selo:"English", alt:true, contexto:"A clever rabbit fools a big lion with a trick and escapes.",
-     pergunta:"What kind of folk tale is this?",
-     opcoes:["A trickster tale","A pourquoi tale","A biography"],
-     certa:0, nota:"Trickster tales: a small, clever character fools someone bigger. Pourquoi tales explain WHY something in nature is the way it is."},
-    {selo:"English", alt:true, contexto:"A story that explains why the turtle has a cracked shell.",
-     pergunta:"What kind of tale is it?",
-     opcoes:["A pourquoi tale","A trickster tale","A moral"],
-     certa:0, nota:"<i>Pourquoi</i> means “why” in French. These tales explain something about nature."},
-    {selo:"English", alt:true, contexto:"The story of a real person's life, written by someone else, in time order.",
-     pergunta:"What is it called?",
-     opcoes:["A biography","A folk tale","A timeline"],
-     certa:0, nota:"A <b>timeline</b> is the drawing that shows the events in order with their dates. The <b>biography</b> is the text."},
-    {selo:"English", alt:true, contexto:"Look at the words: snake, dream, star, frog.",
-     pergunta:"What do they have in common?",
-     opcoes:["They all start with a blend — you hear both letters","They all start with a digraph","They are all homophones"],
-     certa:0, nota:"Blends: sn, dr, st, fr. In a blend you still hear the two sounds; in a digraph (sh, ch, th, ph, wh, ck) the two letters make only one."},
-    {selo:"English", alt:true, contexto:"“______ books over there are mine.”",
-     pergunta:"Which demonstrative pronoun fits?",
-     opcoes:["Those","This","That"],
-     certa:0, nota:"<b>Over there</b> + plural (books) = <b>those</b>. This/these are near; that/those are far. This/that are singular; these/those are plural."}
+    {selo:"Vegetação", alt:true, contexto:"Árvores baixas, com troncos retorcidos, casca grossa e raízes muito profundas.",
+     pergunta:"Que vegetação é essa, e por que ela é assim?",
+     opcoes:["Cerrado — tem estação seca, então as raízes vão fundo atrás de água e a casca grossa protege","Mata Atlântica — porque fica no litoral","Pantanal — porque alaga"],
+     certa:0, nota:"O Cerrado é do clima tropical, que tem verão chuvoso e inverno seco. Cada característica da planta é uma defesa contra a seca."},
+    {selo:"Clima", contexto:"Chove pouco, de forma irregular, e às vezes passam meses sem chuva. Faz calor o ano todo.",
+     pergunta:"Que clima é esse e onde fica?",
+     opcoes:["Semiárido, no sertão nordestino","Tropical de altitude, nas serras","Equatorial, no Norte"],
+     certa:0, nota:"Semiárido: quente e seco, com chuvas escassas e mal distribuídas. É o clima da Caatinga."},
+    {selo:"Clima", contexto:"Quatro estações bem marcadas, inverno frio com geada e chuva distribuída o ano todo.",
+     pergunta:"Que clima é esse?",
+     opcoes:["Subtropical, na região Sul","Tropical, no Centro-Oeste","Tropical atlântico, no litoral"],
+     certa:0, nota:"É o único lugar do Brasil onde as quatro estações aparecem bem separadas. A vegetação típica são os campos do Pampa e as matas de araucária."},
+    {selo:"Clima", contexto:"Duas cidades ficam na mesma latitude, mas uma está no alto da serra e a outra perto do nível do mar.",
+     pergunta:"O que acontece?",
+     opcoes:["A cidade da serra é mais fria — por causa da altitude","As duas têm exatamente a mesma temperatura","A cidade da serra é mais quente"],
+     certa:0, nota:"Quanto mais alto, mais frio. É por isso que existe o clima tropical de altitude nas serras do Sudeste."},
+    {selo:"Vegetação", alt:true, contexto:"Floresta úmida que ficava em quase toda a faixa litorânea do Brasil — e da qual sobrou uma parte pequena.",
+     pergunta:"Que bioma é esse?",
+     opcoes:["Mata Atlântica","Floresta Amazônica","Cerrado"],
+     certa:0, nota:"A Mata Atlântica foi a mais devastada: é onde começou a ocupação do país e onde vive a maior parte da população."},
+    {selo:"Vegetação", alt:true, contexto:"Uma planície que fica alagada durante a cheia e seca depois, no Centro-Oeste.",
+     pergunta:"Que área é essa?",
+     opcoes:["Pantanal","Pampa","Caatinga"],
+     certa:0, nota:"O Pantanal vive esse ciclo de cheia e seca todo ano, e por isso mistura plantas de vários biomas vizinhos."},
+    {selo:"Tempo × clima", contexto:"Pegadinha!",
+     pergunta:"“Neste inverno fez mais frio do que o normal em Curitiba.” Isso é tempo ou clima?",
+     opcoes:["Tempo — é o que aconteceu neste inverno específico","Clima — fala de Curitiba","Nenhum dos dois"],
+     certa:0, nota:"O clima de Curitiba é subtropical, de inverno frio — isso não muda. Já o que aconteceu NESTE inverno é tempo."},
+    {selo:"Clima", contexto:"Outra pegadinha.",
+     pergunta:"O Brasil inteiro tem o mesmo clima?",
+     opcoes:["Não — o país é enorme e tem vários climas, do equatorial ao subtropical","Sim, tropical em todo lugar","Sim, só muda a temperatura"],
+     certa:0, nota:"Por ser um país continental, o Brasil tem climas muito diferentes — e é isso que explica paisagens tão diferentes."},
+    {selo:"Vegetação", alt:true, contexto:"Pergunta de causa.",
+     pergunta:"Por que a Floresta Amazônica é tão densa?",
+     opcoes:["Porque tem calor e chuva o ano todo, ou seja, água de sobra para as plantas","Porque o solo é o mais rico do mundo","Porque ninguém nunca morou lá"],
+     certa:0, nota:"É o clima equatorial que sustenta a floresta. Curiosidade: o solo da Amazônia é pobre — quem alimenta a floresta é a própria matéria orgânica que cai das árvores."},
+    {selo:"Clima", contexto:"A Nami reparou que, perto do mar, o ar é mais úmido e a temperatura varia menos entre o dia e a noite.",
+     pergunta:"Que fator explica isso?",
+     opcoes:["A proximidade do mar","A latitude","A altitude"],
+     certa:0, nota:"O mar funciona como um regulador: deixa o ar úmido e evita extremos de temperatura. Por isso o litoral tem o clima tropical atlântico."}
   ];
 
-  var KEY = "zion-revisao-historia-english-2026-11-08";
+  var KEY = "zion-clima-vegetacao-2026-11-12";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -332,10 +332,10 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","Segunda tem a última prova do trimestre, e ela vem em dose dupla: HISTÓRIA e ENGLISH na mesma manhã.");
-    var p2 = el("p","lead","A Robin desenrolou na mesa um mapa antigo do Brasil colonial: o gado subindo pro interior, as missões, os bandeirantes e, lá no meio, o ouro de Minas. O Brook abriu o livro de contos e afinou o violino: “Yohohoho! English time!”");
-    var p3 = el("p","lead","Revisão final. Primeiro os dois mapas, depois o simulado — e no fim a pergunta aberta que mais vale ponto.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"A Trilha do Ouro e o Livro de Contos"), p1, p2, p3, botao("Bora revisar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","A Nami decidiu atravessar o Brasil de norte a sul pra testar o Clima-Tact. Levou casaco, guarda-chuva, protetor solar e cantil cheio.");
+    var p2 = el("p","lead","No primeiro dia, na Amazônia, choveu à tarde — como chove quase todo dia. Semanas depois, no sertão, o cantil salvou a viagem: fazia meses que não chovia. E lá no Sul ela precisou do casaco: tinha geada no campo.");
+    var p3 = el("p","lead","Mesmo país, paisagens completamente diferentes. Hoje você descobre por quê — e a regra que liga uma coisa à outra.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"A Travessia da Nami"), p1, p2, p3, botao("Bora navegar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
@@ -359,116 +359,68 @@
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","HISTÓRIA · 1. A pecuária e a ocupação do interior"));
-    r1.appendChild(lista([
-      "Os portugueses trouxeram o <b>gado</b> para o Brasil. Ele dava <b>carne, leite e couro</b> e ainda servia para <b>transportar cargas</b>.",
-      "No começo a criação ficava <b>perto do litoral</b> — mas ali a terra era usada nas <b>plantações de cana-de-açúcar</b>.",
-      "Por isso a pecuária <b>avançou para o interior</b>, em busca de <b>pastagens</b>. Os <b>rios</b> ajudavam: davam água aos animais e facilitavam o caminho.",
-      "<b>Resultado:</b> a criação de gado contribuiu para a <b>ocupação e o povoamento</b> de novas áreas, formando <b>fazendas e povoados</b>."
+    r1.appendChild(el("div","nome","1. Tempo não é clima"));
+    r1.appendChild(ficha2([
+      ["Tempo","como está a atmosfera <b>agora</b>, num lugar e num momento. “Hoje choveu à tarde.” Muda de um dia para o outro"],
+      ["Clima","o <b>padrão que se repete</b> num lugar ao longo de <b>muitos anos</b>. “Em Manaus chove o ano inteiro.” Demora muito para mudar"]
     ]));
+    r1.appendChild(el("p","muted","Jeito fácil de lembrar: o tempo é o humor do dia; o clima é o jeito de ser do lugar."));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","HISTÓRIA · 2. Jesuítas e missões"));
-    r2.appendChild(lista([
-      "Os <b>jesuítas</b> eram religiosos católicos que vieram para a América com o objetivo de <b>espalhar a religião católica</b> — isso se chama <b>catequizar</b>.",
-      "Criaram comunidades chamadas <b>missões</b> ou <b>reduções</b>, onde os indígenas viviam sob a orientação dos religiosos.",
-      "Lá eles <b>ensinavam a religião católica</b> e <b>aprendiam línguas indígenas</b> para facilitar a comunicação.",
-      "Os indígenas realizavam <b>agricultura, criação de animais e produção de objetos</b>.",
-      "As missões ajudaram a <b>ocupar</b> várias regiões, mas a chegada dos colonizadores mudou profundamente a vida dos povos indígenas, com a ocupação de seus territórios e o desrespeito a muitos costumes."
+    r2.appendChild(el("div","nome","2. O que faz o clima mudar de lugar para lugar"));
+    r2.appendChild(ficha2([
+      ["Latitude","distância até a <b>linha do Equador</b>. Quanto <b>mais perto do Equador, mais quente</b>; quanto mais longe, mais frio"],
+      ["Altitude","quanto <b>mais alto</b> o lugar, <b>mais frio</b>. Por isso faz frio nas serras, mesmo em região quente"],
+      ["Proximidade do mar","perto do mar o ar fica mais <b>úmido</b> e a temperatura varia menos"],
+      ["Vegetação e relevo","florestas deixam o ar mais úmido; montanhas seguram as chuvas de um lado da serra"]
     ]));
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","HISTÓRIA · 3. Bandeirantes e indígenas"));
+    r3.appendChild(el("div","nome","3. Os climas do Brasil"));
     r3.appendChild(ficha2([
-      ["Bandeiras","as <b>expedições</b> pelo interior do território; muitas saíam da região de <b>São Paulo</b>"],
-      ["O que procuravam","<b>metais e pedras preciosas</b>; outros buscavam <b>capturar indígenas para escravizá-los</b>"],
-      ["Dificuldades","longos caminhos, rios, florestas e <b>falta de alimentos</b>"],
-      ["Os indígenas","<b>resistiam</b> de várias maneiras: enfrentando os bandeirantes, <b>fugindo</b> para outras regiões e criando estratégias"],
-      ["Por que resistiam","para proteger sua <b>liberdade</b>, suas <b>terras</b>, seus <b>costumes</b> e sua <b>identidade</b>"]
+      ["Equatorial","<b>quente e úmido o ano todo</b>, com chuva quase todo dia. Região <b>Norte</b>"],
+      ["Tropical","<b>quente</b>, com duas estações: <b>verão chuvoso e inverno seco</b>. Boa parte do Centro-Oeste, Sudeste e Nordeste"],
+      ["Tropical de altitude","nas <b>serras</b> do Sudeste: também tem verão chuvoso, mas as temperaturas são <b>mais amenas</b>"],
+      ["Tropical atlântico","na faixa do <b>litoral</b>: quente e <b>úmido</b>, com bastante chuva vinda do mar"],
+      ["Semiárido","<b>quente e seco</b>, com pouca chuva e muito irregular. <b>Sertão nordestino</b>"],
+      ["Subtropical","Região <b>Sul</b>: as <b>quatro estações</b> bem marcadas, <b>inverno frio</b> com geada, e chuva o ano todo"]
     ]));
-    r3.appendChild(el("p","muted","Cuidado na hora de escrever: quem capturava eram os BANDEIRANTES; quem resistia para proteger a liberdade eram os POVOS INDÍGENAS. Deixe claro quem faz o quê em cada frase."));
     g.appendChild(r3);
 
     var r4 = el("div","regra");
-    r4.appendChild(el("div","nome","HISTÓRIA · 4. O ouro e as cidades mineradoras"));
-    r4.appendChild(lista([
-      "Nos séculos <b>XVII e XVIII</b> foram encontradas <b>jazidas de ouro</b>; muita gente se deslocou para a região que hoje é <b>Minas Gerais</b>.",
-      "<b>Mudanças:</b> aumento da <b>população</b>, surgimento de <b>cidades e vilas</b> e o aparecimento de <b>novos ofícios e atividades de trabalho</b>.",
-      "<b>Ofícios urbanos:</b> sapateiro (calçados), ferreiro (ferro e ferramentas), carpinteiro (madeira e móveis), pedreiro (casas e igrejas), barbeiro (cabelo, barba e cuidados), boticário (remédios), comerciante, religiosos e artistas.",
-      "<b>Problemas das cidades:</b> o crescimento foi rápido demais — faltou <b>abastecimento de alimentos</b>, os <b>preços subiram</b>, e houve problemas de <b>infraestrutura, transporte e organização dos espaços urbanos</b>."
+    r4.appendChild(el("div","nome","4. A regra de ouro: o clima manda na vegetação"));
+    r4.appendChild(el("p","muted","A planta não escolhe onde nascer: ela precisa aguentar o clima do lugar. Por isso cada clima tem a sua vegetação."));
+    r4.appendChild(ficha2([
+      ["Floresta Amazônica","clima <b>equatorial</b>. Calor e chuva o ano todo → floresta <b>densa</b>, árvores <b>altíssimas</b>, enorme <b>biodiversidade</b>"],
+      ["Cerrado","clima <b>tropical</b>. Tem estação seca → árvores <b>baixas e retorcidas</b>, <b>casca grossa</b> e <b>raízes muito profundas</b> em busca de água"],
+      ["Caatinga","clima <b>semiárido</b>. Pouca chuva → <b>cactos</b>, espinhos, folhas pequenas, e muitas plantas <b>perdem as folhas</b> na seca. É o único bioma <b>só do Brasil</b>"],
+      ["Mata Atlântica","clima <b>tropical atlântico</b>, no litoral. Floresta úmida e muito <b>devastada</b>: sobrou uma parte pequena"],
+      ["Pampa (Campos)","clima <b>subtropical</b>, no Sul. <b>Gramíneas</b> e campos abertos, usados para criar gado"],
+      ["Pantanal","planície do Centro-Oeste que <b>alaga</b> na cheia e seca depois. Mistura plantas de vários biomas vizinhos"]
     ]));
     g.appendChild(r4);
 
-    var r5 = el("div","regra");
-    r5.appendChild(el("div","nome","HISTÓRIA · 5. O quinto, as Casas de Fundição e a Conjuração Mineira"));
-    r5.appendChild(ficha2([
-      ["O quinto","o imposto de <b>20% (a quinta parte)</b> de todo o ouro encontrado, entregue à <b>Coroa portuguesa</b>"],
-      ["Casas de Fundição","lá o ouro era <b>derretido e transformado em barras</b>, que recebiam uma <b>marca</b> provando que passaram pelo controle oficial"],
-      ["Para que serviam","<b>dificultar</b> a circulação do <b>ouro em pó</b>, que podia ser escondido ou vendido sem pagar imposto"],
-      ["A insatisfação","o controle e a cobrança de impostos deixaram <b>parte da população insatisfeita</b>, ainda mais quando Portugal <b>intensificou a fiscalização</b>"],
-      ["Conjuração Mineira","fim do século <b>XVIII</b>: um grupo de Minas Gerais se organizou <b>contra o domínio português</b>. O movimento foi <b>descoberto antes</b> de sair do papel"],
-      ["Tiradentes","<b>Joaquim José da Silva Xavier</b>. Foi preso, condenado e <b>executado em 1792</b>"],
-      ["O lema","<i>Libertas Quae Sera Tamen</i> — <b>“Liberdade, ainda que tardia”</b>: defendiam a liberdade do Brasil mesmo que ela demorasse a chegar"]
-    ]));
-    g.appendChild(r5);
-
-    var r6 = el("div","regra");
-    r6.appendChild(el("div","nome","ENGLISH · 1. Homonyms and homophones"));
-    r6.appendChild(ficha2([
-      ["Homophones","<b>same sound</b>, different spelling and meaning: <i>see / sea · to / two / too · their / there · right / write · hear / here</i>"],
-      ["Homonyms","<b>same spelling and sound</b>, different meaning: <i>bat</i> (animal / baseball bat) · <i>bark</i> (dog sound / tree) · <i>left</i> (direction / past of leave)"]
-    ]));
-    g.appendChild(r6);
-
-    var r7 = el("div","regra");
-    r7.appendChild(el("div","nome","ENGLISH · 2. Folk tales"));
-    r7.appendChild(ficha2([
-      ["Trickster tale","a clever character (the <b>trickster</b>) uses <b>tricks</b> to fool someone bigger or stronger"],
-      ["Pourquoi tale","explains <b>why</b> something in nature is the way it is — <i>why the sky is high, why the turtle has a cracked shell</i>"],
-      ["Elements","<b>characters, setting, problem, plot, solution, magic/exaggeration</b> and the <b>moral</b> (the lesson)"]
-    ]));
-    g.appendChild(r7);
-
-    var r8 = el("div","regra");
-    r8.appendChild(el("div","nome","ENGLISH · 3. Biographies and timelines"));
-    r8.appendChild(lista([
-      "A <b>biography</b> is the story of a <b>real person's life</b>, written by someone else, told in <b>time order</b>.",
-      "A <b>timeline</b> shows the events <b>in order</b>, with <b>dates</b>, from the earliest to the latest."
-    ]));
-    g.appendChild(r8);
-
-    var r9 = el("div","regra");
-    r9.appendChild(el("div","nome","ENGLISH · 4. Digraphs, blends and pronouns"));
-    r9.appendChild(ficha2([
-      ["Digraph","<b>two letters, ONE sound</b>: <i>ph</i> (phone), <i>th</i> (think), <i>ch</i> (chair), <i>sh</i> (ship), <i>wh</i> (whale), <i>ck</i> (duck)"],
-      ["Blend","<b>two letters, BOTH sounds</b> still heard: <i>br</i> (bread), <i>sn</i> (snake), <i>dr</i> (dream), <i>sk</i> (skate), <i>st</i> (star), <i>sl</i> (sleep), <i>fr</i> (frog)"],
-      ["Subject pronouns","<b>I, you, he, she, it, we, they</b> — quem faz a ação"],
-      ["Demonstrative","<b>this</b> (perto, 1) · <b>these</b> (perto, vários) · <b>that</b> (longe, 1) · <b>those</b> (longe, vários)"]
-    ]));
-    g.appendChild(r9);
-
-    var citacao = el("div","citacao","Na prova vai cair: “Quais eram os objetivos dos bandeirantes e por que os povos indígenas resistiam às suas expedições?”");
+    var citacao = el("div","citacao","Luffy, coçando a cabeça: “Por que no sertão tem cacto e na Amazônia tem árvore gigante? É o mesmo país!”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F4DA} Robin pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F326} Nami pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "a pergunta tem DUAS partes, então a resposta também precisa ter duas. " +
-      "Primeira parte, os bandeirantes: eles procuravam metais e pedras preciosas, e alguns capturavam indígenas para escravizá-los. " +
-      "Agora eu começo uma frase NOVA, com o sujeito trocado, senão fica parecendo que são os bandeirantes de novo: “Os povos indígenas resistiam…”. " +
-      "E aí eu digo por quê: para proteger sua liberdade, suas terras, seus costumes e sua identidade. " +
-      "Duas perguntas, duas frases, cada uma com o seu dono."));
+      "primeiro eu olho o clima de cada lugar, porque é ele que manda. Na Amazônia chove quase todo dia e faz calor: tem água de sobra. " +
+      "Com água de sobra, a planta pode crescer o quanto quiser — por isso floresta densa e árvore gigante. " +
+      "No sertão o clima é semiárido: chove pouco e de forma irregular. Uma árvore gigante morreria de sede ali. " +
+      "Então sobrevivem as plantas que sabem guardar água: cacto, espinho no lugar de folha, folha pequena pra perder menos água. " +
+      "Conclusão: não é o país que muda, é o clima. E a vegetação só segue o clima."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
-      eyebrow("Os dois mapas"),
-      el("h2",null,"Tudo o que cai na segunda"),
-      el("p",null,"Leia uma vez com calma. Depois feche os olhos e tente lembrar os cinco blocos de História e os quatro de English."),
+      eyebrow("A regra"),
+      el("h2",null,"Por que o Brasil tem tantas paisagens"),
       g,
-      el("p","muted","Agora a parte que mais vale ponto: como escrever as respostas abertas."),
+      el("p","muted","Vê a Nami ligando as duas coisas, passo a passo:"),
       citacao, modelo,
-      el("p","muted","A regra: PERGUNTA COM DUAS PARTES → RESPOSTA COM DUAS FRASES, cada uma dizendo QUEM faz o quê."),
+      el("p","muted","A pergunta que resolve quase tudo: QUANTA CHUVA TEM AQUI? → é isso que define a planta."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -487,8 +439,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Aquecimento feito!"),
-        el("p",null,"Agora o simulado: 10 questões das duas matérias, sem dica, do jeito que cai na segunda."),
+        eyebrow("Treino guiado"), el("h2",null,"Rota aberta!"),
+        el("p",null,"Você já liga clima e vegetação. Agora é sem dica — e com as pegadinhas da travessia."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -550,7 +502,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Simulado completo! \u{1F5FA}"),
+        eyebrow("Desafio"), el("h2",null,"Travessia completa! \u{1F30D}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -598,15 +550,15 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"A pergunta de duas partes"));
-    c2.appendChild(el("p","lead","Esta caiu na revisão e tem tudo para cair na prova: <b>“Quais eram os principais objetivos dos bandeirantes e por que os povos indígenas resistiam às suas expedições?”</b>"));
-    c2.appendChild(el("p","lead","Escreve a resposta completa, com as TUAS palavras. Lembra: <b>duas frases</b> — uma sobre os bandeirantes, outra sobre os indígenas. Deixa claro quem faz o quê em cada uma."));
+    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
+    c2.appendChild(el("p","lead","O Luffy continua sem entender: “é o mesmo país, por que no sertão tem cacto e na Amazônia tem árvore gigante?”."));
+    c2.appendChild(el("p","lead","Explica pra ele, com as TUAS palavras, <b>como o clima de um lugar decide a vegetação</b>. Fala dos dois lugares: o que acontece onde chove muito e o que acontece onde chove pouco."));
     var chips = el("div","chips");
-    ["metais e pedras preciosas","capturar para escravizar","proteger liberdade e terras"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
-    c2.appendChild(el("p","muted","Palavras que ajudam:"));
+    ["clima","chuva","adaptada / guarda água"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Os bandeirantes procuravam...");
+    ta.setAttribute("placeholder","Luffy, quem manda na vegetação é...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -632,20 +584,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Trilha concluída \u{1F3C1}"));
+    c.appendChild(el("h2",null,"Clima-Tact calibrado \u{1F326}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você fecha o trimestre sabendo a matéria e, melhor ainda, sabendo escrever as respostas de duas partes.";
-    if(ad <= 4) msg = "Vale reler os dois mapas no domingo, principalmente o quinto, as Casas de Fundição e a diferença entre digraph e blend.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, nas duas matérias. Última prova do trimestre com a lição já na mão.";
-    c.appendChild(el("p",null, msg + " No domingo à noite: uma passada nos dois mapas, em voz alta. Segunda de manhã, só o vocabulário de English."));
+    var msg = "Você já explica a paisagem pelo clima — é isso que a professora quer ver nas respostas.";
+    if(ad <= 4) msg = "Os nomes dos climas ainda se misturam. Antes da folha, repete a regra: quanta chuva tem aqui? É isso que define a planta.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de tempo × clima e da altitude.";
+    c.appendChild(el("p",null, msg + " Agora faz a folha: em cada questão, pergunta primeiro qual é o clima — a vegetação vem atrás."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["REVISÃO DE PROVA — História (cap. 8 e 9) + English (Units 5 a 8)",
+    var txt = ["AULA DE HOJE — Geografia: Clima e vegetação do Brasil (A Travessia da Nami)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

@@ -204,11 +204,19 @@
   .ficha2 b{font-family:var(--display); font-weight:700; color:var(--accent); font-size:.95rem;}
   .ficha2 span{font-size:.93rem;}
   .en{color:var(--gold); font-weight:700;}
+
+  .etapas{display:flex; flex-direction:column; gap:0;}
+  .et{display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border-left:3px solid var(--accent);
+      background:var(--surface2); margin-bottom:3px; border-radius:0 10px 10px 0;}
+  .et b{font-family:var(--display); font-weight:800; color:var(--accent); flex:none; width:26px;
+        text-align:center; font-size:1.1rem;}
+  .et span{font-size:.95rem;}
+  .et i{font-style:normal; color:var(--muted); display:block; font-size:.85rem; margin-top:2px;}
 </style>
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>12/11 · A Travessia da Nami · Geografia — Clima e vegetação do Brasil</span></div>
+    <div class="brand"><b>Droidec</b><span>15/11 · O Caminho até o Prato · Geografia — De onde vem o que eu consumo</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -220,77 +228,69 @@
   "use strict";
 
   var GUIADO = [
-    {selo:"Tempo × clima", contexto:"O Usopp anotou no diário de bordo: “Hoje choveu a tarde toda em Goiânia.”",
-     pergunta:"Ele está falando de tempo ou de clima?",
-     opcoes:["Tempo — é como está a atmosfera hoje, num momento","Clima — é o padrão de muitos anos","Os dois significam a mesma coisa"],
-     certa:0, dica:"Uma palavra entrega: HOJE. Clima é o que se repete por muitos anos.",
-     porque:"Tempo é o estado da atmosfera agora e muda de um dia pro outro. Clima é o padrão que se repete num lugar ao longo de muitos anos."},
-    {selo:"Clima", contexto:"Primeira parada da Nami: faz calor o ano inteiro e chove quase todo dia.",
-     pergunta:"Que clima é esse, e em que região do Brasil ela está?",
-     opcoes:["Equatorial, na região Norte","Semiárido, no Nordeste","Subtropical, no Sul"],
-     certa:0, dica:"Quente + úmido + chuva o ano todo. Pensa na maior floresta do país.",
-     porque:"É o clima equatorial, típico da região Norte — e é ele que sustenta a Floresta Amazônica."},
-    {selo:"Vegetação", alt:true, contexto:"Noutra parada, a Nami vê plantas com espinhos no lugar das folhas, cactos e arbustos que perderam quase todas as folhas.",
-     pergunta:"Que vegetação é essa?",
-     opcoes:["Caatinga","Floresta Amazônica","Pampa"],
-     certa:0, dica:"Espinho e folha pequena servem para uma coisa só: perder menos água.",
-     porque:"É a Caatinga, do clima semiárido. As plantas são adaptadas à seca — e esse é o único bioma que existe só no Brasil."},
-    {selo:"Clima", contexto:"A Nami reparou que, quanto mais o navio se afastava da linha do Equador em direção ao sul, mais frio ficava.",
-     pergunta:"Que fator do clima explica isso?",
-     opcoes:["A latitude — a distância até a linha do Equador","A altitude","A proximidade do mar"],
-     certa:0, dica:"Latitude tem a ver com estar perto ou longe do Equador. Altitude tem a ver com estar alto ou baixo.",
-     porque:"Quanto mais perto do Equador, mais quente; quanto mais longe, mais frio. Isso é a latitude."},
-    {selo:"Vegetação", alt:true, contexto:"Calor e chuva o ano todo, com água de sobra para as plantas.",
-     pergunta:"Que vegetação combina com o clima equatorial?",
-     opcoes:["Floresta Amazônica — densa, com árvores altíssimas","Caatinga","Campos do Pampa"],
-     certa:0, nota:null, dica:"Com água de sobra, a planta cresce o quanto quiser. O que aparece?",
-     porque:"Água e calor o ano todo permitem uma floresta densa, de árvores altíssimas e muita biodiversidade."}
+    {selo:"Caminho", contexto:"O Sanji recebeu uma caixa de tomates que veio direto da fazenda para a feira.",
+     pergunta:"Qual é a PRIMEIRA etapa do caminho de um alimento?",
+     opcoes:["A produção, no campo","A venda no mercado","O transporte"],
+     certa:0, dica:"Pensa em onde o alimento nasce. Antes de ser vendido, ele precisa ser o quê?",
+     porque:"Tudo começa na produção: a fazenda planta, colhe ou cria os animais. É de lá que sai a matéria-prima."},
+    {selo:"Caminho", contexto:"O caminhão leva os pacotes de arroz do engenho até os supermercados da cidade.",
+     pergunta:"Que etapa é essa?",
+     opcoes:["Circulação — o transporte e a distribuição","Produção","Consumo"],
+     certa:0, dica:"É a mesma etapa que você estudou em outubro: levar o produto de um lugar ao outro.",
+     porque:"Circulação é o transporte dos produtos até os locais de venda — por caminhão, trem, navio ou avião."},
+    {selo:"Matéria-prima", alt:true, contexto:"Pão francês da padaria.",
+     pergunta:"Qual é a matéria-prima principal dele?",
+     opcoes:["O trigo","O forno","A padaria"],
+     certa:0, dica:"Matéria-prima é o que foi plantado ou criado e entrou na fábrica. O que vira farinha?",
+     porque:"O trigo é plantado, vira farinha no moinho e depois pão na padaria. O forno é equipamento, não matéria-prima."},
+    {selo:"Produção", contexto:"Numa propriedade pequena, a família toda trabalha e planta de tudo um pouco: mandioca, feijão, verduras e ainda cria galinhas.",
+     pergunta:"Que forma de produção é essa?",
+     opcoes:["Agricultura familiar","Agronegócio","Indústria"],
+     certa:0, dica:"Repara em duas coisas: quem trabalha e quantos produtos diferentes saem dali.",
+     porque:"Agricultura familiar: a própria família é a mão de obra, a propriedade é menor e a variedade de produtos é grande."},
+    {selo:"Produção", contexto:"Uma fazenda enorme planta só soja, usa colheitadeiras e tem funcionários contratados. Boa parte da safra vai para outros países.",
+     pergunta:"E essa?",
+     opcoes:["Agronegócio","Agricultura familiar","Comércio informal"],
+     certa:0, dica:"Grande área + máquinas + um produto só + exportação.",
+     porque:"Agronegócio: grandes propriedades, trabalhadores contratados, muita tecnologia e produção em grande escala, boa parte para exportação."}
   ];
 
   var DESAFIO = [
-    {selo:"Vegetação", alt:true, contexto:"Árvores baixas, com troncos retorcidos, casca grossa e raízes muito profundas.",
-     pergunta:"Que vegetação é essa, e por que ela é assim?",
-     opcoes:["Cerrado — tem estação seca, então as raízes vão fundo atrás de água e a casca grossa protege","Mata Atlântica — porque fica no litoral","Pantanal — porque alaga"],
-     certa:0, nota:"O Cerrado é do clima tropical, que tem verão chuvoso e inverno seco. Cada característica da planta é uma defesa contra a seca."},
-    {selo:"Clima", contexto:"Chove pouco, de forma irregular, e às vezes passam meses sem chuva. Faz calor o ano todo.",
-     pergunta:"Que clima é esse e onde fica?",
-     opcoes:["Semiárido, no sertão nordestino","Tropical de altitude, nas serras","Equatorial, no Norte"],
-     certa:0, nota:"Semiárido: quente e seco, com chuvas escassas e mal distribuídas. É o clima da Caatinga."},
-    {selo:"Clima", contexto:"Quatro estações bem marcadas, inverno frio com geada e chuva distribuída o ano todo.",
-     pergunta:"Que clima é esse?",
-     opcoes:["Subtropical, na região Sul","Tropical, no Centro-Oeste","Tropical atlântico, no litoral"],
-     certa:0, nota:"É o único lugar do Brasil onde as quatro estações aparecem bem separadas. A vegetação típica são os campos do Pampa e as matas de araucária."},
-    {selo:"Clima", contexto:"Duas cidades ficam na mesma latitude, mas uma está no alto da serra e a outra perto do nível do mar.",
-     pergunta:"O que acontece?",
-     opcoes:["A cidade da serra é mais fria — por causa da altitude","As duas têm exatamente a mesma temperatura","A cidade da serra é mais quente"],
-     certa:0, nota:"Quanto mais alto, mais frio. É por isso que existe o clima tropical de altitude nas serras do Sudeste."},
-    {selo:"Vegetação", alt:true, contexto:"Floresta úmida que ficava em quase toda a faixa litorânea do Brasil — e da qual sobrou uma parte pequena.",
-     pergunta:"Que bioma é esse?",
-     opcoes:["Mata Atlântica","Floresta Amazônica","Cerrado"],
-     certa:0, nota:"A Mata Atlântica foi a mais devastada: é onde começou a ocupação do país e onde vive a maior parte da população."},
-    {selo:"Vegetação", alt:true, contexto:"Uma planície que fica alagada durante a cheia e seca depois, no Centro-Oeste.",
-     pergunta:"Que área é essa?",
-     opcoes:["Pantanal","Pampa","Caatinga"],
-     certa:0, nota:"O Pantanal vive esse ciclo de cheia e seca todo ano, e por isso mistura plantas de vários biomas vizinhos."},
-    {selo:"Tempo × clima", contexto:"Pegadinha!",
-     pergunta:"“Neste inverno fez mais frio do que o normal em Curitiba.” Isso é tempo ou clima?",
-     opcoes:["Tempo — é o que aconteceu neste inverno específico","Clima — fala de Curitiba","Nenhum dos dois"],
-     certa:0, nota:"O clima de Curitiba é subtropical, de inverno frio — isso não muda. Já o que aconteceu NESTE inverno é tempo."},
-    {selo:"Clima", contexto:"Outra pegadinha.",
-     pergunta:"O Brasil inteiro tem o mesmo clima?",
-     opcoes:["Não — o país é enorme e tem vários climas, do equatorial ao subtropical","Sim, tropical em todo lugar","Sim, só muda a temperatura"],
-     certa:0, nota:"Por ser um país continental, o Brasil tem climas muito diferentes — e é isso que explica paisagens tão diferentes."},
-    {selo:"Vegetação", alt:true, contexto:"Pergunta de causa.",
-     pergunta:"Por que a Floresta Amazônica é tão densa?",
-     opcoes:["Porque tem calor e chuva o ano todo, ou seja, água de sobra para as plantas","Porque o solo é o mais rico do mundo","Porque ninguém nunca morou lá"],
-     certa:0, nota:"É o clima equatorial que sustenta a floresta. Curiosidade: o solo da Amazônia é pobre — quem alimenta a floresta é a própria matéria orgânica que cai das árvores."},
-    {selo:"Clima", contexto:"A Nami reparou que, perto do mar, o ar é mais úmido e a temperatura varia menos entre o dia e a noite.",
-     pergunta:"Que fator explica isso?",
-     opcoes:["A proximidade do mar","A latitude","A altitude"],
-     certa:0, nota:"O mar funciona como um regulador: deixa o ar úmido e evita extremos de temperatura. Por isso o litoral tem o clima tropical atlântico."}
+    {selo:"Caminho", contexto:"Leite: a vaca é ordenhada na fazenda, o leite vai de caminhão-tanque até o laticínio, é pasteurizado, embalado, distribuído e vendido no mercado.",
+     pergunta:"Em que etapa o leite é pasteurizado e embalado?",
+     opcoes:["No beneficiamento, na indústria","Na produção","Na comercialização"],
+     certa:0, nota:"Beneficiamento é quando o alimento é limpo, transformado e embalado na indústria. Nem todo alimento passa por essa etapa."},
+    {selo:"Matéria-prima", alt:true, contexto:"Pegadinha!",
+     pergunta:"Qual é a matéria-prima do queijo?",
+     opcoes:["O leite","A vaca","O supermercado"],
+     certa:0, nota:"A vaca é o animal que produz; a matéria-prima que entra na fábrica é o leite. Mesma lógica do suco: a matéria-prima é a fruta."},
+    {selo:"Caminho", contexto:"Banana, alface, tomate e ovo.",
+     pergunta:"O que esses alimentos têm em comum?",
+     opcoes:["São in natura: vão quase direto do campo para a mesa, sem passar por fábrica","São todos industrializados","Todos vêm de fora do Brasil"],
+     certa:0, nota:"In natura = caminho curto. Já o pão, o iogurte e o açúcar passam pela indústria antes de chegar à mesa."},
+    {selo:"Produção", contexto:"Segundo o Censo Agropecuário de 2017, do IBGE.",
+     pergunta:"Quanto a agricultura familiar representa dos estabelecimentos rurais do Brasil?",
+     opcoes:["77% — a maioria das propriedades do país","23%","Menos de 10%"],
+     certa:0, nota:"São 77% das propriedades e 67% das pessoas que trabalham no campo, mas ocupam só 23% da área. Ou seja: muitas propriedades pequenas."},
+    {selo:"Produção", contexto:"Soja, milho, café, carnes, açúcar e algodão.",
+     pergunta:"Esses produtos estão ligados principalmente a quê?",
+     opcoes:["Ao agronegócio e à exportação","À agricultura familiar","Ao comércio informal"],
+     certa:0, nota:"São os campeões das exportações brasileiras. O agronegócio responde por cerca de um quarto do PIB do país."},
+    {selo:"Produção", contexto:"Mandioca, feijão, leite, hortaliças, frutas e ovos.",
+     pergunta:"Quem tem papel importante na produção desses alimentos do dia a dia?",
+     opcoes:["A agricultura familiar","Somente as grandes fazendas de monocultura","As indústrias"],
+     certa:0, nota:"A agricultura familiar tem peso grande justamente nos alimentos que vão para a mesa do brasileiro, vendidos em feiras, mercados e usados na merenda escolar."},
+    {selo:"Caminho", contexto:"Tratorista, ordenhador, motorista de caminhão, repositor de mercado e entregador.",
+     pergunta:"O que essas pessoas têm em comum?",
+     opcoes:["Todas participam do caminho do alimento até o consumidor","Todas trabalham na mesma fazenda","Todas são donas de supermercado"],
+     certa:0, nota:"Muita gente participa do percurso, em etapas diferentes: no campo, na indústria, no transporte e na venda."},
+    {selo:"Produção", contexto:"Pegadinha final.",
+     pergunta:"Qual afirmação está certa?",
+     opcoes:["Agricultura familiar e agronegócio são formas diferentes de produzir, e as duas são importantes","O agronegócio não serve para nada","A agricultura familiar não produz quase nada"],
+     certa:0, nota:"Uma abastece principalmente a mesa do brasileiro; a outra movimenta a economia e as exportações. No trabalho, mostre que você entendeu as duas — sem torcida."}
   ];
 
-  var KEY = "zion-clima-vegetacao-2026-11-12";
+  var KEY = "zion-de-onde-vem-consumo-2026-11-15";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -332,10 +332,10 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","A Nami decidiu atravessar o Brasil de norte a sul pra testar o Clima-Tact. Levou casaco, guarda-chuva, protetor solar e cantil cheio.");
-    var p2 = el("p","lead","No primeiro dia, na Amazônia, choveu à tarde — como chove quase todo dia. Semanas depois, no sertão, o cantil salvou a viagem: fazia meses que não chovia. E lá no Sul ela precisou do casaco: tinha geada no campo.");
-    var p3 = el("p","lead","Mesmo país, paisagens completamente diferentes. Hoje você descobre por quê — e a regra que liga uma coisa à outra.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"A Travessia da Nami"), p1, p2, p3, botao("Bora navegar! →", function(){ vai(1); }));
+    var p1 = el("p","lead","O Sanji recebeu as entregas no porto: leite, arroz, ovos, pão e uma caixa de tomates. Em dez minutos tudo estava na cozinha do Sunny.");
+    var p2 = el("p","lead","O Luffy olhou aquilo e perguntou: “de onde vem isso tudo?”. O Sanji riu: “essa caixa de tomate viajou mais do que você, capitão”.");
+    var p3 = el("p","lead","Hoje você vai refazer esse caminho de trás pra frente — do prato até a terra onde o alimento nasceu. É exatamente isso que o teu trabalho de Geografia pede.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"O Caminho até o Prato"), p1, p2, p3, botao("Bora rastrear! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
@@ -349,6 +349,18 @@
     return f;
   }
 
+  function etapas(itens){
+    var w = el("div","etapas");
+    itens.forEach(function(it, i){
+      var d = el("div","et");
+      d.appendChild(el("b",null,String(i+1)));
+      var s = el("span"); s.innerHTML = it[0] + "<i>" + it[1] + "</i>";
+      d.appendChild(s);
+      w.appendChild(d);
+    });
+    return w;
+  }
+
   function lista(itens){
     var ul = el("ul","passos");
     itens.forEach(function(t){ var li = el("li"); li.innerHTML = t; ul.appendChild(li); });
@@ -359,68 +371,63 @@
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. Tempo não é clima"));
-    r1.appendChild(ficha2([
-      ["Tempo","como está a atmosfera <b>agora</b>, num lugar e num momento. “Hoje choveu à tarde.” Muda de um dia para o outro"],
-      ["Clima","o <b>padrão que se repete</b> num lugar ao longo de <b>muitos anos</b>. “Em Manaus chove o ano inteiro.” Demora muito para mudar"]
+    r1.appendChild(el("div","nome","1. O caminho que todo alimento faz"));
+    r1.appendChild(etapas([
+      ["<b>Produção</b> — no campo","a fazenda planta, colhe ou cria os animais. É de onde sai a <b>matéria-prima</b>"],
+      ["<b>Beneficiamento</b> — na indústria","o alimento é limpo, transformado e embalado. Nem todo alimento passa por aqui"],
+      ["<b>Circulação</b> — o transporte","caminhão, trem, navio ou avião levam o produto até os pontos de venda"],
+      ["<b>Comercialização</b> — a venda","mercado, feira, padaria, loja, aplicativo"],
+      ["<b>Consumo</b> — a sua casa","a família compra, cozinha e come"]
     ]));
-    r1.appendChild(el("p","muted","Jeito fácil de lembrar: o tempo é o humor do dia; o clima é o jeito de ser do lugar."));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. O que faz o clima mudar de lugar para lugar"));
+    r2.appendChild(el("div","nome","2. Nem todo alimento faz o mesmo caminho"));
     r2.appendChild(ficha2([
-      ["Latitude","distância até a <b>linha do Equador</b>. Quanto <b>mais perto do Equador, mais quente</b>; quanto mais longe, mais frio"],
-      ["Altitude","quanto <b>mais alto</b> o lugar, <b>mais frio</b>. Por isso faz frio nas serras, mesmo em região quente"],
-      ["Proximidade do mar","perto do mar o ar fica mais <b>úmido</b> e a temperatura varia menos"],
-      ["Vegetação e relevo","florestas deixam o ar mais úmido; montanhas seguram as chuvas de um lado da serra"]
+      ["<i>In natura</i>","vai quase direto do campo pra mesa: <b>banana, tomate, alface, ovo</b>. Caminho curto"],
+      ["Industrializado","passa pela fábrica antes: <b>trigo → farinha → pão</b>; <b>leite → queijo e iogurte</b>; <b>cana → açúcar</b>. Caminho longo"],
+      ["Matéria-prima","é o que ENTRA na fábrica. No pão, a matéria-prima é o <b>trigo</b>; no queijo, o <b>leite</b>; no suco, a <b>fruta</b>"]
     ]));
+    r2.appendChild(el("p","muted","Quando a pergunta do trabalho pedir a matéria-prima de um alimento industrializado, pense: o que foi plantado ou criado para fazer isso?"));
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. Os climas do Brasil"));
-    r3.appendChild(ficha2([
-      ["Equatorial","<b>quente e úmido o ano todo</b>, com chuva quase todo dia. Região <b>Norte</b>"],
-      ["Tropical","<b>quente</b>, com duas estações: <b>verão chuvoso e inverno seco</b>. Boa parte do Centro-Oeste, Sudeste e Nordeste"],
-      ["Tropical de altitude","nas <b>serras</b> do Sudeste: também tem verão chuvoso, mas as temperaturas são <b>mais amenas</b>"],
-      ["Tropical atlântico","na faixa do <b>litoral</b>: quente e <b>úmido</b>, com bastante chuva vinda do mar"],
-      ["Semiárido","<b>quente e seco</b>, com pouca chuva e muito irregular. <b>Sertão nordestino</b>"],
-      ["Subtropical","Região <b>Sul</b>: as <b>quatro estações</b> bem marcadas, <b>inverno frio</b> com geada, e chuva o ano todo"]
-    ]));
+    r3.appendChild(el("div","nome","3. Quem trabalha nesse caminho"));
+    r3.appendChild(el("p","muted","Muito mais gente do que parece: <b>agricultor, pecuarista, ordenhador, tratorista, colhedor, operador de máquina na indústria, embalador, motorista de caminhão, estoquista, repositor, feirante, atendente e entregador</b>. E os meios de transporte: caminhão (rodoviário), trem (ferroviário), navio (hidroviário) e avião (aéreo)."));
     g.appendChild(r3);
 
     var r4 = el("div","regra");
-    r4.appendChild(el("div","nome","4. A regra de ouro: o clima manda na vegetação"));
-    r4.appendChild(el("p","muted","A planta não escolhe onde nascer: ela precisa aguentar o clima do lugar. Por isso cada clima tem a sua vegetação."));
+    r4.appendChild(el("div","nome","4. Duas formas de produzir no campo"));
     r4.appendChild(ficha2([
-      ["Floresta Amazônica","clima <b>equatorial</b>. Calor e chuva o ano todo → floresta <b>densa</b>, árvores <b>altíssimas</b>, enorme <b>biodiversidade</b>"],
-      ["Cerrado","clima <b>tropical</b>. Tem estação seca → árvores <b>baixas e retorcidas</b>, <b>casca grossa</b> e <b>raízes muito profundas</b> em busca de água"],
-      ["Caatinga","clima <b>semiárido</b>. Pouca chuva → <b>cactos</b>, espinhos, folhas pequenas, e muitas plantas <b>perdem as folhas</b> na seca. É o único bioma <b>só do Brasil</b>"],
-      ["Mata Atlântica","clima <b>tropical atlântico</b>, no litoral. Floresta úmida e muito <b>devastada</b>: sobrou uma parte pequena"],
-      ["Pampa (Campos)","clima <b>subtropical</b>, no Sul. <b>Gramíneas</b> e campos abertos, usados para criar gado"],
-      ["Pantanal","planície do Centro-Oeste que <b>alaga</b> na cheia e seca depois. Mistura plantas de vários biomas vizinhos"]
+      ["<b>Agricultura familiar</b>","a <b>própria família</b> é a mão de obra e mora na propriedade. Terrenos <b>menores</b>, <b>variedade grande</b> de produtos, menos máquinas. Boa parte da produção vai para o <b>mercado interno</b> — ou seja, para a mesa dos brasileiros, em feiras, mercados e na merenda escolar"],
+      ["<b>Agronegócio</b>","grandes propriedades, <b>trabalhadores contratados</b>, muitas <b>máquinas e tecnologia</b>. Costuma produzir <b>poucos produtos em grande quantidade</b> (monocultura), com boa parte voltada para a <b>exportação</b> e para a indústria"]
+    ]));
+    r4.appendChild(lista([
+      "<b>Números do Censo Agropecuário 2017 (IBGE):</b> a agricultura familiar é <b>77% dos estabelecimentos</b> rurais do país e emprega <b>67% das pessoas</b> que trabalham no campo — mas ocupa só <b>23% da área</b> e responde por <b>23% do valor da produção</b>.",
+      "Ela tem papel importante em alimentos do dia a dia: <b>mandioca, feijão, leite, hortaliças, frutas, ovos</b>.",
+      "<b>O agronegócio</b> responde por cerca de <b>um quarto do PIB</b> brasileiro (22,8% em 2026, segundo Cepea/CNA) e lidera as exportações: <b>soja, milho, café, carnes, açúcar e algodão</b>.",
+      "Os dois são <b>importantes e diferentes</b>: um abastece principalmente a mesa do brasileiro, o outro movimenta a economia e as exportações."
     ]));
     g.appendChild(r4);
 
-    var citacao = el("div","citacao","Luffy, coçando a cabeça: “Por que no sertão tem cacto e na Amazônia tem árvore gigante? É o mesmo país!”");
+    var citacao = el("div","citacao","Pergunta do trabalho: “Todos os alimentos são produzidos da mesma maneira? Explique.”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F326} Nami pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1F373} Sanji pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu olho o clima de cada lugar, porque é ele que manda. Na Amazônia chove quase todo dia e faz calor: tem água de sobra. " +
-      "Com água de sobra, a planta pode crescer o quanto quiser — por isso floresta densa e árvore gigante. " +
-      "No sertão o clima é semiárido: chove pouco e de forma irregular. Uma árvore gigante morreria de sede ali. " +
-      "Então sobrevivem as plantas que sabem guardar água: cacto, espinho no lugar de folha, folha pequena pra perder menos água. " +
-      "Conclusão: não é o país que muda, é o clima. E a vegetação só segue o clima."));
+      "primeiro eu respondo direto, sem enrolar: não, não são. " +
+      "Depois eu dou o motivo: alguns vêm quase direto do campo, como o tomate e o ovo; outros passam por fábrica antes de chegar à mesa, como o pão e o iogurte. " +
+      "E aí eu dou mais um motivo, o do tipo de propriedade: alguns são produzidos por famílias em propriedades pequenas, outros em grandes fazendas com máquinas. " +
+      "Por último eu fecho com um exemplo da minha casa. Pronto: resposta direta, dois motivos e um exemplo — é assim que vale nota cheia."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Por que o Brasil tem tantas paisagens"),
+      el("h2",null,"Do campo até a sua mesa"),
       g,
-      el("p","muted","Vê a Nami ligando as duas coisas, passo a passo:"),
+      el("p","muted","Vê o Sanji montando uma resposta do trabalho, passo a passo:"),
       citacao, modelo,
-      el("p","muted","A pergunta que resolve quase tudo: QUANTA CHUVA TEM AQUI? → é isso que define a planta."),
+      el("p","muted","A fórmula das respostas: RESPONDA DIRETO → DÊ O MOTIVO → DÊ UM EXEMPLO."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -439,8 +446,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Rota aberta!"),
-        el("p",null,"Você já liga clima e vegetação. Agora é sem dica — e com as pegadinhas da travessia."),
+        eyebrow("Treino guiado"), el("h2",null,"Rastro pego!"),
+        el("p",null,"Você já segue o caminho do alimento. Agora é sem dica — e com as pegadinhas do trabalho."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -502,7 +509,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Travessia completa! \u{1F30D}"),
+        eyebrow("Desafio"), el("h2",null,"Caminho mapeado! \u{1F69A}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -550,15 +557,15 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"Como você explicaria isso pro Luffy?"));
-    c2.appendChild(el("p","lead","O Luffy continua sem entender: “é o mesmo país, por que no sertão tem cacto e na Amazônia tem árvore gigante?”."));
-    c2.appendChild(el("p","lead","Explica pra ele, com as TUAS palavras, <b>como o clima de um lugar decide a vegetação</b>. Fala dos dois lugares: o que acontece onde chove muito e o que acontece onde chove pouco."));
+    c2.appendChild(el("h2",null,"A pergunta que vale mais ponto"));
+    c2.appendChild(el("p","lead","Esta é a questão 3a do teu trabalho: <b>“Quais são as principais diferenças entre a agricultura familiar e o agronegócio?”</b>"));
+    c2.appendChild(el("p","lead","Escreve a resposta com as TUAS palavras. Compara os dois em pelo menos <b>três pontos</b>: quem trabalha, o tamanho da produção e para onde vai o que é produzido."));
     var chips = el("div","chips");
-    ["clima","chuva","adaptada / guarda água"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    ["quem trabalha","máquinas e tamanho","para onde vai"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
     c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Luffy, quem manda na vegetação é...");
+    ta.setAttribute("placeholder","Na agricultura familiar... Já no agronegócio...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -584,20 +591,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Clima-Tact calibrado \u{1F326}"));
+    c.appendChild(el("h2",null,"Despensa do Sunny, rastreada \u{1F373}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já explica a paisagem pelo clima — é isso que a professora quer ver nas respostas.";
-    if(ad <= 4) msg = "Os nomes dos climas ainda se misturam. Antes da folha, repete a regra: quanta chuva tem aqui? É isso que define a planta.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas de tempo × clima e da altitude.";
-    c.appendChild(el("p",null, msg + " Agora faz a folha: em cada questão, pergunta primeiro qual é o clima — a vegetação vem atrás."));
+    var msg = "Você já sabe rastrear um alimento e comparar as duas formas de produzir — é isso que o trabalho pede.";
+    if(ad <= 4) msg = "Agricultura familiar e agronegócio ainda se misturam. Antes de escrever, repete os três pontos: quem trabalha, o tamanho e para onde vai a produção.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas da matéria-prima e de qual produção abastece a mesa do brasileiro.";
+    c.appendChild(el("p",null, msg + " Agora começa o trabalho: primeiro a conversa em casa e a tabela dos 5 alimentos. O resto vem depois, um pedaço por dia."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["AULA DE HOJE — Geografia: Clima e vegetação do Brasil (A Travessia da Nami)",
+    var txt = ["TRABALHO DE GEOGRAFIA — De onde vem o que eu consumo (O Caminho até o Prato)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",

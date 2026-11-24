@@ -216,7 +216,7 @@
 
 <div class="wrap">
   <header>
-    <div class="brand"><b>Droidec</b><span>15/11 · O Caminho até o Prato · Geografia — De onde vem o que eu consumo</span></div>
+    <div class="brand"><b>Droidec</b><span>24/11 · Usopp, o Geólogo · Science — Rocks and Minerals</span></div>
     <ul class="rota" id="rota"></ul>
   </header>
   <main id="tela"></main>
@@ -228,69 +228,69 @@
   "use strict";
 
   var GUIADO = [
-    {selo:"Caminho", contexto:"O Sanji recebeu uma caixa de tomates que veio direto da fazenda para a feira.",
-     pergunta:"Qual é a PRIMEIRA etapa do caminho de um alimento?",
-     opcoes:["A produção, no campo","A venda no mercado","O transporte"],
-     certa:0, dica:"Pensa em onde o alimento nasce. Antes de ser vendido, ele precisa ser o quê?",
-     porque:"Tudo começa na produção: a fazenda planta, colhe ou cria os animais. É de lá que sai a matéria-prima."},
-    {selo:"Caminho", contexto:"O caminhão leva os pacotes de arroz do engenho até os supermercados da cidade.",
-     pergunta:"Que etapa é essa?",
-     opcoes:["Circulação — o transporte e a distribuição","Produção","Consumo"],
-     certa:0, dica:"É a mesma etapa que você estudou em outubro: levar o produto de um lugar ao outro.",
-     porque:"Circulação é o transporte dos produtos até os locais de venda — por caminhão, trem, navio ou avião."},
-    {selo:"Matéria-prima", alt:true, contexto:"Pão francês da padaria.",
-     pergunta:"Qual é a matéria-prima principal dele?",
-     opcoes:["O trigo","O forno","A padaria"],
-     certa:0, dica:"Matéria-prima é o que foi plantado ou criado e entrou na fábrica. O que vira farinha?",
-     porque:"O trigo é plantado, vira farinha no moinho e depois pão na padaria. O forno é equipamento, não matéria-prima."},
-    {selo:"Produção", contexto:"Numa propriedade pequena, a família toda trabalha e planta de tudo um pouco: mandioca, feijão, verduras e ainda cria galinhas.",
-     pergunta:"Que forma de produção é essa?",
-     opcoes:["Agricultura familiar","Agronegócio","Indústria"],
-     certa:0, dica:"Repara em duas coisas: quem trabalha e quantos produtos diferentes saem dali.",
-     porque:"Agricultura familiar: a própria família é a mão de obra, a propriedade é menor e a variedade de produtos é grande."},
-    {selo:"Produção", contexto:"Uma fazenda enorme planta só soja, usa colheitadeiras e tem funcionários contratados. Boa parte da safra vai para outros países.",
-     pergunta:"E essa?",
-     opcoes:["Agronegócio","Agricultura familiar","Comércio informal"],
-     certa:0, dica:"Grande área + máquinas + um produto só + exportação.",
-     porque:"Agronegócio: grandes propriedades, trabalhadores contratados, muita tecnologia e produção em grande escala, boa parte para exportação."}
+    {selo:"Rock × Mineral", contexto:"O texto diz: “Minerals are formed naturally in the Earth.”",
+     pergunta:"O que é um mineral?",
+     opcoes:["Algo que se forma naturalmente dentro da Terra — é o “ingrediente” das rochas","Uma pedra grande","Uma máquina que quebra pedras"],
+     certa:0, dica:"A palavra-chave está no texto: <i>formed naturally</i>. Mineral é ingrediente ou receita pronta?",
+     porque:"Mineral é o ingrediente: forma-se naturalmente na Terra e existem mais de 4000 tipos diferentes."},
+    {selo:"Rock × Mineral", contexto:"“A rock is made up of different types of minerals that have been pushed together.”",
+     pergunta:"Então uma rocha é…",
+     opcoes:["Vários minerais apertados juntos formando uma pedra sólida","Um mineral sozinho","Uma pedra sem nada dentro"],
+     certa:0, dica:"Se mineral é o ingrediente, a rocha é o quê?",
+     porque:"A rocha é a receita pronta: dois ou mais minerais apertados juntos. E os minerais mudam de uma rocha para outra."},
+    {selo:"Vocabulary", alt:true, contexto:"Two words from the text: boulder and pebble.",
+     pergunta:"What is the difference?",
+     opcoes:["A boulder is a large rock and a pebble is a small one","A boulder is small and a pebble is large","They mean the same thing"],
+     certa:0, dica:"O texto diz: <i>Some rocks are large; these are called boulders. Other rocks are small; these are called pebbles.</i>",
+     porque:"Boulder = rocha grande. Pebble = rocha pequena, um seixo."},
+    {selo:"Types", contexto:"Esta rocha se formou quando a lava de um vulcão esfriou e endureceu.",
+     pergunta:"Que tipo de rocha é essa?",
+     opcoes:["Igneous","Sedimentary","Metamorphic"],
+     certa:0, dica:"Igneous lembra ignição — fogo. Qual delas tem a ver com vulcão?",
+     porque:"Igneous rocks nascem do magma ou da lava que esfriou. O granito é um exemplo."},
+    {selo:"Reading", contexto:"A pergunta da folha é: “How many types of minerals are there?”",
+     pergunta:"Qual é a melhor resposta?",
+     opcoes:["“There are over 4000 types of minerals.” — frase completa","“4000”","“A lot.”"],
+     certa:0, dica:"Em reading comprehension, resposta de uma palavra não mostra que você entendeu.",
+     porque:"Frase completa, usando as palavras do texto. É assim que se responde em inglês nessa atividade."}
   ];
 
   var DESAFIO = [
-    {selo:"Caminho", contexto:"Leite: a vaca é ordenhada na fazenda, o leite vai de caminhão-tanque até o laticínio, é pasteurizado, embalado, distribuído e vendido no mercado.",
-     pergunta:"Em que etapa o leite é pasteurizado e embalado?",
-     opcoes:["No beneficiamento, na indústria","Na produção","Na comercialização"],
-     certa:0, nota:"Beneficiamento é quando o alimento é limpo, transformado e embalado na indústria. Nem todo alimento passa por essa etapa."},
-    {selo:"Matéria-prima", alt:true, contexto:"Pegadinha!",
-     pergunta:"Qual é a matéria-prima do queijo?",
-     opcoes:["O leite","A vaca","O supermercado"],
-     certa:0, nota:"A vaca é o animal que produz; a matéria-prima que entra na fábrica é o leite. Mesma lógica do suco: a matéria-prima é a fruta."},
-    {selo:"Caminho", contexto:"Banana, alface, tomate e ovo.",
-     pergunta:"O que esses alimentos têm em comum?",
-     opcoes:["São in natura: vão quase direto do campo para a mesa, sem passar por fábrica","São todos industrializados","Todos vêm de fora do Brasil"],
-     certa:0, nota:"In natura = caminho curto. Já o pão, o iogurte e o açúcar passam pela indústria antes de chegar à mesa."},
-    {selo:"Produção", contexto:"Segundo o Censo Agropecuário de 2017, do IBGE.",
-     pergunta:"Quanto a agricultura familiar representa dos estabelecimentos rurais do Brasil?",
-     opcoes:["77% — a maioria das propriedades do país","23%","Menos de 10%"],
-     certa:0, nota:"São 77% das propriedades e 67% das pessoas que trabalham no campo, mas ocupam só 23% da área. Ou seja: muitas propriedades pequenas."},
-    {selo:"Produção", contexto:"Soja, milho, café, carnes, açúcar e algodão.",
-     pergunta:"Esses produtos estão ligados principalmente a quê?",
-     opcoes:["Ao agronegócio e à exportação","À agricultura familiar","Ao comércio informal"],
-     certa:0, nota:"São os campeões das exportações brasileiras. O agronegócio responde por cerca de um quarto do PIB do país."},
-    {selo:"Produção", contexto:"Mandioca, feijão, leite, hortaliças, frutas e ovos.",
-     pergunta:"Quem tem papel importante na produção desses alimentos do dia a dia?",
-     opcoes:["A agricultura familiar","Somente as grandes fazendas de monocultura","As indústrias"],
-     certa:0, nota:"A agricultura familiar tem peso grande justamente nos alimentos que vão para a mesa do brasileiro, vendidos em feiras, mercados e usados na merenda escolar."},
-    {selo:"Caminho", contexto:"Tratorista, ordenhador, motorista de caminhão, repositor de mercado e entregador.",
-     pergunta:"O que essas pessoas têm em comum?",
-     opcoes:["Todas participam do caminho do alimento até o consumidor","Todas trabalham na mesma fazenda","Todas são donas de supermercado"],
-     certa:0, nota:"Muita gente participa do percurso, em etapas diferentes: no campo, na indústria, no transporte e na venda."},
-    {selo:"Produção", contexto:"Pegadinha final.",
-     pergunta:"Qual afirmação está certa?",
-     opcoes:["Agricultura familiar e agronegócio são formas diferentes de produzir, e as duas são importantes","O agronegócio não serve para nada","A agricultura familiar não produz quase nada"],
-     certa:0, nota:"Uma abastece principalmente a mesa do brasileiro; a outra movimenta a economia e as exportações. No trabalho, mostre que você entendeu as duas — sem torcida."}
+    {selo:"Types", contexto:"Formada por camadas de areia e barro prensadas durante muito tempo. É nela que costumam aparecer fósseis.",
+     pergunta:"Que tipo de rocha é?",
+     opcoes:["Sedimentary","Igneous","Metamorphic"],
+     certa:0, nota:"Sedimentary vem de sedimento: camadas que se acumulam e são prensadas. Exemplos: sandstone e limestone."},
+    {selo:"Types", contexto:"Era uma rocha, mas o calor e a pressão dentro da Terra a transformaram em outra. O mármore se formou assim.",
+     pergunta:"Que tipo é?",
+     opcoes:["Metamorphic","Sedimentary","Igneous"],
+     certa:0, nota:"Metamorphic lembra metamorfose: a rocha mudou. O marble vem do limestone transformado."},
+    {selo:"Minerals", alt:true, contexto:"“Did you know we also eat minerals?”",
+     pergunta:"Qual mineral está na banana e no espinafre?",
+     opcoes:["Potassium","Sodium","Titanium"],
+     certa:0, nota:"Potassium (potássio) está na banana e no espinafre. Sodium (sódio) é o do sal, usado para dar sabor à comida."},
+    {selo:"Minerals", alt:true, contexto:"Dois diamantes do mesmo tipo, mas com cores diferentes.",
+     pergunta:"O que muda a cor de uma gemstone?",
+     opcoes:["Pequenas quantidades de outros minerais, como chromium, iron e titanium","O tamanho da pedra","O país onde foi encontrada"],
+     certa:0, nota:"Segundo o texto, as gemas têm a mesma base no mundo todo; o que muda a cor — e o valor — são esses minerais em pequena quantidade."},
+    {selo:"Uses", contexto:"O papel brilhante das revistas.",
+     pergunta:"Qual mineral é usado para fazer esse papel?",
+     opcoes:["Kaolinite","Galena","Granite"],
+     certa:0, nota:"Kaolinite dá o acabamento brilhante (<i>glossy paper</i>). Galena é das chumbadas de pesca."},
+    {selo:"Uses", contexto:"Pegadinha!",
+     pergunta:"Para que serve o granito, segundo o texto?",
+     opcoes:["Para bancadas — e, quando triturado, para fazer estradas e concreto","Só para fazer joias","Para temperar comida"],
+     certa:0, nota:"O texto cita os dois usos: <i>benchtops</i> e, <i>when it is crushed</i>, estradas e concreto."},
+    {selo:"Vocabulary", alt:true, contexto:"“We learn information about rocks and minerals from geologists.”",
+     pergunta:"What is a geologist?",
+     opcoes:["A person who studies rocks and minerals","A person who sells jewellery","A person who builds roads"],
+     certa:0, nota:"O próprio texto explica logo em seguida: <i>These are the people who study rocks and minerals.</i>"},
+    {selo:"Reading", contexto:"Você não sabe responder uma pergunta da folha.",
+     pergunta:"Qual é a melhor estratégia?",
+     opcoes:["Achar a palavra-chave da pergunta e procurar ela no texto","Chutar qualquer coisa","Pular a questão"],
+     certa:0, nota:"Em reading comprehension a resposta quase sempre está escrita no texto. O trabalho é achar o trecho — e depois escrever com frase completa."}
   ];
 
-  var KEY = "zion-de-onde-vem-consumo-2026-11-15";
+  var KEY = "zion-rocks-minerals-2026-11-24";
   var VAZIO = {tela:0, iG:0, iD:0, guiado:{}, desafio:{}, texto:""};
   var S = JSON.parse(JSON.stringify(VAZIO));
   try{ var raw = localStorage.getItem(KEY); if(raw){ S = Object.assign(S, JSON.parse(raw)); } }catch(e){}
@@ -332,10 +332,10 @@
 
   /* ---------- 1. gancho ---------- */
   function gancho(){
-    var p1 = el("p","lead","O Sanji recebeu as entregas no porto: leite, arroz, ovos, pão e uma caixa de tomates. Em dez minutos tudo estava na cozinha do Sunny.");
-    var p2 = el("p","lead","O Luffy olhou aquilo e perguntou: “de onde vem isso tudo?”. O Sanji riu: “essa caixa de tomate viajou mais do que você, capitão”.");
-    var p3 = el("p","lead","Hoje você vai refazer esse caminho de trás pra frente — do prato até a terra onde o alimento nasceu. É exatamente isso que o teu trabalho de Geografia pede.");
-    return card(eyebrow("Missão de hoje"), el("h1",null,"O Caminho até o Prato"), p1, p2, p3, botao("Bora rastrear! →", function(){ vai(1); }));
+    var p1 = el("p","lead","O Usopp achou uma caverna cheia de pedras brilhantes e já gritou: “Tesouro! Diamantes! Vou ficar rico!”");
+    var p2 = el("p","lead","A Robin olhou com calma e explicou: metade daquilo era pedra comum, metade era mineral de verdade — e tem gente que estuda isso a vida inteira. Essas pessoas se chamam <b>geologists</b>.");
+    var p3 = el("p","lead","Hoje você vira geólogo da tripulação. Missão: saber a diferença entre <b>rock</b> e <b>mineral</b>, conhecer os três tipos de rocha e descobrir onde eles aparecem no teu dia a dia.");
+    return card(eyebrow("Missão de hoje"), el("h1",null,"Usopp, o Geólogo"), p1, p2, p3, botao("Bora escavar! →", function(){ vai(1); }));
   }
 
   /* ---------- 2. a regra ---------- */
@@ -371,63 +371,69 @@
     var g = el("div","grupo");
 
     var r1 = el("div","regra");
-    r1.appendChild(el("div","nome","1. O caminho que todo alimento faz"));
-    r1.appendChild(etapas([
-      ["<b>Produção</b> — no campo","a fazenda planta, colhe ou cria os animais. É de onde sai a <b>matéria-prima</b>"],
-      ["<b>Beneficiamento</b> — na indústria","o alimento é limpo, transformado e embalado. Nem todo alimento passa por aqui"],
-      ["<b>Circulação</b> — o transporte","caminhão, trem, navio ou avião levam o produto até os pontos de venda"],
-      ["<b>Comercialização</b> — a venda","mercado, feira, padaria, loja, aplicativo"],
-      ["<b>Consumo</b> — a sua casa","a família compra, cozinha e come"]
+    r1.appendChild(el("div","nome","1. Rock × Mineral — a diferença que cai sempre"));
+    r1.appendChild(ficha2([
+      ["<span class='en'>Mineral</span>","forma-se <b>naturalmente</b> dentro da Terra. É o <b>ingrediente</b>. Existem mais de <b>4000</b> tipos"],
+      ["<span class='en'>Rock</span>","é feita de <b>minerais</b> apertados juntos até virar uma pedra sólida. É a <b>receita pronta</b>"],
+      ["Em inglês","<i>A rock is made up of different types of minerals pushed together.</i>"],
+      ["<span class='en'>Boulder</span>","uma rocha <b>grande</b>"],
+      ["<span class='en'>Pebble</span>","uma rocha <b>pequena</b>, um seixo"],
+      ["<span class='en'>Geologist</span>","o cientista que <b>estuda</b> rochas e minerais"]
     ]));
+    r1.appendChild(el("p","muted","Jeito de nunca errar: mineral é o ingrediente; rocha é o bolo pronto. Uma rocha costuma ter dois ou mais minerais dentro."));
     g.appendChild(r1);
 
     var r2 = el("div","regra");
-    r2.appendChild(el("div","nome","2. Nem todo alimento faz o mesmo caminho"));
+    r2.appendChild(el("div","nome","2. The three types of rocks"));
     r2.appendChild(ficha2([
-      ["<i>In natura</i>","vai quase direto do campo pra mesa: <b>banana, tomate, alface, ovo</b>. Caminho curto"],
-      ["Industrializado","passa pela fábrica antes: <b>trigo → farinha → pão</b>; <b>leite → queijo e iogurte</b>; <b>cana → açúcar</b>. Caminho longo"],
-      ["Matéria-prima","é o que ENTRA na fábrica. No pão, a matéria-prima é o <b>trigo</b>; no queijo, o <b>leite</b>; no suco, a <b>fruta</b>"]
+      ["<span class='en'>Igneous</span>","nasce do <b>magma ou lava que esfriou</b> e endureceu. Ex.: <i>granite, basalt, obsidian</i>"],
+      ["<span class='en'>Sedimentary</span>","formada por <b>camadas de sedimentos</b> (areia, barro, restos) prensadas por muito tempo. Ex.: <i>sandstone, limestone</i>. É nela que costumam aparecer <b>fósseis</b>"],
+      ["<span class='en'>Metamorphic</span>","era outra rocha e <b>mudou</b> por causa do <b>calor e da pressão</b>. Ex.: <i>marble</i> (vem do limestone), <i>slate</i>"]
     ]));
-    r2.appendChild(el("p","muted","Quando a pergunta do trabalho pedir a matéria-prima de um alimento industrializado, pense: o que foi plantado ou criado para fazer isso?"));
+    r2.appendChild(el("p","muted","Dica de memória: <b>igneous</b> lembra ignição, fogo. <b>Sedimentary</b> lembra sedimento, camada. <b>Metamorphic</b> lembra metamorfose, transformação."));
     g.appendChild(r2);
 
     var r3 = el("div","regra");
-    r3.appendChild(el("div","nome","3. Quem trabalha nesse caminho"));
-    r3.appendChild(el("p","muted","Muito mais gente do que parece: <b>agricultor, pecuarista, ordenhador, tratorista, colhedor, operador de máquina na indústria, embalador, motorista de caminhão, estoquista, repositor, feirante, atendente e entregador</b>. E os meios de transporte: caminhão (rodoviário), trem (ferroviário), navio (hidroviário) e avião (aéreo)."));
+    r3.appendChild(el("div","nome","3. Minerals: gemstones, comida e uso no dia a dia"));
+    r3.appendChild(lista([
+      "<b>Gemstones</b> são minerais <b>raros e bonitos</b>, como o diamante, usados em <i>jewellery</i> (joias).",
+      "A <b>cor</b> de uma gema vem de minerais em <b>pequena quantidade</b> dentro dela — <i>chromium, iron, titanium</i> — e isso também muda o <b>valor</b> dela.",
+      "<b>A gente come minerais!</b> <i>Sodium</i> (sódio) dá sabor à comida, na forma de sal. <i>Potassium</i> (potássio) está na banana e no espinafre.",
+      "<b>Kaolinite</b> → o <b>papel brilhante</b> das revistas.",
+      "<b>Galena</b> → usada para fazer <b>chumbadas de pesca</b> (<i>sinkers and fishing tackle</i>).",
+      "<b>Granite</b> → <b>bancadas</b> de cozinha; e, quando <b>triturado</b>, vira <b>estrada e concreto</b>."
+    ]));
     g.appendChild(r3);
 
     var r4 = el("div","regra");
-    r4.appendChild(el("div","nome","4. Duas formas de produzir no campo"));
-    r4.appendChild(ficha2([
-      ["<b>Agricultura familiar</b>","a <b>própria família</b> é a mão de obra e mora na propriedade. Terrenos <b>menores</b>, <b>variedade grande</b> de produtos, menos máquinas. Boa parte da produção vai para o <b>mercado interno</b> — ou seja, para a mesa dos brasileiros, em feiras, mercados e na merenda escolar"],
-      ["<b>Agronegócio</b>","grandes propriedades, <b>trabalhadores contratados</b>, muitas <b>máquinas e tecnologia</b>. Costuma produzir <b>poucos produtos em grande quantidade</b> (monocultura), com boa parte voltada para a <b>exportação</b> e para a indústria"]
-    ]));
-    r4.appendChild(lista([
-      "<b>Números do Censo Agropecuário 2017 (IBGE):</b> a agricultura familiar é <b>77% dos estabelecimentos</b> rurais do país e emprega <b>67% das pessoas</b> que trabalham no campo — mas ocupa só <b>23% da área</b> e responde por <b>23% do valor da produção</b>.",
-      "Ela tem papel importante em alimentos do dia a dia: <b>mandioca, feijão, leite, hortaliças, frutas, ovos</b>.",
-      "<b>O agronegócio</b> responde por cerca de <b>um quarto do PIB</b> brasileiro (22,8% em 2026, segundo Cepea/CNA) e lidera as exportações: <b>soja, milho, café, carnes, açúcar e algodão</b>.",
-      "Os dois são <b>importantes e diferentes</b>: um abastece principalmente a mesa do brasileiro, o outro movimenta a economia e as exportações."
+    r4.appendChild(el("div","nome","4. Como responder um reading comprehension"));
+    r4.appendChild(etapas([
+      ["<b>Leia a pergunta primeiro</b>","assim você já sabe o que procurar no texto"],
+      ["<b>Ache a palavra-chave</b>","se a pergunta fala de <i>gemstones</i>, procure essa palavra no texto"],
+      ["<b>Volte ao texto e sublinhe</b>","a resposta quase sempre está escrita lá — não precisa adivinhar"],
+      ["<b>Responda com frase completa</b>","não escreva só “4000”; escreva <i>“There are over 4000 types of minerals.”</i>"],
+      ["<b>Releia conferindo</b>","a sua resposta responde mesmo o que foi perguntado?"]
     ]));
     g.appendChild(r4);
 
-    var citacao = el("div","citacao","Pergunta do trabalho: “Todos os alimentos são produzidos da mesma maneira? Explique.”");
+    var citacao = el("div","citacao","Pergunta típica da folha: “What is the difference between a rock and a mineral?”");
 
     var modelo = el("div","fb"); modelo.setAttribute("data-k","modelo");
-    modelo.appendChild(el("b",null,"\u{1F373} Sanji pensa alto: "));
+    modelo.appendChild(el("b",null,"\u{1FAA8} Robin pensa alto: "));
     modelo.appendChild(document.createTextNode(
-      "primeiro eu respondo direto, sem enrolar: não, não são. " +
-      "Depois eu dou o motivo: alguns vêm quase direto do campo, como o tomate e o ovo; outros passam por fábrica antes de chegar à mesa, como o pão e o iogurte. " +
-      "E aí eu dou mais um motivo, o do tipo de propriedade: alguns são produzidos por famílias em propriedades pequenas, outros em grandes fazendas com máquinas. " +
-      "Por último eu fecho com um exemplo da minha casa. Pronto: resposta direta, dois motivos e um exemplo — é assim que vale nota cheia."));
+      "primeiro eu procuro no texto os dois lugares onde aparecem as palavras rock e mineral — tem um parágrafo para cada uma. " +
+      "No parágrafo do mineral está escrito que ele se forma naturalmente na Terra. No da rocha, que ela é feita de minerais apertados juntos. " +
+      "Agora eu junto as duas informações numa frase só, em inglês: “A mineral is formed naturally in the Earth, and a rock is made up of different minerals pushed together.” " +
+      "Repara que eu não inventei nada: as duas partes estavam no texto. Em reading comprehension, a resposta quase sempre está escrita — o trabalho é achar e juntar."));
 
     return card(
       navbar("A regra", function(){ vai(0); }),
       eyebrow("A regra"),
-      el("h2",null,"Do campo até a sua mesa"),
+      el("h2",null,"Rochas, minerais e como achar a resposta"),
       g,
-      el("p","muted","Vê o Sanji montando uma resposta do trabalho, passo a passo:"),
+      el("p","muted","Vê a Robin montando uma resposta, passo a passo:"),
       citacao, modelo,
-      el("p","muted","A fórmula das respostas: RESPONDA DIRETO → DÊ O MOTIVO → DÊ UM EXEMPLO."),
+      el("p","muted","A ordem: LEIA A PERGUNTA → ACHE A PALAVRA-CHAVE → VOLTE AO TEXTO → FRASE COMPLETA."),
       botao("Entendi, quero treinar →", function(){ vai(2); })
     );
   }
@@ -446,8 +452,8 @@
     if(idx >= GUIADO.length){
       return card(
         navbar("Treino guiado", function(){ pula("iG", GUIADO.length-1); }),
-        eyebrow("Treino guiado"), el("h2",null,"Rastro pego!"),
-        el("p",null,"Você já segue o caminho do alimento. Agora é sem dica — e com as pegadinhas do trabalho."),
+        eyebrow("Treino guiado"), el("h2",null,"Picareta afiada!"),
+        el("p",null,"Você já separa rocha de mineral. Agora é sem dica — e com as pegadinhas da folha."),
         botao("Ir pro desafio →", function(){ vai(3); }));
     }
     var q = GUIADO[idx], feito = S.guiado[idx];
@@ -509,7 +515,7 @@
       var acertos = 0; for(var k in S.desafio) if(S.desafio[k] && S.desafio[k].acertou) acertos++;
       return card(
         navbar("Desafio", function(){ pula("iD", DESAFIO.length-1); }),
-        eyebrow("Desafio"), el("h2",null,"Caminho mapeado! \u{1F69A}"),
+        eyebrow("Desafio"), el("h2",null,"Caverna explorada! \u{1F48E}"),
         el("p",null,"Você respondeu " + acertos + " de " + DESAFIO.length + " certas de primeira."),
         botao("Última parada →", function(){ vai(4); }));
     }
@@ -557,15 +563,15 @@
     var c2 = el("div","card");
     c2.appendChild(navbar("Explicação", function(){ pula("iD", DESAFIO.length-1, 3); }));
     c2.appendChild(eyebrow("Explique como Droidec"));
-    c2.appendChild(el("h2",null,"A pergunta que vale mais ponto"));
-    c2.appendChild(el("p","lead","Esta é a questão 3a do teu trabalho: <b>“Quais são as principais diferenças entre a agricultura familiar e o agronegócio?”</b>"));
-    c2.appendChild(el("p","lead","Escreve a resposta com as TUAS palavras. Compara os dois em pelo menos <b>três pontos</b>: quem trabalha, o tamanho da produção e para onde vai o que é produzido."));
+    c2.appendChild(el("h2",null,"A pergunta principal da folha"));
+    c2.appendChild(el("p","lead","Esta é a pergunta que quase sempre aparece: <b>“What is the difference between a rock and a mineral?”</b>"));
+    c2.appendChild(el("p","lead","Escreve a tua resposta <b>em inglês</b>, do jeito que você escreveria na folha. Uma frase para cada um já basta — e lembra de dizer que a rocha é <b>feita de</b> minerais."));
     var chips = el("div","chips");
-    ["quem trabalha","máquinas e tamanho","para onde vai"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
-    c2.appendChild(el("p","muted","Tenta usar estas palavras:"));
+    ["formed naturally","made up of minerals","pushed together"].forEach(function(t){ chips.appendChild(el("span","chip",t)); });
+    c2.appendChild(el("p","muted","Palavras que ajudam:"));
     c2.appendChild(chips);
     var ta = el("textarea"); ta.value = S.texto || "";
-    ta.setAttribute("placeholder","Na agricultura familiar... Já no agronegócio...");
+    ta.setAttribute("placeholder","A mineral is...");
     var cont = el("div","contador","0 letras");
     var b = botao("Terminei →", function(){ vai(5); });
     b.disabled = true; b.style.opacity = ".45";
@@ -591,20 +597,20 @@
     var c = el("div","card");
     c.appendChild(navbar("Fim da rota", function(){ vai(4); }));
     c.appendChild(eyebrow("Fim da rota"));
-    c.appendChild(el("h2",null,"Despensa do Sunny, rastreada \u{1F373}"));
+    c.appendChild(el("h2",null,"Geólogo oficial do Sunny \u{1FAA8}"));
     var pl = el("div","placar"); pl.appendChild(document.createTextNode(acertos + "/" + total));
     pl.appendChild(el("small",null,"acertos de primeira"));
     c.appendChild(pl);
 
-    var msg = "Você já sabe rastrear um alimento e comparar as duas formas de produzir — é isso que o trabalho pede.";
-    if(ad <= 4) msg = "Agricultura familiar e agronegócio ainda se misturam. Antes de escrever, repete os três pontos: quem trabalha, o tamanho e para onde vai a produção.";
-    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas da matéria-prima e de qual produção abastece a mesa do brasileiro.";
-    c.appendChild(el("p",null, msg + " Agora começa o trabalho: primeiro a conversa em casa e a tabela dos 5 alimentos. O resto vem depois, um pedaço por dia."));
+    var msg = "Você já sabe a diferença entre rocha e mineral e sabe voltar ao texto para achar a resposta.";
+    if(ad <= 4) msg = "Os três tipos de rocha ainda se misturam. Antes da folha, repete: igneous = fogo, sedimentary = camadas, metamorphic = mudou.";
+    if(acertos === total) msg = "Você acertou tudo de primeira, inclusive as pegadinhas do granito e dos minerais que a gente come.";
+    c.appendChild(el("p",null, msg + " Agora faz a folha: lê a pergunta, procura a palavra-chave no texto e responde com frase completa, em inglês."));
 
     c.appendChild(el("hr","linha"));
     c.appendChild(el("p","muted","Aperta o botão e manda esse resumo pro papai:"));
 
-    var txt = ["TRABALHO DE GEOGRAFIA — De onde vem o que eu consumo (O Caminho até o Prato)",
+    var txt = ["AULA DE HOJE — Science: Rocks and Minerals (Usopp, o Geólogo)",
                "Data: " + new Date().toLocaleDateString("pt-BR"),
                "",
                "Treino guiado: " + ag + "/" + tg + " de primeira",
